@@ -1,0 +1,535 @@
+fileFormatVersion: 2
+guid: 59da090666bfc42f1825034ce9be2a60
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1158644089248145492
+    second: bar_planning_hologram_0
+  - first:
+      213: 3970151790185580931
+    second: bar_planning_hologram_1
+  - first:
+      213: 3029445032836478469
+    second: bar_planning_hologram_2
+  - first:
+      213: 4536112071653412427
+    second: bar_planning_hologram_3
+  - first:
+      213: -1090964356835910612
+    second: bar_planning_hologram_4
+  - first:
+      213: 7750588058668368182
+    second: bar_planning_hologram_5
+  - first:
+      213: 5985421388744516400
+    second: bar_planning_hologram_6
+  - first:
+      213: 2846976423446453234
+    second: bar_planning_hologram_7
+  - first:
+      213: -3464099678330082880
+    second: bar_planning_hologram_8
+  - first:
+      213: -875703558742083049
+    second: bar_planning_hologram_9
+  - first:
+      213: -1925909068208205119
+    second: bar_planning_hologram_10
+  - first:
+      213: 2646880934438661770
+    second: bar_planning_hologram_11
+  - first:
+      213: 750104839129859591
+    second: bar_planning_hologram_12
+  - first:
+      213: -2305246493257326207
+    second: bar_planning_hologram_13
+  - first:
+      213: -6090802159289807513
+    second: bar_planning_hologram_14
+  - first:
+      213: 3766101193064119144
+    second: bar_planning_hologram_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bar_planning_hologram_0
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 165
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caf124fe65babefe0800000000000000
+      internalID: -1158644089248145492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_1
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 32
+        width: 180
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3898466b400d81730800000000000000
+      internalID: 3970151790185580931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_2
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 179
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5063ac8e430ca0a20800000000000000
+      internalID: 3029445032836478469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_3
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 175
+        width: 18
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4e434455e183fe30800000000000000
+      internalID: 4536112071653412427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_4
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 93
+        width: 62
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2cde2892bd1cd0f0800000000000000
+      internalID: -1090964356835910612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_5
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 148
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 631005566ce9f8b60800000000000000
+      internalID: 7750588058668368182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_6
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 140
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 033642b7a0d701350800000000000000
+      internalID: 5985421388744516400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 76
+        width: 12
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fb107329fd728720800000000000000
+      internalID: 2846976423446453234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_8
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 117
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c9279632bb0defc0800000000000000
+      internalID: -3464099678330082880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_9
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 79
+        width: 14
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71af1a4c040e8d3f0800000000000000
+      internalID: -875703558742083049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_10
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 80
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c21fb708ebc545e0800000000000000
+      internalID: -1925909068208205119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_11
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 31
+        width: 45
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8e68f3af2c9bb420800000000000000
+      internalID: 2646880934438661770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_12
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 0
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70603a08068e86a00800000000000000
+      internalID: 750104839129859591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_13
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 15
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 181aea1378e1200e0800000000000000
+      internalID: -2305246493257326207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_14
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 22
+        width: 43
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76d4952e4bf197ba0800000000000000
+      internalID: -6090802159289807513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_planning_hologram_15
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 4
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86bf2c8d411e34430800000000000000
+      internalID: 3766101193064119144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bar_planning_hologram_0: -1158644089248145492
+      bar_planning_hologram_1: 3970151790185580931
+      bar_planning_hologram_10: -1925909068208205119
+      bar_planning_hologram_11: 2646880934438661770
+      bar_planning_hologram_12: 750104839129859591
+      bar_planning_hologram_13: -2305246493257326207
+      bar_planning_hologram_14: -6090802159289807513
+      bar_planning_hologram_15: 3766101193064119144
+      bar_planning_hologram_2: 3029445032836478469
+      bar_planning_hologram_3: 4536112071653412427
+      bar_planning_hologram_4: -1090964356835910612
+      bar_planning_hologram_5: 7750588058668368182
+      bar_planning_hologram_6: 5985421388744516400
+      bar_planning_hologram_7: 2846976423446453234
+      bar_planning_hologram_8: -3464099678330082880
+      bar_planning_hologram_9: -875703558742083049
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

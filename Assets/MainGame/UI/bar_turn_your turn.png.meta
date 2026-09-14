@@ -1,0 +1,483 @@
+fileFormatVersion: 2
+guid: aef52e9e45d2944c49fa6824210306e5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4937595777335419804
+    second: bar_turn_your turn_0
+  - first:
+      213: 4782261647111728867
+    second: bar_turn_your turn_1
+  - first:
+      213: -860053921125626654
+    second: bar_turn_your turn_2
+  - first:
+      213: -1090399113585457583
+    second: bar_turn_your turn_3
+  - first:
+      213: -8702012339751634896
+    second: bar_turn_your turn_4
+  - first:
+      213: 9157664936593133177
+    second: bar_turn_your turn_5
+  - first:
+      213: -4449842774734662429
+    second: bar_turn_your turn_6
+  - first:
+      213: 996731845339795073
+    second: bar_turn_your turn_7
+  - first:
+      213: -5986113542245220887
+    second: bar_turn_your turn_8
+  - first:
+      213: -5308115512401317414
+    second: bar_turn_your turn_9
+  - first:
+      213: 1566438493363644572
+    second: bar_turn_your turn_10
+  - first:
+      213: 1187233464888517859
+    second: bar_turn_your turn_11
+  - first:
+      213: -2660900309930620759
+    second: bar_turn_your turn_12
+  - first:
+      213: 7758833648772028102
+    second: bar_turn_your turn_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bar_turn_your turn_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 152
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46c147f0dc22a7bb0800000000000000
+      internalID: -4937595777335419804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_1
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 167
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eea11b61a10e5240800000000000000
+      internalID: 4782261647111728867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_2
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 169
+        width: 38
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ec00a7f3897014f0800000000000000
+      internalID: -860053921125626654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_3
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 151
+        width: 47
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 156865b88cf1ed0f0800000000000000
+      internalID: -1090399113585457583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_4
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 52
+        width: 74
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 038b90ad1ed3c3780800000000000000
+      internalID: -8702012339751634896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_5
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 52
+        width: 127
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97e0fad8dbf861f70800000000000000
+      internalID: 9157664936593133177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_6
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 51
+        width: 62
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e41a99929bfe32c0800000000000000
+      internalID: -4449842774734662429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_7
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 54
+        width: 64
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18e4cc9155a15dd00800000000000000
+      internalID: 996731845339795073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_8
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 53
+        width: 62
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ed7159f27d0deca0800000000000000
+      internalID: -5986113542245220887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_9
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 51
+        width: 62
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad13498a019c556b0800000000000000
+      internalID: -5308115512401317414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_10
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 52
+        width: 69
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c982077a28b1db510800000000000000
+      internalID: 1566438493363644572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_11
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 0
+        width: 62
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e4e22ccb86e97010800000000000000
+      internalID: 1187233464888517859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_12
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 4
+        width: 53
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a8cbd32445921bd0800000000000000
+      internalID: -2660900309930620759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_your turn_13
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 10
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c69762781aecab60800000000000000
+      internalID: 7758833648772028102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bar_turn_your turn_0: -4937595777335419804
+      bar_turn_your turn_1: 4782261647111728867
+      bar_turn_your turn_10: 1566438493363644572
+      bar_turn_your turn_11: 1187233464888517859
+      bar_turn_your turn_12: -2660900309930620759
+      bar_turn_your turn_13: 7758833648772028102
+      bar_turn_your turn_2: -860053921125626654
+      bar_turn_your turn_3: -1090399113585457583
+      bar_turn_your turn_4: -8702012339751634896
+      bar_turn_your turn_5: 9157664936593133177
+      bar_turn_your turn_6: -4449842774734662429
+      bar_turn_your turn_7: 996731845339795073
+      bar_turn_your turn_8: -5986113542245220887
+      bar_turn_your turn_9: -5308115512401317414
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

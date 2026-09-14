@@ -1,0 +1,561 @@
+fileFormatVersion: 2
+guid: 87b6969d3d0c04dd3afadc4587e38747
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5971258793022090879
+    second: bar_turn_enemy turn_0
+  - first:
+      213: 856955142045672352
+    second: bar_turn_enemy turn_1
+  - first:
+      213: 8526812307751216902
+    second: bar_turn_enemy turn_2
+  - first:
+      213: 9192884658206800503
+    second: bar_turn_enemy turn_3
+  - first:
+      213: -1056532018469784765
+    second: bar_turn_enemy turn_4
+  - first:
+      213: 5083073324620427992
+    second: bar_turn_enemy turn_5
+  - first:
+      213: 1935332850761655126
+    second: bar_turn_enemy turn_6
+  - first:
+      213: -1819200221413860981
+    second: bar_turn_enemy turn_7
+  - first:
+      213: 7781035959694710074
+    second: bar_turn_enemy turn_8
+  - first:
+      213: 3214023998406675796
+    second: bar_turn_enemy turn_9
+  - first:
+      213: -6158126155397086534
+    second: bar_turn_enemy turn_10
+  - first:
+      213: 5189020607580958798
+    second: bar_turn_enemy turn_11
+  - first:
+      213: -7500414972276719825
+    second: bar_turn_enemy turn_12
+  - first:
+      213: -7483136360457209083
+    second: bar_turn_enemy turn_13
+  - first:
+      213: -2587411972957783810
+    second: bar_turn_enemy turn_14
+  - first:
+      213: -5242929044940140635
+    second: bar_turn_enemy turn_15
+  - first:
+      213: -2539535091045750812
+    second: bar_turn_enemy turn_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 168
+        width: 49
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1819dfbc3c3d12da0800000000000000
+      internalID: -5971258793022090879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_1
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 192
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a3a31e492484eb00800000000000000
+      internalID: 856955142045672352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_2
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 170
+        width: 65
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 607a0fded92555670800000000000000
+      internalID: 8526812307751216902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_3
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 145
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77afd8104efa39f70800000000000000
+      internalID: 9192884658206800503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_4
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 60
+        width: 57
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34338491ab17651f0800000000000000
+      internalID: -1056532018469784765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_5
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 55
+        width: 68
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d2b349e144ba8640800000000000000
+      internalID: 5083073324620427992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_6
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 60
+        width: 57
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 653eac359feabda10800000000000000
+      internalID: 1935332850761655126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_7
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 55
+        width: 76
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8990538907e0c6e0800000000000000
+      internalID: -1819200221413860981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_8
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 55
+        width: 74
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a35d42acafacbfb60800000000000000
+      internalID: 7781035959694710074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_9
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 57
+        width: 64
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45d4c944cc18a9c20800000000000000
+      internalID: 3214023998406675796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_10
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 56
+        width: 62
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab2c38983e0f98aa0800000000000000
+      internalID: -6158126155397086534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_11
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 54
+        width: 62
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e407b0fffba130840800000000000000
+      internalID: 5189020607580958798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_12
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 55
+        width: 69
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2fbc65525c29e790800000000000000
+      internalID: -7500414972276719825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2
+        width: 55
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50b7325a02f862890800000000000000
+      internalID: -7483136360457209083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_14
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 0
+        width: 66
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef83240f48aa71cd0800000000000000
+      internalID: -2587411972957783810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_15
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 44
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5afc3c5dfcf5d37b0800000000000000
+      internalID: -5242929044940140635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bar_turn_enemy turn_16
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 15
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e7249b2a42c1ccd0800000000000000
+      internalID: -2539535091045750812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bar_turn_enemy turn_0: -5971258793022090879
+      bar_turn_enemy turn_1: 856955142045672352
+      bar_turn_enemy turn_10: -6158126155397086534
+      bar_turn_enemy turn_11: 5189020607580958798
+      bar_turn_enemy turn_12: -7500414972276719825
+      bar_turn_enemy turn_13: -7483136360457209083
+      bar_turn_enemy turn_14: -2587411972957783810
+      bar_turn_enemy turn_15: -5242929044940140635
+      bar_turn_enemy turn_16: -2539535091045750812
+      bar_turn_enemy turn_2: 8526812307751216902
+      bar_turn_enemy turn_3: 9192884658206800503
+      bar_turn_enemy turn_4: -1056532018469784765
+      bar_turn_enemy turn_5: 5083073324620427992
+      bar_turn_enemy turn_6: 1935332850761655126
+      bar_turn_enemy turn_7: -1819200221413860981
+      bar_turn_enemy turn_8: 7781035959694710074
+      bar_turn_enemy turn_9: 3214023998406675796
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

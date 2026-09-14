@@ -1,0 +1,899 @@
+fileFormatVersion: 2
+guid: 86a0b4c4a5c6440d79c1568ab894f977
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8450030099342098510
+    second: fx_counter_0
+  - first:
+      213: 4991572848849074706
+    second: fx_counter_1
+  - first:
+      213: 5478820450628634529
+    second: fx_counter_2
+  - first:
+      213: 5121384215927479061
+    second: fx_counter_3
+  - first:
+      213: -2073877483172999668
+    second: fx_counter_4
+  - first:
+      213: -2490089015808320709
+    second: fx_counter_5
+  - first:
+      213: 6754648198973178553
+    second: fx_counter_6
+  - first:
+      213: 1666248779967225402
+    second: fx_counter_7
+  - first:
+      213: 4175518044161547841
+    second: fx_counter_8
+  - first:
+      213: -4227849113916282269
+    second: fx_counter_9
+  - first:
+      213: -4924643542999247021
+    second: fx_counter_10
+  - first:
+      213: -2490017926944756525
+    second: fx_counter_11
+  - first:
+      213: -4877497170228564174
+    second: fx_counter_12
+  - first:
+      213: 4845230109614790186
+    second: fx_counter_13
+  - first:
+      213: -8822186778906145239
+    second: fx_counter_14
+  - first:
+      213: 955021723483663280
+    second: fx_counter_15
+  - first:
+      213: 4319255360641175820
+    second: fx_counter_16
+  - first:
+      213: 7800373761864164328
+    second: fx_counter_17
+  - first:
+      213: 3570759129014406370
+    second: fx_counter_18
+  - first:
+      213: 4903858638821531447
+    second: fx_counter_19
+  - first:
+      213: 5675134880008085292
+    second: fx_counter_20
+  - first:
+      213: 7338035036226579571
+    second: fx_counter_21
+  - first:
+      213: 7533238974930631835
+    second: fx_counter_22
+  - first:
+      213: 5964423285770431633
+    second: fx_counter_23
+  - first:
+      213: -444871876126610121
+    second: fx_counter_24
+  - first:
+      213: -2554355343499476245
+    second: fx_counter_25
+  - first:
+      213: -3936682621224235590
+    second: fx_counter_26
+  - first:
+      213: -3427417733839495055
+    second: fx_counter_27
+  - first:
+      213: 7296657430229854268
+    second: fx_counter_28
+  - first:
+      213: -3843827612894450036
+    second: fx_counter_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fx_counter_0
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 253
+        width: 50
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bffa5315667bba80800000000000000
+      internalID: -8450030099342098510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_1
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 90
+        width: 45
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21a322e3f01a54540800000000000000
+      internalID: 4991572848849074706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_2
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 205
+        width: 32
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a78ddbfb2ea80c40800000000000000
+      internalID: 5478820450628634529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_3
+      rect:
+        serializedVersion: 2
+        x: 761
+        y: 139
+        width: 88
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51b56a46fcfc21740800000000000000
+      internalID: 5121384215927479061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_4
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 192
+        width: 34
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0ecacbba6b1833e0800000000000000
+      internalID: -2073877483172999668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 215
+        width: 34
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3b94a1bb3d617dd0800000000000000
+      internalID: -2490089015808320709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_6
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 217
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b24782dfb45dbd50800000000000000
+      internalID: 6754648198973178553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_7
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 231
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3edf5def64bf1710800000000000000
+      internalID: 1666248779967225402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_8
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 71
+        width: 89
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14e9b7fc98b62f930800000000000000
+      internalID: 4175518044161547841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_9
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 232
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36ae11981a9a355c0800000000000000
+      internalID: -4227849113916282269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_10
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 153
+        width: 135
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 357db1e1ac628abb0800000000000000
+      internalID: -4924643542999247021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_11
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 89
+        width: 90
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dc6a1c53eda17dd0800000000000000
+      internalID: -2490017926944756525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_12
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 0
+        width: 96
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23fad8f6a26af4cb0800000000000000
+      internalID: -4877497170228564174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_13
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 50
+        width: 89
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a26dd921d17bd3340800000000000000
+      internalID: 4845230109614790186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_14
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 88
+        width: 96
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92ec625dddb419580800000000000000
+      internalID: -8822186778906145239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_15
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 89
+        width: 90
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bb6605923be04d00800000000000000
+      internalID: 955021723483663280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_16
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 158
+        width: 11
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c011839bdd311fb30800000000000000
+      internalID: 4319255360641175820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_17
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 56
+        width: 87
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e3e037bb9e704c60800000000000000
+      internalID: 7800373761864164328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_18
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 30
+        width: 122
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ec03675282ed8130800000000000000
+      internalID: 3570759129014406370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_19
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 114
+        width: 33
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73f10b343710e0440800000000000000
+      internalID: 4903858638821531447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_20
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 63
+        width: 38
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2f9f4fea1122ce40800000000000000
+      internalID: 5675134880008085292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_21
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 30
+        width: 70
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37ce7a3acffe5d560800000000000000
+      internalID: 7338035036226579571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_22
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 18
+        width: 110
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9c3ed45fe07b8860800000000000000
+      internalID: 7533238974930631835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_23
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 29
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19c2a66a063e5c250800000000000000
+      internalID: 5964423285770431633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_24
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 45
+        width: 27
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73d69ecb26f73d9f0800000000000000
+      internalID: -444871876126610121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_25
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 41
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be2c790495b1d8cd0800000000000000
+      internalID: -2554355343499476245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_26
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 43
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abdc97073081e59c0800000000000000
+      internalID: -3936682621224235590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_27
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 21
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1706f95fabd5f60d0800000000000000
+      internalID: -3427417733839495055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_28
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 15
+        width: 29
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c38a090064fe24560800000000000000
+      internalID: 7296657430229854268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fx_counter_29
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 12
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8ea69bc62bf7aac0800000000000000
+      internalID: -3843827612894450036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      fx_counter_0: -8450030099342098510
+      fx_counter_1: 4991572848849074706
+      fx_counter_10: -4924643542999247021
+      fx_counter_11: -2490017926944756525
+      fx_counter_12: -4877497170228564174
+      fx_counter_13: 4845230109614790186
+      fx_counter_14: -8822186778906145239
+      fx_counter_15: 955021723483663280
+      fx_counter_16: 4319255360641175820
+      fx_counter_17: 7800373761864164328
+      fx_counter_18: 3570759129014406370
+      fx_counter_19: 4903858638821531447
+      fx_counter_2: 5478820450628634529
+      fx_counter_20: 5675134880008085292
+      fx_counter_21: 7338035036226579571
+      fx_counter_22: 7533238974930631835
+      fx_counter_23: 5964423285770431633
+      fx_counter_24: -444871876126610121
+      fx_counter_25: -2554355343499476245
+      fx_counter_26: -3936682621224235590
+      fx_counter_27: -3427417733839495055
+      fx_counter_28: 7296657430229854268
+      fx_counter_29: -3843827612894450036
+      fx_counter_3: 5121384215927479061
+      fx_counter_4: -2073877483172999668
+      fx_counter_5: -2490089015808320709
+      fx_counter_6: 6754648198973178553
+      fx_counter_7: 1666248779967225402
+      fx_counter_8: 4175518044161547841
+      fx_counter_9: -4227849113916282269
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

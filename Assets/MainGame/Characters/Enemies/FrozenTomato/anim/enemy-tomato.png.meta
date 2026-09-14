@@ -1,0 +1,1211 @@
+fileFormatVersion: 2
+guid: 69b580aece21941ab9cf2b15921fa96c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3581058393830120938
+    second: enemy-tomato_0
+  - first:
+      213: 7873620324350565263
+    second: enemy-tomato_1
+  - first:
+      213: 4386698650060121038
+    second: enemy-tomato_2
+  - first:
+      213: 1644666710469908536
+    second: enemy-tomato_3
+  - first:
+      213: -3752649885030329863
+    second: enemy-tomato_4
+  - first:
+      213: 8712980451448626742
+    second: enemy-tomato_5
+  - first:
+      213: 6347677643820458016
+    second: enemy-tomato_6
+  - first:
+      213: -5500417225690267391
+    second: enemy-tomato_7
+  - first:
+      213: -7856947838668384159
+    second: enemy-tomato_8
+  - first:
+      213: 6296544476075346468
+    second: enemy-tomato_9
+  - first:
+      213: -8173912984602032322
+    second: enemy-tomato_10
+  - first:
+      213: -2466274058170896993
+    second: enemy-tomato_11
+  - first:
+      213: 3325840531030669634
+    second: enemy-tomato_12
+  - first:
+      213: -5767539068025101697
+    second: enemy-tomato_13
+  - first:
+      213: 8026269470493559743
+    second: enemy-tomato_14
+  - first:
+      213: 6464388928666896419
+    second: enemy-tomato_15
+  - first:
+      213: 3202099422379329966
+    second: enemy-tomato_16
+  - first:
+      213: 8668800846711950357
+    second: enemy-tomato_17
+  - first:
+      213: -5584236022316387619
+    second: enemy-tomato_18
+  - first:
+      213: 2145945660574080207
+    second: enemy-tomato_19
+  - first:
+      213: 1507097299584931209
+    second: enemy-tomato_20
+  - first:
+      213: 5362458884376510847
+    second: enemy-tomato_21
+  - first:
+      213: -257661782056159972
+    second: enemy-tomato_22
+  - first:
+      213: -1017254345202137644
+    second: enemy-tomato_23
+  - first:
+      213: -4483915769132594045
+    second: enemy-tomato_24
+  - first:
+      213: -3697533401971313662
+    second: enemy-tomato_25
+  - first:
+      213: 3673109633522272951
+    second: enemy-tomato_26
+  - first:
+      213: -6498588562875291918
+    second: enemy-tomato_27
+  - first:
+      213: 4880402751552940297
+    second: enemy-tomato_28
+  - first:
+      213: -7295007849300549487
+    second: enemy-tomato_29
+  - first:
+      213: 5142703858455456012
+    second: enemy-tomato_30
+  - first:
+      213: -6730891999335355269
+    second: enemy-tomato_31
+  - first:
+      213: -2174755210815913015
+    second: enemy-tomato_32
+  - first:
+      213: -4303650088027650134
+    second: enemy-tomato_33
+  - first:
+      213: 68081158139769891
+    second: enemy-tomato_34
+  - first:
+      213: -5570559358017969956
+    second: enemy-tomato_35
+  - first:
+      213: 5918060958203223450
+    second: enemy-tomato_36
+  - first:
+      213: 5411186304136871734
+    second: enemy-tomato_37
+  - first:
+      213: 3864920386862134978
+    second: enemy-tomato_38
+  - first:
+      213: -2623645496820006601
+    second: enemy-tomato_39
+  - first:
+      213: -7322046607442070563
+    second: enemy-tomato_40
+  - first:
+      213: -6143894364347549647
+    second: enemy-tomato_41
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: enemy-tomato_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 618
+        width: 67
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61223d33d568d4ec0800000000000000
+      internalID: -3581058393830120938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_1
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 618
+        width: 70
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8b163108f7b44d60800000000000000
+      internalID: 7873620324350565263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_2
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 641
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec3e4853e2fa0ec30800000000000000
+      internalID: 4386698650060121038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_3
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 618
+        width: 48
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 838187bc8a703d610800000000000000
+      internalID: 1644666710469908536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_4
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 614
+        width: 72
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f15b5cdfc8ebebc0800000000000000
+      internalID: -3752649885030329863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_5
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 484
+        width: 275
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63e9487ae89bae870800000000000000
+      internalID: 8712980451448626742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_6
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 634
+        width: 75
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0206b948f2b771850800000000000000
+      internalID: 6347677643820458016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_7
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 596
+        width: 101
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 101ca4afca79aa3b0800000000000000
+      internalID: -5500417225690267391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_8
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 613
+        width: 59
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 168d561919386f290800000000000000
+      internalID: -7856947838668384159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_9
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 591
+        width: 79
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42a4be827d1d16750800000000000000
+      internalID: 6296544476075346468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_10
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 644
+        width: 56
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e37c7df927d609e80800000000000000
+      internalID: -8173912984602032322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_11
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 642
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9d66fb9fc806cdd0800000000000000
+      internalID: -2466274058170896993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_12
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 619
+        width: 48
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 249fda78752c72e20800000000000000
+      internalID: 3325840531030669634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_13
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 483
+        width: 254
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f722d2e76c595ffa0800000000000000
+      internalID: -5767539068025101697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_14
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 487
+        width: 249
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbbc454fe89036f60800000000000000
+      internalID: 8026269470493559743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_15
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 596
+        width: 129
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32888271b7f16b950800000000000000
+      internalID: 6464388928666896419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_16
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 522
+        width: 60
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea9476e8574207c20800000000000000
+      internalID: 3202099422379329966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_17
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 503
+        width: 127
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51c0fd8d074cd4870800000000000000
+      internalID: 8668800846711950357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_18
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 523
+        width: 85
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd234eb9ceec082b0800000000000000
+      internalID: -5584236022316387619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_19
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 458
+        width: 44
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcc1fc5653ee7cd10800000000000000
+      internalID: 2145945660574080207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_20
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 323
+        width: 258
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 985d5bf42094ae410800000000000000
+      internalID: 1507097299584931209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_21
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 434
+        width: 70
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7146ed91f74b6a40800000000000000
+      internalID: 5362458884376510847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_22
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 351
+        width: 179
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c15395079f99c6cf0800000000000000
+      internalID: -257661782056159972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_23
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 322
+        width: 82
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d5010c009cf1e1f0800000000000000
+      internalID: -1017254345202137644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_24
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 291
+        width: 145
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38c44126d5ee5c1c0800000000000000
+      internalID: -4483915769132594045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_25
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 294
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 204bb5616f8bfacc0800000000000000
+      internalID: -3697533401971313662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_26
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 292
+        width: 56
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ba092f20c189f230800000000000000
+      internalID: 3673109633522272951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_27
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 4
+        width: 233
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f6e660122060d5a0800000000000000
+      internalID: -6498588562875291918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_28
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 259
+        width: 43
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 909e62fe17caab340800000000000000
+      internalID: 4880402751552940297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_29
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 255
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19021ccf20de2ca90800000000000000
+      internalID: -7295007849300549487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_30
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 101
+        width: 305
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c09a44c79ed8e5740800000000000000
+      internalID: 5142703858455456012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_31
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 238
+        width: 28
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7ce81e63611792a0800000000000000
+      internalID: -6730891999335355269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_32
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 188
+        width: 24
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c343e978a7b1d1e0800000000000000
+      internalID: -2174755210815913015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_33
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 188
+        width: 15
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa78881fb0d5644c0800000000000000
+      internalID: -4303650088027650134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_34
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 149
+        width: 38
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32471ded37fd1f000800000000000000
+      internalID: 68081158139769891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_35
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 102
+        width: 31
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd06c1927c561b2b0800000000000000
+      internalID: -5570559358017969956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_36
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 4
+        width: 16
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9d9fc4161d212250800000000000000
+      internalID: 5918060958203223450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_37
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 9
+        width: 212
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63f798f1645681b40800000000000000
+      internalID: 5411186304136871734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_38
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 55
+        width: 34
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c635185d94f2a530800000000000000
+      internalID: 3864920386862134978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_39
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 3
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7318d714250f69bd0800000000000000
+      internalID: -2623645496820006601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_40
+      rect:
+        serializedVersion: 2
+        x: 971
+        y: 4
+        width: 24
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd3bf86876dd26a90800000000000000
+      internalID: -7322046607442070563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-tomato_41
+      rect:
+        serializedVersion: 2
+        x: 987
+        y: 22
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1383a8b90a08cbaa0800000000000000
+      internalID: -6143894364347549647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      enemy-tomato_0: -3581058393830120938
+      enemy-tomato_1: 7873620324350565263
+      enemy-tomato_10: -8173912984602032322
+      enemy-tomato_11: -2466274058170896993
+      enemy-tomato_12: 3325840531030669634
+      enemy-tomato_13: -5767539068025101697
+      enemy-tomato_14: 8026269470493559743
+      enemy-tomato_15: 6464388928666896419
+      enemy-tomato_16: 3202099422379329966
+      enemy-tomato_17: 8668800846711950357
+      enemy-tomato_18: -5584236022316387619
+      enemy-tomato_19: 2145945660574080207
+      enemy-tomato_2: 4386698650060121038
+      enemy-tomato_20: 1507097299584931209
+      enemy-tomato_21: 5362458884376510847
+      enemy-tomato_22: -257661782056159972
+      enemy-tomato_23: -1017254345202137644
+      enemy-tomato_24: -4483915769132594045
+      enemy-tomato_25: -3697533401971313662
+      enemy-tomato_26: 3673109633522272951
+      enemy-tomato_27: -6498588562875291918
+      enemy-tomato_28: 4880402751552940297
+      enemy-tomato_29: -7295007849300549487
+      enemy-tomato_3: 1644666710469908536
+      enemy-tomato_30: 5142703858455456012
+      enemy-tomato_31: -6730891999335355269
+      enemy-tomato_32: -2174755210815913015
+      enemy-tomato_33: -4303650088027650134
+      enemy-tomato_34: 68081158139769891
+      enemy-tomato_35: -5570559358017969956
+      enemy-tomato_36: 5918060958203223450
+      enemy-tomato_37: 5411186304136871734
+      enemy-tomato_38: 3864920386862134978
+      enemy-tomato_39: -2623645496820006601
+      enemy-tomato_4: -3752649885030329863
+      enemy-tomato_40: -7322046607442070563
+      enemy-tomato_41: -6143894364347549647
+      enemy-tomato_5: 8712980451448626742
+      enemy-tomato_6: 6347677643820458016
+      enemy-tomato_7: -5500417225690267391
+      enemy-tomato_8: -7856947838668384159
+      enemy-tomato_9: 6296544476075346468
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

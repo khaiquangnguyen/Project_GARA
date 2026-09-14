@@ -1,0 +1,120 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.cs]
+indent_style = space
+indent_size = 4
+
+# Braces on their own line (Allman) — Rider's default C# brace style.
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
+
+# using directives outside the namespace, System first, alphabetical within each group.
+csharp_using_directive_placement = outside_namespace:suggestion
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+# var only where the type is obvious from the right-hand side; explicit otherwise.
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = false:suggestion
+
+# Prefer expression-bodied members for simple one-liners (properties, accessors).
+csharp_style_expression_bodied_properties = true:suggestion
+csharp_style_expression_bodied_accessors = true:suggestion
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_constructors = false:suggestion
+
+# Spacing.
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_after_cast = false
+
+# Braces required, even for single-statement bodies.
+csharp_prefer_braces = true:suggestion
+
+# Naming: PascalCase for types and members (methods/properties/events).
+# Fields are camelCase everywhere; private fields additionally take a
+# leading underscore UNLESS marked [SerializeField], in which case they're
+# bare camelCase like a public field (Roslyn naming rules can't key off an
+# attribute, so this one exception isn't machine-enforced — see the
+# csharp-style skill). camelCase for parameters/locals, I-prefixed
+# interfaces, T-prefixed type parameters.
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+dotnet_naming_style.camel_case.capitalization = camel_case
+
+dotnet_naming_style.underscore_camel_case.capitalization = camel_case
+dotnet_naming_style.underscore_camel_case.required_prefix = _
+
+dotnet_naming_style.interface_style.capitalization = pascal_case
+dotnet_naming_style.interface_style.required_prefix = I
+
+dotnet_naming_style.type_param_style.capitalization = pascal_case
+dotnet_naming_style.type_param_style.required_prefix = T
+
+dotnet_naming_symbols.types.applicable_kinds = class, struct, enum, delegate
+dotnet_naming_symbols.types.applicable_accessibilities = *
+
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+dotnet_naming_symbols.interfaces.applicable_accessibilities = *
+
+dotnet_naming_symbols.type_parameters.applicable_kinds = type_parameter
+dotnet_naming_symbols.type_parameters.applicable_accessibilities = *
+
+dotnet_naming_symbols.members.applicable_kinds = method, property, event
+dotnet_naming_symbols.members.applicable_accessibilities = *
+
+dotnet_naming_symbols.non_private_fields.applicable_kinds = field
+dotnet_naming_symbols.non_private_fields.applicable_accessibilities = public, internal, protected, protected_internal, private_protected
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_symbols.parameters_and_locals.applicable_kinds = parameter, local
+
+dotnet_naming_symbols.constants.applicable_kinds = field
+dotnet_naming_symbols.constants.required_modifiers = const
+
+dotnet_naming_rule.types_pascal.symbols = types
+dotnet_naming_rule.types_pascal.style = pascal_case
+dotnet_naming_rule.types_pascal.severity = suggestion
+
+dotnet_naming_rule.interfaces_i_prefix.symbols = interfaces
+dotnet_naming_rule.interfaces_i_prefix.style = interface_style
+dotnet_naming_rule.interfaces_i_prefix.severity = suggestion
+
+dotnet_naming_rule.type_parameters_t_prefix.symbols = type_parameters
+dotnet_naming_rule.type_parameters_t_prefix.style = type_param_style
+dotnet_naming_rule.type_parameters_t_prefix.severity = suggestion
+
+dotnet_naming_rule.members_pascal.symbols = members
+dotnet_naming_rule.members_pascal.style = pascal_case
+dotnet_naming_rule.members_pascal.severity = suggestion
+
+dotnet_naming_rule.non_private_fields_camel.symbols = non_private_fields
+dotnet_naming_rule.non_private_fields_camel.style = camel_case
+dotnet_naming_rule.non_private_fields_camel.severity = suggestion
+
+dotnet_naming_rule.private_fields_underscore_camel.symbols = private_fields
+dotnet_naming_rule.private_fields_underscore_camel.style = underscore_camel_case
+dotnet_naming_rule.private_fields_underscore_camel.severity = suggestion
+
+dotnet_naming_rule.constants_pascal.symbols = constants
+dotnet_naming_rule.constants_pascal.style = pascal_case
+dotnet_naming_rule.constants_pascal.severity = suggestion
+
+dotnet_naming_rule.parameters_and_locals_camel.symbols = parameters_and_locals
+dotnet_naming_rule.parameters_and_locals_camel.style = camel_case
+dotnet_naming_rule.parameters_and_locals_camel.severity = suggestion

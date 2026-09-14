@@ -1,0 +1,821 @@
+fileFormatVersion: 2
+guid: 90d890f8a96f34d1796329e31fcc7f7e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5590218091045302713
+    second: pose_finisher_0
+  - first:
+      213: 329680290395144807
+    second: pose_finisher_1
+  - first:
+      213: 4408263739301281293
+    second: pose_finisher_2
+  - first:
+      213: 853158314432002884
+    second: pose_finisher_3
+  - first:
+      213: 4716920349051965642
+    second: pose_finisher_4
+  - first:
+      213: -2946797558197037275
+    second: pose_finisher_5
+  - first:
+      213: -3840753089700913039
+    second: pose_finisher_6
+  - first:
+      213: -3756499799034382351
+    second: pose_finisher_7
+  - first:
+      213: 378333572533988177
+    second: pose_finisher_8
+  - first:
+      213: -3271463342848651052
+    second: pose_finisher_9
+  - first:
+      213: -5192297452071080970
+    second: pose_finisher_10
+  - first:
+      213: -6758837648431736951
+    second: pose_finisher_11
+  - first:
+      213: -6959149270977035149
+    second: pose_finisher_12
+  - first:
+      213: 3895163134379170828
+    second: pose_finisher_13
+  - first:
+      213: 5254839592740432830
+    second: pose_finisher_14
+  - first:
+      213: -3723389113171552306
+    second: pose_finisher_15
+  - first:
+      213: 7730230332363846718
+    second: pose_finisher_16
+  - first:
+      213: -3948586825598265816
+    second: pose_finisher_17
+  - first:
+      213: 2732954517087185073
+    second: pose_finisher_18
+  - first:
+      213: 744122624666079591
+    second: pose_finisher_19
+  - first:
+      213: -4711597219424620670
+    second: pose_finisher_20
+  - first:
+      213: -3554539117630682162
+    second: pose_finisher_21
+  - first:
+      213: -6355484737056053713
+    second: pose_finisher_22
+  - first:
+      213: -7992629422084697684
+    second: pose_finisher_23
+  - first:
+      213: 3650738924327085866
+    second: pose_finisher_24
+  - first:
+      213: 4196524085074608058
+    second: pose_finisher_25
+  - first:
+      213: 8518823330205574334
+    second: pose_finisher_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pose_finisher_0
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 357
+        width: 129
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74e4842b34e8b62b0800000000000000
+      internalID: -5590218091045302713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_1
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 308
+        width: 13
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76243763a72439400800000000000000
+      internalID: 329680290395144807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_2
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 386
+        width: 12
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0eb941d38c4d2d30800000000000000
+      internalID: 4408263739301281293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_3
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 358
+        width: 92
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44bf3ec77f607db00800000000000000
+      internalID: 853158314432002884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_4
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 317
+        width: 43
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac0dd0fe01ed57140800000000000000
+      internalID: 4716920349051965642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_5
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 319
+        width: 50
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5275daecb3fda17d0800000000000000
+      internalID: -2946797558197037275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_6
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 364
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 170a4620a67e2bac0800000000000000
+      internalID: -3840753089700913039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_7
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 371
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f7bab7e55b3edbc0800000000000000
+      internalID: -3756499799034382351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_8
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 219
+        width: 207
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15b2e75316c104500800000000000000
+      internalID: 378333572533988177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_9
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 64
+        width: 493
+        height: 287
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d05bc13c6d6992d0800000000000000
+      internalID: -3271463342848651052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_10
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 261
+        width: 77
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fb23213af041f7b0800000000000000
+      internalID: -5192297452071080970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_11
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 242
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98790b6f7f8c332a0800000000000000
+      internalID: -6758837648431736951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_12
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 184
+        width: 93
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 374ce74fb922c6f90800000000000000
+      internalID: -6959149270977035149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_13
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 168
+        width: 30
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0c1ed6bb366e0630800000000000000
+      internalID: 3895163134379170828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_14
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 165
+        width: 65
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebba3fca4c0fce840800000000000000
+      internalID: 5254839592740432830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 101
+        width: 122
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec75ad4345dd35cc0800000000000000
+      internalID: -3723389113171552306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_16
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 67
+        width: 78
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e343f70e78b474b60800000000000000
+      internalID: 7730230332363846718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_17
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 57
+        width: 232
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8269d6fd33dc339c0800000000000000
+      internalID: -3948586825598265816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_18
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 5
+        width: 65
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b8e74a47a76de520800000000000000
+      internalID: 2732954517087185073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_19
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 0
+        width: 127
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7619d88a597a35a00800000000000000
+      internalID: 744122624666079591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_20
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 14
+        width: 26
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28f2a73ca4b0d9eb0800000000000000
+      internalID: -4711597219424620670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_21
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 40
+        width: 11
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecb8469518dbbaec0800000000000000
+      internalID: -3554539117630682162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_22
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 0
+        width: 14
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f266b50fd48ccc7a0800000000000000
+      internalID: -6355484737056053713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_23
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 27
+        width: 47
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca15e4b23e9741190800000000000000
+      internalID: -7992629422084697684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_24
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 0
+        width: 134
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a27253095b70aa230800000000000000
+      internalID: 3650738924327085866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_25
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 0
+        width: 260
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abf3e36db6c0d3a30800000000000000
+      internalID: 4196524085074608058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pose_finisher_26
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 43
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb4a6352fa0f83670800000000000000
+      internalID: 8518823330205574334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pose_finisher_0: -5590218091045302713
+      pose_finisher_1: 329680290395144807
+      pose_finisher_10: -5192297452071080970
+      pose_finisher_11: -6758837648431736951
+      pose_finisher_12: -6959149270977035149
+      pose_finisher_13: 3895163134379170828
+      pose_finisher_14: 5254839592740432830
+      pose_finisher_15: -3723389113171552306
+      pose_finisher_16: 7730230332363846718
+      pose_finisher_17: -3948586825598265816
+      pose_finisher_18: 2732954517087185073
+      pose_finisher_19: 744122624666079591
+      pose_finisher_2: 4408263739301281293
+      pose_finisher_20: -4711597219424620670
+      pose_finisher_21: -3554539117630682162
+      pose_finisher_22: -6355484737056053713
+      pose_finisher_23: -7992629422084697684
+      pose_finisher_24: 3650738924327085866
+      pose_finisher_25: 4196524085074608058
+      pose_finisher_26: 8518823330205574334
+      pose_finisher_3: 853158314432002884
+      pose_finisher_4: 4716920349051965642
+      pose_finisher_5: -2946797558197037275
+      pose_finisher_6: -3840753089700913039
+      pose_finisher_7: -3756499799034382351
+      pose_finisher_8: 378333572533988177
+      pose_finisher_9: -3271463342848651052
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
