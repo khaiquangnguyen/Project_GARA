@@ -49,7 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85d6664bbb164fca918db3485159ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.IdleState
-  skeletonRendererRef: {fileID: 4108323643834172434}
+  positionMode: 0
+  skeletonRendererRef: {fileID: 3134209029974725100}
   animationName: idle
   loop: 1
 --- !u!114 &8728835523697270279
@@ -64,7 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d58d8ed5a7e74d6298eeacacb042dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.HitState
-  skeletonRendererRef: {fileID: 4108323643834172434}
+  positionMode: 0
+  skeletonRendererRef: {fileID: 3134209029974725100}
   animationName: hit
   loop: 0
 --- !u!114 &4525627942790522944
@@ -79,7 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c899a15e2636c4b419aec0d14b9a05d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DeathState
-  skeletonRendererRef: {fileID: 4108323643834172434}
+  positionMode: 0
+  skeletonRendererRef: {fileID: 3134209029974725100}
   animationName: death
   loop: 0
 --- !u!114 &4193828577790402808
@@ -94,7 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9bfa519cdd445478557afa1577b87c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.Atk1State
-  skeletonRendererRef: {fileID: 4108323643834172434}
+  positionMode: 0
+  skeletonRendererRef: {fileID: 3134209029974725100}
   animationName: attack-1
   loop: 0
   damageAmount: 0
@@ -110,7 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a4724b3f27e48b08f2ee9bc46b00b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.Atk2State
-  skeletonRendererRef: {fileID: 4108323643834172434}
+  positionMode: 0
+  skeletonRendererRef: {fileID: 3134209029974725100}
   animationName: attack-2
   loop: 0
   damageAmount: 0
@@ -126,7 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e2a2d5fdb7a4a2d9122739d57b36b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.Atk3State
-  skeletonRendererRef: {fileID: 4108323643834172434}
+  positionMode: 0
+  skeletonRendererRef: {fileID: 3134209029974725100}
   animationName: combo
   loop: 0
   damageAmount: 0
@@ -139,13 +145,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3445767280558310761}
-  - component: {fileID: 8263364982392722405}
-  - component: {fileID: 4108323643834172434}
-  - component: {fileID: 5571885251785103081}
-  - component: {fileID: 3265129801847840877}
   - component: {fileID: 4011238170706008863}
   - component: {fileID: 1118167080659379036}
   - component: {fileID: 8883732798456878140}
+  - component: {fileID: 3639539694035085640}
+  - component: {fileID: 889148493493009851}
   m_Layer: 0
   m_Name: FrozenTomato
   m_TagString: Untagged
@@ -167,15 +171,277 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7271493244571812737}
+  - {fileID: 4839247598297356633}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &8263364982392722405
-MeshRenderer:
+--- !u!114 &4011238170706008863
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3662008488019087220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8b1f504802141559300367a73fee48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Characters::GARA.Characters.CharacterDefinition
+  characterId: frozen_tomato
+  displayName: Frozen Tomato
+  portrait: {fileID: -5099292496197868168, guid: dabbe5e2e9d5846fc93356f3ca3bc7df, type: 3}
+  faction: 1
+  baseStats:
+    maxHp: 40
+    maxMp: 0
+    maxAp: 0
+    attack: 6
+    defense: 3
+    speed: 8
+  innateAbilityIds: []
+  levelUnlockedAbilities: []
+  allowedEquipmentSlots: 
+  defaultState: {fileID: 8427294588567716401}
+  basicAttacks:
+  - input: 0
+    state: {fileID: 4193828577790402808}
+    apCost: 0
+    positionMode: 1
+  - input: 1
+    state: {fileID: 7495025016596399778}
+    apCost: 0
+    positionMode: 1
+  - input: 2
+    state: {fileID: 8192445616348435663}
+    apCost: 0
+    positionMode: 1
+  combos: []
+  specials: []
+--- !u!114 &1118167080659379036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3662008488019087220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e43221d75b574dc4b54aead84c4c42d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.CharacterStateMachine
+--- !u!114 &8883732798456878140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3662008488019087220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012353150acb644e4857ee5fe803b240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.AttackExecutor
+  stateMachine: {fileID: 1118167080659379036}
+  timeBetweenMoveAndAction: 0.2
+--- !u!114 &3639539694035085640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3662008488019087220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84dc4729cd36e43e2ab38845456b4cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MoveForwardState
+  positionMode: 2
+  duration: 0.25
+  curveX:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curveY:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yOffsetAmount: 0.5
+  onBeginMove:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &889148493493009851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3662008488019087220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f66e41026b2e141918c39b8839799063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MoveBackwardState
+  positionMode: 2
+  duration: 0.25
+  curveX:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curveY:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yOffsetAmount: 0.5
+  onBeginMove:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &8492791200727557971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4839247598297356633}
+  - component: {fileID: 775708656566368157}
+  - component: {fileID: 5426249263931606805}
+  - component: {fileID: 3134209029974725100}
+  - component: {fileID: 8059554638890978879}
+  m_Layer: 0
+  m_Name: Visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4839247598297356633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492791200727557971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3445767280558310761}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &775708656566368157
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492791200727557971}
+  m_Mesh: {fileID: 0}
+--- !u!23 &5426249263931606805
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492791200727557971}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -213,18 +479,18 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1779148103
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4108323643834172434
+--- !u!114 &3134209029974725100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662008488019087220}
+  m_GameObject: {fileID: 8492791200727557971}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e075b9a3e08e2f74fbd651c858ab16ed, type: 3}
@@ -258,21 +524,13 @@ MonoBehaviour:
   fixDrawOrder: 0
   maskInteraction: 0
   fixPrefabOverrideViaMeshFilter: 2
---- !u!33 &5571885251785103081
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662008488019087220}
-  m_Mesh: {fileID: 0}
---- !u!114 &3265129801847840877
+--- !u!114 &8059554638890978879
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662008488019087220}
+  m_GameObject: {fileID: 8492791200727557971}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
@@ -284,67 +542,3 @@ MonoBehaviour:
   loop: 0
   timeScale: 1
   unscaledTime: 0
---- !u!114 &4011238170706008863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662008488019087220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df8b1f504802141559300367a73fee48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GARA.Characters::GARA.Characters.CharacterDefinition
-  characterId: frozen_tomato
-  displayName: Frozen Tomato
-  portrait: {fileID: -5099292496197868168, guid: dabbe5e2e9d5846fc93356f3ca3bc7df, type: 3}
-  faction: 1
-  baseStats:
-    maxHp: 40
-    maxMp: 0
-    maxAp: 0
-    attack: 6
-    defense: 3
-    speed: 8
-  innateAbilityIds: []
-  levelUnlockedAbilities: []
-  allowedEquipmentSlots: 
-  defaultState: {fileID: 8427294588567716401}
-  basicAttacks:
-  - input: 0
-    state: {fileID: 4193828577790402808}
-    apCost: 0
-  - input: 1
-    state: {fileID: 7495025016596399778}
-    apCost: 0
-  - input: 2
-    state: {fileID: 8192445616348435663}
-    apCost: 0
-  combos: []
-  specials: []
---- !u!114 &1118167080659379036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662008488019087220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e43221d75b574dc4b54aead84c4c42d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.CharacterStateMachine
---- !u!114 &8883732798456878140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662008488019087220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 012353150acb644e4857ee5fe803b240, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.AttackExecutor
-  stateMachine: {fileID: 1118167080659379036}

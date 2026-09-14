@@ -26,12 +26,21 @@ public class CombatOverlayManager : MonoBehaviour
     [Tooltip("Toggled on the instant a basic-attack sequence starts; toggled off again when the next turn starts.")]
     [SerializeField] private GameObject basicAttackStartedAnnouncement;
 
+    [Tooltip("Toggled on the instant a combo finisher lands; toggled off again when the next turn starts.")]
+    [SerializeField] private GameObject comboPerformedAnnouncement;
+
+    [Tooltip("The single authored 'what happens to a non-targeted character' template — mirrors a character's own structure (a Visual child) plus its own OnNotTargetedEffect child, exposed via EffectDummy. That child is cloned onto every character once combat starts.")]
+    [SerializeField] private EffectDummy effectDummyPrefab;
+
+    private bool _hasClonedCharacterEffects;
+
     private void OnEnable()
     {
         CombatPhaseController.TurnOrderChanged += RefreshTurnOrder;
         CombatPhaseController.TurnFactionChanged += ToggleTurnAnnouncement;
         CombatPhaseController.SpecialUsedAnnouncement += ShowSpecialUsedAnnouncement;
         CombatPhaseController.BasicAttackStartedAnnouncement += ShowBasicAttackStartedAnnouncement;
+        CombatPhaseController.ComboPerformedAnnouncement += ShowComboPerformedAnnouncement;
     }
 
     private void OnDisable()
@@ -40,10 +49,23 @@ public class CombatOverlayManager : MonoBehaviour
         CombatPhaseController.TurnFactionChanged -= ToggleTurnAnnouncement;
         CombatPhaseController.SpecialUsedAnnouncement -= ShowSpecialUsedAnnouncement;
         CombatPhaseController.BasicAttackStartedAnnouncement -= ShowBasicAttackStartedAnnouncement;
+        CombatPhaseController.ComboPerformedAnnouncement -= ShowComboPerformedAnnouncement;
     }
 
     public void RefreshTurnOrder(Sprite[] portraits)
     {
+        // First time the turn order is populated, every character has
+        // definitely finished spawning (CombatManager only raises this
+        // once GenerateParticipants is fully done) — the reliable moment
+        // to clone the per-character effects onto each of them, rather than
+        // racing Unity's cross-object Start() ordering.
+        if (!_hasClonedCharacterEffects)
+        {
+            CloneEffectOntoEveryCharacter(effectDummyPrefab != null ? effectDummyPrefab.OnNotTargetedEffect : null);
+            CloneEffectOntoEveryCharacter(effectDummyPrefab != null ? effectDummyPrefab.OnHitEffect : null);
+            _hasClonedCharacterEffects = true;
+        }
+
         for (var i = 0; i < turnOrderSlots.Length; i++)
         {
             var slot = turnOrderSlots[i];
@@ -54,6 +76,19 @@ public class CombatOverlayManager : MonoBehaviour
 
             slot.SetPortrait(i < portraits.Length ? portraits[i] : null);
             slot.SetCurrent(i == 0);
+        }
+    }
+
+    private void CloneEffectOntoEveryCharacter(GameObject effectPrefab)
+    {
+        if (effectPrefab == null)
+        {
+            return;
+        }
+
+        foreach (var executor in FindObjectsByType<AttackExecutor>(FindObjectsSortMode.None))
+        {
+            Instantiate(effectPrefab, executor.transform, false);
         }
     }
 
@@ -80,6 +115,11 @@ public class CombatOverlayManager : MonoBehaviour
         {
             basicAttackStartedAnnouncement.SetActive(false);
         }
+
+        if (comboPerformedAnnouncement != null)
+        {
+            comboPerformedAnnouncement.SetActive(false);
+        }
     }
 
     private void ShowSpecialUsedAnnouncement()
@@ -95,6 +135,14 @@ public class CombatOverlayManager : MonoBehaviour
         if (basicAttackStartedAnnouncement != null)
         {
             basicAttackStartedAnnouncement.SetActive(true);
+        }
+    }
+
+    private void ShowComboPerformedAnnouncement()
+    {
+        if (comboPerformedAnnouncement != null)
+        {
+            comboPerformedAnnouncement.SetActive(true);
         }
     }
 }

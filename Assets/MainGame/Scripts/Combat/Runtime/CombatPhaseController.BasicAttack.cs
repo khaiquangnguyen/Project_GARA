@@ -1,29 +1,21 @@
 using System;
+using System.Collections;
 using GARA.Characters;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace GARA.Combat
 {
-    // Basic-attack (Z/X/C) handling for CombatPhaseController. The target
-    // selector is shown continuously for the whole Combat Phase (see
-    // BeginPhaseForCurrentActor) — pressing Z/X/C immediately starts or
-    // continues the real-time buffer/combo chain against whatever's
-    // currently selected, exactly like the original real-time combo system;
-    // there's no separate target-selection/confirmation step for basic
-    // attacks. The combo may still only be used once per phase — locked in
-    // either by a matched finisher or by the player pressing Enter with no
-    // pending selection (see the main partial's OnEndOrLockCombo).
     public partial class CombatPhaseController
     {
-        // Raised the instant a basic-attack sequence starts (the first
-        // Z/X/C of the phase, not every chained swing) — a dedicated signal
-        // so UI can toggle its own announcement GameObject, the same way
-        // TurnFactionChanged toggles the turn one.
         public static event Action BasicAttackStartedAnnouncement;
+        public static event Action ComboPerformedAnnouncement;
 
-        private bool _comboInProgress;
-        private bool _comboUsedThisPhase;
+        [Tooltip("Pause after the combo finisher's animation finishes before the basic-attack chain actually ends (targeting clears, actor returns to standard position) — keeps the finisher from immediately getting cut off.")]
+        [SerializeField]
+        private float comboFinisherEndDelay = 1f;
+
+        private bool _basicAttackChainActive;
 
         private void OnAtk1(InputAction.CallbackContext ctx) => TryTriggerBasicAttack(AttackInput.Atk1);
         private void OnAtk2(InputAction.CallbackContext ctx) => TryTriggerBasicAttack(AttackInput.Atk2);
@@ -31,17 +23,22 @@ namespace GARA.Combat
 
         private void Update()
         {
-            if (!CanAct() || _comboUsedThisPhase)
+            if (!CanAct() || _chainedActionUsedThisPhase)
             {
                 return;
             }
 
-            _actor.basicAttackController.Tick(Time.deltaTime, true, OnBasicAttackResolved);
+            _actor.basicAttackController.Tick(true, OnBasicAttackResolved);
         }
 
         private void TryTriggerBasicAttack(AttackInput input)
         {
-            if (!CanAct() || _comboUsedThisPhase)
+            if (!CanAct() || _chainedActionUsedThisPhase)
+            {
+                return;
+            }
+
+            if (!_basicAttackChainActive && _phaseActionState != PhaseActionState.Regular)
             {
                 return;
             }
@@ -51,12 +48,12 @@ namespace GARA.Combat
                 return;
             }
 
-            if (!_comboInProgress)
+            if (!_basicAttackChainActive)
             {
+                _basicAttackChainActive = TryEnterChainedAction(OnBasicAttackChainCancelled);
                 BasicAttackStartedAnnouncement?.Invoke();
             }
 
-            _comboInProgress = true;
             _actor.basicAttackController.OnAttackInput(input);
         }
 
@@ -67,33 +64,71 @@ namespace GARA.Combat
                 return;
             }
 
-            _actorExecutor.PlayAction(resolution.state, new ICombatTarget[] { targetSelector.CurrentTarget });
-            _actorExecutor.ActionFinished += ReturnToIdleIfNothingQueued;
+            PlayBasicAttackSwing(resolution);
+        }
+
+        // Single entry point for playing any basic-attack swing, whether
+        // it's an ordinary input (from OnBasicAttackResolved) or a combo
+        // finisher queued to play right after the input that triggered it
+        // (from OnBasicAttackActionFinished, below) — a finisher never
+        // bypasses that input's own swing, it plays once it's done.
+        private void PlayBasicAttackSwing(ComboResolution resolution)
+        {
+            var selectedTarget = targetSelector.CurrentTarget;
+            AnnounceTargetingForSingleEnemyTarget(_actor, selectedTarget);
+            _actorExecutor.PlayAction(resolution.state, new ICombatTarget[] { selectedTarget }, resolution.positionMode);
+            _actorExecutor.ActionFinished += OnBasicAttackActionFinished;
 
             if (resolution.kind == ComboResolutionKind.Finisher)
             {
-                _comboInProgress = false;
-                _comboUsedThisPhase = true;
+                ComboPerformedAnnouncement?.Invoke();
+                ExitBasicAttackChain();
             }
         }
 
-        // Once this swing's animation ends, fall back to Idle unless the
-        // player already queued the next swing (which Update()'s Tick will
-        // consume and chain into on its own).
-        private void ReturnToIdleIfNothingQueued()
+        private void OnBasicAttackActionFinished()
         {
-            _actorExecutor.ActionFinished -= ReturnToIdleIfNothingQueued;
+            _actorExecutor.ActionFinished -= OnBasicAttackActionFinished;
 
-            if (!_actor.basicAttackController.HasBufferedInput)
+            if (_basicAttackChainActive && _actor.basicAttackController.TryTakeQueuedFinisher(out var finisher))
             {
-                _actorExecutor.ReturnToIdle();
+                PlayBasicAttackSwing(finisher);
+                return;
             }
+
+            if (!_basicAttackChainActive)
+            {
+                StartCoroutine(FinishBasicAttackChainAfterDelay());
+            }
+        }
+
+        private IEnumerator FinishBasicAttackChainAfterDelay()
+        {
+            yield return new WaitForSeconds(comboFinisherEndDelay);
+            FinishBasicAttackChain();
+        }
+
+        private void OnBasicAttackChainCancelled()
+        {
+            ExitBasicAttackChain();
+            FinishBasicAttackChain();
+        }
+
+        private void FinishBasicAttackChain()
+        {
+            AnnounceTargetingClearedForEnemies(_actor);
+            _actorExecutor.ReturnToStandardPosition();
+        }
+
+        private void ExitBasicAttackChain()
+        {
+            _basicAttackChainActive = false;
+            ExitChainedAction();
         }
 
         private void ResetBasicAttackStateForNewPhase()
         {
-            _comboInProgress = false;
-            _comboUsedThisPhase = false;
+            _basicAttackChainActive = false;
         }
     }
 }

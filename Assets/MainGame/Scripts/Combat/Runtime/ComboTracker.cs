@@ -12,6 +12,9 @@ namespace GARA.Combat
         private readonly CharacterDefinition _definition;
         private readonly List<AttackInput> _sequence = new();
 
+        private bool _hasQueuedFinisher;
+        private ComboResolution _queuedFinisher;
+
         public ComboTracker(CharacterDefinition definition)
         {
             _definition = definition;
@@ -20,8 +23,13 @@ namespace GARA.Combat
         public void Reset()
         {
             _sequence.Clear();
+            _hasQueuedFinisher = false;
         }
 
+        // Registers the input's own basic attack as the resolution — a
+        // matched combo tail never bypasses the final input's own swing,
+        // it just queues the finisher to play right after that swing
+        // finishes (see TryTakeQueuedFinisher).
         public ComboResolution Register(AttackInput input)
         {
             _sequence.Add(input);
@@ -30,14 +38,29 @@ namespace GARA.Combat
             {
                 if (SequenceEndsWith(combo.sequence))
                 {
-                    Reset();
-                    return ComboResolution.Finisher(combo.finisherState);
+                    _hasQueuedFinisher = true;
+                    _queuedFinisher = ComboResolution.Finisher(combo.finisherState, combo.finisherState.PositionMode);
+                    _sequence.Clear();
+                    break;
                 }
             }
 
             return _definition.TryGetBasicAttack(input, out var basicAttack)
-                ? ComboResolution.Basic(basicAttack.state)
+                ? ComboResolution.Basic(basicAttack.state, basicAttack.positionMode)
                 : ComboResolution.None();
+        }
+
+        public bool TryTakeQueuedFinisher(out ComboResolution finisher)
+        {
+            if (!_hasQueuedFinisher)
+            {
+                finisher = ComboResolution.None();
+                return false;
+            }
+
+            finisher = _queuedFinisher;
+            _hasQueuedFinisher = false;
+            return true;
         }
 
         private bool SequenceEndsWith(AttackInput[] comboSequence)

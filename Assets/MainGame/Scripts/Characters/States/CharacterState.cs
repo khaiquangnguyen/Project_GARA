@@ -18,6 +18,10 @@ namespace GARA.Characters
     // unique within the whole hierarchy.
     public abstract class CharacterState : MonoBehaviour
     {
+        [SerializeField] private ActionPositionMode positionMode;
+
+        public ActionPositionMode PositionMode => positionMode;
+
         // Raised by the subclass whenever it considers itself done — e.g. a
         // SpineAnimationState raises this off the animation's own Complete
         // event, not a hand-authored duration.

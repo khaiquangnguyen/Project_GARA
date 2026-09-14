@@ -15,5 +15,7 @@ namespace GARA.Characters
         public CharacterState state;
 
         public int apCost;
+
+        public ActionPositionMode positionMode;
     }
 }

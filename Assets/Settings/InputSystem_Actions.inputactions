@@ -1114,6 +1114,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "CancelChainedAction",
+                    "type": "Button",
+                    "id": "d2d0695f-979e-4596-97db-1ab86c62cb5b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -1235,6 +1245,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "EndOrLockCombo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2aef452-e14b-4999-9539-612fa75b75b7",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CancelChainedAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

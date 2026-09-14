@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using GARA.Characters;
+using MoreMountains.Tools;
 using UnityEngine;
 
 namespace GARA.Combat
@@ -34,6 +36,13 @@ namespace GARA.Combat
         private readonly Dictionary<CharacterState, CharacterState> _liveStateByAssetReference = new();
 
         public bool IsDefeated => currentHp <= 0;
+
+        // Raised the instant a participant's HP crosses into defeated —
+        // once, on that transition only, not on every subsequent hit. Lets
+        // combat-flow code (CombatPhaseController) react without
+        // CombatParticipant needing to know about TargetSelector/turn order
+        // itself.
+        public static event Action<CombatParticipant> Defeated;
 
         public static CombatParticipant FromManagedCharacter(ManagedCharacter character, CharacterDefinition definition, FactionTag faction)
         {
@@ -84,7 +93,23 @@ namespace GARA.Combat
 
         public void ApplyDamage(int amount)
         {
+            var wasDefeated = IsDefeated;
             currentHp = Mathf.Max(0, currentHp - amount);
+            MMEventManager.TriggerEvent(new HitStateEvent(SceneRoot));
+
+            var executor = SceneRoot.GetComponent<AttackExecutor>();
+            if (IsDefeated)
+            {
+                executor?.PlayDeathReaction();
+                if (!wasDefeated)
+                {
+                    Defeated?.Invoke(this);
+                }
+            }
+            else
+            {
+                executor?.PlayHitReaction();
+            }
         }
 
         public bool TrySpendAp(int amount)

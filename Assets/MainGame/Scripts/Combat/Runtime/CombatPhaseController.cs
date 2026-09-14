@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GARA.Characters;
+using MoreMountains.Tools;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -59,10 +61,15 @@ namespace GARA.Combat
         private InputAction _targetLeft;
         private InputAction _targetRight;
         private InputAction _endOrLockCombo;
+        private InputAction _cancelChainedAction;
 
         private CombatParticipant _actor;
         private AttackExecutor _actorExecutor;
         private bool _phaseActive;
+
+        private PhaseActionState _phaseActionState;
+        private bool _chainedActionUsedThisPhase;
+        private Action _activeChainedActionCancelHandler;
 
         private void Awake()
         {
@@ -79,6 +86,7 @@ namespace GARA.Combat
             _targetLeft = map.FindAction("TargetLeft");
             _targetRight = map.FindAction("TargetRight");
             _endOrLockCombo = map.FindAction("EndOrLockCombo");
+            _cancelChainedAction = map.FindAction("CancelChainedAction");
         }
 
         private void OnEnable()
@@ -92,7 +100,9 @@ namespace GARA.Combat
             _slotD.performed += OnSlotD;
             _targetLeft.performed += OnTargetLeft;
             _targetRight.performed += OnTargetRight;
-            _endOrLockCombo.performed += OnEndOrLockCombo;
+            _endOrLockCombo.performed += OnEndCombatPhase;
+            _cancelChainedAction.performed += OnCancelChainedAction;
+            CombatParticipant.Defeated += OnParticipantDefeated;
 
             combatInputActions.FindActionMap("Combat").Enable();
         }
@@ -108,9 +118,21 @@ namespace GARA.Combat
             _slotD.performed -= OnSlotD;
             _targetLeft.performed -= OnTargetLeft;
             _targetRight.performed -= OnTargetRight;
-            _endOrLockCombo.performed -= OnEndOrLockCombo;
+            _endOrLockCombo.performed -= OnEndCombatPhase;
+            _cancelChainedAction.performed -= OnCancelChainedAction;
+            CombatParticipant.Defeated -= OnParticipantDefeated;
 
             combatInputActions.FindActionMap("Combat").Disable();
+        }
+
+        // Drops the just-defeated participant from whatever's currently
+        // selectable (a no-op if it wasn't in the pool) and refreshes the
+        // turn-order display — fires the instant a participant dies,
+        // regardless of whose turn it is or what killed them.
+        private void OnParticipantDefeated(CombatParticipant participant)
+        {
+            targetSelector.RemoveCandidate(participant);
+            RaiseTurnOrderChanged();
         }
 
         public void Initialize(BattleContext battle, Dictionary<CombatParticipant, AttackExecutor> executors)
@@ -148,7 +170,7 @@ namespace GARA.Combat
 
         private void OnTargetLeft(InputAction.CallbackContext ctx)
         {
-            if (CanAct())
+            if (CanChooseNewAction())
             {
                 targetSelector.CycleLeft();
             }
@@ -156,34 +178,77 @@ namespace GARA.Combat
 
         private void OnTargetRight(InputAction.CallbackContext ctx)
         {
-            if (CanAct())
+            if (CanChooseNewAction())
             {
                 targetSelector.CycleRight();
             }
         }
 
-        private void OnEndOrLockCombo(InputAction.CallbackContext ctx)
+        private void OnEndCombatPhase(InputAction.CallbackContext ctx)
         {
-            if (!CanAct())
+            if (!CanChooseNewAction())
             {
                 return;
             }
 
-            if (_comboInProgress && !_comboUsedThisPhase)
+            EndCombatPhase();
+        }
+
+        private void OnCancelChainedAction(InputAction.CallbackContext ctx)
+        {
+            if (!CanAct() || _phaseActionState != PhaseActionState.ChainedAction)
             {
-                // Locks the combo without a finisher; the phase continues.
-                _comboInProgress = false;
-                _comboUsedThisPhase = true;
+                return;
             }
-            else
-            {
-                EndCombatPhase();
-            }
+
+            _activeChainedActionCancelHandler?.Invoke();
         }
 
         private bool CanAct()
         {
             return _phaseActive && _actor != null && _actor.faction == FactionTag.Player && !_actorExecutor.IsBusy;
+        }
+
+
+        // Claims the phase's one chained-action slot for whichever driver
+        // calls this on its own first input (basic attack today). Returns
+        // false if the slot is already taken or already spent this phase.
+        // onCancelRequested is invoked if the player presses Escape while
+        // this chain owns the slot — each driver owns its own "how do I
+        // unwind cleanly" logic; this layer only tracks whether the slot
+        // is taken.
+        private bool TryEnterChainedAction(Action onCancelRequested)
+        {
+            if (_phaseActionState != PhaseActionState.Regular || _chainedActionUsedThisPhase)
+            {
+                return false;
+            }
+
+            _phaseActionState = PhaseActionState.ChainedAction;
+            _activeChainedActionCancelHandler = onCancelRequested;
+            return true;
+        }
+
+        // Called by a driver once its chain is fully done — a finisher
+        // landed, or it was explicitly cancelled. Spends the phase's slot
+        // and hands control back to Regular.
+        private void ExitChainedAction()
+        {
+            _phaseActionState = PhaseActionState.Regular;
+            _chainedActionUsedThisPhase = true;
+            _activeChainedActionCancelHandler = null;
+        }
+
+        private bool CanChooseNewAction()
+        {
+            return CanAct() && _phaseActionState == PhaseActionState.Regular;
+        }
+
+        private void ResetPhaseActionStateForNewPhase()
+        {
+            _phaseActionState = PhaseActionState.Regular;
+            _chainedActionUsedThisPhase = false;
+            _activeChainedActionCancelHandler = null;
         }
 
         // Fires the instant it's chosen — applies whatever targeting rule
@@ -195,7 +260,7 @@ namespace GARA.Combat
         // entirely and hits every living member of the relevant party.
         private void TryUseSpecial(int slot)
         {
-            if (!CanAct())
+            if (!CanChooseNewAction())
             {
                 return;
             }
@@ -243,22 +308,39 @@ namespace GARA.Combat
                 return;
             }
 
+            AnnounceTargetingForSpecial(_actor, entry, targets);
             SpecialUsedAnnouncement?.Invoke();
-            _actorExecutor.PlayAction(entry.state, targets);
+            _actorExecutor.PlayAction(entry.state, targets, entry.positionMode);
+            _actorExecutor.ActionFinished += OnSpecialActionFinished;
+
+            void OnSpecialActionFinished()
+            {
+                _actorExecutor.ActionFinished -= OnSpecialActionFinished;
+                AnnounceTargetingClearedForSpecial(_actor, entry);
+                _actorExecutor.ReturnToStandardPosition();
+            }
         }
 
         private void BeginPhaseForCurrentActor()
         {
             _actor = _battle.CurrentActor;
             _actorExecutor = _executors[_actor];
+            SetActorSortingOrder(_actor, 1);
             TurnFactionChanged?.Invoke(_actor.faction == FactionTag.Player);
+            ResetPhaseActionStateForNewPhase();
             ResetBasicAttackStateForNewPhase();
             _actor.basicAttackController.ResetForNewTurn();
 
             if (_actor.faction != FactionTag.Player)
             {
                 _phaseActive = false;
-                _enemyTurnController.TakeTurn(_actor, EndCombatPhase);
+                _enemyTurnController.TakeTurn(
+                    _actor,
+                    _actorExecutor,
+                    LivingEnemiesOf(_actor),
+                    target => AnnounceTargetingForSingleEnemyTarget(_actor, target),
+                    () => AnnounceTargetingClearedForEnemies(_actor),
+                    EndCombatPhase);
                 return;
             }
 
@@ -270,6 +352,8 @@ namespace GARA.Combat
         {
             _phaseActive = false;
             targetSelector.EndSelection();
+            AnnounceTargetingClearedForEnemies(_actor);
+            SetActorSortingOrder(_actor, 0);
 
             _battle.AdvanceTurn();
             RaiseTurnOrderChanged();
@@ -280,6 +364,96 @@ namespace GARA.Combat
             }
 
             BeginPhaseForCurrentActor();
+        }
+
+        // Announces every OTHER living enemy as not-targeted, and the
+        // selected one as targeted, for whichever single-enemy-target basic
+        // attack is about to play. No-op for specials that hit everyone in
+        // a pool (AllEnemy/AllFriendly) — see
+        // AnnounceTargetingForSpecial/AnnounceTargetingClearedForSpecial for
+        // those. This class has no opinion on what "not targeted" looks
+        // like — it just broadcasts the targeting state via MMEventManager;
+        // whatever's listening (see OnNotTargetedEffect) decides that.
+        private void AnnounceTargetingForSingleEnemyTarget(CombatParticipant actor, CombatParticipant selectedTarget)
+        {
+            foreach (var enemy in LivingEnemiesOf(actor))
+            {
+                MMEventManager.TriggerEvent(new TargetedStateEvent(enemy.SceneRoot, enemy == selectedTarget));
+            }
+        }
+
+        private void AnnounceTargetingClearedForEnemies(CombatParticipant actor)
+        {
+            foreach (var enemy in LivingEnemiesOf(actor))
+            {
+                MMEventManager.TriggerEvent(new TargetedStateEvent(enemy.SceneRoot, true));
+            }
+        }
+
+        private void AnnounceTargetingForSpecial(CombatParticipant actor, SpecialAttackEntry entry, IReadOnlyList<ICombatTarget> targets)
+        {
+            switch (entry.targetMode)
+            {
+                case SpecialTargetMode.OneEnemy:
+                    foreach (var enemy in LivingEnemiesOf(actor))
+                    {
+                        MMEventManager.TriggerEvent(new TargetedStateEvent(enemy.SceneRoot, targets.Contains(enemy)));
+                    }
+                    break;
+                case SpecialTargetMode.OneFriendly:
+                    foreach (var ally in LivingAlliesOf(actor))
+                    {
+                        MMEventManager.TriggerEvent(new TargetedStateEvent(ally.SceneRoot, targets.Contains(ally)));
+                    }
+                    break;
+                // AllEnemy/AllFriendly: everyone in the pool is targeted — nothing to announce as excluded.
+            }
+        }
+
+        private void AnnounceTargetingClearedForSpecial(CombatParticipant actor, SpecialAttackEntry entry)
+        {
+            switch (entry.targetMode)
+            {
+                case SpecialTargetMode.OneEnemy:
+                    foreach (var enemy in LivingEnemiesOf(actor))
+                    {
+                        MMEventManager.TriggerEvent(new TargetedStateEvent(enemy.SceneRoot, true));
+                    }
+                    break;
+                case SpecialTargetMode.OneFriendly:
+                    foreach (var ally in LivingAlliesOf(actor))
+                    {
+                        MMEventManager.TriggerEvent(new TargetedStateEvent(ally.SceneRoot, true));
+                    }
+                    break;
+            }
+        }
+
+        // Renders the acting character above the rest of their formation
+        // for the duration of their turn — order 1 while it's their turn,
+        // reset to 0 once it ends. Sorting order itself lives on the
+        // MeshRenderer Spine renders through, but resolved off the
+        // SkeletonRenderer specifically (its own GameObject's renderer) so
+        // this targets the actual skeleton's renderer, not just whichever
+        // MeshRenderer happens to be found first under the character.
+        private void SetActorSortingOrder(CombatParticipant actor, int order)
+        {
+            if (actor?.SceneRoot == null)
+            {
+                return;
+            }
+
+            var skeletonRenderer = actor.SceneRoot.GetComponentInChildren<SkeletonRenderer>();
+            if (skeletonRenderer == null)
+            {
+                return;
+            }
+
+            var meshRenderer = skeletonRenderer.GetComponent<MeshRenderer>();
+            if (meshRenderer != null)
+            {
+                meshRenderer.sortingOrder = order;
+            }
         }
 
         private List<CombatParticipant> LivingEnemiesOf(CombatParticipant actor)

@@ -59,6 +59,36 @@ namespace GARA.Combat
             _candidates.Clear();
         }
 
+        // Drops a candidate that's no longer selectable (defeated mid-
+        // selection, e.g. killed by an earlier swing in the same chain) —
+        // a no-op if it isn't currently in the pool. Keeps the cursor on
+        // whichever candidate it was pointing at when possible, only
+        // shifting it back if that would run past the end of the list.
+        public void RemoveCandidate(CombatParticipant participant)
+        {
+            var index = _candidates.IndexOf(participant);
+            if (index < 0)
+            {
+                return;
+            }
+
+            _candidates.RemoveAt(index);
+
+            if (_candidates.Count == 0)
+            {
+                _currentIndex = 0;
+                HideIndicator();
+                return;
+            }
+
+            if (_currentIndex >= _candidates.Count)
+            {
+                _currentIndex = _candidates.Count - 1;
+            }
+
+            ShowAt(CurrentTarget);
+        }
+
         private void ShowAt(CombatParticipant target)
         {
             if (target == null)

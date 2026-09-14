@@ -6,7 +6,8 @@
     "spine-unity",
     "spine-csharp",
     "Unity.InputSystem",
-    "UnityEngine.UI"
+    "UnityEngine.UI",
+    "MoreMountains.Tools"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
