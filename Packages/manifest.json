@@ -8,7 +8,7 @@
     "com.esotericsoftware.spine.urp-shaders": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Modules/com.esotericsoftware.spine.urp-shaders#4.3",
     "com.kyrylokuzyk.primetween": "file:../Packages/com.kyrylokuzyk.primetween.tgz",
     "com.unity.2d.aseprite": "6.0.0",
-    "com.unity.2d.psdimporter": "15.0.0",
+    "com.unity.2d.psdimporter": "15.0.1",
     "com.unity.ai.assistant": "2.19.0-pre.2",
     "com.unity.cinemachine": "6.7.0",
     "com.unity.collab-proxy": "2.13.6",
