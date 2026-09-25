@@ -46,6 +46,8 @@ namespace GARA.Combat
         private Action _pendingOnImpact;
         private Func<float> _pendingBeforeAttack;
 
+        private readonly Dictionary<GameObject, IAttackHitFeedback> _hitFeedbacks = new();
+
         public bool IsBusy => _isBusy;
         public CombatParticipant Participant => _participant;
 
@@ -75,8 +77,9 @@ namespace GARA.Combat
         }
 
         // Plays one swing (a basic attack, a combo finisher, or a special)
-        // against an explicit target list, dashing to the first target
-        // first when positionMode calls for it. Does not move the actor
+        // against an explicit target list. positionMode is absolute: it
+        // first dashes to the first target (MoveInFrontOfEnemy) or back to
+        // the standard spot (StayAtOriginalPosition). Does not move the actor
         // back — a Combat Phase "Action" (a special, or the whole chained
         // basic-attack sequence) may be made of several of these calls, so
         // the caller decides when the Action is actually over and calls
@@ -114,20 +117,28 @@ namespace GARA.Combat
                 && targets[0] is CombatParticipant frontTarget)
             {
                 var destination = CombatSpacing.PositionInFrontOfEnemy(_participant, frontTarget, RangeOf(liveState));
-                if (Vector3.Distance(_participant.SceneTransform.position, destination) > AlreadyAtDestinationDistance)
-                {
-                    _moveForwardState.SetDestination(destination);
-                    BeginState(_moveForwardState, targets, OnMoveForwardFinished);
-                }
-                else
-                {
-                    BeginAttackState();
-                }
+                MoveThenAttack(_moveForwardState, destination, targets);
+            }
+            else if (positionMode == ActionPositionMode.StayAtOriginalPosition && _moveBackwardState != null)
+            {
+                MoveThenAttack(_moveBackwardState, _standardPosition, targets);
             }
             else
             {
                 BeginAttackState();
             }
+        }
+
+        private void MoveThenAttack(MoveState moveState, Vector3 destination, IReadOnlyList<ICombatTarget> targets)
+        {
+            if (Vector3.Distance(_participant.SceneTransform.position, destination) <= AlreadyAtDestinationDistance)
+            {
+                BeginAttackState();
+                return;
+            }
+
+            moveState.SetDestination(destination);
+            BeginState(moveState, targets, OnMoveForwardFinished);
         }
 
         // Seconds from an in-place PlayAction of assetSideState to its hit
@@ -144,6 +155,29 @@ namespace GARA.Combat
             EnterDefaultState();
         }
 
+        // Plays a hit-feedback prefab on this character, spawning it under
+        // SceneRoot the first time and reusing that instance after.
+        public void PlayHitFeedback(GameObject prefab)
+        {
+            if (prefab == null)
+            {
+                return;
+            }
+
+            if (!_hitFeedbacks.TryGetValue(prefab, out var feedback))
+            {
+                feedback = Instantiate(prefab, _participant.SceneTransform).GetComponent<IAttackHitFeedback>();
+                if (feedback == null)
+                {
+                    Debug.LogWarning($"[{nameof(AttackExecutor)}] {prefab.name} has no {nameof(IAttackHitFeedback)} at its root.", prefab);
+                }
+
+                _hitFeedbacks[prefab] = feedback;
+            }
+
+            feedback?.Play();
+        }
+
         private static float RangeOf(CharacterState liveState)
         {
             if (liveState is AttackSpecAnimationState { NextSpec: { } spec })
@@ -155,10 +189,10 @@ namespace GARA.Combat
             return 0f;
         }
 
-        // Dashes up to target at assetSideState's attack range (as
-        // MoveInFrontOfEnemy does before a swing), idles there, then calls
-        // onArrived. Calls straight back if there's nothing to dash for.
-        public void MoveInFrontOf(ICombatTarget target, CharacterState assetSideState, Action onArrived)
+        // Dashes up to target at assetSideState's attack range, or spec's
+        // when given (as MoveInFrontOfEnemy does before a swing), idles
+        // there, then calls onArrived. Calls straight back if there's nothing to dash for.
+        public void MoveInFrontOf(ICombatTarget target, CharacterState assetSideState, Action onArrived, AttackAnimationSpec spec = null)
         {
             if (_moveForwardState == null || !(target is CombatParticipant enemy))
             {
@@ -166,7 +200,8 @@ namespace GARA.Combat
                 return;
             }
 
-            var destination = CombatSpacing.PositionInFrontOfEnemy(_participant, enemy, RangeOf(_participant.ResolveLiveState(assetSideState)));
+            var range = spec != null ? spec.Range : RangeOf(_participant.ResolveLiveState(assetSideState));
+            var destination = CombatSpacing.PositionInFrontOfEnemy(_participant, enemy, range);
             if (Vector3.Distance(_participant.SceneTransform.position, destination) <= AlreadyAtDestinationDistance)
             {
                 onArrived?.Invoke();

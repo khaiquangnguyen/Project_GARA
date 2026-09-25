@@ -7,5 +7,9 @@ namespace GARA.Characters
     public interface ILiveSkillInputSession : ISkillInputSession
     {
         event Action<SkillStep> StepPerformed;
+
+        // The first step's move, whose range the pre-input dash stands at.
+        // Null when there's none to aim for.
+        AttackAnimationSpec OpeningMove { get; }
     }
 }

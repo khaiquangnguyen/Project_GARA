@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Characters::GARA.Characters.AttackAnimationSpec
   skeletonData: {fileID: 11400000, guid: 56e53593a549a482ea10d743e6fef56d, type: 2}
   animationName: atk-3
-  range: 1
+  range: 2
+  hitFeedback: {fileID: 825474723826213862, guid: 4a8702edd17214aa0a494b6df619a75d, type: 3}

@@ -6,12 +6,14 @@ using UnityEngine;
 
 namespace GARA.Combat
 {
-    // Live skill cards (ILiveSkillInputSession): the actor dashes in before
-    // the minigame, then plays each step's attack on the card's own state and
-    // resolves it as the session emits it. Normal steps resolve the card's
-    // effects at their share; the finale resolves its perfectEffects and, for
-    // an IPerfectAnnouncementCard, drops its announcement onto each target so
-    // it lands on the finale's hit frame.
+    // Live skill cards (ILiveSkillInputSession): the actor dashes in to the
+    // opening move's range before the minigame, then plays each step's
+    // attack on the card's own state as the session emits it. Bar steps play
+    // at the card's positionMode and resolve its effects at their share; the
+    // finale plays animationSpec at finalePositionMode, resolves
+    // perfectEffects and drops the spec's announcement onto each target so
+    // it lands on the finale's hit frame. Each hit plays its spec's
+    // feedback prefab on the actor.
     public partial class CombatSceneManager
     {
         private void BeginLiveSkillCard(SkillCardDefinition card, IReadOnlyList<ICombatTarget> targets, ILiveSkillInputSession session)
@@ -27,7 +29,7 @@ namespace GARA.Combat
 
             if (card.positionMode == ActionPositionMode.MoveInFrontOfEnemy && targets.Count > 0)
             {
-                executor.MoveInFrontOf(targets[0], state, BeginSession);
+                executor.MoveInFrontOf(targets[0], state, BeginSession, session.OpeningMove);
             }
             else
             {
@@ -51,8 +53,12 @@ namespace GARA.Combat
                 stepsLanded++;
                 var effects = step.isFinale ? card.perfectEffects : card.effects;
                 List<PerfectAnnouncementDropEffect> drops = null;
-                executor.PlayAction(state, targets, ActionPositionMode.StayAtOriginalPosition, spec: step.animation, beforeAttack: BeforeAttack, onImpact: () =>
+                var positionMode = step.isFinale ? card.finalePositionMode : card.positionMode;
+                executor.PlayAction(state, targets, positionMode, spec: step.animation, beforeAttack: BeforeAttack, onImpact: () =>
                 {
+                    var move = step.animation != null ? step.animation : card.animationSpec;
+                    executor.PlayHitFeedback(move != null ? move.HitFeedback : null);
+
                     if (drops != null)
                     {
                         foreach (var drop in drops)
@@ -117,9 +123,7 @@ namespace GARA.Combat
                     actor.NotifySkillCardResolved(battleQuery, finishedCard, finishedTargets, performance);
                 }
 
-                AnnounceTargetingClearedForSkillCard(actor, finishedCard);
-                executor.ReturnToStandardPosition();
-                yield return FinishSkillCardResolving(executor);
+                yield return EndSkillCard(actor, executor, notify ? finishedCard.endDelay : 0f);
             }
 
             void Unsubscribe()
@@ -129,14 +133,14 @@ namespace GARA.Combat
             }
         }
     
-        // Spawns the card's drop effect at each target, released so it
+        // Spawns the finale spec's drop effect at each target, released so it
         // lands on the finale's hit event. leadIn is how long the finale must
         // wait to start when the drop is longer than its time-to-hit. Null
-        // when the card has no announcement.
+        // when it isn't a FinaleAttackAnimationSpec with one.
         private static List<PerfectAnnouncementDropEffect> DropPerfectAnnouncements(SkillCardDefinition card, CharacterState state, IReadOnlyList<ICombatTarget> targets, AttackExecutor executor, out float leadIn)
         {
             leadIn = 0f;
-            if (!(card is IPerfectAnnouncementCard { PerfectAnnouncementDrop: { } template }))
+            if (!(card.animationSpec is FinaleAttackAnimationSpec { PerfectAnnouncementDrop: { } template }))
             {
                 return null;
             }

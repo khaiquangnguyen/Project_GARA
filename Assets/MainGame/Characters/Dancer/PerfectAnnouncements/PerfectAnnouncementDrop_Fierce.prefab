@@ -80,7 +80,7 @@ MonoBehaviour:
     EnumConditionPropertyName: 
     EnumConditions: 0000000000000000000000000000000000000000000000000000000000000000y
   duration: 0.1
-  holdDuration: 0.5
+  holdDuration: 1
   landingOffset: {x: 0, y: 0}
 --- !u!1 &7107863290203886061
 GameObject:

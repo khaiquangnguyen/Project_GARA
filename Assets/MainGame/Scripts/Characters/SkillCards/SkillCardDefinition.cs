@@ -39,12 +39,7 @@ namespace GARA.Characters
 
         public int mpCost;
 
-        [Tooltip("Clip played when the card resolves — a live card's perfect finale. Its range is where MoveInFrontOfEnemy stands.")]
-        [Expandable]
-        [Required]
-        public AttackAnimationSpec animationSpec;
-
-        [Tooltip("MoveInFrontOfEnemy stands at animationSpec's range.")]
+        [Tooltip("MoveInFrontOfEnemy stands at animationSpec's range; StayAtOriginalPosition returns to the actor's own spot first. On a live card this covers its bars; the finale uses finalePositionMode.")]
         public ActionPositionMode positionMode;
 
         [HideIf(nameof(HasSharedTiering))]
@@ -53,16 +48,38 @@ namespace GARA.Characters
         [Expandable]
         public SkillEffectDefinition[] effects = Array.Empty<SkillEffectDefinition>();
 
+        public bool refundOnAbort;
+
+        [Tooltip("Seconds the actor holds after the card's last swing before walking back, so the attack doesn't end abruptly.")]
+        [Min(0f)]
+        public float endDelay = 0.3f;
+
+        [Tooltip("Clip played when the card resolves — a live card's perfect finale. Its range is where MoveInFrontOfEnemy stands.")]
+        [BoxGroup(FinaleGroup)]
+        [Expandable]
+        [Required]
+        public AttackAnimationSpec animationSpec;
+
+        [Tooltip("Where a live card's finale plays, regardless of where its bars left the actor. MoveInFrontOfEnemy dashes in to animationSpec's range; StayAtOriginalPosition returns to the actor's own spot first.")]
+        [BoxGroup(FinaleGroup)]
+        [ShowIf(nameof(IsLive))]
+        public ActionPositionMode finalePositionMode;
+
         [Tooltip("Resolved by a live card's perfect finale instead of effects.")]
+        [BoxGroup(FinaleGroup)]
         [Expandable]
         public SkillEffectDefinition[] perfectEffects = Array.Empty<SkillEffectDefinition>();
 
-        public bool refundOnAbort;
+        private const string FinaleGroup = "Finale";
 
         public virtual ISkillInputSession CreateInputSession(ISkillInputHost host)
         {
             return new InstantSkillInputSession(new SkillPerformance(1f, TierFor(1f), false, null));
         }
+
+        // True when the card plays moves as its input runs and ends on a
+        // finale (an ILiveSkillInputSession); shows finalePositionMode.
+        protected virtual bool IsLive => false;
 
         // True when a subclass takes its tiering from elsewhere (hides the field).
         protected virtual bool HasSharedTiering => false;

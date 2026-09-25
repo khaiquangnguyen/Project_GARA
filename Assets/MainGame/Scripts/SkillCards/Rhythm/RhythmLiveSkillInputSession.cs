@@ -22,6 +22,8 @@ namespace GARA.SkillCards.Rhythm
 
         public event Action<SkillStep> StepPerformed;
 
+        public AttackAnimationSpec OpeningMove => _card.OpeningMove;
+
         public RhythmLiveSkillInputSession(RhythmSequencePlayer player, RhythmSkillCard card)
         {
             _player = player;

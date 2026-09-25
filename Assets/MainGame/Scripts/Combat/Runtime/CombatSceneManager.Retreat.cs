@@ -6,48 +6,43 @@ using UnityEngine;
 
 namespace GARA.Combat
 {
-    // "Retreat if not targeted" (see retreatIfNotTargeted): while a
-    // One*/Multi* skill card plays, every living member of its target pool
-    // that's neither targeted nor the actor steps back to one of its side's
-    // retreat slots, and walks back once the action is over. That's never
-    // more than two per side — a side's third member is always a target or
-    // the actor — so each side has exactly two slots. Slots are handed out
-    // in formation order so retreating characters never cross paths, and
-    // each slot's own sorting order is applied for as long as someone
-    // stands there, so the scene controls how they overlap.
+    // "Retreat if not targeted" (see retreatIfNotTargeted): while an action
+    // plays, every living character not involved in it (neither the actor
+    // nor a target, on either side) steps back to one of its side's retreat
+    // slots, and walks back once the action is over. A side can have all 3
+    // members uninvolved, so each side has 3 slots, handed out in formation
+    // order so retreating characters never cross paths. Each slot's own
+    // sorting order applies while someone stands there.
     public partial class CombatSceneManager
     {
         [Header("Retreat")]
-        [Tooltip("Exactly 2 slots for the left (player) side — slot 0 goes to whichever retreating character stands nearest the front of the formation.")]
-        [SerializeField] private RetreatSlot[] leftRetreatSlots = new RetreatSlot[2];
+        [Tooltip("Exactly 3 slots for the left (player) side — slot 0 goes to whichever retreating character stands nearest the front of the formation.")]
+        [SerializeField] private RetreatSlot[] leftRetreatSlots = new RetreatSlot[BattleParty.Size];
 
-        [Tooltip("Exactly 2 slots for the right (enemy) side — slot 0 goes to whichever retreating character stands nearest the front of the formation.")]
-        [SerializeField] private RetreatSlot[] rightRetreatSlots = new RetreatSlot[2];
+        [Tooltip("Exactly 3 slots for the right (enemy) side — slot 0 goes to whichever retreating character stands nearest the front of the formation.")]
+        [SerializeField] private RetreatSlot[] rightRetreatSlots = new RetreatSlot[BattleParty.Size];
 
         private readonly List<CombatParticipant> _retreated = new();
 
-        private void RetreatUntargeted(CombatParticipant actor, SkillCardDefinition card, IReadOnlyList<ICombatTarget> targets)
+        private void RetreatUninvolved(CombatParticipant actor, IReadOnlyList<ICombatTarget> targets)
         {
-            if (!retreatIfNotTargeted || card.targetMode.IsAll())
+            if (!retreatIfNotTargeted)
             {
                 return;
             }
 
-            var untargeted = LivingPoolOf(actor, card.targetMode.GetPool())
-                .Where(participant => participant != actor && !targets.Contains(participant))
-                .ToList();
-
-            RetreatSide(untargeted, _battle.playerParty, leftRetreatSlots);
-            RetreatSide(untargeted, _battle.enemyParty, rightRetreatSlots);
+            var uninvolved = LivingUninvolvedIn(actor, targets);
+            RetreatSide(uninvolved, _battle.playerParty, leftRetreatSlots);
+            RetreatSide(uninvolved, _battle.enemyParty, rightRetreatSlots);
         }
 
-        private void RetreatSide(List<CombatParticipant> untargeted, BattleParty party, RetreatSlot[] slots)
+        private void RetreatSide(List<CombatParticipant> uninvolved, BattleParty party, RetreatSlot[] slots)
         {
             var slotIndex = 0;
             foreach (var formationSlot in party.Slots)
             {
                 var participant = formationSlot.occupant;
-                if (participant == null || !untargeted.Contains(participant)
+                if (participant == null || !uninvolved.Contains(participant)
                     || !_executors.TryGetValue(participant, out var executor))
                 {
                     continue;

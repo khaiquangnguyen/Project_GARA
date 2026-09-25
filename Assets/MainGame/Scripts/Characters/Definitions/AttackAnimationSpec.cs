@@ -21,7 +21,12 @@ namespace GARA.Characters
         [SerializeField]
         private float range = 1f;
 
+        [Tooltip("Prefab (AttackHitFeedback at its root) spawned on the attacker and played on this move's hit in a live card (a bar or the finale).")]
+        [SerializeField]
+        private GameObject hitFeedback;
+
         public string AnimationName => animationName;
         public float Range => range;
+        public GameObject HitFeedback => hitFeedback;
     }
 }

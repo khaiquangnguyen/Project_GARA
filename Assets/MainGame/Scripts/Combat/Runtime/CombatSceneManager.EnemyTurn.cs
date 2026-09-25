@@ -45,18 +45,19 @@ namespace GARA.Combat
                 yield break;
             }
 
-            AnnounceTargetingForSkillCard(actor, card, targets);
-            RetreatUntargeted(actor, card, targets);
+            AnnounceTargetingForSkillCard(actor, targets);
+            RetreatUninvolved(actor, targets);
             _enemyActionInProgress = true;
             actorExecutor.PlayAction(actor.SkillCardStateOf(card), targets, card.positionMode);
             yield return new WaitUntil(() => !actorExecutor.IsBusy);
             _enemyActionInProgress = false;
+            yield return new WaitForSeconds(card.endDelay);
 
             actorExecutor.ReturnToStandardPosition();
             yield return ReturnRetreated();
             yield return new WaitUntil(() => !actorExecutor.IsBusy);
 
-            AnnounceTargetingClearedForSkillCard(actor, card);
+            AnnounceTargetingClearedForSkillCard(actor);
             EndCombatPhase();
         }
 

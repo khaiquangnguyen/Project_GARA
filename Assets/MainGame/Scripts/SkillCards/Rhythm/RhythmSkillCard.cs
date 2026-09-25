@@ -52,6 +52,36 @@ namespace GARA.SkillCards.Rhythm
             }
         }
 
+        protected override bool IsLive => HasMoves;
+
+        // The move of the earliest-played bar that has one.
+        public AttackAnimationSpec OpeningMove
+        {
+            get
+            {
+                AttackAnimationSpec opening = null;
+                var openingTime = float.MaxValue;
+                foreach (var bar in bars)
+                {
+                    if (bar.move == null || bar.notes == null)
+                    {
+                        continue;
+                    }
+
+                    foreach (var note in bar.notes)
+                    {
+                        if (note.time < openingTime)
+                        {
+                            openingTime = note.time;
+                            opening = bar.move;
+                        }
+                    }
+                }
+
+                return opening;
+            }
+        }
+
         public bool TryGetMove(int barIndex, out AttackAnimationSpec move)
         {
             move = barIndex >= 0 && barIndex < bars.Length ? bars[barIndex].move : null;

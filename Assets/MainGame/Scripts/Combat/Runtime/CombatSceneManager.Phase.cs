@@ -510,8 +510,8 @@ namespace GARA.Combat
                 return false;
             }
 
-            AnnounceTargetingForSkillCard(_actor, card, targets);
-            RetreatUntargeted(_actor, card, targets);
+            AnnounceTargetingForSkillCard(_actor, targets);
+            RetreatUninvolved(_actor, targets);
 
             _phaseActionState = PhaseActionState.SkillCardInput;
             skillCardInputHost.RaiseInputPhaseStarted(card);
@@ -542,7 +542,7 @@ namespace GARA.Combat
             if (performance.WasAborted && card.refundOnAbort)
             {
                 _actor.RefundResources(card.apCost, card.mpCost);
-                AnnounceTargetingClearedForSkillCard(_actor, card);
+                AnnounceTargetingClearedForSkillCard(_actor);
                 StartCoroutine(FinishSkillCardResolving(_actorExecutor));
                 return;
             }
@@ -566,10 +566,22 @@ namespace GARA.Combat
             void OnSkillCardActionFinished()
             {
                 _actorExecutor.ActionFinished -= OnSkillCardActionFinished;
-                AnnounceTargetingClearedForSkillCard(_actor, card);
-                _actorExecutor.ReturnToStandardPosition();
-                StartCoroutine(FinishSkillCardResolving(_actorExecutor));
+                StartCoroutine(EndSkillCard(_actor, _actorExecutor, card.endDelay));
             }
+        }
+
+        // Holds the actor's last pose for holdSeconds, then walks everyone
+        // back and finishes resolving.
+        private IEnumerator EndSkillCard(CombatParticipant actor, AttackExecutor actorExecutor, float holdSeconds)
+        {
+            if (holdSeconds > 0f)
+            {
+                yield return new WaitForSeconds(holdSeconds);
+            }
+
+            AnnounceTargetingClearedForSkillCard(actor);
+            actorExecutor.ReturnToStandardPosition();
+            yield return FinishSkillCardResolving(actorExecutor);
         }
 
         // Resolving only ends — and input only unlocks — once the actor and
@@ -674,34 +686,25 @@ namespace GARA.Combat
             }
         }
 
-        // Announces every OTHER living member of the targeted pool as
-        // not-targeted, and the card's targets as targeted, for a One*/Multi*
-        // card that's about to play. No-op for cards that hit everyone in a
-        // pool (All*). This class has no opinion on what "not targeted"
-        // looks like — it just broadcasts the targeting state via
-        // MMEventManager; whatever's listening (see OnNotTargetedEffect)
-        // decides that.
-        private void AnnounceTargetingForSkillCard(CombatParticipant actor, SkillCardDefinition card, IReadOnlyList<ICombatTarget> targets)
+        // Announces the card's targets as targeted and everyone not involved
+        // (neither actor nor target, on either side) as not-targeted.
+        // Listeners (see OnNotTargetedEffect) decide what that looks like.
+        private void AnnounceTargetingForSkillCard(CombatParticipant actor, IReadOnlyList<ICombatTarget> targets)
         {
-            if (card.targetMode.IsAll())
+            foreach (var participant in LivingUninvolvedIn(actor, targets))
             {
-                return;
+                MMEventManager.TriggerEvent(new TargetedStateEvent(participant.SceneRoot, false));
             }
 
-            foreach (var participant in LivingPoolOf(actor, card.targetMode.GetPool()))
+            foreach (var target in targets.OfType<CombatParticipant>())
             {
-                MMEventManager.TriggerEvent(new TargetedStateEvent(participant.SceneRoot, targets.Contains(participant)));
+                MMEventManager.TriggerEvent(new TargetedStateEvent(target.SceneRoot, true));
             }
         }
 
-        private void AnnounceTargetingClearedForSkillCard(CombatParticipant actor, SkillCardDefinition card)
+        private void AnnounceTargetingClearedForSkillCard(CombatParticipant actor)
         {
-            if (card.targetMode.IsAll())
-            {
-                return;
-            }
-
-            foreach (var participant in LivingPoolOf(actor, card.targetMode.GetPool()))
+            foreach (var participant in LivingEnemiesOf(actor).Concat(LivingAlliesOf(actor)))
             {
                 MMEventManager.TriggerEvent(new TargetedStateEvent(participant.SceneRoot, true));
             }
@@ -745,6 +748,15 @@ namespace GARA.Combat
         {
             var own = actor.faction == FactionTag.Player ? _battle.playerParty : _battle.enemyParty;
             return own.LivingMembers().ToList();
+        }
+
+        // Every living character on either side that's neither the actor
+        // nor one of the action's targets.
+        private List<CombatParticipant> LivingUninvolvedIn(CombatParticipant actor, IReadOnlyList<ICombatTarget> targets)
+        {
+            return LivingEnemiesOf(actor).Concat(LivingAlliesOf(actor))
+                .Where(participant => participant != actor && !targets.Contains(participant))
+                .ToList();
         }
 
         private List<CombatParticipant> LivingPoolOf(CombatParticipant actor, TargetPool pool)

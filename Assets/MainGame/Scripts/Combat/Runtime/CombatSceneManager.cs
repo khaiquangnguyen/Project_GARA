@@ -33,10 +33,9 @@ namespace GARA.Combat
         [Tooltip("Spawned character instances are parented here.")]
         [SerializeField] private Transform combatCharactersParent;
 
-        // How this scene stages an action's untargeted characters — scene
-        // setup, never per card. "Untargeted" means members of the action's
-        // target pool it doesn't target, the actor excepted; All* actions
-        // leave nobody untargeted.
+        // How this scene stages the characters an action doesn't involve —
+        // scene setup, never per card. "Not targeted" means every living
+        // character on either side that's neither the actor nor a target.
         [Header("Combat Settings")]
         [Tooltip("Untargeted characters are dimmed while an action plays.")]
         [SerializeField] private bool fadeIfNotTargeted = true;

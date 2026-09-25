@@ -20,7 +20,6 @@ MonoBehaviour:
   multiTargetCount: 2
   apCost: 0
   mpCost: 0
-  animationSpec: {fileID: 11400000, guid: 512bf6fe746748b0afbd2489a0101b5e, type: 2}
   positionMode: 1
   tiering:
     okThreshold: 0.35
@@ -28,9 +27,12 @@ MonoBehaviour:
     perfectThreshold: 0.9
   effects:
   - {fileID: 11400000, guid: b7dd7679c54d94f3d9a348f97cd209d0, type: 2}
+  refundOnAbort: 0
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: 85297e99d8c440d28df6a8d007800912, type: 2}
+  finalePositionMode: 0
   perfectEffects:
   - {fileID: 11400000, guid: 6b0033345b51d4bfb9805701253e477b, type: 2}
-  refundOnAbort: 0
   bars:
   - notes:
     - input:
@@ -63,4 +65,3 @@ MonoBehaviour:
   scoreSource: 0
   completionGate: 0.5
   strayPressPenalty: 0.02
-  perfectAnnouncementDrop: {fileID: 2992109876589051284, guid: 7303572acafa4691b34d3465930d88b3, type: 3}

@@ -9,16 +9,10 @@ namespace GARA.Characters.Dancer
     // Dancer using the card (the input host's actor); the card supplies only
     // its bars.
     [CreateAssetMenu(menuName = "GARA/Characters/Dancer/Dance Card", fileName = "DanceCard")]
-    public class DancerSkillCard : RhythmSkillCard, IPerfectAnnouncementCard
+    public class DancerSkillCard : RhythmSkillCard
     {
-        [Tooltip("This card's own drop prefab, dropped onto each target on the perfect finale and landing on its hit frame.")]
-        [SerializeField]
-        private GameObject perfectAnnouncementDrop;
-
         [NonSerialized]
         private Dancer _owner;
-
-        public GameObject PerfectAnnouncementDrop => perfectAnnouncementDrop;
 
         protected override bool HasSharedTiering => true;
 
