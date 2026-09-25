@@ -1,0 +1,19 @@
+{
+  "name": "GARA.SkillCards.Rhythm",
+  "rootNamespace": "GARA.SkillCards.Rhythm",
+  "references": [
+    "GARA.Characters",
+    "GARA.Rhythm",
+    "GARA.Input",
+    "NaughtyAttributes.Core"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

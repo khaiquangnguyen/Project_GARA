@@ -1,0 +1,19 @@
+{
+  "name": "GARA.Characters.Chef",
+  "rootNamespace": "GARA.Characters.Chef",
+  "references": [
+    "GARA.Characters",
+    "GARA.SkillCards.InputSets",
+    "GARA.InputSets",
+    "GARA.Input"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

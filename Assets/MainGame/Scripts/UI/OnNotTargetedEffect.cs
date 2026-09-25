@@ -8,14 +8,14 @@ using GARA.Combat;
 // namespace. Declares, in exactly one place, what happens to a character
 // that isn't the selected target for the action about to play. Combat code
 // never touches this directly — it only broadcasts TargetedStateEvent via
-// MMEventManager (see CombatPhaseController); this class listens for that
+// MMEventManager (see CombatSceneManager); this class listens for that
 // and decides what to do, which for now means playing (or reverse-playing)
 // its own MMF_Player. Swapping the effect — a different feedback, more
 // feedbacks, a completely different reaction — never touches combat code.
 //
 // One instance of this lives on the single child of the EffectExampleDummy
 // prefab, authored against that dummy's own placeholder Visual. At scene
-// start, CombatOverlayManager clones that child onto every character in
+// start, CombatSceneManager clones that child onto every character in
 // the scene; each clone retargets itself to its new owner on Awake (see
 // RetargetToOwner) rather than needing any external wiring call.
 public class OnNotTargetedEffect : MonoBehaviour, MMEventListener<TargetedStateEvent>
@@ -35,7 +35,7 @@ public class OnNotTargetedEffect : MonoBehaviour, MMEventListener<TargetedStateE
 
     // Self-retargets to whichever character this clone was parented under
     // — no external call needed. Assumes it's a direct child of the
-    // character's SceneRoot (see CombatOverlayManager's cloning step).
+    // character's SceneRoot (see CombatSceneManager's cloning step).
     private void RetargetToOwner()
     {
         if (transform.parent == null)

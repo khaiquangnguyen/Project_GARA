@@ -41,6 +41,7 @@ namespace GARA.Combat
 
         private CharacterState _pendingAttackState;
         private IReadOnlyList<ICombatTarget> _pendingTargets;
+        private Action _pendingOnImpact;
 
         public bool IsBusy => _isBusy;
         public CombatParticipant Participant => _participant;
@@ -75,7 +76,11 @@ namespace GARA.Combat
         // basic-attack sequence) may be made of several of these calls, so
         // the caller decides when the Action is actually over and calls
         // ReturnToStandardPosition then.
-        public void PlayAction(CharacterState assetSideState, IReadOnlyList<ICombatTarget> targets, ActionPositionMode positionMode)
+        // onImpact (optional) is threaded through to the primary attack
+        // state's CharacterStateContext.OnImpact — never to the move-in/
+        // move-out states, since those aren't the "action" itself. Null by
+        // default so existing callers are unaffected.
+        public void PlayAction(CharacterState assetSideState, IReadOnlyList<ICombatTarget> targets, ActionPositionMode positionMode, Action onImpact = null)
         {
             var liveState = _participant.ResolveLiveState(assetSideState);
             if (liveState == null)
@@ -86,6 +91,7 @@ namespace GARA.Combat
             _isBusy = true;
             _pendingAttackState = liveState;
             _pendingTargets = targets;
+            _pendingOnImpact = onImpact;
 
             if (positionMode == ActionPositionMode.MoveInFrontOfEnemy
                 && _moveForwardState != null
@@ -197,7 +203,7 @@ namespace GARA.Combat
 
         private void BeginAttackState()
         {
-            BeginState(_pendingAttackState, _pendingTargets, OnAttackStateFinished);
+            BeginState(_pendingAttackState, _pendingTargets, OnAttackStateFinished, _pendingOnImpact);
         }
 
         private void OnAttackStateFinished()
@@ -205,10 +211,11 @@ namespace GARA.Combat
             _isBusy = false;
             _pendingAttackState = null;
             _pendingTargets = null;
+            _pendingOnImpact = null;
             ActionFinished?.Invoke();
         }
 
-        private void BeginState(CharacterState state, IReadOnlyList<ICombatTarget> targets, Action onFinished)
+        private void BeginState(CharacterState state, IReadOnlyList<ICombatTarget> targets, Action onFinished, Action onImpact = null)
         {
             if (_activeState != null)
             {
@@ -219,7 +226,7 @@ namespace GARA.Combat
             _activeStateFinishedHandler = onFinished;
             _activeState.Finished += _activeStateFinishedHandler;
 
-            stateMachine.ChangeState(_activeState, new CharacterStateContext(_battleQuery, _participant, targets));
+            stateMachine.ChangeState(_activeState, new CharacterStateContext(_battleQuery, _participant, targets, onImpact));
         }
     }
 }

@@ -8,7 +8,7 @@ using Event = Spine.Event;
 namespace GARA.Combat
 {
     // Shared "play one named Spine clip" behavior. Concrete leaf subclasses
-    // (Atk1State, IdleState, ...) exist only so each is its own distinct
+    // (SpecialAState, IdleState, ...) exist only so each is its own distinct
     // type — CharacterState resolution assumes at most one instance of a
     // given concrete type per prefab, so every state needs a real subclass
     // even when the behavior is identical. States may live on a child of
@@ -76,7 +76,17 @@ namespace GARA.Combat
         {
             trackEntry.Complete -= OnAnimationComplete;
             _activeTrackEntry = null;
+            OnBeforeFinished();
             RaiseFinished();
+        }
+
+        // Hook for a subclass that needs to guarantee some side effect has
+        // happened by the time Finished fires, even if the animation
+        // completed without ever raising the Spine event that would
+        // normally trigger it (see SkillCardAnimationState). No-op by
+        // default.
+        protected virtual void OnBeforeFinished()
+        {
         }
 
         private void OnTrackEvent(TrackEntry trackEntry, Event e)

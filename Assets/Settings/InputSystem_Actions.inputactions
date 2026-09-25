@@ -1016,36 +1016,6 @@
             "id": "0dba7b4c-282a-47e6-9f1d-887cf0f3475c",
             "actions": [
                 {
-                    "name": "Atk1",
-                    "type": "Button",
-                    "id": "15a1a5bc-dbde-456d-89f3-03f0f5e5a1f9",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
-                },
-                {
-                    "name": "Atk2",
-                    "type": "Button",
-                    "id": "8ac12d41-0a7b-42a2-a10f-5e20dce1fb0c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
-                },
-                {
-                    "name": "Atk3",
-                    "type": "Button",
-                    "id": "b6eb4ec5-b39a-4398-a3b5-9e19dd94d7b3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
-                },
-                {
                     "name": "SlotA",
                     "type": "Button",
                     "id": "d79fbe39-01e0-4f30-a02a-10af4864f426",
@@ -1106,19 +1076,9 @@
                     "priority": 0
                 },
                 {
-                    "name": "EndOrLockCombo",
+                    "name": "EndPhase",
                     "type": "Button",
                     "id": "e0e88048-8f5b-435d-9fd3-eaeea2d6dada",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
-                },
-                {
-                    "name": "CancelChainedAction",
-                    "type": "Button",
-                    "id": "d2d0695f-979e-4596-97db-1ab86c62cb5b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1127,39 +1087,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "023662bd-8152-44c9-8140-bc8cb61c4468",
-                    "path": "<Keyboard>/z",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Atk1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "14430090-3ca8-4770-b9a1-18ea57cd49af",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Atk2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aee58b1d-1b45-4bd5-9811-08fb0fcefe54",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Atk3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "9dca96f8-dfe5-4c61-b06a-104af3832f6c",
@@ -1233,7 +1160,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "EndOrLockCombo",
+                    "action": "EndPhase",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1244,18 +1171,99 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "EndOrLockCombo",
+                    "action": "EndPhase",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Rhythm",
+            "id": "16140231-2c41-4b33-8415-e6be5e22620b",
+            "actions": [
+                {
+                    "name": "Up",
+                    "type": "Button",
+                    "id": "587438fb-5bda-4cfd-b8df-f5e020cb288c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Left",
+                    "type": "Button",
+                    "id": "93bddf35-551d-403c-9731-d1afc23080c7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Down",
+                    "type": "Button",
+                    "id": "fbf0a0df-32fc-4a45-8e4b-2403dbbfd813",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Right",
+                    "type": "Button",
+                    "id": "155e7cbf-caaf-4a62-9b9b-c4ba2c7edc55",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f4c0ce72-497a-483b-8636-4c5c35cac95a",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "f2aef452-e14b-4999-9539-612fa75b75b7",
-                    "path": "<Keyboard>/escape",
+                    "id": "f582dd0a-aac3-415d-a86d-157e7f67a815",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CancelChainedAction",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ba47500-7e5b-4813-9310-60dabf9fb0c2",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "347c00f0-4c8f-4db2-9608-db2e63b2deea",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,15 +1,15 @@
 namespace GARA.Combat
 {
-    // The Combat Phase's current top-level mode for the acting player
-    // character: Regular (free to pick any action) or ChainedAction
-    // (locked into whichever multi-input action currently owns the phase's
-    // one chained-action slot — basic attack today, potentially a chained
-    // special later). Deliberately doesn't track *which* chain is active —
-    // only one can be active at a time, and each driver tracks its own
-    // "is this my chain" locally (see CombatPhaseController.BasicAttack.cs).
+    // What CombatSceneManager is doing with the actor's current turn.
+    // Regular is the default — free to choose a skill card, cycle targets,
+    // or end the phase. SkillCardInput/SkillCardResolving bracket one
+    // skill-card use: input while its minigame is running, resolving while
+    // its animation/effects play out — both gate input handling back to a
+    // no-op until the flow returns to Regular.
     public enum PhaseActionState
     {
         Regular,
-        ChainedAction
+        SkillCardInput,
+        SkillCardResolving
     }
 }

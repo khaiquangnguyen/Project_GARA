@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24a7936686a3d43f79bec623c8130082, type: 3}
+  m_Name: RhythmInputTokenMap
+  m_EditorClassIdentifier: GARA.Input::GARA.Input.InputTokenMap
+  entries:
+  - token:
+      id: 1
+    displayName: Up
+    action: {fileID: 7312709578764171004, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  - token:
+      id: 2
+    displayName: Left
+    action: {fileID: 8314740641163527917, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  - token:
+      id: 3
+    displayName: Down
+    action: {fileID: 2488294992016654109, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  - token:
+      id: 4
+    displayName: Right
+    action: {fileID: 5316854970665653956, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

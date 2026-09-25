@@ -38,10 +38,27 @@ MonoBehaviour:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - GARA.Characters
+    - GARA.Characters.Chef
+    - GARA.Characters.Dancer
+    - GARA.Characters.Gambler
+    - GARA.Chords
     - GARA.Combat
+    - GARA.Countdowns
+    - GARA.Input
+    - GARA.InputCombos
+    - GARA.InputSets
+    - GARA.Rhythm
+    - GARA.Shake
+    - GARA.SkillCards.InputSets
+    - GARA.SkillCards.Rhythm
+    - GARA.SkillCards.Shake
+    - Kybernetik.Animancer
+    - Kybernetik.Animancer.FSM
     - Lofelt.NiceVibrations
     - Lofelt.NiceVibrations.Demo
     - MoreMountains.Tools
+    - NaughtyAttributes.Core
+    - NaughtyAttributes.Test
     - PrimeTween.Runtime
     - spine-addressables
     - spine-csharp

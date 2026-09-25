@@ -14,7 +14,7 @@ using GARA.Combat;
 // touches combat code.
 //
 // One instance of this lives on its own child of the EffectExampleDummy
-// prefab, alongside OnNotTargetedEffect. At scene start, CombatOverlayManager
+// prefab, alongside OnNotTargetedEffect. At scene start, CombatSceneManager
 // clones that child onto every character in the scene; each clone retargets
 // itself to its new owner on Awake (see RetargetToOwner) rather than
 // needing any external wiring call.
@@ -32,7 +32,7 @@ public class OnHitEffect : MonoBehaviour, MMEventListener<HitStateEvent>
 
     // Self-retargets to whichever character this clone was parented under
     // — no external call needed. Assumes it's a direct child of the
-    // character's SceneRoot (see CombatOverlayManager's cloning step). Also
+    // character's SceneRoot (see CombatSceneManager's cloning step). Also
     // makes sure that character's Spine visual has an MMPositionShaker on
     // it (nothing ships one by default) and points any MMF_PositionShake
     // feedback's TargetShaker directly at it — left blank, that feedback

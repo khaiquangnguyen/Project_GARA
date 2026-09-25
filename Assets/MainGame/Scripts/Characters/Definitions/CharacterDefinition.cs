@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -36,26 +37,35 @@ namespace GARA.Characters
         [Tooltip("Entered automatically once a spawned participant is initialized for combat — always Idle today.")]
         public CharacterState defaultState;
 
-        [Header("Basic Attacks & Combos")]
-        public BasicAttackEntry[] basicAttacks = Array.Empty<BasicAttackEntry>();
-
-        public ComboDefinition[] combos = Array.Empty<ComboDefinition>();
-
-        [Header("Specials")]
+        [Header("Skill Cards")]
         [Tooltip("Up to 4 entries — array index 0-3 maps to A/S/D/F.")]
         [SerializeField]
-        private SpecialAttackEntry[] specials = Array.Empty<SpecialAttackEntry>();
+        [Expandable]
+        private SkillCardDefinition[] skillCards = Array.Empty<SkillCardDefinition>();
 
-        public IReadOnlyList<SpecialAttackEntry> Specials => specials;
+        public IReadOnlyList<SkillCardDefinition> SkillCards => skillCards;
 
-        private const int MaxSpecials = 4;
+        [Header("Passives")]
+        [Tooltip("Always-on class passives. React to combat events; runtime state lives on the participant, not the asset.")]
+        [SerializeField]
+        [Expandable]
+        private PassiveDefinition[] passives = Array.Empty<PassiveDefinition>();
+
+        public IReadOnlyList<PassiveDefinition> Passives => passives;
+
+        [Header("Palate (enemies)")]
+        public PalateProfile palate;
+
+        private const int MaxSkillCards = 4;
 
         private void OnValidate()
         {
-            if (specials.Length > MaxSpecials)
+            if (skillCards.Length > MaxSkillCards)
             {
-                Array.Resize(ref specials, MaxSpecials);
+                Array.Resize(ref skillCards, MaxSkillCards);
             }
+
+            palate.SanitizeInPlace(this);
         }
 
         // Resolved from the sibling Spine component rather than stored here,
@@ -70,30 +80,15 @@ namespace GARA.Characters
             return baseStats.CreateStats();
         }
 
-        public bool TryGetBasicAttack(AttackInput input, out BasicAttackEntry entry)
+        public bool TryGetSkillCard(int slotIndex, out SkillCardDefinition card)
         {
-            foreach (var basicAttack in basicAttacks)
+            if (slotIndex >= 0 && slotIndex < skillCards.Length && skillCards[slotIndex] != null)
             {
-                if (basicAttack.input == input)
-                {
-                    entry = basicAttack;
-                    return true;
-                }
-            }
-
-            entry = default;
-            return false;
-        }
-
-        public bool TryGetSpecial(int slotIndex, out SpecialAttackEntry entry)
-        {
-            if (slotIndex >= 0 && slotIndex < specials.Length)
-            {
-                entry = specials[slotIndex];
+                card = skillCards[slotIndex];
                 return true;
             }
 
-            entry = default;
+            card = null;
             return false;
         }
 
@@ -104,27 +99,11 @@ namespace GARA.Characters
                 yield return defaultState;
             }
 
-            foreach (var basicAttack in basicAttacks)
+            foreach (var card in skillCards)
             {
-                if (basicAttack.state != null)
+                if (card != null && card.animationState != null)
                 {
-                    yield return basicAttack.state;
-                }
-            }
-
-            foreach (var combo in combos)
-            {
-                if (combo.finisherState != null)
-                {
-                    yield return combo.finisherState;
-                }
-            }
-
-            foreach (var special in specials)
-            {
-                if (special.state != null)
-                {
-                    yield return special.state;
+                    yield return card.animationState;
                 }
             }
         }

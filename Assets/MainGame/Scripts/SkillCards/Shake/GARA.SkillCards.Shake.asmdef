@@ -1,0 +1,19 @@
+{
+  "name": "GARA.SkillCards.Shake",
+  "rootNamespace": "GARA.SkillCards.Shake",
+  "references": [
+    "GARA.Characters",
+    "GARA.Shake",
+    "GARA.Input",
+    "NaughtyAttributes.Core"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

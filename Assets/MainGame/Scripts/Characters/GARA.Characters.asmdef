@@ -3,7 +3,8 @@
   "rootNamespace": "GARA.Characters",
   "references": [
     "spine-unity",
-    "spine-csharp"
+    "spine-csharp",
+    "NaughtyAttributes.Core"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

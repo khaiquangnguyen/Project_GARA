@@ -5,9 +5,9 @@ namespace GARA.Characters
 {
     // Base type for anything a character can be doing: an attack, a jump, a
     // dodge, a defend, etc. Declared here (not in GARA.Combat) so
-    // BasicAttackEntry/ComboDefinition can reference it without
-    // GARA.Characters depending on GARA.Combat — concrete states live in
-    // GARA.Combat and are free to use real combat types.
+    // SpecialAttackEntry can reference it without GARA.Characters depending
+    // on GARA.Combat — concrete states live in GARA.Combat and are free to
+    // use real combat types.
     //
     // Assumption: at most one subclass of a given concrete type anywhere
     // under the character prefab's root. Resolution

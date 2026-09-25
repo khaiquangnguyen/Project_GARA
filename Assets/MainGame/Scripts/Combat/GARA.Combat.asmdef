@@ -7,7 +7,10 @@
     "spine-csharp",
     "Unity.InputSystem",
     "UnityEngine.UI",
-    "MoreMountains.Tools"
+    "MoreMountains.Tools",
+    "NaughtyAttributes.Core",
+    "GARA.Rhythm",
+    "GARA.InputSets"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

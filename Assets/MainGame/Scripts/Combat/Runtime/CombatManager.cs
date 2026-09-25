@@ -7,7 +7,7 @@ namespace GARA.Combat
 {
     public class CombatManager : MonoBehaviour
     {
-        [SerializeField] private CombatPhaseController playerTurnController;
+        [SerializeField] private CombatSceneManager combatSceneManager;
 
         private BattleContext _battle;
         private Transform[] _leftSlotAnchors;
@@ -62,8 +62,7 @@ namespace GARA.Combat
                 SpawnAndBind(participant, encounter.definition.gameObject, isLeft: false, i);
             }
 
-            playerTurnController.Initialize(_battle, _executors);
-            playerTurnController.BeginBattle();
+            combatSceneManager.BeginBattle(_battle, _executors);
         }
 
         private void SpawnAndBind(CombatParticipant participant, GameObject prefab, bool isLeft, int slotIndex)

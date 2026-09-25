@@ -3,8 +3,8 @@ using UnityEngine;
 // Lives on the root of the EffectExampleDummy prefab (and any future
 // variant of it) — exposes which child GameObjects hold this dummy's
 // per-character effect components (OnNotTargetedEffect, OnHitEffect) via
-// direct Inspector-assigned references, so callers (CombatOverlayManager)
-// don't need to find them by name/path.
+// direct Inspector-assigned references. CombatSceneManager references those
+// two children directly as the templates it clones onto every character.
 //
 // Also doubles as an authoring-time preview tool: assign ANY character
 // prefab to previewCharacterPrefab and use the Preview/Restore context menu

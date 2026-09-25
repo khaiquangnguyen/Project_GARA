@@ -2,14 +2,6 @@ using System;
 
 namespace GARA.Characters
 {
-    public enum SpecialTargetMode
-    {
-        OneEnemy,
-        AllEnemy,
-        OneFriendly,
-        AllFriendly
-    }
-
     // Authored per character on CharacterDefinition.specials, capped at 4
     // entries — array index 0-3 maps to A/S/D/F. OneEnemy uses whatever the
     // always-visible target selector currently points to; OneFriendly

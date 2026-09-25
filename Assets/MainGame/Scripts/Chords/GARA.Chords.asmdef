@@ -1,0 +1,19 @@
+{
+  "name": "GARA.Chords",
+  "rootNamespace": "GARA.Chords",
+  "references": [
+    "GARA.Input",
+    "GARA.InputSets",
+    "Unity.InputSystem",
+    "NaughtyAttributes.Core"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

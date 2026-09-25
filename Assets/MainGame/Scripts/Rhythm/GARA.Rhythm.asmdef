@@ -1,0 +1,19 @@
+{
+  "name": "GARA.Rhythm",
+  "rootNamespace": "GARA.Rhythm",
+  "references": [
+    "GARA.Input",
+    "Unity.InputSystem",
+    "MoreMountains.Tools",
+    "NaughtyAttributes.Core"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
