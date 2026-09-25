@@ -49,6 +49,14 @@ namespace GARA.Combat
 
         public PassiveRuntimeSet Passives => _passives ??= new PassiveRuntimeSet(definition != null ? definition.Passives : null);
 
+        // The skill cards brought into this battle — resolved once at battle
+        // start from the definition's pool (see
+        // CharacterDefinition.ResolveCombatLoadout). Everything in combat
+        // picks cards from here, never from the definition's full pool.
+        private List<SkillCardDefinition> _skillCards = new();
+
+        public IReadOnlyList<SkillCardDefinition> SkillCards => _skillCards;
+
         // Active statuses (e.g. food coma) inflicted by cooking/other skill
         // effects. Mirrors _timedModifiers' shape but kept separate — a
         // status shapes incoming damage/turn-skipping rather than StatBlock.
@@ -83,7 +91,8 @@ namespace GARA.Combat
                 currentHp = stats.MaxHp.Value,
                 currentMp = stats.MaxMp.Value,
                 currentAp = stats.MaxAp.Value,
-                speed = stats.Speed.Value
+                speed = stats.Speed.Value,
+                _skillCards = definition.ResolveCombatLoadout(character.equippedSkillCardIds)
             };
             return participant;
         }
@@ -101,9 +110,22 @@ namespace GARA.Combat
                 currentHp = stats.MaxHp.Value,
                 currentMp = stats.MaxMp.Value,
                 currentAp = stats.MaxAp.Value,
-                speed = stats.Speed.Value
+                speed = stats.Speed.Value,
+                _skillCards = encounter.definition.ResolveCombatLoadout()
             };
             return participant;
+        }
+
+        public bool TryGetSkillCard(int index, out SkillCardDefinition card)
+        {
+            if (index >= 0 && index < _skillCards.Count)
+            {
+                card = _skillCards[index];
+                return true;
+            }
+
+            card = null;
+            return false;
         }
 
         // Returns a copy of the baseline with every active timed modifier
@@ -139,8 +161,44 @@ namespace GARA.Combat
             }
         }
 
+        // Parry/jump windows use scaled time, so a freeze frame pauses them.
+        public bool IsParrying => Time.time < _parryEndsAt;
+
+        private float _parryEndsAt = float.NegativeInfinity;
+
+        public void BeginParry(float durationSeconds)
+        {
+            _parryEndsAt = Time.time + durationSeconds;
+        }
+
+        public static event Action<CombatParticipant> ParrySucceeded;
+
+        public bool IsJumping => Time.time < _jumpEndsAt;
+
+        private float _jumpEndsAt = float.NegativeInfinity;
+
+        public void BeginJump(float durationSeconds)
+        {
+            _jumpEndsAt = Time.time + durationSeconds;
+        }
+
+        // A hit inside a parry or jump window is negated (parry wins if both
+        // are open).
         public void ApplyDamage(int amount)
         {
+            if (IsParrying)
+            {
+                MMEventManager.TriggerEvent(new ParrySuccessStateEvent(SceneRoot));
+                ParrySucceeded?.Invoke(this);
+                return;
+            }
+
+            if (IsJumping)
+            {
+                MMEventManager.TriggerEvent(new JumpSuccessStateEvent(SceneRoot));
+                return;
+            }
+
             ApplyDamageCore(ModifyIncomingDamage(amount));
         }
 
@@ -253,8 +311,9 @@ namespace GARA.Combat
             var overflow = becameFull ? _fullness - capacity : 0;
             if (becameFull)
             {
-                // Carry the remainder rather than zeroing out, clamped so one huge
-                // feeding can never chain a second coma trigger on the same feed.
+                // Carry the remainder rather than zeroing out, clamped so one
+                // huge feeding can never chain a second coma trigger on the
+                // same feed.
                 _fullness = Mathf.Clamp(overflow, 0, capacity - 1);
             }
 
@@ -274,8 +333,9 @@ namespace GARA.Combat
         }
 
         // Ticks every NON-skip status down by one turn (same "N of the owner's
-        // own turns" semantics as TickTimedModifiers) and drops expired entries.
-        // Skip statuses are ticked separately by ConsumeSkippedTurn, from inside
+        // own turns" semantics as TickTimedModifiers) and drops expired
+        // entries. Skip statuses are ticked separately by ConsumeSkippedTurn,
+        // from inside
         // the turn-skip itself, so the count of skipped turns is exactly the
         // authored duration.
         public void TickStatuses()
@@ -380,6 +440,7 @@ namespace GARA.Combat
 
         private void ResolveCharacterStates(GameObject instantiatedRoot)
         {
+            var liveStates = instantiatedRoot.GetComponentsInChildren<CharacterState>(true);
             foreach (var assetSideRef in definition.EnumerateCharacterStateReferences())
             {
                 if (assetSideRef == null || _liveStateByAssetReference.ContainsKey(assetSideRef))
@@ -387,9 +448,18 @@ namespace GARA.Combat
                     continue;
                 }
 
-                var live = instantiatedRoot.GetComponentInChildren(assetSideRef.GetType(), true) as CharacterState;
+                // A skill card's state is matched by its card; any other by type.
+                var live = assetSideRef.SkillCard != null
+                    ? Array.Find(liveStates, state => state.SkillCard == assetSideRef.SkillCard)
+                    : instantiatedRoot.GetComponentInChildren(assetSideRef.GetType(), true) as CharacterState;
                 _liveStateByAssetReference[assetSideRef] = live;
             }
+        }
+
+        // Asset-side state that plays card on this character.
+        public CharacterState SkillCardStateOf(SkillCardDefinition card)
+        {
+            return definition.FindSkillCardState(card);
         }
 
         public CharacterState ResolveLiveState(CharacterState assetSideReference)

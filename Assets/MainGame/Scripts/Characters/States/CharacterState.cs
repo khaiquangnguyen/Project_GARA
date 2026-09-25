@@ -9,18 +9,18 @@ namespace GARA.Characters
     // on GARA.Combat — concrete states live in GARA.Combat and are free to
     // use real combat types.
     //
-    // Assumption: at most one subclass of a given concrete type anywhere
-    // under the character prefab's root. Resolution
-    // (CombatParticipant.ResolveCharacterStates) uses
-    // GetComponentInChildren(type), which is ambiguous otherwise. States
-    // don't need to live on the root itself — commonly they're grouped
-    // under a child (e.g. "States") — but each concrete type must still be
-    // unique within the whole hierarchy.
+    // A state that plays a skill card (a SkillCardState) references it and is
+    // resolved by it. Any other state is resolved by concrete type
+    // (CombatParticipant.ResolveCharacterStates), so at most one of each such
+    // type may live under the character prefab's root.
     public abstract class CharacterState : MonoBehaviour
     {
         [SerializeField] private ActionPositionMode positionMode;
 
         public ActionPositionMode PositionMode => positionMode;
+
+        // The skill card that plays this state, if any.
+        public virtual SkillCardDefinition SkillCard => null;
 
         // Raised by the subclass whenever it considers itself done — e.g. a
         // SpineAnimationState raises this off the animation's own Complete

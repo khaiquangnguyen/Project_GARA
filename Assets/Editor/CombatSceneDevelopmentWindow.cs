@@ -1,7 +1,10 @@
 using System;
+using GARA.Combat;
 using GARA.Input;
 using GARA.InputSets;
 using GARA.Rhythm;
+using GARA.ShakeBalance;
+using MoreMountains.Feedbacks;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -12,7 +15,7 @@ namespace GARA.EditorTools
     // One place for the combat scene's development aids. The visual-driver
     // tests don't reference any driver: like a character, they play a
     // generated minigame through a real RhythmSequencePlayer /
-    // InputSetCollectionPlayer, whose static "any started/ended" events the
+    // InputSetCollectionPlayer / ShakeBalancePlayer, whose static "any started/ended" events the
     // scene's overlay already forwards to whichever driver presents it.
     public class CombatSceneDevelopmentWindow : EditorWindow
     {
@@ -73,9 +76,107 @@ namespace GARA.EditorTools
             onExhausted = ExhaustedSetBehaviour.Skip
         };
 
+        [SerializeField]
+        private InputTokenMap shakeBalanceInputMap;
+
+        [SerializeField]
+        private InputToken shakeBalanceLeftToken = new InputToken(2);
+
+        [SerializeField]
+        private InputToken shakeBalanceRightToken = new InputToken(4);
+
+        [SerializeField]
+        private bool shakeBalanceUseCashOutToken = true;
+
+        [SerializeField]
+        private InputToken shakeBalanceCashOutToken = new InputToken(1);
+
+        [Tooltip("Seconds until the run ends on its own. 0 = no limit.")]
+        [SerializeField]
+        private float shakeBalanceDuration;
+
+        [SerializeField]
+        private float shakeBalanceBaseInstability = 0.8f;
+
+        [SerializeField]
+        private float shakeBalanceInstabilityGrowth = 0.02f;
+
+        [SerializeField]
+        private float shakeBalanceBaseNoise = 0.3f;
+
+        [SerializeField]
+        private float shakeBalanceNoiseGrowth = 0.02f;
+
+        [Range(0f, 1f)]
+        [SerializeField]
+        private float shakeBalancePerfectZone = 0.15f;
+
+        [Range(0f, 1f)]
+        [SerializeField]
+        private float shakeBalanceGoodZone = 0.35f;
+
+        [SerializeField]
+        private float shakeBalanceBankTimeConstant = 8f;
+
+        [Range(0f, 1f)]
+        [SerializeField]
+        private float shakeBalanceKeepOnFall = 0.5f;
+
+        [Tooltip("Seconds the view's position shake lasts.")]
+        [SerializeField]
+        private float viewShakePositionDuration = 0.25f;
+
+        [Tooltip("How fast the view goes back and forth. Higher = buzzier.")]
+        [SerializeField]
+        private float viewShakePositionSpeed = 20f;
+
+        [Tooltip("How far the view moves, in UI pixels at the 1920x1080 reference resolution. 0 = no position shake.")]
+        [SerializeField]
+        private float viewShakePositionRange = 50f;
+
+        [SerializeField]
+        private Vector3 viewShakePositionMainDirection = Vector3.up;
+
+        [Tooltip("When on, each shake picks a random direction between Main and Alt Direction.")]
+        [SerializeField]
+        private bool viewShakePositionRandomizeDirection;
+
+        [SerializeField]
+        private Vector3 viewShakePositionAltDirection = Vector3.up;
+
+        [SerializeField]
+        private bool viewShakePositionAddDirectionalNoise = true;
+
+        [SerializeField]
+        private Vector3 viewShakePositionNoiseStrengthMin = new Vector3(0f, 0.25f, 0f);
+
+        [SerializeField]
+        private Vector3 viewShakePositionNoiseStrengthMax = new Vector3(0f, 0.25f, 0f);
+
+        [Tooltip("Seconds the view's Z rotation shake lasts.")]
+        [SerializeField]
+        private float viewShakeRotationDuration = 0.25f;
+
+        [Tooltip("How fast the view tilts back and forth.")]
+        [SerializeField]
+        private float viewShakeRotationSpeed = 20f;
+
+        [Tooltip("How far the view tilts around Z, in degrees. 0 = no rotation shake. Tilting uncovers the screen corners, so keep it small.")]
+        [SerializeField]
+        private float viewShakeRotationRange = 2f;
+
+        [Tooltip("When on, both shakes' strength follows the attenuation curve over their duration.")]
+        [SerializeField]
+        private bool viewShakeUseAttenuation = true;
+
+        [SerializeField]
+        private AnimationCurve viewShakeAttenuationCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(0.5f, 1f), new Keyframe(1f, 0f));
+
         private SerializedObject _serializedWindow;
         private bool _rhythmExpanded = true;
         private bool _inputSetExpanded = true;
+        private bool _shakeBalanceExpanded = true;
+        private bool _viewShakeExpanded = true;
         private Vector2 _scroll;
 
         [MenuItem("Tools/Combat Scene Development")]
@@ -88,11 +189,12 @@ namespace GARA.EditorTools
         {
             _serializedWindow = new SerializedObject(this);
 
-            if (rhythmInputMap == null || inputSetInputMap == null)
+            if (rhythmInputMap == null || inputSetInputMap == null || shakeBalanceInputMap == null)
             {
                 var defaultMap = FindDefaultInputMap();
                 rhythmInputMap = rhythmInputMap != null ? rhythmInputMap : defaultMap;
                 inputSetInputMap = inputSetInputMap != null ? inputSetInputMap : defaultMap;
+                shakeBalanceInputMap = shakeBalanceInputMap != null ? shakeBalanceInputMap : defaultMap;
             }
         }
 
@@ -124,6 +226,22 @@ namespace GARA.EditorTools
             {
                 nameof(inputSetInputMap), nameof(setCount), nameof(minInputsPerSet), nameof(maxInputsPerSet), nameof(setTimeLimit), nameof(setCollectionTimeLimit), nameof(retryPolicy)
             }, IsPlaying<InputSetCollectionPlayer>(p => p.IsPlaying), RunInputSetTest);
+
+            _shakeBalanceExpanded = DrawSection("Shake Balance", _shakeBalanceExpanded, new[]
+            {
+                nameof(shakeBalanceInputMap), nameof(shakeBalanceLeftToken), nameof(shakeBalanceRightToken), nameof(shakeBalanceUseCashOutToken), nameof(shakeBalanceCashOutToken),
+                nameof(shakeBalanceDuration), nameof(shakeBalanceBaseInstability), nameof(shakeBalanceInstabilityGrowth), nameof(shakeBalanceBaseNoise), nameof(shakeBalanceNoiseGrowth),
+                nameof(shakeBalancePerfectZone), nameof(shakeBalanceGoodZone), nameof(shakeBalanceBankTimeConstant), nameof(shakeBalanceKeepOnFall)
+            }, IsPlaying<ShakeBalancePlayer>(p => p.IsPlaying), RunShakeBalanceTest);
+
+            _viewShakeExpanded = DrawSection("View Shake", _viewShakeExpanded, new[]
+            {
+                nameof(viewShakePositionDuration), nameof(viewShakePositionSpeed), nameof(viewShakePositionRange), nameof(viewShakePositionMainDirection),
+                nameof(viewShakePositionRandomizeDirection), nameof(viewShakePositionAltDirection), nameof(viewShakePositionAddDirectionalNoise),
+                nameof(viewShakePositionNoiseStrengthMin), nameof(viewShakePositionNoiseStrengthMax),
+                nameof(viewShakeRotationDuration), nameof(viewShakeRotationSpeed), nameof(viewShakeRotationRange),
+                nameof(viewShakeUseAttenuation), nameof(viewShakeAttenuationCurve)
+            }, false, RunViewShakeTest);
 
             EditorGUILayout.EndScrollView();
             _serializedWindow.ApplyModifiedProperties();
@@ -229,6 +347,81 @@ namespace GARA.EditorTools
             });
         }
 
+        private void RunShakeBalanceTest()
+        {
+            if (!TryGetInputMap(shakeBalanceInputMap, "Shake Balance"))
+            {
+                return;
+            }
+
+            var cashOutToken = shakeBalanceUseCashOutToken ? shakeBalanceCashOutToken : (InputToken?)null;
+            var definition = ShakeBalanceDefinition.CreateRuntime(shakeBalanceLeftToken, shakeBalanceRightToken, cashOutToken, shakeBalanceDuration);
+            definition.SetDifficulty(shakeBalanceBaseInstability, shakeBalanceInstabilityGrowth, shakeBalanceBaseNoise, shakeBalanceNoiseGrowth);
+            definition.SetScoring(shakeBalancePerfectZone, shakeBalanceGoodZone, shakeBalanceBankTimeConstant, shakeBalanceKeepOnFall);
+
+            var player = GetHostPlayer<ShakeBalancePlayer>(shakeBalanceInputMap);
+            player.Play(definition, report =>
+            {
+                Destroy(definition);
+                Debug.Log($"[ShakeBalanceTest] {ShakeBalanceDebugLogger.Describe(report)}");
+            });
+        }
+
+        /// <summary>
+        /// Shakes the scene's view with this window's settings, sent straight to the view shakers
+        /// CombatSceneManager references — the same call a Position / Rotation Shake feedback makes.
+        /// The shakers store no settings of their own. Also used by the CombatSceneManager
+        /// Inspector's Test View Shake button (opening this window if needed, for its settings).
+        /// </summary>
+        public static void TestViewShake()
+        {
+            GetWindow<CombatSceneDevelopmentWindow>(WindowTitle, false).RunViewShakeTest();
+        }
+
+        private void RunViewShakeTest()
+        {
+            var manager = Object.FindFirstObjectByType<CombatSceneManager>();
+            if (manager == null)
+            {
+                Debug.LogWarning($"[{WindowTitle}] View Shake test needs a CombatSceneManager in the open scene.");
+                return;
+            }
+
+            // Both are private serialized fields on CombatSceneManager.
+            var serializedManager = new SerializedObject(manager);
+            var positionShaker = serializedManager.FindProperty("viewPositionShaker").objectReferenceValue as MMPositionShaker;
+            var rotationShaker = serializedManager.FindProperty("viewRotationShaker").objectReferenceValue as MMRotationShaker;
+            if (positionShaker == null && rotationShaker == null)
+            {
+                Debug.LogWarning($"[{WindowTitle}] View Shake test needs CombatSceneManager's View Position Shaker or View Rotation Shaker assigned.");
+                return;
+            }
+
+            if (positionShaker != null && viewShakePositionRange > 0f)
+            {
+                positionShaker.OnMMPositionShakeEvent(
+                    viewShakePositionDuration, viewShakePositionSpeed, viewShakePositionRange, viewShakePositionMainDirection,
+                    viewShakePositionRandomizeDirection, viewShakePositionAltDirection,
+                    randomizeDirectionOnPlay: false, randomizeDirectionX: true, randomizeDirectionY: true, randomizeDirectionZ: true,
+                    addDirectionalNoise: viewShakePositionAddDirectionalNoise,
+                    directionalNoiseStrengthMin: viewShakePositionNoiseStrengthMin, directionalNoiseStrengthMax: viewShakePositionNoiseStrengthMax,
+                    randomnessSeed: Vector3.zero, randomizeSeedOnShake: true,
+                    useAttenuation: viewShakeUseAttenuation, attenuationCurve: viewShakeAttenuationCurve,
+                    channelData: positionShaker.ChannelData);
+            }
+
+            if (rotationShaker != null && viewShakeRotationRange > 0f)
+            {
+                rotationShaker.OnMMRotationShakeEvent(
+                    viewShakeRotationDuration, viewShakeRotationSpeed, viewShakeRotationRange, Vector3.forward,
+                    randomizeDirection: false, shakeAltDirection: Vector3.forward, randomizeDirectionOnPlay: false,
+                    addDirectionalNoise: false, directionalNoiseStrengthMin: Vector3.zero, directionalNoiseStrengthMax: Vector3.zero,
+                    randomnessSeed: Vector3.zero, randomizeSeedOnShake: true,
+                    useAttenuation: viewShakeUseAttenuation, attenuationCurve: viewShakeAttenuationCurve,
+                    channelData: rotationShaker.ChannelData);
+            }
+        }
+
         /// <summary>The Play-mode host's player of type <typeparamref name="T"/>, created on first use and pointed at <paramref name="inputMap"/>.</summary>
         private static T GetHostPlayer<T>(InputTokenMap inputMap) where T : MonoBehaviour
         {
@@ -245,7 +438,7 @@ namespace GARA.EditorTools
                 player = host.AddComponent<T>();
             }
 
-            // inputMap is a private serialized field on both players.
+            // inputMap is a private serialized field on every player.
             var serializedPlayer = new SerializedObject(player);
             serializedPlayer.FindProperty("inputMap").objectReferenceValue = inputMap;
             serializedPlayer.ApplyModifiedPropertiesWithoutUndo();

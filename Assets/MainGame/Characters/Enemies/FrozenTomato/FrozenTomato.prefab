@@ -96,12 +96,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa9bfa519cdd445478557afa1577b87c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.Atk1State
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.FrozenTomatoAttack1State
   positionMode: 0
-  skeletonRendererRef: {fileID: 3134209029974725100}
-  animationName: attack-1
-  loop: 0
-  damageAmount: 0
+  skillCard: {fileID: 11400000, guid: 0b7dcb76865e4dc0a725937d4df028fa, type: 2}
 --- !u!114 &7495025016596399778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,12 +110,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93a4724b3f27e48b08f2ee9bc46b00b4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.Atk2State
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.FrozenTomatoAttack2State
   positionMode: 0
-  skeletonRendererRef: {fileID: 3134209029974725100}
-  animationName: attack-2
-  loop: 0
-  damageAmount: 0
+  skillCard: {fileID: 11400000, guid: 1cb1c71c1e55487d844023c22b21b3a5, type: 2}
 --- !u!114 &8192445616348435663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,12 +124,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37e2a2d5fdb7a4a2d9122739d57b36b7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.Atk3State
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.FrozenTomatoComboState
   positionMode: 0
-  skeletonRendererRef: {fileID: 3134209029974725100}
-  animationName: combo
-  loop: 0
-  damageAmount: 0
+  skillCard: {fileID: 11400000, guid: a91d76bc9e4f42bdb5c609ecc7c8264b, type: 2}
 --- !u!1 &3662008488019087220
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,21 +192,7 @@ MonoBehaviour:
   levelUnlockedAbilities: []
   allowedEquipmentSlots: 
   defaultState: {fileID: 8427294588567716401}
-  basicAttacks:
-  - input: 0
-    state: {fileID: 4193828577790402808}
-    apCost: 0
-    positionMode: 1
-  - input: 1
-    state: {fileID: 7495025016596399778}
-    apCost: 0
-    positionMode: 1
-  - input: 2
-    state: {fileID: 8192445616348435663}
-    apCost: 0
-    positionMode: 1
-  combos: []
-  specials: []
+  maxCombatSkillCards: 4
 --- !u!114 &1118167080659379036
 MonoBehaviour:
   m_ObjectHideFlags: 0

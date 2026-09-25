@@ -1,6 +1,6 @@
 namespace GARA.Combat
 {
-    public class HitState : SpineAnimationState
+    public class HitState : NamedSpineAnimationState
     {
     }
 }

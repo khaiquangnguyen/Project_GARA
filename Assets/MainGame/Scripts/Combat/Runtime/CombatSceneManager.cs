@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace GARA.Combat
@@ -10,6 +11,9 @@ namespace GARA.Combat
     // scene's layout or UI. Split across partial files by concern:
     //   .Phase     — the turn loop, player input and targeting broadcasts
     //   .EnemyTurn — placeholder enemy AI
+    //   .LiveSkill — live skill cards that play steps during their minigame
+    //   .Parry     — the player's parry window during an enemy's swing
+    //   .Jump      — the player's jump (dodge) window during an enemy's swing
     //   .Overlay   — turn order, announcements and the minigame visual drivers
     public partial class CombatSceneManager : MonoBehaviour
     {
@@ -28,6 +32,27 @@ namespace GARA.Combat
         [Header("Spawning")]
         [Tooltip("Spawned character instances are parented here.")]
         [SerializeField] private Transform combatCharactersParent;
+
+        // How this scene stages an action's untargeted characters — scene
+        // setup, never per card. "Untargeted" means members of the action's
+        // target pool it doesn't target, the actor excepted; All* actions
+        // leave nobody untargeted.
+        [Header("Combat Settings")]
+        [Tooltip("Untargeted characters are dimmed while an action plays.")]
+        [SerializeField] private bool fadeIfNotTargeted = true;
+
+        [Tooltip("Untargeted characters shrink while an action plays.")]
+        [SerializeField] private bool shrinkIfNotTargeted;
+
+        [Tooltip("Untargeted characters step back to this scene's retreat slots while an action plays.")]
+        [SerializeField] private bool retreatIfNotTargeted;
+
+        [Header("Defense")]
+        [Expandable]
+        [SerializeField] private JumpSpec jumpSpec;
+
+        [Expandable]
+        [SerializeField] private ParrySpec parrySpec;
 
         private void Awake()
         {

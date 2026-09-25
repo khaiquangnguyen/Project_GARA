@@ -1,26 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using GARA.Characters;
 using UnityEngine;
 
 namespace GARA.Combat
 {
     // Placeholder until real enemy AI exists — waits briefly, then randomly
-    // picks one of the actor's authored skill cards (A/S/D/F) that it can
-    // afford and that targets a single enemy (the only targeting this can
-    // resolve yet), spends its AP/MP the same way the player's skill-card
-    // flow does, then ends its turn once the whole swing (including the dash
-    // back) is done. If nothing is affordable, the turn ends immediately with
-    // a warning. Uses the same targeting-fade announcements a player's
-    // special does, so the not-targeted and on-hit effects react identically
-    // either way.
+    // picks any card from the actor's combat loadout that has at least one
+    // valid target, then ends its turn once the whole swing (including the
+    // dash back) is done. Targeting follows the card's own mode, the same
+    // rules a player's card uses except that the "one" modes pick at random
+    // instead of reading a selector: One* hits one random living member of
+    // its pool (enemies, friendlies, or every character), All* hits all of
+    // them, and Multi* hits multiTargetCount random ones (repeats allowed or
+    // not, per the mode). Enemies ignore AP/MP costs entirely — every card is free
+    // for them. If no card qualifies, the turn ends immediately with a
+    // warning. Uses the same targeting-fade announcements a player's card
+    // does, so the not-targeted and on-hit effects react identically either
+    // way.
     public partial class CombatSceneManager
     {
         [Header("Enemy Turn")]
         [Tooltip("Seconds an enemy waits at the start of its turn before acting.")]
         [SerializeField] private float enemyTurnDelaySeconds = 0.5f;
 
-        private IEnumerator PerformEnemyTurn(CombatParticipant actor, AttackExecutor actorExecutor, IReadOnlyList<CombatParticipant> livingTargets)
+        private IEnumerator PerformEnemyTurn(CombatParticipant actor, AttackExecutor actorExecutor)
         {
             yield return new WaitForSeconds(enemyTurnDelaySeconds);
 
@@ -33,65 +38,57 @@ namespace GARA.Combat
                 yield break;
             }
 
-            if (livingTargets.Count == 0 || !TryPickAffordableEnemySkillCard(actor, out var card))
+            if (!TryPickEnemySkillCard(actor, out var card, out var targets))
             {
-                Debug.LogWarning($"[{nameof(CombatSceneManager)}] {actor.definition.displayName} has no affordable single-target skill card this turn — ending turn.", this);
+                Debug.LogWarning($"[{nameof(CombatSceneManager)}] {actor.definition.displayName} has no usable skill card this turn — ending turn.", this);
                 EndCombatPhase();
                 yield break;
             }
 
-            if (!actor.TrySpendResources(card.apCost, card.mpCost))
-            {
-                EndCombatPhase();
-                yield break;
-            }
-
-            var target = livingTargets[Random.Range(0, livingTargets.Count)];
-
-            AnnounceTargetingForSingleEnemyTarget(actor, target);
-            actorExecutor.PlayAction(card.animationState, new ICombatTarget[] { target }, card.positionMode);
+            AnnounceTargetingForSkillCard(actor, card, targets);
+            RetreatUntargeted(actor, card, targets);
+            _enemyActionInProgress = true;
+            actorExecutor.PlayAction(actor.SkillCardStateOf(card), targets, card.positionMode);
             yield return new WaitUntil(() => !actorExecutor.IsBusy);
+            _enemyActionInProgress = false;
 
             actorExecutor.ReturnToStandardPosition();
+            yield return ReturnRetreated();
             yield return new WaitUntil(() => !actorExecutor.IsBusy);
 
-            AnnounceTargetingClearedForEnemies(actor);
+            AnnounceTargetingClearedForSkillCard(actor, card);
             EndCombatPhase();
         }
 
-        // Collects every authored, affordable, single-enemy-target skill
-        // card (slots 0-3, i.e. A/S/D/F) and returns one at random.
-        private static bool TryPickAffordableEnemySkillCard(CombatParticipant actor, out SkillCardDefinition card)
+        // Collects every loadout card that has at least one valid target
+        // right now and returns one at random, along with its targets.
+        private bool TryPickEnemySkillCard(CombatParticipant actor, out SkillCardDefinition card, out IReadOnlyList<ICombatTarget> targets)
         {
-            var candidates = new List<SkillCardDefinition>();
-            for (var slot = 0; slot < 4; slot++)
+            var candidates = new List<(SkillCardDefinition card, IReadOnlyList<ICombatTarget> targets)>();
+            foreach (var candidate in actor.SkillCards)
             {
-                if (!actor.definition.TryGetSkillCard(slot, out var candidate))
+                if (candidate != null && TryResolveEnemyTargets(actor, candidate, out var candidateTargets))
                 {
-                    continue;
+                    candidates.Add((candidate, candidateTargets));
                 }
-
-                if (candidate.targetMode != SpecialTargetMode.OneEnemy)
-                {
-                    continue;
-                }
-
-                if (actor.currentAp < candidate.apCost || actor.currentMp < candidate.mpCost)
-                {
-                    continue;
-                }
-
-                candidates.Add(candidate);
             }
 
             if (candidates.Count == 0)
             {
                 card = null;
+                targets = null;
                 return false;
             }
 
-            card = candidates[Random.Range(0, candidates.Count)];
+            (card, targets) = candidates[Random.Range(0, candidates.Count)];
             return true;
+        }
+
+        private bool TryResolveEnemyTargets(CombatParticipant actor, SkillCardDefinition card, out IReadOnlyList<ICombatTarget> targets)
+        {
+            var pool = LivingPoolOf(actor, card.targetMode.GetPool());
+            targets = card.targetMode.PickRandomTargets(pool, card.multiTargetCount).Cast<ICombatTarget>().ToArray();
+            return targets.Count > 0;
         }
     }
 }

@@ -27,6 +27,12 @@ namespace GARA.Characters
 
         public List<string> carriedConsumableItemIds = new();
 
+        // SkillCardDefinition.cardIds this character brings into battle, in
+        // order — a subset of its definition's card pool, capped at
+        // maxCombatSkillCards (see CharacterDefinition.ResolveCombatLoadout).
+        // Empty means "use the definition's default loadout".
+        public List<string> equippedSkillCardIds = new();
+
         public ManagedCharacter(string instanceId, string definitionId)
         {
             this.instanceId = instanceId;

@@ -12,10 +12,12 @@ GameObject:
   - component: {fileID: 6683238165070620661}
   - component: {fileID: 4343542595800764247}
   - component: {fileID: 8135769160124919445}
-  - component: {fileID: 3275462291649786967}
-  - component: {fileID: 1177657373058995197}
-  - component: {fileID: 2850305648509539080}
-  - component: {fileID: 8053233261068214277}
+  - component: {fileID: 8115682968760053704}
+  - component: {fileID: 701774666510319452}
+  - component: {fileID: 187036711498518172}
+  - component: {fileID: 2762323635188462187}
+  - component: {fileID: 4011800275172657183}
+  - component: {fileID: 5535124410395038728}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -86,7 +88,7 @@ MonoBehaviour:
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: death
   loop: 0
---- !u!114 &3275462291649786967
+--- !u!114 &8115682968760053704
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,15 +97,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 525333047013397211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa9bfa519cdd445478557afa1577b87c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e7fbfac6709143d0a3298f258aa2bb7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.Atk1State
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.ParryState
   positionMode: 0
   skeletonRendererRef: {fileID: 2092571582275687145}
-  animationName: atk-1
+  animationName: parry-1
   loop: 0
-  damageAmount: 10
---- !u!114 &1177657373058995197
+--- !u!114 &701774666510319452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,15 +113,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 525333047013397211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93a4724b3f27e48b08f2ee9bc46b00b4, type: 3}
+  m_Script: {fileID: 11500000, guid: da93c804da1654cc88ab03c1a6b9fd7f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.Atk2State
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.JumpState
   positionMode: 0
   skeletonRendererRef: {fileID: 2092571582275687145}
-  animationName: atk-2
-  loop: 0
-  damageAmount: 10
---- !u!114 &2850305648509539080
+  animationName: idle
+  loop: 1
+--- !u!114 &187036711498518172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,15 +129,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 525333047013397211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37e2a2d5fdb7a4a2d9122739d57b36b7, type: 3}
+  m_Script: {fileID: 11500000, guid: a546739be2e7549b49adfd5ae8478299, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.Atk3State
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerFabulousState
   positionMode: 0
-  skeletonRendererRef: {fileID: 2092571582275687145}
-  animationName: atk-3
-  loop: 0
-  damageAmount: 10
---- !u!114 &8053233261068214277
+  skillCard: {fileID: 11400000, guid: 1d24cdfb438e5419da7114a214a84198, type: 2}
+--- !u!114 &2762323635188462187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,14 +143,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 525333047013397211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37b70e0de865c4e6d91f7f274481f6d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 94dbb24330ea6453fa1ffa7dc0a2a436, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.ComboFinisherState
-  positionMode: 1
-  skeletonRendererRef: {fileID: 2092571582275687145}
-  animationName: special
-  loop: 0
-  damageAmount: 10
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerServeState
+  positionMode: 0
+  skillCard: {fileID: 11400000, guid: 82cbe38c9c6f7454eb41684b6900422a, type: 2}
+--- !u!114 &4011800275172657183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525333047013397211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 916b9be4f8c234c88b18ba666ceb3cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerFierceState
+  positionMode: 0
+  skillCard: {fileID: 11400000, guid: 3ab1053043888451eb0717462813b21d, type: 2}
+--- !u!114 &5535124410395038728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525333047013397211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bed1ee2a455342d296fa68d806b962a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerDivineState
+  positionMode: 0
+  skillCard: {fileID: 11400000, guid: a14dcca265d58448aaae0fca13860940, type: 2}
 --- !u!1 &7753796104726555178
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.AttackExecutor
   stateMachine: {fileID: 5432460959043900503}
   timeBetweenMoveAndAction: 0.2
+  deathDisappearDelay: 0.5
 --- !u!114 &1814630587145776563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,23 +418,12 @@ MonoBehaviour:
   levelUnlockedAbilities: []
   allowedEquipmentSlots: 
   defaultState: {fileID: 6683238165070620661}
-  basicAttacks:
-  - input: 0
-    state: {fileID: 3275462291649786967}
-    apCost: 10
-    positionMode: 1
-  - input: 1
-    state: {fileID: 1177657373058995197}
-    apCost: 10
-    positionMode: 0
-  - input: 2
-    state: {fileID: 2850305648509539080}
-    apCost: 10
-    positionMode: 0
-  combos:
-  - sequence: 000000000100000002000000i
-    finisherState: {fileID: 8053233261068214277}
-  specials: []
+  maxCombatSkillCards: 4
+  passives: []
+  palate:
+    canBeFed: 0
+    favoriteFlavors: 0
+    fullnessCapacity: 0
 --- !u!114 &1076281139041943887
 MonoBehaviour:
   m_ObjectHideFlags: 0

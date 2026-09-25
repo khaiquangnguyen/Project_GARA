@@ -10,7 +10,10 @@
     "MoreMountains.Tools",
     "NaughtyAttributes.Core",
     "GARA.Rhythm",
-    "GARA.InputSets"
+    "GARA.SkillCards.Rhythm",
+    "GARA.InputSets",
+    "GARA.ShakeBalance",
+    "GARA.Input"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

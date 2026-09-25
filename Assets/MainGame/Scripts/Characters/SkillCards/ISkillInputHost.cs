@@ -10,5 +10,8 @@ namespace GARA.Characters
         T GetDriver<T>() where T : UnityEngine.Component;
 
         UnityEngine.MonoBehaviour CoroutineRunner { get; }
+
+        // The character using the card.
+        CharacterDefinition Actor { get; }
     }
 }

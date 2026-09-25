@@ -1,4 +1,5 @@
 using GARA.Characters;
+using GARA.Rhythm;
 using UnityEngine;
 
 namespace GARA.Characters.Dancer
@@ -9,8 +10,19 @@ namespace GARA.Characters.Dancer
     // without needing a generic "personality" system on the base class.
     public class Dancer : CharacterDefinition
     {
+        [Header("Specials (shared by every Dancer card)")]
+        [SerializeField]
+        private SkillPerformanceTiering specialTiering = SkillPerformanceTiering.Default;
+
+        [Tooltip("Lead-in, tail-out and judging windows around every Dancer card's bars.")]
+        [SerializeField]
+        private RhythmSequenceTiming specialTiming = RhythmSequenceTiming.Default;
+
+        public SkillPerformanceTiering SpecialTiering => specialTiering;
+        public RhythmSequenceTiming SpecialTiming => specialTiming;
+
         // CharacterDefinition already declares its own private OnValidate
-        // (array-length clamping) - Unity's MonoBehaviour message dispatch
+        // (palate sanitizing) - Unity's MonoBehaviour message dispatch
         // invokes each class level's own OnValidate independently, so this
         // one doesn't need to (and, being private in the base, can't) call
         // base.OnValidate().

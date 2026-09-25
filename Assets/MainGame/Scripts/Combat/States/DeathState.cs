@@ -1,6 +1,6 @@
 namespace GARA.Combat
 {
-    public class DeathState : SpineAnimationState
+    public class DeathState : NamedSpineAnimationState
     {
     }
 }

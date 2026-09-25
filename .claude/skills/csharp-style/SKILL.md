@@ -58,6 +58,13 @@ expressed in `.editorconfig`'s naming rules, so it's not machine-enforced — ju
   enum-like subclasses) can share a file when a single file is clearly more readable, but default
   to splitting.
 
+## Comments
+- Keep comments short: one line (at most two) saying what something is for or a non-obvious
+  constraint. No multi-paragraph headers, no restating what the code does, no design essays.
+- Skip comments on self-explanatory members (simple fields, events, one-line methods).
+- Wrap comment lines at ~80 columns.
+- This applies to new code even when nearby older code has long comments — don't copy their length.
+
 ## What NOT to do
 - Don't add a custom brace style, tabs, or non-Rider naming (e.g. `m_field`, `s_field`) —
   those are conventions from *other* projects/packages in this workspace

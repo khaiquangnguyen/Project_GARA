@@ -1016,7 +1016,7 @@
             "id": "0dba7b4c-282a-47e6-9f1d-887cf0f3475c",
             "actions": [
                 {
-                    "name": "SlotA",
+                    "name": "SkillLeft",
                     "type": "Button",
                     "id": "d79fbe39-01e0-4f30-a02a-10af4864f426",
                     "expectedControlType": "",
@@ -1026,29 +1026,9 @@
                     "priority": 0
                 },
                 {
-                    "name": "SlotB",
-                    "type": "Button",
-                    "id": "6b1c4991-e652-4b04-9d31-be60c418ba80",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
-                },
-                {
-                    "name": "SlotC",
+                    "name": "SkillRight",
                     "type": "Button",
                     "id": "d58b167a-4040-484c-ac8d-ce9d5eded81b",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
-                },
-                {
-                    "name": "SlotD",
-                    "type": "Button",
-                    "id": "887bf0c5-b676-4d56-b987-9cf442588fb5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1084,6 +1064,36 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "UseSkill",
+                    "type": "Button",
+                    "id": "74a866e0-56c9-4321-b7c5-f4a5bc2787b1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Parry",
+                    "type": "Button",
+                    "id": "5b1f3c7e-2a4d-4e8b-9c61-7d0a3f2e8b14",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "9d4e6a2b-3c75-4f18-b0e9-2a6c8d1f7e53",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -1094,18 +1104,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SlotA",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "05b12d92-3300-4ff8-843a-f14125b51558",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SlotB",
+                    "action": "SkillLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1116,18 +1115,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SlotC",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "230c7e25-9d71-473f-9675-b22093bc30e4",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SlotD",
+                    "action": "SkillRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1160,7 +1148,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "EndPhase",
+                    "action": "UseSkill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -1168,6 +1156,39 @@
                     "name": "",
                     "id": "71db175f-f62f-4791-8346-c4bad4acf7d9",
                     "path": "<Keyboard>/numpadEnter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8e2d4a6-7f31-4b59-a0d2-6e9b1c3f5a27",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Parry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e7a1c3f5-8b24-4d6e-9f02-5c3b7a9d1e68",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9db9930d-ec0c-4f62-a30e-6e39d5a38c89",
+                    "path": "<Keyboard>/backspace",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

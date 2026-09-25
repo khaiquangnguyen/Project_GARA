@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GARA.EditorTools
 {
-    // Applies to every SpineAnimationState subclass (SpecialAState, IdleState,
+    // Applies to every SpineAnimationState subclass (DancerDivineState, IdleState,
     // ...) via editorForChildClasses. Preview only works while the target
     // is part of a live scene/prefab-editing context — its SkeletonAnimation
     // needs to actually be ticking (Spine components run ExecuteAlways).

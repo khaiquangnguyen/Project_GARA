@@ -1,23 +1,31 @@
 using System.Collections.Generic;
 using GARA.Characters;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace GARA.Combat
 {
     // Shared base for any Spine-animated action that deals flat damage to
-    // every target it was given (a basic attack, a combo finisher, a
-    // special). Damage is applied on the clip's "hit" user event (matched
-    // case-insensitively by lowercasing before comparing) rather than
-    // immediately on Enter — the event must be authored on the animation in
-    // Spine itself, at whatever frame the swing actually connects. A clip
-    // with no such event never deals damage.
-    public abstract class DamagingSpineAnimationState : SpineAnimationState
+    // every target it was given (a basic attack, a combo finisher). Damage is
+    // applied on the clip's "hit" user event (matched case-insensitively)
+    // rather than immediately on Enter — the event must be authored on the
+    // animation in Spine itself, at whatever frame the swing actually
+    // connects. A clip with no such event never deals damage. The clip (and
+    // its staging data, e.g. range) comes from animationSpec.
+    public abstract class DamagingSpineAnimationState : AttackSpecAnimationState
     {
-        private const string HitEventName = "hit";
+        [Expandable]
+        [SerializeField]
+        private AttackAnimationSpec animationSpec;
 
-        [SerializeField] private int damageAmount;
+        [SerializeField]
+        private int damageAmount;
 
         private IReadOnlyList<ICombatTarget> _pendingTargets;
+
+        public AttackAnimationSpec AnimationSpec => animationSpec;
+
+        protected override AttackAnimationSpec DefaultSpec => animationSpec;
 
         public override void Enter(CharacterStateContext context)
         {
@@ -27,7 +35,7 @@ namespace GARA.Combat
 
         protected override void OnSpineEvent(string eventName)
         {
-            if (_pendingTargets == null || eventName == null || eventName.ToLowerInvariant() != HitEventName)
+            if (_pendingTargets == null || !IsHitEvent(eventName))
             {
                 return;
             }

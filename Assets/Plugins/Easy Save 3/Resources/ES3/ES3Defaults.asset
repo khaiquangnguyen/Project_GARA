@@ -49,9 +49,11 @@ MonoBehaviour:
     - GARA.InputSets
     - GARA.Rhythm
     - GARA.Shake
+    - GARA.ShakeBalance
     - GARA.SkillCards.InputSets
     - GARA.SkillCards.Rhythm
     - GARA.SkillCards.Shake
+    - GARA.SkillCards.ShakeBalance
     - Kybernetik.Animancer
     - Kybernetik.Animancer.FSM
     - Lofelt.NiceVibrations

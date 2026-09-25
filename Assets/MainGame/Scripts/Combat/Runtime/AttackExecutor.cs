@@ -32,6 +32,8 @@ namespace GARA.Combat
         private MoveForwardState _moveForwardState;
         private MoveBackwardState _moveBackwardState;
         private HitState _hitState;
+        private ParryState _parryState;
+        private JumpState _jumpState;
         private DeathState _deathState;
         private Vector3 _standardPosition;
 
@@ -42,6 +44,7 @@ namespace GARA.Combat
         private CharacterState _pendingAttackState;
         private IReadOnlyList<ICombatTarget> _pendingTargets;
         private Action _pendingOnImpact;
+        private Func<float> _pendingBeforeAttack;
 
         public bool IsBusy => _isBusy;
         public CombatParticipant Participant => _participant;
@@ -55,6 +58,8 @@ namespace GARA.Combat
             _moveForwardState = _participant.SceneRoot.GetComponentInChildren<MoveForwardState>(true);
             _moveBackwardState = _participant.SceneRoot.GetComponentInChildren<MoveBackwardState>(true);
             _hitState = _participant.SceneRoot.GetComponentInChildren<HitState>(true);
+            _parryState = _participant.SceneRoot.GetComponentInChildren<ParryState>(true);
+            _jumpState = _participant.SceneRoot.GetComponentInChildren<JumpState>(true);
             _deathState = _participant.SceneRoot.GetComponentInChildren<DeathState>(true);
             _standardPosition = _participant.SceneTransform.position;
             EnterDefaultState();
@@ -80,7 +85,11 @@ namespace GARA.Combat
         // state's CharacterStateContext.OnImpact — never to the move-in/
         // move-out states, since those aren't the "action" itself. Null by
         // default so existing callers are unaffected.
-        public void PlayAction(CharacterState assetSideState, IReadOnlyList<ICombatTarget> targets, ActionPositionMode positionMode, Action onImpact = null)
+        // spec (optional) plays instead of the state's own spec, this time
+        // only. The move-in range comes from whichever spec will play.
+        // beforeAttack (optional) runs right before the attack state plays,
+        // after any move-in; it returns seconds to hold the attack back.
+        public void PlayAction(CharacterState assetSideState, IReadOnlyList<ICombatTarget> targets, ActionPositionMode positionMode, Action onImpact = null, AttackAnimationSpec spec = null, Func<float> beforeAttack = null)
         {
             var liveState = _participant.ResolveLiveState(assetSideState);
             if (liveState == null)
@@ -88,17 +97,23 @@ namespace GARA.Combat
                 return; // misauthored prefab — missing component
             }
 
+            if (spec != null && liveState is AttackSpecAnimationState attackState)
+            {
+                attackState.OverrideNextSpec(spec);
+            }
+
             _isBusy = true;
             _pendingAttackState = liveState;
             _pendingTargets = targets;
             _pendingOnImpact = onImpact;
+            _pendingBeforeAttack = beforeAttack;
 
             if (positionMode == ActionPositionMode.MoveInFrontOfEnemy
                 && _moveForwardState != null
                 && targets.Count > 0
                 && targets[0] is CombatParticipant frontTarget)
             {
-                var destination = CombatSpacing.PositionInFrontOfEnemy(_participant, frontTarget);
+                var destination = CombatSpacing.PositionInFrontOfEnemy(_participant, frontTarget, RangeOf(liveState));
                 if (Vector3.Distance(_participant.SceneTransform.position, destination) > AlreadyAtDestinationDistance)
                 {
                     _moveForwardState.SetDestination(destination);
@@ -115,9 +130,56 @@ namespace GARA.Combat
             }
         }
 
+        // Seconds from an in-place PlayAction of assetSideState to its hit
+        // event. False if the state has no hit event to time against.
+        public bool TryGetSecondsToImpact(CharacterState assetSideState, out float seconds)
+        {
+            seconds = 0f;
+            return _participant.ResolveLiveState(assetSideState) is AttackSpecAnimationState attackState
+                   && attackState.TryGetSecondsToHit(out seconds);
+        }
+
         public void ReturnToIdle()
         {
             EnterDefaultState();
+        }
+
+        private static float RangeOf(CharacterState liveState)
+        {
+            if (liveState is AttackSpecAnimationState { NextSpec: { } spec })
+            {
+                return spec.Range;
+            }
+
+            Debug.LogWarning($"[{nameof(AttackExecutor)}] {liveState} has no {nameof(AttackAnimationSpec)} — moving in at range 0.", liveState);
+            return 0f;
+        }
+
+        // Dashes up to target at assetSideState's attack range (as
+        // MoveInFrontOfEnemy does before a swing), idles there, then calls
+        // onArrived. Calls straight back if there's nothing to dash for.
+        public void MoveInFrontOf(ICombatTarget target, CharacterState assetSideState, Action onArrived)
+        {
+            if (_moveForwardState == null || !(target is CombatParticipant enemy))
+            {
+                onArrived?.Invoke();
+                return;
+            }
+
+            var destination = CombatSpacing.PositionInFrontOfEnemy(_participant, enemy, RangeOf(_participant.ResolveLiveState(assetSideState)));
+            if (Vector3.Distance(_participant.SceneTransform.position, destination) <= AlreadyAtDestinationDistance)
+            {
+                onArrived?.Invoke();
+                return;
+            }
+
+            _isBusy = true;
+            _moveForwardState.SetDestination(destination);
+            BeginState(_moveForwardState, Array.Empty<ICombatTarget>(), () =>
+            {
+                OnRepositionFinished();
+                onArrived?.Invoke();
+            });
         }
 
         // Briefly plays this character's HitState reaction, then falls
@@ -137,6 +199,39 @@ namespace GARA.Combat
         }
 
         private void OnHitReactionFinished()
+        {
+            ReturnToIdle();
+        }
+
+        // Played on every Parry press, hit or miss.
+        public void PlayParry()
+        {
+            if (_parryState == null || _isBusy)
+            {
+                return;
+            }
+
+            BeginState(_parryState, Array.Empty<ICombatTarget>(), OnParryFinished);
+        }
+
+        private void OnParryFinished()
+        {
+            ReturnToIdle();
+        }
+
+        // Played on every Jump press, hit or miss.
+        public void PlayJump(JumpSpec spec)
+        {
+            if (_jumpState == null || _isBusy)
+            {
+                return;
+            }
+
+            _jumpState.SetSpec(spec);
+            BeginState(_jumpState, Array.Empty<ICombatTarget>(), OnJumpFinished);
+        }
+
+        private void OnJumpFinished()
         {
             ReturnToIdle();
         }
@@ -181,13 +276,50 @@ namespace GARA.Combat
 
             _isBusy = true;
             _moveBackwardState.SetDestination(_standardPosition);
-            BeginState(_moveBackwardState, Array.Empty<ICombatTarget>(), OnReturnToStandardPositionFinished);
+            BeginState(_moveBackwardState, Array.Empty<ICombatTarget>(), OnRepositionFinished);
         }
 
-        private void OnReturnToStandardPositionFinished()
+        private void OnRepositionFinished()
         {
             _isBusy = false;
             ReturnToIdle();
+        }
+
+        // Steps back to a retreat spot while an action this character isn't
+        // targeted by plays out (see CombatSceneManager.Retreat), then idles
+        // there. Busy for the duration of the move.
+        public void RetreatTo(Vector3 destination)
+        {
+            MoveTo(_moveBackwardState, destination);
+        }
+
+        // Walks back from a retreat spot to the standard combat position.
+        public void ReturnFromRetreat()
+        {
+            MoveTo(_moveForwardState, _standardPosition);
+        }
+
+        // Safety rail: puts the character straight back at its standard
+        // combat position, cutting short any move in progress.
+        public void SnapToStandardPosition()
+        {
+            _isBusy = false;
+            _participant.SceneTransform.position = _standardPosition;
+            ReturnToIdle();
+        }
+
+        private void MoveTo(MoveState moveState, Vector3 destination)
+        {
+            if (moveState == null)
+            {
+                _participant.SceneTransform.position = destination;
+                ReturnToIdle();
+                return;
+            }
+
+            _isBusy = true;
+            moveState.SetDestination(destination);
+            BeginState(moveState, Array.Empty<ICombatTarget>(), OnRepositionFinished);
         }
 
         private void OnMoveForwardFinished()
@@ -203,6 +335,25 @@ namespace GARA.Combat
 
         private void BeginAttackState()
         {
+            var holdBack = _pendingBeforeAttack?.Invoke() ?? 0f;
+            _pendingBeforeAttack = null;
+            if (holdBack > 0f)
+            {
+                StartCoroutine(PlayPendingAttackStateAfter(holdBack));
+                return;
+            }
+
+            PlayPendingAttackState();
+        }
+
+        private IEnumerator PlayPendingAttackStateAfter(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            PlayPendingAttackState();
+        }
+
+        private void PlayPendingAttackState()
+        {
             BeginState(_pendingAttackState, _pendingTargets, OnAttackStateFinished, _pendingOnImpact);
         }
 
@@ -212,6 +363,7 @@ namespace GARA.Combat
             _pendingAttackState = null;
             _pendingTargets = null;
             _pendingOnImpact = null;
+            _pendingBeforeAttack = null;
             ActionFinished?.Invoke();
         }
 

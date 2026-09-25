@@ -19,6 +19,7 @@ namespace GARA.Combat
         public static event Action<SkillPerformance> InputPhaseEnded;
 
         public MonoBehaviour CoroutineRunner => this;
+        public CharacterDefinition Actor { get; set; }
 
         public T GetDriver<T>() where T : Component
         {

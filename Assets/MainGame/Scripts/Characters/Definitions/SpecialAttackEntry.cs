@@ -3,8 +3,8 @@ using System;
 namespace GARA.Characters
 {
     // Authored per character on CharacterDefinition.specials, capped at 4
-    // entries — array index 0-3 maps to A/S/D/F. OneEnemy uses whatever the
-    // always-visible target selector currently points to; OneFriendly
+    // entries — array index 0-3 is the order A/D cycles through. OneEnemy
+    // uses whatever the always-visible target selector points to; OneFriendly
     // always targets the first living ally; AllEnemy/AllFriendly hit every
     // living member of the relevant party.
     [Serializable]

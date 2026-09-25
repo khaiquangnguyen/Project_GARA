@@ -16,6 +16,16 @@ namespace GARA.EditorTools
             {
                 CombatSceneDevelopmentWindow.Open();
             }
+
+            // Play mode only: the view shake's display is switched on at runtime.
+            using (new EditorGUI.DisabledScope(!Application.isPlaying))
+            {
+                // Uses the Combat Scene Development window's View Shake settings.
+                if (GUILayout.Button("Test View Shake"))
+                {
+                    CombatSceneDevelopmentWindow.TestViewShake();
+                }
+            }
         }
     }
 }

@@ -13,10 +13,11 @@ using GARA.Combat;
 // its own MMF_Player. Swapping the effect — a different feedback, more
 // feedbacks, a completely different reaction — never touches combat code.
 //
-// One instance of this lives on the single child of the EffectExampleDummy
-// prefab, authored against that dummy's own placeholder Visual. At scene
-// start, CombatSceneManager clones that child onto every character in
-// the scene; each clone retargets itself to its new owner on Awake (see
+// One instance of this lives on each not-targeted child (the fade, the
+// shrink) of each effect dummy prefab (PlayerEffectDummy, EnemyEffectDummy),
+// authored against that dummy's own placeholder Visual. At scene start,
+// CombatSceneManager clones that child onto every character of the dummy's
+// side; each clone retargets itself to its new owner on Awake (see
 // RetargetToOwner) rather than needing any external wiring call.
 public class OnNotTargetedEffect : MonoBehaviour, MMEventListener<TargetedStateEvent>
 {
@@ -56,6 +57,10 @@ public class OnNotTargetedEffect : MonoBehaviour, MMEventListener<TargetedStateE
             if (f is MMF_SkeletonAlpha skeletonAlphaFeedback)
             {
                 skeletonAlphaFeedback.BoundSkeletonAnimation = spineAnimation;
+            }
+            else if (f is MMF_Scale scaleFeedback)
+            {
+                scaleFeedback.AnimateScaleTarget = spineAnimation.transform;
             }
         }
     }

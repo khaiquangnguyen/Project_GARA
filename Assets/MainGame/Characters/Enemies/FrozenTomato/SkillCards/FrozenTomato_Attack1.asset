@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 390ec546ba458469e9c10bd4d971a611, type: 3}
+  m_Name: FrozenTomato_Attack1
+  m_EditorClassIdentifier: GARA.Characters::GARA.Characters.SkillCardDefinition
+  cardId: frozen_tomato_attack_1
+  displayName: Attack 1
+  description: 
+  icon: {fileID: 0}
+  targetMode: 0
+  multiTargetCount: 2
+  apCost: 0
+  mpCost: 0
+  animationSpec: {fileID: 11400000, guid: 9a69ea22e4fb4570a60f005fb0c3f1d5, type: 2}
+  positionMode: 1
+  tiering:
+    okThreshold: 0.35
+    goodThreshold: 0.65
+    perfectThreshold: 0.9
+  effects: []
+  refundOnAbort: 0

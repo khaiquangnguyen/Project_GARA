@@ -33,7 +33,7 @@ namespace GARA.Characters
                 : tierMultiplier.For(context.Performance.Tier);
 
             var attackFactor = attackerScaling.Evaluate(attackerOffensiveStatValue);
-            var baseDamage = baseDamageAmount.Resolve(in context);
+            var baseDamage = baseDamageAmount.Resolve(in context) * context.Share;
 
             foreach (var target in context.Targets)
             {

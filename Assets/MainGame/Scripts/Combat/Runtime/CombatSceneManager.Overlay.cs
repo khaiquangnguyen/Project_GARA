@@ -1,6 +1,10 @@
+using GARA.Characters;
 using GARA.InputSets;
 using GARA.Rhythm;
+using GARA.ShakeBalance;
+using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GARA.Combat
 {
@@ -18,26 +22,73 @@ namespace GARA.Combat
         [Tooltip("Exactly 6 slots, left to right — slot 0 is always the current turn, since the queue itself shifts left as turns are consumed.")]
         [SerializeField] private TurnAvatar[] turnOrderSlots = new TurnAvatar[6];
 
+        [Tooltip("Shows the acting player's combat loadout, in order.")]
+        [SerializeField] private SkillCardSlot[] skillCardSlots = new SkillCardSlot[4];
+
         [Tooltip("Shown while a player character is acting, hidden otherwise.")]
         [SerializeField] private GameObject playerTurnAnnouncement;
 
         [Tooltip("Shown while an enemy is acting, hidden otherwise.")]
         [SerializeField] private GameObject enemyTurnAnnouncement;
 
-        [Tooltip("Toggled on the instant a special is used; toggled off again when the next turn starts.")]
-        [SerializeField] private GameObject specialUsedAnnouncement;
+        // Per-character effect templates, one set per side — each taken
+        // from that side's EffectDummy (PlayerEffectDummy/EnemyEffectDummy)
+        // and cloned onto every character of that faction once combat
+        // starts, so player and enemy characters can react differently.
+        [Header("Player Character Effects")]
+        [Tooltip("PlayerEffectDummy's OnNotTargetedEffect child.")]
+        [FormerlySerializedAs("notTargetedEffectTemplate")]
+        [SerializeField] private GameObject playerNotTargetedEffectTemplate;
 
-        [Tooltip("The EffectDummy's OnNotTargetedEffect child — cloned onto every character once combat starts.")]
-        [SerializeField] private GameObject notTargetedEffectTemplate;
+        [Tooltip("PlayerEffectDummy's OnNotTargetedShrinkEffect child.")]
+        [FormerlySerializedAs("notTargetedShrinkEffectTemplate")]
+        [SerializeField] private GameObject playerNotTargetedShrinkEffectTemplate;
 
-        [Tooltip("The EffectDummy's OnHitEffect child — cloned onto every character once combat starts.")]
-        [SerializeField] private GameObject hitEffectTemplate;
+        [Tooltip("PlayerEffectDummy's OnHitEffect child.")]
+        [FormerlySerializedAs("hitEffectTemplate")]
+        [SerializeField] private GameObject playerHitEffectTemplate;
+
+        [Tooltip("PlayerEffectDummy's OnParrySuccessEffect child.")]
+        [SerializeField] private GameObject playerParrySuccessEffectTemplate;
+
+        [Tooltip("PlayerEffectDummy's OnJumpSuccessEffect child.")]
+        [SerializeField] private GameObject playerJumpSuccessEffectTemplate;
+
+        [Header("Enemy Character Effects")]
+        [Tooltip("EnemyEffectDummy's OnNotTargetedEffect child.")]
+        [SerializeField] private GameObject enemyNotTargetedEffectTemplate;
+
+        [Tooltip("EnemyEffectDummy's OnNotTargetedShrinkEffect child.")]
+        [SerializeField] private GameObject enemyNotTargetedShrinkEffectTemplate;
+
+        [Tooltip("EnemyEffectDummy's OnHitEffect child.")]
+        [SerializeField] private GameObject enemyHitEffectTemplate;
+
+        [Tooltip("EnemyEffectDummy's OnParrySuccessEffect child.")]
+        [SerializeField] private GameObject enemyParrySuccessEffectTemplate;
+
+        [Tooltip("EnemyEffectDummy's OnJumpSuccessEffect child.")]
+        [SerializeField] private GameObject enemyJumpSuccessEffectTemplate;
+
+        [Header("Minigame Visual Drivers")]
 
         [Tooltip("Scene instance of the RhythmVisualDriver prefab — shown whenever any rhythm sequence starts.")]
         [SerializeField] private RhythmVisualDriver rhythmVisualDriver;
 
         [Tooltip("Scene instance of the InputSetVisualDriver prefab — shown whenever any input set collection starts.")]
         [SerializeField] private InputSetVisualDriver inputSetVisualDriver;
+
+        [Tooltip("Scene instance of the ShakeBalanceVisualDriver prefab — shown whenever any shake balance run starts.")]
+        [SerializeField] private ShakeBalanceVisualDriver shakeBalanceVisualDriver;
+
+        // The ViewShake prefab's shakers, which move the whole rendered view.
+        // They hold no shake settings of their own: whoever shakes the view
+        // sends them — a Position / Rotation Shake feedback on channel 10 with
+        // no target shaker (from any prefab), or the Combat Scene Development
+        // window's View Shake test, which calls them directly.
+        [Header("View Shake")]
+        [SerializeField] private MMPositionShaker viewPositionShaker;
+        [SerializeField] private MMRotationShaker viewRotationShaker;
 
         private bool _hasClonedCharacterEffects;
 
@@ -47,6 +98,8 @@ namespace GARA.Combat
             RhythmSequencePlayer.AnySequenceEnded += HideRhythmSequence;
             InputSetCollectionPlayer.AnySetCollectionStarted += ShowInputSetCollection;
             InputSetCollectionPlayer.AnySetCollectionEnded += HideInputSetCollection;
+            ShakeBalancePlayer.AnyBalanceStarted += ShowShakeBalance;
+            ShakeBalancePlayer.AnyBalanceEnded += HideShakeBalance;
         }
 
         private void DisableOverlay()
@@ -55,6 +108,8 @@ namespace GARA.Combat
             RhythmSequencePlayer.AnySequenceEnded -= HideRhythmSequence;
             InputSetCollectionPlayer.AnySetCollectionStarted -= ShowInputSetCollection;
             InputSetCollectionPlayer.AnySetCollectionEnded -= HideInputSetCollection;
+            ShakeBalancePlayer.AnyBalanceStarted -= ShowShakeBalance;
+            ShakeBalancePlayer.AnyBalanceEnded -= HideShakeBalance;
         }
 
         private void RefreshTurnOrder(Sprite[] portraits)
@@ -66,8 +121,22 @@ namespace GARA.Combat
             // of them.
             if (!_hasClonedCharacterEffects)
             {
-                CloneEffectOntoEveryCharacter(notTargetedEffectTemplate);
-                CloneEffectOntoEveryCharacter(hitEffectTemplate);
+                // The fade and shrink are just not-targeted effects reacting
+                // to TargetedStateEvent — leaving one off every character
+                // turns it off, while the event itself still broadcasts.
+                if (fadeIfNotTargeted)
+                {
+                    CloneEffectOntoEveryCharacter(playerNotTargetedEffectTemplate, enemyNotTargetedEffectTemplate);
+                }
+
+                if (shrinkIfNotTargeted)
+                {
+                    CloneEffectOntoEveryCharacter(playerNotTargetedShrinkEffectTemplate, enemyNotTargetedShrinkEffectTemplate);
+                }
+
+                CloneEffectOntoEveryCharacter(playerHitEffectTemplate, enemyHitEffectTemplate);
+                CloneEffectOntoEveryCharacter(playerParrySuccessEffectTemplate, enemyParrySuccessEffectTemplate);
+                CloneEffectOntoEveryCharacter(playerJumpSuccessEffectTemplate, enemyJumpSuccessEffectTemplate);
                 _hasClonedCharacterEffects = true;
             }
 
@@ -84,16 +153,54 @@ namespace GARA.Combat
             }
         }
 
-        private void CloneEffectOntoEveryCharacter(GameObject effectTemplate)
+        // Each character gets its own side's template — a side with none
+        // assigned simply goes without that effect.
+        private void CloneEffectOntoEveryCharacter(GameObject playerTemplate, GameObject enemyTemplate)
         {
-            if (effectTemplate == null)
+            foreach (var (participant, executor) in _executors)
             {
-                return;
+                var effectTemplate = participant.faction == FactionTag.Player ? playerTemplate : enemyTemplate;
+                if (effectTemplate != null)
+                {
+                    Instantiate(effectTemplate, executor.transform, false);
+                }
             }
+        }
 
-            foreach (var executor in _executors.Values)
+        // Empty on non-player turns.
+        private void RefreshSkillCardSlots(CombatParticipant actor)
+        {
+            var cards = actor != null && actor.faction == FactionTag.Player ? actor.SkillCards : null;
+            for (var i = 0; i < skillCardSlots.Length; i++)
             {
-                Instantiate(effectTemplate, executor.transform, false);
+                var slot = skillCardSlots[i];
+                if (slot == null)
+                {
+                    continue;
+                }
+
+                if (cards != null && i < cards.Count)
+                {
+                    slot.Show(cards[i]);
+                }
+                else
+                {
+                    slot.Clear();
+                }
+
+                slot.SetHighlighted(false);
+            }
+        }
+
+        // -1 highlights none.
+        private void HighlightSkillCardSlot(int index)
+        {
+            for (var i = 0; i < skillCardSlots.Length; i++)
+            {
+                if (skillCardSlots[i] != null)
+                {
+                    skillCardSlots[i].SetHighlighted(i == index);
+                }
             }
         }
 
@@ -107,21 +214,6 @@ namespace GARA.Combat
             if (enemyTurnAnnouncement != null)
             {
                 enemyTurnAnnouncement.SetActive(!isPlayerTurn);
-            }
-
-            // A new turn starting clears any leftover action announcement from
-            // whoever acted before.
-            if (specialUsedAnnouncement != null)
-            {
-                specialUsedAnnouncement.SetActive(false);
-            }
-        }
-
-        private void ShowSpecialUsedAnnouncement()
-        {
-            if (specialUsedAnnouncement != null)
-            {
-                specialUsedAnnouncement.SetActive(true);
             }
         }
 
@@ -154,6 +246,22 @@ namespace GARA.Combat
             if (inputSetVisualDriver != null)
             {
                 inputSetVisualDriver.Hide();
+            }
+        }
+
+        private void ShowShakeBalance(ShakeBalanceRunner runner)
+        {
+            if (shakeBalanceVisualDriver != null)
+            {
+                shakeBalanceVisualDriver.Show(runner);
+            }
+        }
+
+        private void HideShakeBalance(ShakeBalanceRunner runner)
+        {
+            if (shakeBalanceVisualDriver != null)
+            {
+                shakeBalanceVisualDriver.Hide();
             }
         }
     }

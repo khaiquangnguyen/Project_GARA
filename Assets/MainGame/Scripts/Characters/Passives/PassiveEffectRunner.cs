@@ -12,14 +12,14 @@ namespace GARA.Characters
     // triggering card targeted.
     public static class PassiveEffectRunner
     {
-        public static void Resolve(SkillEffectDefinition[] effects, in PassiveContext context, SpecialTargetMode targetMode, SkillPerformance triggerPerformance)
+        public static void Resolve(SkillEffectDefinition[] effects, in PassiveContext context, SpecialTargetMode targetMode, SkillPerformance triggerPerformance, int multiTargetCount = 1)
         {
             if (effects == null || effects.Length == 0)
             {
                 return;
             }
 
-            var targets = ResolveTargets(context.Battle, context.Self, targetMode);
+            var targets = ResolveTargets(context.Battle, context.Self, targetMode, multiTargetCount);
             var effectContext = new SkillEffectContext(context.Battle, context.Self, targets, triggerPerformance);
             foreach (var effect in effects)
             {
@@ -37,7 +37,11 @@ namespace GARA.Characters
         // other living ally, and AllFriendly adds self back in on top of
         // Allies — matching how CombatSceneManager's own LivingAlliesOf
         // (drawn from the actor's whole party, self included) behaves.
-        public static IReadOnlyList<ICombatTarget> ResolveTargets(IBattleQuery battle, ICombatTarget self, SpecialTargetMode mode)
+        // Every other mode (Multi*, and the *Character modes) resolves at
+        // random out of its living pool — friendlies being Allies plus self,
+        // everyone being enemies plus friendlies (see
+        // SpecialTargetModeExtensions.PickRandomTargets).
+        public static IReadOnlyList<ICombatTarget> ResolveTargets(IBattleQuery battle, ICombatTarget self, SpecialTargetMode mode, int multiTargetCount = 1)
         {
             switch (mode)
             {
@@ -69,8 +73,28 @@ namespace GARA.Characters
                     return living;
                 }
                 default:
-                    return Array.Empty<ICombatTarget>();
+                    return mode.PickRandomTargets(LivingPool(battle, self, mode.GetPool()), multiTargetCount);
             }
+        }
+
+        private static List<ICombatTarget> LivingPool(IBattleQuery battle, ICombatTarget self, TargetPool pool)
+        {
+            var living = new List<ICombatTarget>();
+            if (pool != TargetPool.Friendlies)
+            {
+                living.AddRange(battle.Enemies.Where(candidate => !candidate.IsDefeated));
+            }
+
+            if (pool != TargetPool.Enemies)
+            {
+                living.AddRange(battle.Allies.Where(candidate => !candidate.IsDefeated));
+                if (self != null && !self.IsDefeated)
+                {
+                    living.Add(self);
+                }
+            }
+
+            return living;
         }
     }
 }

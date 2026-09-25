@@ -13,9 +13,10 @@ using GARA.Combat;
 // feedback, more feedbacks, a completely different reaction — never
 // touches combat code.
 //
-// One instance of this lives on its own child of the EffectExampleDummy
-// prefab, alongside OnNotTargetedEffect. At scene start, CombatSceneManager
-// clones that child onto every character in the scene; each clone retargets
+// One instance of this lives on its own child of each effect dummy prefab
+// (PlayerEffectDummy, EnemyEffectDummy), alongside OnNotTargetedEffect. At
+// scene start, CombatSceneManager clones that child onto every character of
+// the dummy's side; each clone retargets
 // itself to its new owner on Awake (see RetargetToOwner) rather than
 // needing any external wiring call.
 public class OnHitEffect : MonoBehaviour, MMEventListener<HitStateEvent>
@@ -34,10 +35,12 @@ public class OnHitEffect : MonoBehaviour, MMEventListener<HitStateEvent>
     // — no external call needed. Assumes it's a direct child of the
     // character's SceneRoot (see CombatSceneManager's cloning step). Also
     // makes sure that character's Spine visual has an MMPositionShaker on
-    // it (nothing ships one by default) and points any MMF_PositionShake
-    // feedback's TargetShaker directly at it — left blank, that feedback
-    // broadcasts on a channel instead, which every character's shaker would
-    // answer to at once rather than just this one.
+    // it (nothing ships one by default) and points every MMF_PositionShake
+    // feedback authored against the dummy's own shaker at it instead — left
+    // on the dummy's shaker, it would shake the dummy rather than this
+    // character. A position shake authored with no TargetShaker is left
+    // alone: that one broadcasts on its channel on purpose (e.g. the view
+    // shake, channel 10, which only the ViewShake prefab's shakers answer).
     private void RetargetToOwner()
     {
         if (transform.parent == null)
@@ -61,7 +64,7 @@ public class OnHitEffect : MonoBehaviour, MMEventListener<HitStateEvent>
 
         foreach (var f in feedback.FeedbacksList)
         {
-            if (f is MMF_PositionShake positionShakeFeedback)
+            if (f is MMF_PositionShake positionShakeFeedback && positionShakeFeedback.TargetShaker != null)
             {
                 positionShakeFeedback.TargetShaker = shaker;
             }
