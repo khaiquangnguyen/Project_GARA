@@ -73,6 +73,10 @@ namespace GARA.Characters
         [Header("Palate (enemies)")]
         public PalateProfile palate;
 
+        [Header("HP Heart (enemies)")]
+        [Tooltip("Where this enemy's HP heart sits.")]
+        public Transform hpHeartAnchor;
+
         private void OnValidate()
         {
             palate.SanitizeInPlace(this);

@@ -51,6 +51,10 @@ namespace GARA.Combat
         public bool IsBusy => _isBusy;
         public CombatParticipant Participant => _participant;
 
+        // Once dead, the death state is final: no hit/parry/jump reaction,
+        // idle or reposition may replace it.
+        private bool IsDead => _participant != null && _participant.IsDefeated;
+
         public event Action ActionFinished;
 
         public void Initialize(CombatParticipant participant, IBattleQuery battleQuery)
@@ -69,6 +73,11 @@ namespace GARA.Combat
 
         private void EnterDefaultState()
         {
+            if (IsDead)
+            {
+                return;
+            }
+
             var defaultState = _participant.ResolveLiveState(_participant.definition.defaultState);
             if (defaultState != null)
             {
@@ -225,7 +234,7 @@ namespace GARA.Combat
         // that character's own action.
         public void PlayHitReaction()
         {
-            if (_hitState == null || _isBusy)
+            if (_hitState == null || _isBusy || IsDead)
             {
                 return;
             }
@@ -241,7 +250,7 @@ namespace GARA.Combat
         // Played on every Parry press, hit or miss.
         public void PlayParry()
         {
-            if (_parryState == null || _isBusy)
+            if (_parryState == null || _isBusy || IsDead)
             {
                 return;
             }
@@ -257,7 +266,7 @@ namespace GARA.Combat
         // Played on every Jump press, hit or miss.
         public void PlayJump(JumpSpec spec)
         {
-            if (_jumpState == null || _isBusy)
+            if (_jumpState == null || _isBusy || IsDead)
             {
                 return;
             }
@@ -279,7 +288,7 @@ namespace GARA.Combat
         // always overrides whatever the character was doing.
         public void PlayDeathReaction()
         {
-            if (_deathState == null)
+            if (_deathState == null || _activeState == _deathState)
             {
                 return;
             }
@@ -303,6 +312,11 @@ namespace GARA.Combat
         // sequence including its finisher) is done.
         public void ReturnToStandardPosition()
         {
+            if (IsDead)
+            {
+                return;
+            }
+
             if (_moveBackwardState == null)
             {
                 ReturnToIdle();
@@ -345,6 +359,11 @@ namespace GARA.Combat
 
         private void MoveTo(MoveState moveState, Vector3 destination)
         {
+            if (IsDead)
+            {
+                return;
+            }
+
             if (moveState == null)
             {
                 _participant.SceneTransform.position = destination;

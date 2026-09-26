@@ -11,7 +11,7 @@ namespace GARA.SkillCards.InputSets
     // Chef's RecipeSkillCard) can override BuildPerformance to attach a
     // bespoke Details payload without this class needing to know about it.
     [CreateAssetMenu(menuName = "GARA/Skill Cards/Input Set Skill Card", fileName = "InputSetSkillCard")]
-    public class InputSetSkillCard : SkillCardDefinition
+    public class InputSetSkillCard : TieredSkillCard
     {
         [SerializeField]
         [Expandable]

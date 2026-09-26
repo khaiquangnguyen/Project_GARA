@@ -14,18 +14,13 @@ namespace GARA.Combat
     // cards are repeatable — each gated only by AP+MP affordability and the
     // actor's executor being idle between uses — until the player ends the
     // phase with EndPhase (Backspace). A/D move the card highlight and
-    // UseSkill (Enter) uses the highlighted card; the same public calls (see
+    // UseSkill (Enter) selects the highlighted card; the same public calls (see
     // "Skill card selection" below) are open to any other driver. A
     // card can come from anywhere in the actor's combat loadout
-    // (CombatParticipant.SkillCards), whatever its length. The enemy target
-    // selector is shown continuously for the whole Combat Phase (see
-    // BeginPhaseForCurrentActor) rather than opened per action, and a
-    // special applies its own targeting rule the instant it's chosen:
-    // OneEnemy uses the selector's current target, OneFriendly targets the
-    // first living ally, AllEnemy/AllFriendly hit every living member of
-    // the relevant pool, and Multi*/OneCharacter wait for their targets to
-    // be picked one by one off the selector before firing. Non-player turns go to PerformEnemyTurn (see
-    // .EnemyTurn) — no input is read, nothing is ticked, for them.
+    // (CombatParticipant.SkillCards), whatever its length. Using a card
+    // first selects it and opens its targeting (see "Target picking"); it
+    // only fires once its targets are confirmed. Non-player turns go to
+    // PerformEnemyTurn (see .EnemyTurn) — no input is read for them.
     public partial class CombatSceneManager
     {
         // Raised the instant a stunned (food-coma'd) actor's turn is skipped
@@ -155,6 +150,7 @@ namespace GARA.Combat
             }
 
             ClearTargetPicking();
+            HideTargetDisplays();
             SnapRetreatedBack();
             _phaseActionState = PhaseActionState.Regular;
         }
@@ -166,6 +162,11 @@ namespace GARA.Combat
         private void OnParticipantDefeated(CombatParticipant participant)
         {
             targetSelector.RemoveCandidate(participant);
+            if (IsPickingSkillCardTargets)
+            {
+                RefreshTargetPreview();
+            }
+
             RaiseTurnOrderChanged();
         }
 
@@ -237,13 +238,12 @@ namespace GARA.Combat
         }
 
         // ---- Target picking ----
-        // Using a Multi* or OneCharacter card doesn't fire it straight away:
-        // the phase enters SkillCardTargeting, points the target selector at
-        // the card's pool (enemies, friendlies, or every character), and
-        // waits for RequiredSkillCardTargetCount picks, each taken from the
-        // selector's current target. The card fires the moment the last pick
-        // lands, and the selector goes back to enemies once picking ends.
-        // Resources aren't spent until then, so cancelling costs nothing.
+        // Using a card enters SkillCardTargeting over the card's pool: One/
+        // Multi pick RequiredSkillCardTargetCount times off the selector's
+        // cursor, All selects the whole pool and needs one confirm. The card
+        // fires on the last pick, and resources are only spent then, so
+        // cancelling costs nothing. Target displays (HP hearts, ...) show
+        // only for whoever's currently selected.
 
         public bool IsPickingSkillCardTargets => _phaseActionState == PhaseActionState.SkillCardTargeting;
 
@@ -260,16 +260,24 @@ namespace GARA.Combat
                 return false;
             }
 
-            var target = targetSelector.CurrentTarget;
-            if (!_targetingCard.targetMode.AllowsRepeatTargets() && _pickedTargets.Contains(target))
+            if (_targetingCard.targetMode.IsAll())
             {
-                return false;
+                _pickedTargets.AddRange(targetSelector.Candidates);
+            }
+            else
+            {
+                var target = targetSelector.CurrentTarget;
+                if (!_targetingCard.targetMode.AllowsRepeatTargets() && _pickedTargets.Contains(target))
+                {
+                    return false;
+                }
+
+                _pickedTargets.Add(target);
             }
 
-            _pickedTargets.Add(target);
-            if (_pickedTargets.Count < _requiredTargetCount)
+            if (!_targetingCard.targetMode.IsAll() && _pickedTargets.Count < _requiredTargetCount)
             {
-                SkillCardTargetsChanged?.Invoke(_pickedTargets, _requiredTargetCount);
+                OnPickedTargetsChanged();
                 return true;
             }
 
@@ -288,7 +296,7 @@ namespace GARA.Combat
             }
 
             _pickedTargets.RemoveAt(_pickedTargets.Count - 1);
-            SkillCardTargetsChanged?.Invoke(_pickedTargets, _requiredTargetCount);
+            OnPickedTargetsChanged();
             return true;
         }
 
@@ -311,14 +319,26 @@ namespace GARA.Combat
             _requiredTargetCount = requiredTargetCount;
             _pickedTargets.Clear();
             _phaseActionState = PhaseActionState.SkillCardTargeting;
-            if (card.targetMode.GetPool() != TargetPool.Enemies)
-            {
-                targetSelector.BeginSelection(pool);
-            }
-
+            targetSelector.BeginSelection(pool, card.targetMode.IsAll());
+            RefreshTargetPreview();
             SkillCardTargetsChanged?.Invoke(_pickedTargets, _requiredTargetCount);
         }
 
+        private void OnPickedTargetsChanged()
+        {
+            targetSelector.SetMarked(_pickedTargets.OfType<CombatParticipant>());
+            RefreshTargetPreview();
+            SkillCardTargetsChanged?.Invoke(_pickedTargets, _requiredTargetCount);
+        }
+
+        private void RefreshTargetPreview()
+        {
+            ShowTargetDisplays(targetSelector.Selected);
+        }
+
+        // Discards every targeting visual — the indicators and the preview's
+        // target displays. Runs before a card fires, so only its announced
+        // targets' displays come back (see AnnounceTargetingForSkillCard).
         private void ClearTargetPicking()
         {
             if (_targetingCard == null)
@@ -326,11 +346,8 @@ namespace GARA.Combat
                 return;
             }
 
-            if (_targetingCard.targetMode.GetPool() != TargetPool.Enemies)
-            {
-                targetSelector.BeginSelection(LivingEnemiesOf(_actor));
-            }
-
+            targetSelector.EndSelection();
+            HideTargetDisplays();
             _targetingCard = null;
             _requiredTargetCount = 0;
             _pickedTargets.Clear();
@@ -375,7 +392,7 @@ namespace GARA.Combat
             MoveSkillCardHighlight(1);
         }
 
-        // Enter uses the highlighted card, or confirms a target while picking.
+        // Enter selects the highlighted card, or confirms a target while picking.
         private void OnUseSkill(InputAction.CallbackContext ctx)
         {
             if (IsPickingSkillCardTargets)
@@ -389,22 +406,36 @@ namespace GARA.Combat
 
         private void OnTargetLeft(InputAction.CallbackContext ctx)
         {
-            if (CanAct() || IsPickingSkillCardTargets)
+            if (IsPickingSkillCardTargets)
             {
                 targetSelector.CycleLeft();
+                RefreshTargetPreview();
             }
         }
 
         private void OnTargetRight(InputAction.CallbackContext ctx)
         {
-            if (CanAct() || IsPickingSkillCardTargets)
+            if (IsPickingSkillCardTargets)
             {
                 targetSelector.CycleRight();
+                RefreshTargetPreview();
             }
         }
 
+        // Backspace steps back while picking — undoes the last pick, then
+        // drops the card — and ends the phase otherwise.
         private void OnEndCombatPhase(InputAction.CallbackContext ctx)
         {
+            if (IsPickingSkillCardTargets)
+            {
+                if (!UndoSkillCardTarget())
+                {
+                    CancelSkillCardTargeting();
+                }
+
+                return;
+            }
+
             if (!CanAct())
             {
                 return;
@@ -422,77 +453,33 @@ namespace GARA.Combat
                    && _phaseActionState == PhaseActionState.Regular;
         }
 
-        // Fires the instant it's chosen — applies whatever targeting rule
-        // the card itself declares, with no separate confirmation step.
-        // OneEnemy reads the always-visible selector's current target;
-        // OneFriendly always targets the first living ally (there's no
-        // opportunity to pre-aim a friendly target since nothing keeps the
-        // ally pool on screen ahead of time); All* ignores the selector
-        // entirely and hits every living member of the relevant pool.
-        // Multi* and OneCharacter are the exception: they enter
-        // SkillCardTargeting and only fire once their targets are picked
-        // (see PickSkillCardTarget).
-        // Resources are spent immediately, before the card's input minigame
-        // runs — there's no refund unless the card opts into refundOnAbort
-        // (see OnSkillCardInputCompleted). While a card's minigame/
-        // resolution is in progress (_phaseActionState != Regular), card
-        // selection, target cycling and EndPhase are all ignored — see
-        // CanAct.
+        // Selects the card and opens its targeting (see "Target picking") —
+        // nothing fires or is spent yet. Fails if the card's unaffordable or
+        // its pool is empty. While a card is targeting, mid-minigame or
+        // resolving, card selection and EndPhase are ignored (see CanAct).
         private bool TryUseSkillCard(int index)
         {
-            if (!CanAct())
+            if (!CanAct() || !_actor.TryGetSkillCard(index, out var card))
             {
                 return false;
             }
 
-            if (!_actor.TryGetSkillCard(index, out var card))
+            if (_actor.currentAp < card.apCost || _actor.currentMp < card.mpCost)
             {
                 return false;
             }
 
             var pool = LivingPoolOf(_actor, card.targetMode.GetPool());
-            if (card.targetMode.IsAll())
+            var requiredTargetCount = card.targetMode.IsAll() ? pool.Count
+                : card.targetMode.IsMulti() ? card.targetMode.ResolveMultiTargetCount(card.multiTargetCount, pool.Count)
+                : Mathf.Min(1, pool.Count);
+            if (requiredTargetCount == 0)
             {
-                return pool.Count > 0 && CommitSkillCard(card, pool.Cast<ICombatTarget>().ToArray());
+                return false;
             }
 
-            if (card.targetMode.IsMulti() || card.targetMode == SpecialTargetMode.OneCharacter)
-            {
-                var requiredTargetCount = card.targetMode.IsMulti()
-                    ? card.targetMode.ResolveMultiTargetCount(card.multiTargetCount, pool.Count)
-                    : Mathf.Min(1, pool.Count);
-                if (requiredTargetCount == 0 || _actor.currentAp < card.apCost || _actor.currentMp < card.mpCost)
-                {
-                    return false;
-                }
-
-                BeginTargetPicking(card, pool, requiredTargetCount);
-                return true;
-            }
-
-            IReadOnlyList<ICombatTarget> targets;
-            switch (card.targetMode)
-            {
-                case SpecialTargetMode.OneEnemy:
-                    if (!targetSelector.HasCandidates)
-                    {
-                        return false;
-                    }
-                    targets = new ICombatTarget[] { targetSelector.CurrentTarget };
-                    break;
-                case SpecialTargetMode.OneFriendly:
-                    var allies = LivingAlliesOf(_actor);
-                    if (allies.Count == 0)
-                    {
-                        return false;
-                    }
-                    targets = new ICombatTarget[] { allies[0] };
-                    break;
-                default:
-                    return false;
-            }
-
-            return CommitSkillCard(card, targets);
+            BeginTargetPicking(card, pool, requiredTargetCount);
+            return true;
         }
 
         // Spends the card's cost and starts its input minigame against the
@@ -635,7 +622,6 @@ namespace GARA.Combat
             }
 
             _phaseActive = true;
-            targetSelector.BeginSelection(LivingEnemiesOf(_actor));
             ResetCardHighlight();
         }
 
@@ -689,8 +675,11 @@ namespace GARA.Combat
         // Announces the card's targets as targeted and everyone not involved
         // (neither actor nor target, on either side) as not-targeted.
         // Listeners (see OnNotTargetedEffect) decide what that looks like.
+        // Targets keep their target displays until the card is cleared.
         private void AnnounceTargetingForSkillCard(CombatParticipant actor, IReadOnlyList<ICombatTarget> targets)
         {
+            ShowTargetDisplays(targets.OfType<CombatParticipant>());
+
             foreach (var participant in LivingUninvolvedIn(actor, targets))
             {
                 MMEventManager.TriggerEvent(new TargetedStateEvent(participant.SceneRoot, false));
@@ -704,6 +693,7 @@ namespace GARA.Combat
 
         private void AnnounceTargetingClearedForSkillCard(CombatParticipant actor)
         {
+            HideTargetDisplays();
             foreach (var participant in LivingEnemiesOf(actor).Concat(LivingAlliesOf(actor)))
             {
                 MMEventManager.TriggerEvent(new TargetedStateEvent(participant.SceneRoot, true));

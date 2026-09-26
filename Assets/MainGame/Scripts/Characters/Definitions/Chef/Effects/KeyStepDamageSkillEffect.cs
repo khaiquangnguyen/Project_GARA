@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GARA.Characters.Chef
 {
-    // Damage effect mirroring DamageSkillEffect's attacker/defender stat
+    // Damage effect with attacker/defender stat
     // scaling, but boosted when the recipe's designated "key step" (e.g. the
     // sear, the reduction) came out exquisite, and cut when anything burnt.
     [CreateAssetMenu(menuName = "GARA/Skill Cards/Chef/Effects/Key Step Damage")]

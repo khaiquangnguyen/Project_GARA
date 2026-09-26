@@ -4,30 +4,20 @@ using UnityEngine;
 
 namespace GARA.Rhythm
 {
-    /// <summary>Designer-authored sequence of notes, grouped into bars, judged against an absolute timeline.</summary>
-    [CreateAssetMenu(menuName = "GARA/Rhythm/Rhythm Sequence", fileName = "RhythmSequence")]
+    /// <summary>Runtime-built sequence of notes, grouped into bars, judged against an absolute timeline. Authored as a card's bars (see RhythmSkillCard).</summary>
     public class RhythmSequenceDefinition : ScriptableObject
     {
-        [SerializeField]
-        private float leadIn = 1f;
+        private float _leadIn;
+        private float _tailOut;
+        private RhythmTimingWindows _windows;
+        private RhythmBar[] _bars = Array.Empty<RhythmBar>();
+        private RhythmNote[] _flatNotes;
+        private int[] _barOfNote;
 
-        [SerializeField]
-        private float tailOut = 0.25f;
-
-        [SerializeField]
-        private RhythmTimingWindows windows;
-
-        [Tooltip("Note times are absolute (seconds after the lead-in), not relative to their bar.")]
-        [SerializeField]
-        private RhythmBar[] bars = Array.Empty<RhythmBar>();
-
-        [NonSerialized] private RhythmNote[] _flatNotes;
-        [NonSerialized] private int[] _barOfNote;
-
-        public float LeadIn => leadIn;
-        public float TailOut => tailOut;
-        public RhythmTimingWindows Windows => windows;
-        public IReadOnlyList<RhythmBar> Bars => bars;
+        public float LeadIn => _leadIn;
+        public float TailOut => _tailOut;
+        public RhythmTimingWindows Windows => _windows;
+        public IReadOnlyList<RhythmBar> Bars => _bars;
 
         /// <summary>Every bar's notes flattened and sorted by time — what the runner judges.</summary>
         public IReadOnlyList<RhythmNote> Notes
@@ -50,10 +40,10 @@ namespace GARA.Rhythm
         public static RhythmSequenceDefinition CreateRuntime(float leadIn, float tailOut, RhythmTimingWindows windows, RhythmNote[] notes)
         {
             var definition = CreateInstance<RhythmSequenceDefinition>();
-            definition.leadIn = leadIn;
-            definition.tailOut = tailOut;
-            definition.windows = windows;
-            definition.bars = Array.ConvertAll(notes, note => new RhythmBar { notes = new[] { note } });
+            definition._leadIn = leadIn;
+            definition._tailOut = tailOut;
+            definition._windows = windows;
+            definition._bars = Array.ConvertAll(notes, note => new RhythmBar { notes = new[] { note } });
             return definition;
         }
 
@@ -61,10 +51,10 @@ namespace GARA.Rhythm
         public static RhythmSequenceDefinition CreateRuntime(RhythmSequenceTiming timing, RhythmBar[] bars)
         {
             var definition = CreateInstance<RhythmSequenceDefinition>();
-            definition.leadIn = timing.leadIn;
-            definition.tailOut = timing.tailOut;
-            definition.windows = timing.windows;
-            definition.bars = bars ?? Array.Empty<RhythmBar>();
+            definition._leadIn = timing.leadIn;
+            definition._tailOut = timing.tailOut;
+            definition._windows = timing.windows;
+            definition._bars = bars ?? Array.Empty<RhythmBar>();
             return definition;
         }
 
@@ -83,7 +73,7 @@ namespace GARA.Rhythm
                     }
                 }
 
-                return leadIn + maxNoteEnd + windows.ok + tailOut;
+                return _leadIn + maxNoteEnd + _windows.ok + _tailOut;
             }
         }
 
@@ -95,9 +85,9 @@ namespace GARA.Rhythm
             }
 
             var entries = new List<(RhythmNote note, int bar)>();
-            for (var b = 0; b < bars.Length; b++)
+            for (var b = 0; b < _bars.Length; b++)
             {
-                foreach (var note in bars[b].notes ?? Array.Empty<RhythmNote>())
+                foreach (var note in _bars[b].notes ?? Array.Empty<RhythmNote>())
                 {
                     entries.Add((note, b));
                 }
@@ -106,46 +96,6 @@ namespace GARA.Rhythm
             entries.Sort((x, y) => x.note.time.CompareTo(y.note.time));
             _flatNotes = entries.ConvertAll(e => e.note).ToArray();
             _barOfNote = entries.ConvertAll(e => e.bar).ToArray();
-        }
-
-        private void OnValidate()
-        {
-            for (var b = 0; b < bars.Length; b++)
-            {
-                var notes = bars[b].notes ?? Array.Empty<RhythmNote>();
-                for (var i = 0; i < notes.Length; i++)
-                {
-                    notes[i].time = Mathf.Max(0f, notes[i].time);
-                    notes[i].holdDuration = Mathf.Max(0f, notes[i].holdDuration);
-                }
-
-                Array.Sort(notes, (x, y) => x.time.CompareTo(y.time));
-                bars[b].notes = notes;
-            }
-
-            _flatNotes = null;
-            _barOfNote = null;
-            WarnOverlappingNotes();
-        }
-
-        private void WarnOverlappingNotes()
-        {
-            var notes = Notes;
-            for (var i = 0; i < notes.Count; i++)
-            {
-                for (var j = i + 1; j < notes.Count; j++)
-                {
-                    if (!(notes[i].input == notes[j].input))
-                    {
-                        continue;
-                    }
-
-                    if (Mathf.Abs(notes[i].time - notes[j].time) < windows.ok * 2f)
-                    {
-                        Debug.LogWarning($"[{name}] RhythmSequenceDefinition: notes {i} and {j} share an input token and have overlapping timing windows.", this);
-                    }
-                }
-            }
         }
     }
 }

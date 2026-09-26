@@ -5,7 +5,7 @@ namespace GARA.Characters
 {
     // Base type for anything a character can be doing: an attack, a jump, a
     // dodge, a defend, etc. Declared here (not in GARA.Combat) so
-    // SpecialAttackEntry can reference it without GARA.Characters depending
+    // CharacterDefinition can reference it without GARA.Characters depending
     // on GARA.Combat — concrete states live in GARA.Combat and are free to
     // use real combat types.
     //
@@ -15,10 +15,6 @@ namespace GARA.Characters
     // type may live under the character prefab's root.
     public abstract class CharacterState : MonoBehaviour
     {
-        [SerializeField] private ActionPositionMode positionMode;
-
-        public ActionPositionMode PositionMode => positionMode;
-
         // The skill card that plays this state, if any.
         public virtual SkillCardDefinition SkillCard => null;
 

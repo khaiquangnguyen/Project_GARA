@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2782403544164783946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1267899089328944600}
+  m_Layer: 0
+  m_Name: HpHeartAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1267899089328944600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2782403544164783946}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.565151, y: 2.0495815, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3445767280558310761}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2888275803312621527
 GameObject:
   m_ObjectHideFlags: 0
@@ -49,7 +80,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85d6664bbb164fca918db3485159ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.IdleState
-  positionMode: 0
   skeletonRendererRef: {fileID: 3134209029974725100}
   animationName: idle
   loop: 1
@@ -65,7 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d58d8ed5a7e74d6298eeacacb042dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.HitState
-  positionMode: 0
   skeletonRendererRef: {fileID: 3134209029974725100}
   animationName: hit
   loop: 0
@@ -81,7 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c899a15e2636c4b419aec0d14b9a05d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DeathState
-  positionMode: 0
   skeletonRendererRef: {fileID: 3134209029974725100}
   animationName: death
   loop: 0
@@ -97,7 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9bfa519cdd445478557afa1577b87c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.FrozenTomatoAttack1State
-  positionMode: 0
   skillCard: {fileID: 11400000, guid: 0b7dcb76865e4dc0a725937d4df028fa, type: 2}
 --- !u!114 &7495025016596399778
 MonoBehaviour:
@@ -111,7 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a4724b3f27e48b08f2ee9bc46b00b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.FrozenTomatoAttack2State
-  positionMode: 0
   skillCard: {fileID: 11400000, guid: 1cb1c71c1e55487d844023c22b21b3a5, type: 2}
 --- !u!114 &8192445616348435663
 MonoBehaviour:
@@ -125,7 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e2a2d5fdb7a4a2d9122739d57b36b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.FrozenTomatoComboState
-  positionMode: 0
   skillCard: {fileID: 11400000, guid: a91d76bc9e4f42bdb5c609ecc7c8264b, type: 2}
 --- !u!1 &3662008488019087220
 GameObject:
@@ -163,6 +188,7 @@ Transform:
   m_Children:
   - {fileID: 7271493244571812737}
   - {fileID: 4839247598297356633}
+  - {fileID: 1267899089328944600}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4011238170706008863
@@ -193,6 +219,12 @@ MonoBehaviour:
   allowedEquipmentSlots: 
   defaultState: {fileID: 8427294588567716401}
   maxCombatSkillCards: 4
+  passives: []
+  palate:
+    canBeFed: 0
+    favoriteFlavors: 0
+    fullnessCapacity: 0
+  hpHeartAnchor: {fileID: 1267899089328944600}
 --- !u!114 &1118167080659379036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.AttackExecutor
   stateMachine: {fileID: 1118167080659379036}
   timeBetweenMoveAndAction: 0.2
+  deathDisappearDelay: 0.5
 --- !u!114 &3639539694035085640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84dc4729cd36e43e2ab38845456b4cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MoveForwardState
-  positionMode: 2
   duration: 0.25
   curveX:
     serializedVersion: 2
@@ -306,7 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66e41026b2e141918c39b8839799063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MoveBackwardState
-  positionMode: 2
   duration: 0.25
   curveX:
     serializedVersion: 2

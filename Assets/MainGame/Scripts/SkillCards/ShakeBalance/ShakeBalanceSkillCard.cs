@@ -10,7 +10,7 @@ namespace GARA.SkillCards.ShakeBalance
     // Lives outside GARA.Characters so that assembly never has to depend on
     // GARA.ShakeBalance directly.
     [CreateAssetMenu(menuName = "GARA/Skill Cards/Shake Balance Skill Card", fileName = "ShakeBalanceSkillCard")]
-    public class ShakeBalanceSkillCard : SkillCardDefinition
+    public class ShakeBalanceSkillCard : TieredSkillCard
     {
         [SerializeField]
         [Expandable]

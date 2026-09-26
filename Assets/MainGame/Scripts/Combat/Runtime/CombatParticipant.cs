@@ -76,6 +76,9 @@ namespace GARA.Combat
         // itself.
         public static event Action<CombatParticipant> Defeated;
 
+        // Raised after every change to currentHp, so HP displays can follow.
+        public static event Action<CombatParticipant> HpChanged;
+
         public static CombatParticipant FromManagedCharacter(ManagedCharacter character, CharacterDefinition definition, FactionTag faction)
         {
             // Snapshot: out-of-battle modifiers are baked into the baseline at
@@ -183,9 +186,15 @@ namespace GARA.Combat
         }
 
         // A hit inside a parry or jump window is negated (parry wins if both
-        // are open).
+        // are open). A hit on an already-defeated character is ignored
+        // outright — no parry/jump success, no hit effect or reaction.
         public void ApplyDamage(int amount)
         {
+            if (IsDefeated)
+            {
+                return;
+            }
+
             if (IsParrying)
             {
                 MMEventManager.TriggerEvent(new ParrySuccessStateEvent(SceneRoot));
@@ -233,20 +242,24 @@ namespace GARA.Combat
         // which shapes the amount through ModifyIncomingDamage first) and a
         // status's own per-turn tick damage (ApplyStatusTickDamage, which
         // must NOT be re-shaped by the very status inflicting it).
+        // Already-defeated characters take no further damage, so the death
+        // reaction and Defeated fire exactly once, on the killing blow.
         private void ApplyDamageCore(int amount)
         {
-            var wasDefeated = IsDefeated;
+            if (IsDefeated)
+            {
+                return;
+            }
+
             currentHp = Mathf.Max(0, currentHp - amount);
+            HpChanged?.Invoke(this);
             MMEventManager.TriggerEvent(new HitStateEvent(SceneRoot));
 
             var executor = SceneRoot.GetComponent<AttackExecutor>();
             if (IsDefeated)
             {
                 executor?.PlayDeathReaction();
-                if (!wasDefeated)
-                {
-                    Defeated?.Invoke(this);
-                }
+                Defeated?.Invoke(this);
             }
             else
             {
@@ -468,9 +481,8 @@ namespace GARA.Combat
         }
 
         // Notifies every passive on this participant that a skill card has
-        // finished resolving (its effects have run). Called once from
-        // CombatSceneManager.OnSkillCardInputCompleted, after the card's
-        // own effects resolve.
+        // finished resolving (its effects have run) — once per card, from
+        // either the one-shot or the live skill-card path.
         public void NotifySkillCardResolved(IBattleQuery battle, SkillCardDefinition card, IReadOnlyList<ICombatTarget> targets, SkillPerformance performance)
         {
             Passives.NotifySkillCardResolved(new PassiveContext(battle, this, card, targets, performance));

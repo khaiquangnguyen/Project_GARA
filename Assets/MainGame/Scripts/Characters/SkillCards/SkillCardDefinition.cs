@@ -42,9 +42,7 @@ namespace GARA.Characters
         [Tooltip("MoveInFrontOfEnemy stands at animationSpec's range; StayAtOriginalPosition returns to the actor's own spot first. On a live card this covers its bars; the finale uses finalePositionMode.")]
         public ActionPositionMode positionMode;
 
-        [HideIf(nameof(HasSharedTiering))]
-        public SkillPerformanceTiering tiering = SkillPerformanceTiering.Default;
-
+        [ShowIf(nameof(HasCardEffects))]
         [Expandable]
         public SkillEffectDefinition[] effects = Array.Empty<SkillEffectDefinition>();
 
@@ -67,29 +65,28 @@ namespace GARA.Characters
 
         [Tooltip("Resolved by a live card's perfect finale instead of effects.")]
         [BoxGroup(FinaleGroup)]
+        [ShowIf(nameof(HasPerfectEffects))]
         [Expandable]
         public SkillEffectDefinition[] perfectEffects = Array.Empty<SkillEffectDefinition>();
 
-        private const string FinaleGroup = "Finale";
+        protected const string FinaleGroup = "Finale";
 
         public virtual ISkillInputSession CreateInputSession(ISkillInputHost host)
         {
-            return new InstantSkillInputSession(new SkillPerformance(1f, TierFor(1f), false, null));
+            return new InstantSkillInputSession(new SkillPerformance(1f, SkillPerformanceTier.Perfect, false, null));
         }
 
         // True when the card plays moves as its input runs and ends on a
         // finale (an ILiveSkillInputSession); shows finalePositionMode.
         protected virtual bool IsLive => false;
 
-        // True when a subclass takes its tiering from elsewhere (hides the field).
-        protected virtual bool HasSharedTiering => false;
+        // False when a subclass resolves effects authored elsewhere (e.g. per
+        // rhythm bar); hides effects.
+        protected virtual bool HasCardEffects => true;
 
-        protected virtual SkillPerformanceTiering Tiering => tiering;
-
-        public SkillPerformanceTier TierFor(float score)
-        {
-            return Tiering.Evaluate(score);
-        }
+        // False when a subclass authors its own finale effects; hides
+        // perfectEffects.
+        protected virtual bool HasPerfectEffects => true;
 
         // Completes the moment it begins.
         private class InstantSkillInputSession : ISkillInputSession

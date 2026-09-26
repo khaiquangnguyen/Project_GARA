@@ -21,18 +21,12 @@ MonoBehaviour:
   apCost: 0
   mpCost: 0
   positionMode: 1
-  tiering:
-    okThreshold: 0.35
-    goodThreshold: 0.65
-    perfectThreshold: 0.9
-  effects:
-  - {fileID: 11400000, guid: b7dd7679c54d94f3d9a348f97cd209d0, type: 2}
+  effects: []
   refundOnAbort: 0
   endDelay: 0.5
   animationSpec: {fileID: 11400000, guid: 85297e99d8c440d28df6a8d007800912, type: 2}
   finalePositionMode: 0
-  perfectEffects:
-  - {fileID: 11400000, guid: 6b0033345b51d4bfb9805701253e477b, type: 2}
+  perfectEffects: []
   bars:
   - notes:
     - input:
@@ -41,6 +35,8 @@ MonoBehaviour:
       time: 0
       holdDuration: 0
     move: {fileID: 11400000, guid: d75deaed033a4abd89d12309d6b360a9, type: 2}
+    effects:
+    - rid: 609404912810066076
   - notes:
     - input:
         id: 4
@@ -48,6 +44,8 @@ MonoBehaviour:
       time: 0.5
       holdDuration: 0
     move: {fileID: 11400000, guid: 402e8de2e7304f1cb28bf344911be6e0, type: 2}
+    effects:
+    - rid: 609404912810066077
   - notes:
     - input:
         id: 2
@@ -55,6 +53,8 @@ MonoBehaviour:
       time: 1
       holdDuration: 0
     move: {fileID: 11400000, guid: d75deaed033a4abd89d12309d6b360a9, type: 2}
+    effects:
+    - rid: 609404912810066078
   - notes:
     - input:
         id: 4
@@ -62,6 +62,30 @@ MonoBehaviour:
       time: 1.5
       holdDuration: 0
     move: {fileID: 11400000, guid: 402e8de2e7304f1cb28bf344911be6e0, type: 2}
-  scoreSource: 0
-  completionGate: 0.5
-  strayPressPenalty: 0.02
+    effects:
+    - rid: 609404912810066079
+  finaleEffects:
+  - rid: 609404912810066080
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404912810066076
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404912810066077
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404912810066078
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404912810066079
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404912810066080
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10

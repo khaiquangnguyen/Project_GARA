@@ -8,10 +8,9 @@ namespace GARA.Combat
 {
     // Live skill cards (ILiveSkillInputSession): the actor dashes in to the
     // opening move's range before the minigame, then plays each step's
-    // attack on the card's own state as the session emits it. Bar steps play
-    // at the card's positionMode and resolve its effects at their share; the
-    // finale plays animationSpec at finalePositionMode, resolves
-    // perfectEffects and drops the spec's announcement onto each target so
+    // attack on the card's own state as the session emits it, resolving the
+    // step's effects on its hit. Bar steps play at the card's positionMode;
+    // the finale plays animationSpec at finalePositionMode and drops the spec's announcement onto each target so
     // it lands on the finale's hit frame. Each hit plays its spec's
     // feedback prefab on the actor.
     public partial class CombatSceneManager
@@ -51,7 +50,6 @@ namespace GARA.Combat
             void OnStep(SkillStep step)
             {
                 stepsLanded++;
-                var effects = step.isFinale ? card.perfectEffects : card.effects;
                 List<PerfectAnnouncementDropEffect> drops = null;
                 var positionMode = step.isFinale ? card.finalePositionMode : card.positionMode;
                 executor.PlayAction(state, targets, positionMode, spec: step.animation, beforeAttack: BeforeAttack, onImpact: () =>
@@ -70,11 +68,16 @@ namespace GARA.Combat
                         }
                     }
 
-                    foreach (var effect in effects)
+                    if (step.effects == null)
+                    {
+                        return;
+                    }
+
+                    foreach (var effect in step.effects)
                     {
                         if (effect != null)
                         {
-                            effect.Resolve(new SkillEffectContext(battleQuery, actor, targets, step.performance, step.share));
+                            effect.ApplyEffect(new SkillEffectContext(battleQuery, actor, targets, step.performance));
                         }
                     }
                 });

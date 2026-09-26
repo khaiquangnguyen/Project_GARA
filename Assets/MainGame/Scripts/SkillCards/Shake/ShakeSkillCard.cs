@@ -9,7 +9,7 @@ namespace GARA.SkillCards.Shake
     // alternating-press session. Lives outside GARA.Characters so that
     // assembly never has to depend on GARA.Shake directly.
     [CreateAssetMenu(menuName = "GARA/Skill Cards/Shake Skill Card", fileName = "ShakeSkillCard")]
-    public class ShakeSkillCard : SkillCardDefinition
+    public class ShakeSkillCard : TieredSkillCard
     {
         [SerializeField]
         [Expandable]

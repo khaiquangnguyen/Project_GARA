@@ -4,38 +4,46 @@ using UnityEngine;
 
 namespace GARA.Combat
 {
-    // Owns the "which participant is currently selected" cursor and the
-    // placeholder indicator GameObject rendered at that participant's feet.
-    // Selection is transient — opened once a single-target basic attack or
-    // special is chosen, closed the instant it's confirmed or the player
-    // switches to a different action — not something that spans a whole
-    // Combat Phase. Candidates can be enemies or allies depending on what
-    // was chosen; this class doesn't care which, it just cycles whatever
-    // list it was given.
+    // Owns the target cursor and the placeholder indicators rendered at the
+    // feet of whoever's selected. Opened once a skill card is chosen and
+    // closed the instant it fires or is cancelled. Candidates can be enemies
+    // or allies; this class just cycles whatever list it was given.
     public class TargetSelector : MonoBehaviour
     {
         [SerializeField] private GameObject targetIndicatorPrefab;
 
-        private GameObject _indicatorInstance;
+        private readonly List<GameObject> _indicators = new();
         private readonly List<CombatParticipant> _candidates = new();
+        private readonly List<CombatParticipant> _marked = new();
         private int _currentIndex;
+        private bool _selectsAll;
 
         public CombatParticipant CurrentTarget => _candidates.Count > 0 ? _candidates[_currentIndex] : null;
         public bool HasCandidates => _candidates.Count > 0;
+        public IReadOnlyList<CombatParticipant> Candidates => _candidates;
 
-        public void BeginSelection(IEnumerable<CombatParticipant> candidates)
+        // Everyone an indicator is on: the cursor (or the whole pool when
+        // selecting all) plus any marked picks.
+        public IEnumerable<CombatParticipant> Selected
+        {
+            get
+            {
+                var cursor = _selectsAll || _candidates.Count == 0
+                    ? _candidates
+                    : new List<CombatParticipant> { CurrentTarget };
+                return _marked.Concat(cursor).Distinct();
+            }
+        }
+
+        // selectAll puts an indicator on every candidate and disables cycling.
+        public void BeginSelection(IEnumerable<CombatParticipant> candidates, bool selectAll = false)
         {
             _candidates.Clear();
             _candidates.AddRange(candidates.Where(c => !c.IsDefeated));
+            _marked.Clear();
             _currentIndex = 0;
-
-            if (_candidates.Count == 0)
-            {
-                HideIndicator();
-                return;
-            }
-
-            ShowAt(CurrentTarget);
+            _selectsAll = selectAll;
+            RefreshIndicators();
         }
 
         public void CycleLeft() => Cycle(-1);
@@ -44,73 +52,68 @@ namespace GARA.Combat
 
         private void Cycle(int direction)
         {
-            if (_candidates.Count == 0)
+            if (_candidates.Count == 0 || _selectsAll)
             {
                 return;
             }
 
             _currentIndex = (_currentIndex + direction + _candidates.Count) % _candidates.Count;
-            ShowAt(CurrentTarget);
+            RefreshIndicators();
+        }
+
+        // Already-picked targets that keep an indicator while the cursor moves on.
+        public void SetMarked(IEnumerable<CombatParticipant> marked)
+        {
+            _marked.Clear();
+            _marked.AddRange(marked);
+            RefreshIndicators();
         }
 
         public void EndSelection()
         {
-            HideIndicator();
             _candidates.Clear();
+            _marked.Clear();
+            _selectsAll = false;
+            RefreshIndicators();
         }
 
-        // Drops a candidate that's no longer selectable (defeated mid-
-        // selection, e.g. killed by an earlier swing in the same chain) —
-        // a no-op if it isn't currently in the pool. Keeps the cursor on
-        // whichever candidate it was pointing at when possible, only
-        // shifting it back if that would run past the end of the list.
+        // Drops a candidate that's no longer selectable (defeated) — a no-op
+        // if it isn't in the pool. Keeps the cursor on its target if possible.
         public void RemoveCandidate(CombatParticipant participant)
         {
+            _marked.Remove(participant);
             var index = _candidates.IndexOf(participant);
             if (index < 0)
             {
+                RefreshIndicators();
                 return;
             }
 
             _candidates.RemoveAt(index);
-
-            if (_candidates.Count == 0)
+            if (index < _currentIndex || _currentIndex >= _candidates.Count)
             {
-                _currentIndex = 0;
-                HideIndicator();
-                return;
+                _currentIndex = Mathf.Max(0, _currentIndex - 1);
             }
 
-            if (_currentIndex >= _candidates.Count)
-            {
-                _currentIndex = _candidates.Count - 1;
-            }
-
-            ShowAt(CurrentTarget);
+            RefreshIndicators();
         }
 
-        private void ShowAt(CombatParticipant target)
+        private void RefreshIndicators()
         {
-            if (target == null)
+            var selected = Selected.Where(target => target != null).ToList();
+            while (_indicators.Count < selected.Count)
             {
-                HideIndicator();
-                return;
+                _indicators.Add(Instantiate(targetIndicatorPrefab));
             }
 
-            if (_indicatorInstance == null)
+            for (var i = 0; i < _indicators.Count; i++)
             {
-                _indicatorInstance = Instantiate(targetIndicatorPrefab);
-            }
-
-            _indicatorInstance.SetActive(true);
-            _indicatorInstance.transform.position = target.SceneTransform.position;
-        }
-
-        private void HideIndicator()
-        {
-            if (_indicatorInstance != null)
-            {
-                _indicatorInstance.SetActive(false);
+                var show = i < selected.Count;
+                _indicators[i].SetActive(show);
+                if (show)
+                {
+                    _indicators[i].transform.position = selected[i].SceneTransform.position;
+                }
             }
         }
     }

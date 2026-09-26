@@ -1,16 +1,18 @@
 using System;
+using System.Collections.Generic;
 using GARA.Characters;
 using GARA.Rhythm;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace GARA.SkillCards.Rhythm
 {
     // A skill card whose input minigame is a rhythm sequence, played through
-    // the host's RhythmSequencePlayer driver. The card authors only its bars
-    // (notes, plus the move each plays when cleared); lead-in, tail-out and
-    // judging windows come from the character using it (TimingFor), and each
-    // use builds a fresh runtime sequence. A card with any bar move is live.
-    // The finale is the card's animationSpec.
+    // the host's RhythmSequencePlayer driver. The card authors its bars
+    // (notes, plus the move and effects each plays when cleared); lead-in,
+    // tail-out, judging windows and tiering come from the character using
+    // it (TimingFor, TieringFor). Always live; the finale is the card's
+    // animationSpec and finaleEffects, gated on the whole run.
     public abstract class RhythmSkillCard : SkillCardDefinition
     {
         // Drawn by RhythmSkillCardEditor as a flat timeline instead.
@@ -18,41 +20,24 @@ namespace GARA.SkillCards.Rhythm
         [SerializeField]
         private RhythmCardBar[] bars = Array.Empty<RhythmCardBar>();
 
-        [SerializeField]
-        private RhythmScoreSource scoreSource = RhythmScoreSource.Accuracy;
-
-        [SerializeField, Range(0, 1)]
-        private float completionGate = 0.5f;
-
-        [SerializeField, Range(0, 1)]
-        private float strayPressPenalty = 0.02f;
+        [Tooltip("Gated on the whole run; the triggered ones apply on the finale's hit. None triggered = no finale.")]
+        [BoxGroup(FinaleGroup)]
+        [SerializeReference]
+        [SubclassPicker]
+        public RhythmStepEffect[] finaleEffects = Array.Empty<RhythmStepEffect>();
 
         [NonSerialized]
         private RhythmSequenceDefinition _sequence;
 
         // The sequence of the current (or last) use.
         public RhythmSequenceDefinition Sequence => _sequence;
-        public RhythmScoreSource ScoreSource => scoreSource;
-        public float CompletionGate => completionGate;
-        public float StrayPressPenalty => strayPressPenalty;
+        public IReadOnlyList<RhythmCardBar> Bars => bars;
 
-        public bool HasMoves
-        {
-            get
-            {
-                foreach (var bar in bars)
-                {
-                    if (bar.move != null)
-                    {
-                        return true;
-                    }
-                }
+        protected override bool IsLive => true;
 
-                return false;
-            }
-        }
+        protected override bool HasCardEffects => false;
 
-        protected override bool IsLive => HasMoves;
+        protected override bool HasPerfectEffects => false;
 
         // The move of the earliest-played bar that has one.
         public AttackAnimationSpec OpeningMove
@@ -82,13 +67,9 @@ namespace GARA.SkillCards.Rhythm
             }
         }
 
-        public bool TryGetMove(int barIndex, out AttackAnimationSpec move)
-        {
-            move = barIndex >= 0 && barIndex < bars.Length ? bars[barIndex].move : null;
-            return move != null;
-        }
-
         protected abstract RhythmSequenceTiming TimingFor(CharacterDefinition actor);
+
+        protected abstract SkillPerformanceTiering TieringFor(CharacterDefinition actor);
 
         public override ISkillInputSession CreateInputSession(ISkillInputHost host)
         {
@@ -100,9 +81,7 @@ namespace GARA.SkillCards.Rhythm
             var sequenceBars = Array.ConvertAll(bars, bar => new RhythmBar { notes = bar.notes ?? Array.Empty<RhythmNote>() });
             _sequence = RhythmSequenceDefinition.CreateRuntime(TimingFor(host.Actor), sequenceBars);
             var player = host.GetDriver<RhythmSequencePlayer>();
-            return HasMoves
-                ? new RhythmLiveSkillInputSession(player, this)
-                : new RhythmSkillInputSession(player, this);
+            return new RhythmLiveSkillInputSession(player, this, TieringFor(host.Actor));
         }
 
         protected virtual void OnValidate()
@@ -110,6 +89,19 @@ namespace GARA.SkillCards.Rhythm
             if (bars.Length == 0)
             {
                 Debug.LogWarning($"{name}: RhythmSkillCard has no bars.", this);
+            }
+
+            for (var b = 0; b < bars.Length; b++)
+            {
+                var hasEffects = bars[b].effects != null && bars[b].effects.Length > 0;
+                if (bars[b].move == null && hasEffects)
+                {
+                    Debug.LogWarning($"{name}: bar {b + 1} has effects but no move — they never resolve.", this);
+                }
+                else if (bars[b].move != null && !hasEffects)
+                {
+                    Debug.LogWarning($"{name}: bar {b + 1} has a move but no effects — it never plays.", this);
+                }
             }
         }
     }

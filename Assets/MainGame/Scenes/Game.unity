@@ -4938,6 +4938,7 @@ MonoBehaviour:
   enemyHitEffectTemplate: {fileID: 4724413725210982919, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyParrySuccessEffectTemplate: {fileID: 5950136697058328324, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyJumpSuccessEffectTemplate: {fileID: 8467334021156729000, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
+  enemyHpHeartPrefab: {fileID: 4787717028545996810, guid: 71d8fbdc5752443519c2a92adff2b318, type: 3}
   rhythmVisualDriver: {fileID: 719048227}
   inputSetVisualDriver: {fileID: 2073647041}
   shakeBalanceVisualDriver: {fileID: 1270247268}

@@ -5,29 +5,29 @@ using GARA.Rhythm;
 
 namespace GARA.SkillCards.Rhythm
 {
-    // Rhythm session for a card whose bars have moves: each bar
-    // whose notes are all hit emits its move as a step the moment its last
-    // note is judged; a run with no missed note ends with the finale step
-    // (the state's own clip).
+    // Each bar emits its move as a step the moment its last note is judged,
+    // if any of its effects' gates pass on its notes; the finale (the
+    // state's own clip) likewise if any finale effect's gate passes on the
+    // whole run. Only the triggered effects go with the step.
     internal sealed class RhythmLiveSkillInputSession : ILiveSkillInputSession
     {
         private readonly RhythmSequencePlayer _player;
         private readonly RhythmSkillCard _card;
+        private readonly SkillPerformanceTiering _tiering;
 
         private RhythmSequenceRunner _runner;
         private int[] _judgedCount;
-        private bool[] _allHit;
-        private float[] _scoreSum;
         private List<RhythmNoteResult>[] _barResults;
 
         public event Action<SkillStep> StepPerformed;
 
         public AttackAnimationSpec OpeningMove => _card.OpeningMove;
 
-        public RhythmLiveSkillInputSession(RhythmSequencePlayer player, RhythmSkillCard card)
+        public RhythmLiveSkillInputSession(RhythmSequencePlayer player, RhythmSkillCard card, SkillPerformanceTiering tiering)
         {
             _player = player;
             _card = card;
+            _tiering = tiering;
         }
 
         public void Begin(Action<SkillPerformance> onCompleted)
@@ -40,12 +40,9 @@ namespace GARA.SkillCards.Rhythm
 
             var barCount = _card.Sequence.Bars.Count;
             _judgedCount = new int[barCount];
-            _allHit = new bool[barCount];
-            _scoreSum = new float[barCount];
             _barResults = new List<RhythmNoteResult>[barCount];
             for (var b = 0; b < barCount; b++)
             {
-                _allHit[b] = true;
                 _barResults[b] = new List<RhythmNoteResult>();
             }
 
@@ -66,26 +63,25 @@ namespace GARA.SkillCards.Rhythm
         {
             var sequence = _card.Sequence;
             var barIndex = sequence.BarOfNote(result.NoteIndex);
-            var bar = sequence.Bars[barIndex];
+            var bar = _card.Bars[barIndex];
 
             _judgedCount[barIndex]++;
-            _allHit[barIndex] &= result.IsHit;
-            _scoreSum[barIndex] += ScoreOf(result.Judgement);
             _barResults[barIndex].Add(result);
 
-            if (_judgedCount[barIndex] < bar.notes.Length || !_allHit[barIndex])
+            if (_judgedCount[barIndex] < sequence.Bars[barIndex].notes.Length || bar.move == null)
             {
                 return;
             }
 
-            if (!_card.TryGetMove(barIndex, out var move))
+            // Scored like a whole run, over this bar's notes only.
+            var barReport = new RhythmCompletionReport(_barResults[barIndex], 0, false);
+            var triggered = Triggered(bar.effects, barReport);
+            if (triggered == null)
             {
                 return;
             }
 
-            var score = _scoreSum[barIndex] / bar.notes.Length;
-            var performance = new SkillPerformance(score, _card.TierFor(score), false, _barResults[barIndex]);
-            StepPerformed?.Invoke(new SkillStep(move, performance, 1f / sequence.Bars.Count, false));
+            StepPerformed?.Invoke(new SkillStep(bar.move, RhythmPerformanceMapper.Map(barReport, _tiering), triggered, false));
         }
 
         private void Complete(RhythmCompletionReport report, Action<SkillPerformance> onCompleted)
@@ -96,32 +92,37 @@ namespace GARA.SkillCards.Rhythm
                 _runner = null;
             }
 
-            var performance = RhythmPerformanceMapper.Map(report, _card);
-            // Perfect execution is hit/miss: any Perfect, Good or Ok counts.
-            var isPerfect = !report.WasAborted && report.TotalNotes > 0 && report.MissCount == 0;
+            var performance = RhythmPerformanceMapper.Map(report, _tiering);
+            var triggered = report.WasAborted ? null : Triggered(_card.finaleEffects, report);
             UnityEngine.Debug.Log($"[{nameof(RhythmLiveSkillInputSession)}] {_card.name}: {report.HitNotes}/{report.TotalNotes} hit " +
-                                  $"(P={report.PerfectCount} G={report.GoodCount} O={report.OkCount}) — {(isPerfect ? "finale" : "no finale")}");
-            if (isPerfect)
+                                  $"(P={report.PerfectCount} G={report.GoodCount} O={report.OkCount}) — {(triggered != null ? "finale" : "no finale")}");
+            if (triggered != null)
             {
-                StepPerformed?.Invoke(new SkillStep(null, performance, 1f, true));
+                StepPerformed?.Invoke(new SkillStep(null, performance, triggered, true));
             }
 
             onCompleted(performance);
         }
 
-        private static float ScoreOf(RhythmJudgement judgement)
+        // The effects whose gates pass on report; null when none do.
+        private static List<ISkillEffect> Triggered(RhythmStepEffect[] effects, RhythmCompletionReport report)
         {
-            switch (judgement)
+            if (effects == null)
             {
-                case RhythmJudgement.Perfect:
-                    return 1f;
-                case RhythmJudgement.Good:
-                    return 0.75f;
-                case RhythmJudgement.Ok:
-                    return 0.5f;
-                default:
-                    return 0f;
+                return null;
             }
+
+            List<ISkillEffect> triggered = null;
+            foreach (var effect in effects)
+            {
+                if (effect != null && effect.IsTriggered(report))
+                {
+                    triggered ??= new List<ISkillEffect>();
+                    triggered.Add(effect);
+                }
+            }
+
+            return triggered;
         }
     }
 }

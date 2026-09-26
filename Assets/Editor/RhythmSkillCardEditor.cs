@@ -4,6 +4,7 @@ using GARA.Characters;
 using GARA.Input;
 using GARA.Rhythm;
 using GARA.SkillCards.Rhythm;
+using NaughtyAttributes;
 using NaughtyAttributes.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -11,8 +12,9 @@ using UnityEngine;
 namespace GARA.EditorTools
 {
     // Draws a rhythm card's bars as flat note rows plus a timeline (one lane
-    // per input), instead of nested foldouts. Inputs are labelled from an
-    // InputTokenMap.
+    // per input), instead of nested foldouts. Each bar shows its timing and
+    // move on the left and its effects on the right. Inputs are labelled from
+    // an InputTokenMap.
     [CustomEditor(typeof(RhythmSkillCard), true)]
     public class RhythmSkillCardEditor : NaughtyInspector
     {
@@ -22,12 +24,20 @@ namespace GARA.EditorTools
         private const float AxisHeight = 14f;
         private const float LaneGutter = 56f;
 
-        private const float OrderWidth = 28f;
-        private const float TimeWidth = 50f;
-        private const float DeltaWidth = 44f;
-        private const float KindWidth = 52f;
-        private const float HoldWidth = 44f;
+        private const float OrderWidth = 22f;
+        private const float TimeWidth = 42f;
+        private const float DeltaWidth = 38f;
+        private const float InputWidth = 84f;
+        private const float KindWidth = 44f;
+        private const float HoldWidth = 36f;
+        private const float BarLabelWidth = 40f;
+        private const float BarRangeWidth = 64f;
         private const float RemoveWidth = 20f;
+        private const float TimingColumnWidth = 318f;
+        private const float MoveMinWidth = 150f;
+        private const float EffectsWidth = 224f;
+        private const float EffectsLabelWidth = 70f;
+        private const float ColumnGap = 6f;
 
         private struct NoteRef
         {
@@ -50,6 +60,10 @@ namespace GARA.EditorTools
         private int _selectedBar = -1;
         private int _selectedNote = -1;
 
+        // Inner width of a bar box, measured on repaint. Layout groups here
+        // don't stretch reliably, so the timing column is sized from it.
+        private float _barContentWidth;
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -57,10 +71,48 @@ namespace GARA.EditorTools
             _tokenMap = LoadTokenMap();
         }
 
+        // Card fields, then the bars, then box groups (the finale) last.
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
+            serializedObject.Update();
 
+            var groups = new List<(string name, SerializedProperty property)>();
+            using (var iterator = serializedObject.GetIterator())
+            {
+                for (var enterChildren = true; iterator.NextVisible(enterChildren); enterChildren = false)
+                {
+                    var property = serializedObject.FindProperty(iterator.name);
+                    var group = PropertyUtility.GetAttribute<BoxGroupAttribute>(property);
+                    if (group != null)
+                    {
+                        groups.Add((group.Name, property));
+                    }
+                    else if (property.name == "m_Script")
+                    {
+                        using (new EditorGUI.DisabledScope(true))
+                        {
+                            EditorGUILayout.PropertyField(property);
+                        }
+                    }
+                    else
+                    {
+                        NaughtyEditorGUI.PropertyField_Layout(property, true);
+                    }
+                }
+            }
+
+            DrawBarsSection();
+            DrawBoxGroups(groups);
+
+            serializedObject.ApplyModifiedProperties();
+
+            DrawNonSerializedFields();
+            DrawNativeProperties();
+            DrawButtons();
+        }
+
+        private void DrawBarsSection()
+        {
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Bars", EditorStyles.boldLabel);
             if (targets.Length > 1)
@@ -69,15 +121,42 @@ namespace GARA.EditorTools
                 return;
             }
 
-            serializedObject.Update();
             DrawTokenMapField();
 
             var ordered = CollectNotes();
             DrawTimeline(ordered);
             DrawBarList(ordered);
             DrawWarnings(ordered);
+        }
 
-            serializedObject.ApplyModifiedProperties();
+        private static void DrawBoxGroups(List<(string name, SerializedProperty property)> groups)
+        {
+            var names = new List<string>();
+            foreach (var entry in groups)
+            {
+                if (!names.Contains(entry.name))
+                {
+                    names.Add(entry.name);
+                }
+            }
+
+            foreach (var groupName in names)
+            {
+                var visible = groups.FindAll(entry => entry.name == groupName && PropertyUtility.IsVisible(entry.property));
+                if (visible.Count == 0)
+                {
+                    continue;
+                }
+
+                EditorGUILayout.Space();
+                NaughtyEditorGUI.BeginBoxGroup_Layout(groupName);
+                foreach (var entry in visible)
+                {
+                    NaughtyEditorGUI.PropertyField_Layout(entry.property, true);
+                }
+
+                NaughtyEditorGUI.EndBoxGroup_Layout();
+            }
         }
 
         private void DrawTokenMapField()
@@ -99,7 +178,7 @@ namespace GARA.EditorTools
                 orderOf[(ordered[i].bar, ordered[i].note)] = i;
             }
 
-            DrawColumnHeader();
+            DrawColumnHeader(TimingWidth);
 
             var removeBar = -1;
             var removeNote = (bar: -1, note: -1);
@@ -111,38 +190,49 @@ namespace GARA.EditorTools
                 var bar = _bars.GetArrayElementAtIndex(b);
                 var notes = bar.FindPropertyRelative("notes");
 
-                using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
+                using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
                 {
-                    using (new EditorGUILayout.HorizontalScope())
+                    using (new EditorGUILayout.VerticalScope(GUILayout.Width(TimingWidth)))
                     {
-                        EditorGUILayout.LabelField($"Bar {b + 1}", EditorStyles.boldLabel, GUILayout.Width(48f));
-                        EditorGUILayout.LabelField(BarRangeLabel(ordered, b), EditorStyles.miniLabel, GUILayout.Width(76f));
-                        EditorGUILayout.ObjectField(bar.FindPropertyRelative("move"), typeof(AttackAnimationSpec), GUIContent.none);
-                        if (GUILayout.Button(new GUIContent("+", "Add a note to this bar"), GUILayout.Width(RemoveWidth)))
+                        using (new EditorGUILayout.HorizontalScope())
                         {
-                            addNoteToBar = b;
+                            EditorGUILayout.LabelField($"Bar {b + 1}", EditorStyles.boldLabel, GUILayout.Width(BarLabelWidth));
+                            EditorGUILayout.LabelField(BarRangeLabel(ordered, b), EditorStyles.miniLabel, GUILayout.Width(BarRangeWidth));
+                            EditorGUILayout.ObjectField(bar.FindPropertyRelative("move"), typeof(AttackAnimationSpec), GUIContent.none, GUILayout.MinWidth(MoveMinWidth), GUILayout.ExpandWidth(true));
+                            if (GUILayout.Button(new GUIContent("+", "Add a note to this bar"), GUILayout.Width(RemoveWidth)))
+                            {
+                                addNoteToBar = b;
+                            }
+
+                            if (GUILayout.Button(new GUIContent("×", "Remove this bar"), GUILayout.Width(RemoveWidth)))
+                            {
+                                removeBar = b;
+                            }
                         }
 
-                        if (GUILayout.Button(new GUIContent("×", "Remove this bar"), GUILayout.Width(RemoveWidth)))
+                        for (var n = 0; n < notes.arraySize; n++)
                         {
-                            removeBar = b;
+                            var order = orderOf[(b, n)];
+                            var delta = order > 0 ? ordered[order].time - ordered[order - 1].time : (float?)null;
+                            var action = DrawNoteRow(notes.GetArrayElementAtIndex(n), b, n, order, delta);
+                            if (action == RowAction.Remove)
+                            {
+                                removeNote = (b, n);
+                            }
+                            else if (action == RowAction.TimeChanged)
+                            {
+                                sortBar = b;
+                            }
                         }
                     }
 
-                    for (var n = 0; n < notes.arraySize; n++)
-                    {
-                        var order = orderOf[(b, n)];
-                        var delta = order > 0 ? ordered[order].time - ordered[order - 1].time : (float?)null;
-                        var action = DrawNoteRow(notes.GetArrayElementAtIndex(n), b, n, order, delta);
-                        if (action == RowAction.Remove)
-                        {
-                            removeNote = (b, n);
-                        }
-                        else if (action == RowAction.TimeChanged)
-                        {
-                            sortBar = b;
-                        }
-                    }
+                    GUILayout.Space(ColumnGap);
+                    DrawEffects(bar.FindPropertyRelative("effects"));
+                }
+
+                if (b == 0)
+                {
+                    MeasureBarContentWidth();
                 }
             }
 
@@ -175,18 +265,78 @@ namespace GARA.EditorTools
             }
         }
 
-        private static void DrawColumnHeader()
+        // The bar's effects, each picked by type (SubclassPickerDrawer).
+        private static void DrawEffects(SerializedProperty effects)
+        {
+            using (new EditorGUILayout.VerticalScope(GUILayout.Width(EffectsWidth)))
+            {
+                var labelWidth = EditorGUIUtility.labelWidth;
+                EditorGUIUtility.labelWidth = EffectsLabelWidth;
+
+                var remove = -1;
+                for (var i = 0; i < effects.arraySize; i++)
+                {
+                    using (new EditorGUILayout.HorizontalScope())
+                    {
+                        EditorGUILayout.PropertyField(effects.GetArrayElementAtIndex(i), GUIContent.none, true);
+                        if (GUILayout.Button(new GUIContent("×", "Remove this effect"), GUILayout.Width(RemoveWidth)))
+                        {
+                            remove = i;
+                        }
+                    }
+                }
+
+                EditorGUIUtility.labelWidth = labelWidth;
+
+                if (GUILayout.Button("+ Effect"))
+                {
+                    effects.arraySize++;
+                    effects.GetArrayElementAtIndex(effects.arraySize - 1).managedReferenceValue = null;
+                }
+
+                if (remove >= 0)
+                {
+                    effects.DeleteArrayElementAtIndex(remove);
+                }
+            }
+        }
+
+        // The timing column takes whatever the fixed effects column leaves.
+        private float TimingWidth => Mathf.Max(TimingColumnWidth, _barContentWidth - ColumnGap - EffectsWidth - 1f);
+
+        private void MeasureBarContentWidth()
+        {
+            if (Event.current.type != EventType.Repaint)
+            {
+                return;
+            }
+
+            var width = GUILayoutUtility.GetLastRect().width - EditorStyles.helpBox.padding.horizontal;
+            if (Mathf.Abs(width - _barContentWidth) > 0.5f)
+            {
+                _barContentWidth = width;
+                Repaint();
+            }
+        }
+
+        private static void DrawColumnHeader(float timingWidth)
         {
             using (new EditorGUILayout.HorizontalScope())
             {
-                GUILayout.Space(6f);
-                EditorGUILayout.LabelField("#", EditorStyles.miniLabel, GUILayout.Width(OrderWidth));
-                EditorGUILayout.LabelField("Time", EditorStyles.miniLabel, GUILayout.Width(TimeWidth));
-                EditorGUILayout.LabelField(new GUIContent("Δ", "Seconds since the previous note in play order"), EditorStyles.miniLabel, GUILayout.Width(DeltaWidth));
-                EditorGUILayout.LabelField("Input", EditorStyles.miniLabel, GUILayout.MinWidth(60f));
-                EditorGUILayout.LabelField("Kind", EditorStyles.miniLabel, GUILayout.Width(KindWidth));
-                EditorGUILayout.LabelField("Hold", EditorStyles.miniLabel, GUILayout.Width(HoldWidth));
-                GUILayout.Space(RemoveWidth + 4f);
+                GUILayout.Space(EditorStyles.helpBox.margin.left + EditorStyles.helpBox.padding.left);
+                using (new EditorGUILayout.HorizontalScope(GUILayout.Width(timingWidth)))
+                {
+                    EditorGUILayout.LabelField("#", EditorStyles.miniLabel, GUILayout.Width(OrderWidth));
+                    EditorGUILayout.LabelField("Time", EditorStyles.miniLabel, GUILayout.Width(TimeWidth));
+                    EditorGUILayout.LabelField(new GUIContent("Δ", "Seconds since the previous note in play order"), EditorStyles.miniLabel, GUILayout.Width(DeltaWidth));
+                    EditorGUILayout.LabelField("Input", EditorStyles.miniLabel, GUILayout.Width(InputWidth));
+                    EditorGUILayout.LabelField("Kind", EditorStyles.miniLabel, GUILayout.Width(KindWidth));
+                    EditorGUILayout.LabelField("Hold", EditorStyles.miniLabel, GUILayout.Width(HoldWidth));
+                    GUILayout.FlexibleSpace();
+                }
+
+                GUILayout.Space(ColumnGap);
+                EditorGUILayout.LabelField("Effects", EditorStyles.miniLabel, GUILayout.Width(EffectsWidth));
             }
         }
 
@@ -220,7 +370,7 @@ namespace GARA.EditorTools
             EditorGUILayout.LabelField(delta.HasValue ? $"+{delta.Value:0.###}" : "—", EditorStyles.miniLabel, GUILayout.Width(DeltaWidth));
 
             BuildTokenOptions(tokenId.intValue, out var labels, out var ids);
-            tokenId.intValue = EditorGUILayout.IntPopup(tokenId.intValue, labels, ids, GUILayout.MinWidth(60f));
+            tokenId.intValue = EditorGUILayout.IntPopup(tokenId.intValue, labels, ids, GUILayout.Width(InputWidth));
 
             EditorGUILayout.PropertyField(kind, GUIContent.none, GUILayout.Width(KindWidth));
 
@@ -234,6 +384,7 @@ namespace GARA.EditorTools
                 }
             }
 
+            GUILayout.FlexibleSpace();
             if (GUILayout.Button(new GUIContent("×", "Remove this note"), GUILayout.Width(RemoveWidth)))
             {
                 action = RowAction.Remove;
@@ -423,6 +574,7 @@ namespace GARA.EditorTools
             _bars.arraySize++;
             var bar = _bars.GetArrayElementAtIndex(_bars.arraySize - 1);
             bar.FindPropertyRelative("move").objectReferenceValue = null;
+            bar.FindPropertyRelative("effects").arraySize = 0;
             var notes = bar.FindPropertyRelative("notes");
             notes.arraySize = 1;
             WriteNote(notes.GetArrayElementAtIndex(0), tokenId, ordered.Count > 0 ? LastEnd(ordered) + Step(ordered) : 0f);

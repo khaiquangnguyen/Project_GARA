@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using GARA.Characters;
 using GARA.InputSets;
 using GARA.Rhythm;
@@ -70,6 +72,10 @@ namespace GARA.Combat
         [Tooltip("EnemyEffectDummy's OnJumpSuccessEffect child.")]
         [SerializeField] private GameObject enemyJumpSuccessEffectTemplate;
 
+        [Header("Enemy HP")]
+        [Tooltip("Spawned on each enemy's HP heart anchor at battle start; only shown while that enemy is targeted.")]
+        [SerializeField] private HpHeartView enemyHpHeartPrefab;
+
         [Header("Minigame Visual Drivers")]
 
         [Tooltip("Scene instance of the RhythmVisualDriver prefab — shown whenever any rhythm sequence starts.")]
@@ -92,6 +98,8 @@ namespace GARA.Combat
 
         private bool _hasClonedCharacterEffects;
 
+        private readonly Dictionary<CombatParticipant, HpHeartView> _hpHearts = new();
+
         private void EnableOverlay()
         {
             RhythmSequencePlayer.AnySequenceStarted += ShowRhythmSequence;
@@ -100,6 +108,7 @@ namespace GARA.Combat
             InputSetCollectionPlayer.AnySetCollectionEnded += HideInputSetCollection;
             ShakeBalancePlayer.AnyBalanceStarted += ShowShakeBalance;
             ShakeBalancePlayer.AnyBalanceEnded += HideShakeBalance;
+            CombatParticipant.HpChanged += RefreshHpHeart;
         }
 
         private void DisableOverlay()
@@ -110,6 +119,7 @@ namespace GARA.Combat
             InputSetCollectionPlayer.AnySetCollectionEnded -= HideInputSetCollection;
             ShakeBalancePlayer.AnyBalanceStarted -= ShowShakeBalance;
             ShakeBalancePlayer.AnyBalanceEnded -= HideShakeBalance;
+            CombatParticipant.HpChanged -= RefreshHpHeart;
         }
 
         private void RefreshTurnOrder(Sprite[] portraits)
@@ -137,6 +147,7 @@ namespace GARA.Combat
                 CloneEffectOntoEveryCharacter(playerHitEffectTemplate, enemyHitEffectTemplate);
                 CloneEffectOntoEveryCharacter(playerParrySuccessEffectTemplate, enemyParrySuccessEffectTemplate);
                 CloneEffectOntoEveryCharacter(playerJumpSuccessEffectTemplate, enemyJumpSuccessEffectTemplate);
+                SpawnEnemyHpHearts();
                 _hasClonedCharacterEffects = true;
             }
 
@@ -164,6 +175,64 @@ namespace GARA.Combat
                 {
                     Instantiate(effectTemplate, executor.transform, false);
                 }
+            }
+        }
+
+        // Parented to the anchor so the heart follows its enemy around.
+        private void SpawnEnemyHpHearts()
+        {
+            if (enemyHpHeartPrefab == null)
+            {
+                return;
+            }
+
+            foreach (var (participant, executor) in _executors)
+            {
+                if (participant.faction != FactionTag.Enemy)
+                {
+                    continue;
+                }
+
+                var definition = executor.GetComponent<CharacterDefinition>();
+                var anchor = definition != null ? definition.hpHeartAnchor : null;
+                if (anchor == null)
+                {
+                    Debug.LogWarning($"{executor.name} has no hpHeartAnchor; skipping its HP heart.", executor);
+                    continue;
+                }
+
+                var heart = Instantiate(enemyHpHeartPrefab, anchor, false);
+                _hpHearts[participant] = heart;
+                RefreshHpHeart(participant);
+                heart.gameObject.SetActive(false);
+            }
+        }
+
+        // Shows the per-character target displays (the HP heart for now) on
+        // exactly these participants and hides them everywhere else. New
+        // target-only displays get toggled here too.
+        private void ShowTargetDisplays(IEnumerable<CombatParticipant> targets)
+        {
+            var shown = new HashSet<CombatParticipant>(targets);
+            foreach (var (participant, heart) in _hpHearts)
+            {
+                if (heart != null)
+                {
+                    heart.gameObject.SetActive(shown.Contains(participant));
+                }
+            }
+        }
+
+        private void HideTargetDisplays()
+        {
+            ShowTargetDisplays(Array.Empty<CombatParticipant>());
+        }
+
+        private void RefreshHpHeart(CombatParticipant participant)
+        {
+            if (_hpHearts.TryGetValue(participant, out var heart) && heart != null)
+            {
+                heart.SetHp(participant.currentHp, participant.GetCurrentStats().MaxHp.Value);
             }
         }
 

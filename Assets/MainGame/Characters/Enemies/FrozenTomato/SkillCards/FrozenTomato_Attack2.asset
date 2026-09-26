@@ -22,9 +22,5 @@ MonoBehaviour:
   mpCost: 0
   animationSpec: {fileID: 11400000, guid: 03b3fa088c084dada049176d13e2a801, type: 2}
   positionMode: 1
-  tiering:
-    okThreshold: 0.35
-    goodThreshold: 0.65
-    perfectThreshold: 0.9
   effects: []
   refundOnAbort: 0
