@@ -15,3 +15,5 @@ MonoBehaviour:
   skeletonData: {fileID: 11400000, guid: aa790a370e4464e3e95e23c0aaed7d5a, type: 2}
   animationName: combo
   range: 2
+  hitFeedback: {fileID: 0}
+  impactOnEveryHit: 1

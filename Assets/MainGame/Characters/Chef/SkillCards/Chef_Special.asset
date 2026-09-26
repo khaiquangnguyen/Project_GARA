@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37549959a5edd4375999a81c56d24b7b, type: 3}
+  m_Name: Chef_Special
+  m_EditorClassIdentifier: GARA.Characters.Chef::GARA.Characters.Chef.ChefSkillCard
+  cardId: chef_special
+  displayName: Special
+  description: 
+  icon: {fileID: 21300000, guid: 940eaca3a08c44de79859e2e5d0db8d0, type: 3}
+  targetMode: 0
+  multiTargetCount: 2
+  apCost: 0
+  mpCost: 0
+  positionMode: 1
+  effects: []
+  refundOnAbort: 0
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: f2468e8f31e94c4d8dc5f14cd014ed5c, type: 2}
+  finalePositionMode: 0
+  perfectEffects: []
+  steps:
+  - set:
+      inputs:
+      - id: 1
+      - id: 2
+      - id: 3
+      timeLimit: 3
+    move: {fileID: 11400000, guid: 5de056f5c97142e8a3f1893a3144ebf1, type: 2}
+    effects:
+    - rid: 609404912810067305
+  - set:
+      inputs:
+      - id: 4
+      - id: 2
+      - id: 1
+      timeLimit: 3
+    move: {fileID: 11400000, guid: c85fd78b2e404bcea4032815fb6cf6b5, type: 2}
+    effects:
+    - rid: 609404912810067306
+  - set:
+      inputs:
+      - id: 1
+      - id: 1
+      - id: 1
+      timeLimit: 3
+    move: {fileID: 11400000, guid: 2fb2322f8b7142e987e02a642e2d4f8d, type: 2}
+    effects:
+    - rid: 609404912810067307
+  - set:
+      inputs:
+      - id: 4
+      - id: 3
+      - id: 2
+      - id: 1
+      timeLimit: 3
+    move: {fileID: 11400000, guid: 5aecc0619d1b4554b0722489c1597ce8, type: 2}
+    effects:
+    - rid: 609404912810067308
+  totalTimeLimit: 0
+  finaleEffects:
+  - rid: 609404912810067309
+  keyStepIndex: -1
+  flavors: 0
+  variationOf: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404912810067305
+      type: {class: AllSetsClearedForDamage, ns: GARA.Characters.Chef, asm: GARA.Characters.Chef}
+      data:
+        damage: 10
+    - rid: 609404912810067306
+      type: {class: AllSetsClearedForDamage, ns: GARA.Characters.Chef, asm: GARA.Characters.Chef}
+      data:
+        damage: 10
+    - rid: 609404912810067307
+      type: {class: AllSetsClearedForDamage, ns: GARA.Characters.Chef, asm: GARA.Characters.Chef}
+      data:
+        damage: 10
+    - rid: 609404912810067308
+      type: {class: AllSetsClearedForDamage, ns: GARA.Characters.Chef, asm: GARA.Characters.Chef}
+      data:
+        damage: 10
+    - rid: 609404912810067309
+      type: {class: AllSetsClearedForDamage, ns: GARA.Characters.Chef, asm: GARA.Characters.Chef}
+      data:
+        damage: 10

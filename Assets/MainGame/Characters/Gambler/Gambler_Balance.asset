@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c820c71948a444356b231608fd9e3bf2, type: 3}
+  m_Name: Gambler_Balance
+  m_EditorClassIdentifier: GARA.ShakeBalance::GARA.ShakeBalance.ShakeBalanceDefinition
+  leftToken:
+    id: 2
+  rightToken:
+    id: 4
+  useCashOutToken: 1
+  cashOutToken:
+    id: 1
+  pushStrength: 1
+  pushDamping: 8
+  baseInstability: 0.8
+  instabilityGrowth: 0.02
+  baseNoise: 0.3
+  noiseGrowth: 0.02
+  noiseChangeInterval: 0.4
+  perfectZone: 0.15
+  goodZone: 0.35
+  goodZoneQuality: 0.5
+  bankTimeConstant: 8
+  keepOnFall: 0.5
+  duration: 0

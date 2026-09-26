@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: 5ad83a1aaa15d28448b94fe127294da5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 5ad83a1aaa15d28448b94fe127294da5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4914,6 +4914,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.CombatSceneManager
   enemyTurnDelaySeconds: 0.5
+  noirWorldEnterFeedback: {fileID: 0}
+  noirWorldExitFeedback: {fileID: 0}
   turnOrderSlots:
   - {fileID: 1020560672}
   - {fileID: 32994081}
@@ -4933,11 +4935,15 @@ MonoBehaviour:
   playerHitEffectTemplate: {fileID: 4724413725210982919, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
   playerParrySuccessEffectTemplate: {fileID: 3401488061189719013, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
   playerJumpSuccessEffectTemplate: {fileID: 331152434699064910, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
+  playerActiveActorEffectTemplate: {fileID: 4517199274371294702, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
+  playerNoirifiedEffectTemplate: {fileID: 0}
   enemyNotTargetedEffectTemplate: {fileID: 4760853153468329946, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyNotTargetedShrinkEffectTemplate: {fileID: 3198688047819919781, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyHitEffectTemplate: {fileID: 4724413725210982919, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyParrySuccessEffectTemplate: {fileID: 5950136697058328324, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyJumpSuccessEffectTemplate: {fileID: 8467334021156729000, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
+  enemyActiveActorEffectTemplate: {fileID: 6468845237024180897, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
+  enemyNoirifiedEffectTemplate: {fileID: 0}
   enemyHpHeartPrefab: {fileID: 4787717028545996810, guid: 71d8fbdc5752443519c2a92adff2b318, type: 3}
   rhythmVisualDriver: {fileID: 719048227}
   inputSetVisualDriver: {fileID: 2073647041}
@@ -6116,12 +6122,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.RogueRunManager
   combatManager: {fileID: 280745125}
-  player1: {fileID: 1814630587145776563, guid: e9ca41a216ddb40d092c391f7f1d50b6, type: 3}
-  player2: {fileID: 1814630587145776563, guid: e9ca41a216ddb40d092c391f7f1d50b6, type: 3}
-  player3: {fileID: 1814630587145776563, guid: e9ca41a216ddb40d092c391f7f1d50b6, type: 3}
-  enemy1: {fileID: 11400000, guid: 14f35c17b0282480a982bfe46b2cac37, type: 2}
-  enemy2: {fileID: 11400000, guid: 14f35c17b0282480a982bfe46b2cac37, type: 2}
-  enemy3: {fileID: 11400000, guid: 14f35c17b0282480a982bfe46b2cac37, type: 2}
+  player1:
+    character: {fileID: 1433058949010817348, guid: 5ef528e6f352d4ad18031872ce51d334, type: 3}
+    control: 0
+  player2:
+    character: {fileID: 8570586173179629696, guid: bd17f43b2dd674e3ebcc4df9c44a38ef, type: 3}
+    control: 0
+  player3:
+    character: {fileID: 1814630587145776563, guid: e9ca41a216ddb40d092c391f7f1d50b6, type: 3}
+    control: 0
+  enemy1:
+    encounter: {fileID: 11400000, guid: 14f35c17b0282480a982bfe46b2cac37, type: 2}
+    control: 0
+    charmedToPlayerSide: 0
+  enemy2:
+    encounter: {fileID: 11400000, guid: 14f35c17b0282480a982bfe46b2cac37, type: 2}
+    control: 0
+    charmedToPlayerSide: 0
+  enemy3:
+    encounter: {fileID: 11400000, guid: 14f35c17b0282480a982bfe46b2cac37, type: 2}
+    control: 0
+    charmedToPlayerSide: 0
 --- !u!4 &2093955818
 Transform:
   m_ObjectHideFlags: 0

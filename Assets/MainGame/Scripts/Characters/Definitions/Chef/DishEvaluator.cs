@@ -1,11 +1,9 @@
-using System;
 using GARA.Characters;
 using GARA.InputSets;
 
 namespace GARA.Characters.Chef
 {
-    // Turns a raw InputSetCompletionReport (plus the authored RecipeStep[]
-    // and overall SkillPerformanceTier) into a cooking-domain DishReport.
+    // Turns an InputSetCompletionReport into a cooking-domain DishReport.
     public static class DishEvaluator
     {
         public static StepQuality QualityOf(in InputSetResult result)
@@ -46,21 +44,17 @@ namespace GARA.Characters.Chef
             }
         }
 
-        public static DishReport Evaluate(InputSetCompletionReport report, RecipeSkillCard card, SkillPerformanceTier tier)
+        // Report may cover the whole run or a single step.
+        public static DishReport Evaluate(InputSetCompletionReport report, ChefSkillCard card, SkillPerformanceTier tier)
         {
             var setResults = report?.SetResults;
-            var recipeSteps = card.Steps;
-
-            var stepCount = 0;
-            if (setResults != null && recipeSteps != null)
-            {
-                stepCount = Math.Min(setResults.Count, recipeSteps.Count);
-            }
-
+            var stepCount = setResults?.Count ?? 0;
             var steps = new StepReport[stepCount];
             var exquisiteSteps = 0;
             var ruinedSteps = 0;
             var anyBurnt = false;
+            var hasKeyStep = false;
+            StepReport keyStep = default;
 
             for (var i = 0; i < stepCount; i++)
             {
@@ -68,7 +62,7 @@ namespace GARA.Characters.Chef
                 var quality = QualityOf(in result);
                 var burnt = result.LastFailure == InputSetFailureReason.SetTimedOut;
 
-                steps[i] = new StepReport(i, recipeSteps[i], quality, burnt, result.Attempts, result.TimeToClear);
+                steps[i] = new StepReport(result.SetIndex, quality, burnt, result.Attempts, result.TimeToClear);
 
                 if (quality == StepQuality.Exquisite)
                 {
@@ -84,15 +78,15 @@ namespace GARA.Characters.Chef
                 {
                     anyBurnt = true;
                 }
+
+                if (result.SetIndex == card.KeyStepIndex)
+                {
+                    hasKeyStep = true;
+                    keyStep = steps[i];
+                }
             }
 
-            var keyStepIndex = card.KeyStepIndex;
-            var hasKeyStep = keyStepIndex >= 0 && keyStepIndex < steps.Length;
-            var keyStep = hasKeyStep ? steps[keyStepIndex] : default;
-
-            var grade = GradeOf(tier);
-
-            return new DishReport(grade, steps, keyStep, hasKeyStep, exquisiteSteps, ruinedSteps, anyBurnt, report, card.Flavors);
+            return new DishReport(GradeOf(tier), steps, keyStep, hasKeyStep, exquisiteSteps, ruinedSteps, anyBurnt, report, card.Flavors);
         }
     }
 }

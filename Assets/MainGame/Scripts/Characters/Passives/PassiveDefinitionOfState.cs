@@ -24,6 +24,18 @@ namespace GARA.Characters
 
         protected abstract void OnSkillCardResolved(in PassiveContext context, TState state);
 
+        public sealed override void OnParticipantDefeated(in PassiveContext context, ICombatTarget defeated, PassiveRuntimeState state)
+        {
+            if (state is TState typed)
+            {
+                OnParticipantDefeated(in context, defeated, typed);
+            }
+        }
+
+        protected virtual void OnParticipantDefeated(in PassiveContext context, ICombatTarget defeated, TState state)
+        {
+        }
+
         public sealed override IValueRangeRoller GetRangeRoller(PassiveRuntimeState state)
         {
             return state is TState typed ? GetRangeRoller(typed) : null;

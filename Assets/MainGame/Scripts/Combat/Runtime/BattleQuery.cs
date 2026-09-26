@@ -21,9 +21,11 @@ namespace GARA.Combat
         public ICombatTarget Self => _self;
 
         public IEnumerable<ICombatTarget> Allies =>
-            _battle.AllParticipants.Where(p => p != _self && p.faction == _self.faction);
+            _battle.AllParticipants.Where(p => p != _self && p.Allegiance == _self.Allegiance);
 
         public IEnumerable<ICombatTarget> Enemies =>
-            _battle.AllParticipants.Where(p => p.faction != _self.faction);
+            _battle.AllParticipants.Where(p => p.Allegiance != _self.Allegiance);
+
+        public NoirWorld NoirWorld => _battle.NoirWorld;
     }
 }

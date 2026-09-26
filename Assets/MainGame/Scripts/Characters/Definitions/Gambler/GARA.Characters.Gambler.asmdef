@@ -3,9 +3,7 @@
   "rootNamespace": "GARA.Characters.Gambler",
   "references": [
     "GARA.Characters",
-    "GARA.SkillCards.Shake",
-    "GARA.Shake",
-    "GARA.Input",
+    "GARA.ShakeBalance",
     "NaughtyAttributes.Core"
   ],
   "includePlatforms": [],

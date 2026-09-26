@@ -25,8 +25,13 @@ namespace GARA.Characters
         [SerializeField]
         private GameObject hitFeedback;
 
+        [Tooltip("Impact (effects, hit feedback) on every \"hit\" event of the clip, not just the first — for multi-hit clips.")]
+        [SerializeField]
+        private bool impactOnEveryHit;
+
         public string AnimationName => animationName;
         public float Range => range;
         public GameObject HitFeedback => hitFeedback;
+        public bool ImpactOnEveryHit => impactOnEveryHit;
     }
 }

@@ -415,7 +415,6 @@ MonoBehaviour:
   palate:
     canBeFed: 0
     favoriteFlavors: 0
-    fullnessCapacity: 0
   hpHeartAnchor: {fileID: 0}
   specialTiering:
     okThreshold: 0.35

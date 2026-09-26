@@ -22,7 +22,7 @@ namespace GARA.Characters.Dancer
         public RhythmSequenceTiming SpecialTiming => specialTiming;
 
         // CharacterDefinition already declares its own private OnValidate
-        // (palate sanitizing) - Unity's MonoBehaviour message dispatch
+        // (duplicate card check) - Unity's MonoBehaviour message dispatch
         // invokes each class level's own OnValidate independently, so this
         // one doesn't need to (and, being private in the base, can't) call
         // base.OnValidate().

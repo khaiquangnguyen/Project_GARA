@@ -6,26 +6,17 @@ using UnityEngine;
 
 namespace GARA.Combat
 {
-    // Placeholder until real enemy AI exists — waits briefly, then randomly
-    // picks any card from the actor's combat loadout that has at least one
-    // valid target, then ends its turn once the whole swing (including the
-    // dash back) is done. Targeting follows the card's own mode, the same
-    // rules a player's card uses except that the "one" modes pick at random
-    // instead of reading a selector: One* hits one random living member of
-    // its pool (enemies, friendlies, or every character), All* hits all of
-    // them, and Multi* hits multiTargetCount random ones (repeats allowed or
-    // not, per the mode). Enemies ignore AP/MP costs entirely — every card is free
-    // for them. If no card qualifies, the turn ends immediately with a
-    // warning. Uses the same targeting-fade announcements a player's card
-    // does, so the not-targeted and on-hit effects react identically either
-    // way.
+    // Placeholder AI for any AI-controlled character, on either side: waits
+    // briefly, plays a random loadout card that has a valid target (random
+    // picks for the "one"/Multi* modes, costs ignored) the same way a
+    // player's card plays, then ends the turn once it's resolved.
     public partial class CombatSceneManager
     {
         [Header("Enemy Turn")]
         [Tooltip("Seconds an enemy waits at the start of its turn before acting.")]
         [SerializeField] private float enemyTurnDelaySeconds = 0.5f;
 
-        private IEnumerator PerformEnemyTurn(CombatParticipant actor, AttackExecutor actorExecutor)
+        private IEnumerator PerformAiTurn(CombatParticipant actor, AttackExecutor actorExecutor)
         {
             yield return new WaitForSeconds(enemyTurnDelaySeconds);
 
@@ -45,19 +36,10 @@ namespace GARA.Combat
                 yield break;
             }
 
-            AnnounceTargetingForSkillCard(actor, targets);
-            RetreatUninvolved(actor, targets);
-            _enemyActionInProgress = true;
-            actorExecutor.PlayAction(actor.SkillCardStateOf(card), targets, card.positionMode);
-            yield return new WaitUntil(() => !actorExecutor.IsBusy);
-            _enemyActionInProgress = false;
-            yield return new WaitForSeconds(card.endDelay);
-
-            actorExecutor.ReturnToStandardPosition();
-            yield return ReturnRetreated();
-            yield return new WaitUntil(() => !actorExecutor.IsBusy);
-
-            AnnounceTargetingClearedForSkillCard(actor);
+            // Same path as a player's card, minus the cost.
+            _aiActionInProgress = true;
+            StartSkillCard(card, targets);
+            yield return new WaitUntil(() => _phaseActionState == PhaseActionState.Regular);
             EndCombatPhase();
         }
 

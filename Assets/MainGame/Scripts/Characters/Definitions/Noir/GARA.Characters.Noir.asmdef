@@ -1,0 +1,17 @@
+{
+  "name": "GARA.Characters.Noir",
+  "rootNamespace": "GARA.Characters.Noir",
+  "references": [
+    "GARA.Characters",
+    "NaughtyAttributes.Core"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

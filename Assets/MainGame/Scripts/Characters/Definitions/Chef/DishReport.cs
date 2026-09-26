@@ -3,10 +3,7 @@ using GARA.InputSets;
 
 namespace GARA.Characters.Chef
 {
-    // Cooking-domain SkillPerformance.Details payload a RecipeSkillCard
-    // attaches on top of the generic InputSet mapping, so Chef-specific
-    // effects (DishStatModifierSkillEffect, KeyStepDamageSkillEffect) can
-    // read back per-step quality without depending on raw InputSetResult.
+    // SkillPerformance.Details of a ChefSkillCard, read by the Chef effects.
     public sealed class DishReport
     {
         public readonly DishGrade Grade;

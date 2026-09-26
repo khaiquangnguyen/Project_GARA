@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GARA.Characters;
 using MoreMountains.Tools;
 using NaughtyAttributes;
@@ -20,7 +21,22 @@ namespace GARA.Combat
         public EnemyEncounterData enemySource;
 
         public CharacterDefinition definition;
+
+        // The side this character started on and stands with (its slot).
         public FactionTag faction;
+
+        // Whether the player picks this character's cards on its turn (else
+        // the AI does). Independent of faction; can change mid-battle.
+        public bool playerControlled;
+
+        // Fights for the players' side, player-controlled, while still
+        // standing in its own slot. Can change mid-battle.
+        public bool charmedToPlayerSide;
+
+        // The side this character fights for; decides allies and opponents.
+        public FactionTag Allegiance => charmedToPlayerSide ? FactionTag.Player : faction;
+
+        public bool IsPlayerControlled => playerControlled || charmedToPlayerSide;
 
         public StatBlock baseCombatStats;
         public int currentHp;
@@ -57,14 +73,14 @@ namespace GARA.Combat
 
         public IReadOnlyList<SkillCardDefinition> SkillCards => _skillCards;
 
-        // Active statuses (e.g. food coma) inflicted by cooking/other skill
-        // effects. Mirrors _timedModifiers' shape but kept separate — a
-        // status shapes incoming damage/turn-skipping rather than StatBlock.
+        // Active statuses (e.g. food coma). Mirrors _timedModifiers' shape
+        // but kept separate — a status shapes incoming damage/turn-skipping,
+        // and may also feed StatBlock (see GetCurrentStats).
         private readonly List<StatusEffectInstance> _statuses = new();
 
         // Cooking (Chef) fullness meter — see Feed. Never negative; wraps
-        // back down (with overflow carried) once it crosses the palate's
-        // capacity, rather than resetting to 0.
+        // back down (with overflow carried) once it crosses
+        // PalateProfile.MaxFullness, rather than resetting to 0.
         private int _fullness;
 
         public bool IsDefeated => currentHp <= 0;
@@ -138,7 +154,7 @@ namespace GARA.Combat
         // here so both surfaces stay in sync.
         public StatBlock GetCurrentStats()
         {
-            return baseCombatStats.WithModifiers(_timedModifiers);
+            return baseCombatStats.WithModifiers(_timedModifiers.Concat<IStatModifierSource>(_statuses));
         }
 
         // Adds a new timed buff/debuff — see TimedStatModifierSkillEffect.
@@ -267,10 +283,6 @@ namespace GARA.Combat
             }
         }
 
-        // Cooking (Chef): feeds this participant, returning how much
-        // fullness was gained and whether it tipped over into a food coma.
-        // A no-op (NotFeedable) for anything that can't be fed, is already
-        // defeated, or a non-positive amount.
         public PalateProfile Palate => definition != null ? definition.palate : PalateProfile.None;
 
         public int Fullness => _fullness;
@@ -311,6 +323,13 @@ namespace GARA.Combat
         public static event Action<CombatParticipant> FullnessChanged;
         public static event Action<CombatParticipant> BecameFull;
 
+        // Raised after a status is added; may have changed Speed.
+        public static event Action<CombatParticipant> StatusApplied;
+
+        // Cooking (Chef): feeds this participant, returning how much
+        // fullness was gained and whether it filled up. A no-op
+        // (NotFeedable) for anything that can't be fed, is already
+        // defeated, or a non-positive amount.
         public FeedResult Feed(int amount)
         {
             if (!Palate.CanBeFed || IsDefeated || amount <= 0)
@@ -319,7 +338,7 @@ namespace GARA.Combat
             }
 
             _fullness += amount;
-            var capacity = Palate.FullnessCapacity;
+            const int capacity = PalateProfile.MaxFullness;
             var becameFull = _fullness >= capacity;
             var overflow = becameFull ? _fullness - capacity : 0;
             if (becameFull)
@@ -343,6 +362,13 @@ namespace GARA.Combat
         public void ApplyStatus(StatusEffectInstance status)
         {
             _statuses.Add(status);
+            StatusApplied?.Invoke(this);
+            MMEventManager.TriggerEvent(new StatusAppliedStateEvent(SceneRoot, status.kind));
+        }
+
+        public bool HasStatus(StatusEffectKind kind)
+        {
+            return _statuses.Exists(status => status.kind == kind && !status.IsExpired);
         }
 
         // Ticks every NON-skip status down by one turn (same "N of the owner's
@@ -488,7 +514,7 @@ namespace GARA.Combat
             Passives.NotifySkillCardResolved(new PassiveContext(battle, this, card, targets, performance));
         }
 
-        FactionTag ICombatTarget.Faction => faction;
+        FactionTag ICombatTarget.Faction => Allegiance;
         bool ICombatTarget.IsDefeated => IsDefeated;
         StatBlock ICombatTarget.CurrentStats => GetCurrentStats();
         void ICombatTarget.ApplyDamage(int amount) => ApplyDamage(amount);
@@ -497,5 +523,6 @@ namespace GARA.Combat
         int ICombatTarget.Fullness => Fullness;
         FeedResult ICombatTarget.Feed(int amount) => Feed(amount);
         void ICombatTarget.ApplyStatus(StatusEffectInstance status) => ApplyStatus(status);
+        bool ICombatTarget.HasStatus(StatusEffectKind kind) => HasStatus(kind);
     }
 }

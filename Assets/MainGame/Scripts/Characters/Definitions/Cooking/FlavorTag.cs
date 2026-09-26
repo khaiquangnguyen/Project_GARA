@@ -2,10 +2,9 @@ using System;
 
 namespace GARA.Characters
 {
-    // Flavors a dish (RecipeSkillCard) or a target (PalateProfile) can carry.
-    // Umami is deliberately hidden from players — see FlavorTags.Visible —
-    // it always contributes to fullness but never shows up as a favorite or
-    // in dish-vs-palate match counting.
+    // Flavors a dish (ChefSkillCard) or a target (PalateProfile) can carry.
+    // Umami is dish-only: enemies can't favor it, and it pairs with any
+    // favorite flavor (see MasterchefPassive).
     [Flags]
     public enum FlavorTag
     {

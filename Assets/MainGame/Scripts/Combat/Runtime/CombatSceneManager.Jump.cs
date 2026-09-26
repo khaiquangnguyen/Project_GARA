@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 
 namespace GARA.Combat
 {
-    // Jump input during an enemy swing: opens a dodge window and plays each
-    // player's JumpState. Always followed by a fixed cooldown, hit or miss.
+    // Jump input during an AI-controlled swing: opens a dodge window and
+    // plays each player-controlled defender's JumpState. Always followed by a fixed cooldown, hit or miss.
     // Timings and the jump arc live on JumpSpec.
     public partial class CombatSceneManager
     {
@@ -25,7 +25,7 @@ namespace GARA.Combat
 
         private void OnJump(InputAction.CallbackContext ctx)
         {
-            if (!_enemyActionInProgress)
+            if (!_aiActionInProgress)
             {
                 return;
             }
@@ -43,7 +43,7 @@ namespace GARA.Combat
 
             _jumpCooldownEndsAt = Time.time + jumpSpec.WindowDurationSeconds + jumpSpec.CooldownSeconds;
 
-            foreach (var member in _battle.playerParty.LivingMembers().ToList())
+            foreach (var member in PlayerControlledDefenders())
             {
                 member.BeginJump(jumpSpec.WindowDurationSeconds);
                 _executors[member].PlayJump(jumpSpec);

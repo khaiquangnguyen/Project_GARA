@@ -25,15 +25,15 @@ namespace GARA.Characters
 
         // Cooking (Chef): whether/how this target can be fed, and its
         // current fullness. Implementation lives on CombatParticipant
-        // (GARA.Combat) — declared here so GARA.Characters-side skill
-        // effects (e.g. FeedFullnessSkillEffect) can feed a target without
-        // depending on GARA.Combat.
+        // (GARA.Combat) — declared here so the Chef's Masterchef passive
+        // can feed a target without depending on GARA.Combat.
         PalateProfile Palate { get; }
         int Fullness { get; }
         FeedResult Feed(int amount);
 
-        // Generic status application (e.g. the food-coma stun) — see
+        // Generic status application (e.g. food coma) — see
         // StatusEffectInstance. Implementation lives on CombatParticipant.
         void ApplyStatus(StatusEffectInstance status);
+        bool HasStatus(StatusEffectKind kind);
     }
 }

@@ -2,9 +2,8 @@ using System;
 
 namespace GARA.Characters
 {
-    // A designer-authored value that can either be a fixed int or a min/max
-    // range rolled through whatever IValueRangeRoller the actor's passives
-    // provide (e.g. Gambler's Gambling Addict forcing favorable rolls).
+    // A fixed int or a min/max range rolled through the actor's passives'
+    // IValueRangeRoller.
     [Serializable]
     public struct RangeableInt
     {

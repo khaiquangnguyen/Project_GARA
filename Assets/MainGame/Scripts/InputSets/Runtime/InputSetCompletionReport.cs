@@ -18,5 +18,26 @@ namespace GARA.InputSets
         public bool WasAborted;
         public bool SetCollectionTimedOut;
         public IReadOnlyList<InputSetResult> SetResults;
+
+        // Scores one finished set as if it were a whole run.
+        public static InputSetCompletionReport ForSingleSet(InputSetResult result)
+        {
+            var cleared = result.Outcome == InputSetOutcome.Cleared;
+            var firstTry = cleared && result.ClearedFirstTry;
+            return new InputSetCompletionReport
+            {
+                TotalSets = 1,
+                ClearedSets = cleared ? 1 : 0,
+                FirstTryClears = firstTry ? 1 : 0,
+                TotalAttempts = result.Attempts,
+                CompletionRate = cleared ? 1f : 0f,
+                FirstTryRate = firstTry ? 1f : 0f,
+                AttemptEfficiency = result.Attempts > 0 ? 1f / result.Attempts : 0f,
+                TotalElapsed = result.TimeInSet,
+                WasAborted = false,
+                SetCollectionTimedOut = false,
+                SetResults = new[] { result }
+            };
+        }
     }
 }

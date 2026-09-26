@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629eae04fcb664701851a355167adcc1, type: 3}
+  m_Name: FrogBard_Chorus
+  m_EditorClassIdentifier: GARA.Characters.FrogBard::GARA.Characters.FrogBard.FrogBardSkillCard
+  cardId: frog_bard_chorus
+  displayName: Chorus
+  description: 'Joy: rallies every ally''s attack. Sadness: steadies every ally''s defense.'
+  icon: {fileID: 0}
+  targetMode: 3
+  multiTargetCount: 2
+  apCost: 0
+  mpCost: 0
+  positionMode: 0
+  effects: []
+  refundOnAbort: 0
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: efdef0cdd6f1a4e89bca20179eb6557a, type: 2}
+  finalePositionMode: 0
+  perfectEffects: []
+  bars:
+  - notes:
+    - input:
+        id: 1
+      kind: 0
+      time: 0
+      holdDuration: 0
+    move: {fileID: 0}
+    effects: []
+  - notes:
+    - input:
+        id: 3
+      kind: 0
+      time: 0.5
+      holdDuration: 0
+    move: {fileID: 0}
+    effects: []
+  finaleEffects:
+  - rid: 609404912810066455
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404912810066455
+      type: {class: DualEmotionEffect, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        requiredHitRate: 0.5
+        joy:
+          rid: 609404912810066456
+        sadness:
+          rid: 609404912810066457
+    - rid: 609404912810066456
+      type: {class: StatModifierOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        stat: 3
+        amount: 5
+        turns: 2
+        onSelfInsteadOfTargets: 0
+    - rid: 609404912810066457
+      type: {class: StatModifierOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        stat: 4
+        amount: 5
+        turns: 2
+        onSelfInsteadOfTargets: 0

@@ -60,6 +60,22 @@ namespace GARA.Characters
             }
         }
 
+        public void NotifyParticipantDefeated(in PassiveContext context, ICombatTarget defeated)
+        {
+            foreach (var passive in _passives)
+            {
+                var state = _statesByDefinition[passive];
+                try
+                {
+                    passive.OnParticipantDefeated(in context, defeated, state);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
+            }
+        }
+
         public bool TryGetRangeRoller(out IValueRangeRoller roller)
         {
             foreach (var passive in _passives)

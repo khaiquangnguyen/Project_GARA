@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 390ec546ba458469e9c10bd4d971a611, type: 3}
+  m_Script: {fileID: 11500000, guid: 80e6da80fff104520acb7005b5eb6106, type: 3}
   m_Name: FrozenTomato_Attack1
   m_EditorClassIdentifier: GARA.Characters::GARA.Characters.SkillCardDefinition
   cardId: frozen_tomato_attack_1
@@ -20,7 +20,19 @@ MonoBehaviour:
   multiTargetCount: 2
   apCost: 0
   mpCost: 0
-  animationSpec: {fileID: 11400000, guid: 9a69ea22e4fb4570a60f005fb0c3f1d5, type: 2}
   positionMode: 1
   effects: []
   refundOnAbort: 0
+  endDelay: 0.3
+  animationSpec: {fileID: 11400000, guid: 9a69ea22e4fb4570a60f005fb0c3f1d5, type: 2}
+  finalePositionMode: 0
+  perfectEffects: []
+  hitEffects:
+  - rid: 609404912810066279
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404912810066279
+      type: {class: FlatDamage, ns: GARA.Characters.Enemy, asm: GARA.Characters.Enemy}
+      data:
+        damage: 5

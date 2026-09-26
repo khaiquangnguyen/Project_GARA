@@ -19,6 +19,8 @@ namespace GARA.Combat
         public BattleParty playerParty = new();
         public BattleParty enemyParty = new();
 
+        public NoirWorld NoirWorld { get; } = new();
+
         public TurnOrderGroup CurrentGroup { get; private set; }
         public TurnOrderGroup NextGroup { get; private set; }
 
@@ -77,7 +79,14 @@ namespace GARA.Combat
             return queue.Take(count).ToList();
         }
 
-        public bool IsBattleOver => playerParty.IsWiped() || enemyParty.IsWiped();
+        // Over once either side has no one left fighting for it (a charmed
+        // enemy fights for the players).
+        public bool IsBattleOver => !AnyLivingFightingFor(FactionTag.Player) || !AnyLivingFightingFor(FactionTag.Enemy);
+
+        private bool AnyLivingFightingFor(FactionTag side)
+        {
+            return AllParticipants.Any(p => !p.IsDefeated && p.Allegiance == side);
+        }
 
         public IBattleQuery QueryFor(CombatParticipant self)
         {

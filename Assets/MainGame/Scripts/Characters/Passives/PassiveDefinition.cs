@@ -21,6 +21,12 @@ namespace GARA.Characters
 
         public abstract void OnSkillCardResolved(in PassiveContext context, PassiveRuntimeState state);
 
+        // Any participant on either side (never the owner itself) was just
+        // defeated. context.Card is null.
+        public virtual void OnParticipantDefeated(in PassiveContext context, ICombatTarget defeated, PassiveRuntimeState state)
+        {
+        }
+
         public virtual IValueRangeRoller GetRangeRoller(PassiveRuntimeState state) => null;
 
         // Asked once as the owner's turn ends; true grants them another turn.

@@ -1,44 +1,81 @@
+using System;
 using GARA.Characters;
-using GARA.SkillCards.Shake;
+using GARA.ShakeBalance;
 using NaughtyAttributes;
 using UnityEngine;
 
 namespace GARA.Characters.Gambler
 {
-    // A shake-input session (the "manipulate the odds" minigame) that feeds
-    // its performance into a GamblingGameDefinition roll, optionally reshaped
-    // by a GambleRigDefinition. Extends ShakeSkillCard rather than
-    // SkillCardDefinition directly so it reuses the shake input/authoring
-    // (targetPairs, scoreShaping, ...) as-is.
-    [CreateAssetMenu(menuName = "GARA/Skill Cards/Gambler Skill Card", fileName = "GamblerSkillCard")]
-    public class GamblerSkillCard : ShakeSkillCard
+    // Shake balance score is the luck of the card's game; the roll gates
+    // which effects land on the card's move (animationSpec).
+    [CreateAssetMenu(menuName = "GARA/Characters/Gambler/Gamble Card", fileName = "GambleCard")]
+    public class GamblerSkillCard : SkillCardDefinition
     {
+        private const string GambleGroup = "Gamble";
+
+        [BoxGroup(GambleGroup)]
         [SerializeField]
         [Expandable]
-        private GamblingGameDefinition game;
+        private ShakeBalanceDefinition balance;
 
+        [Tooltip("Maps the run's 0-1 result to the 0-1 score, which is the game's luck.")]
+        [BoxGroup(GambleGroup)]
         [SerializeField]
-        private TierScaling manipulateByTier;
+        private AnimationCurve scoreShaping = AnimationCurve.Linear(0, 0, 1, 1);
 
-        [SerializeField]
-        private bool consolationOnFail = true;
+        [BoxGroup(GambleGroup)]
+        [SerializeReference]
+        [SubclassPicker]
+        public GamblingGame game;
 
-        [SerializeField]
-        [Expandable]
-        private GambleRigDefinition rig;
+        [Tooltip("Gated on the roll; the triggered ones apply on the move's hit. None triggered = the move doesn't play.")]
+        [SerializeReference]
+        [SubclassPicker]
+        public GambleEffect[] rollEffects = Array.Empty<GambleEffect>();
 
-        [SerializeField]
-        private GamblerSkillCard baseCard;
+        public ShakeBalanceDefinition Balance => balance;
 
-        public GamblingGameDefinition Game => game;
-        public TierScaling ManipulateByTier => manipulateByTier;
-        public bool ConsolationOnFail => consolationOnFail;
-        public GambleRigDefinition Rig => rig;
-        public bool IsRigged => rig != null;
+        public AnimationCurve ScoreShaping => scoreShaping;
+
+        protected override bool HasCardEffects => false;
+
+        protected override bool HasPerfectEffects => false;
 
         public override ISkillInputSession CreateInputSession(ISkillInputHost host)
         {
-            return new GamblerSkillInputSession(this, (ShakeSkillInputSession)base.CreateInputSession(host));
+            var tiering = host.Actor is Gambler gambler ? gambler.SpecialTiering : SkillPerformanceTiering.Default;
+            return new GamblerLiveSkillInputSession(host.GetDriver<ShakeBalancePlayer>(), this, tiering);
+        }
+
+        protected virtual void OnValidate()
+        {
+            if (balance == null)
+            {
+                Debug.LogWarning($"{name}: GamblerSkillCard has no balance definition.", this);
+            }
+
+            if (game == null)
+            {
+                Debug.LogWarning($"{name}: GamblerSkillCard has no gambling game.", this);
+            }
+
+            if (rollEffects.Length == 0)
+            {
+                Debug.LogWarning($"{name}: GamblerSkillCard has no roll effects — it never plays.", this);
+            }
+
+            if (game == null)
+            {
+                return;
+            }
+
+            foreach (var effect in rollEffects)
+            {
+                if (effect != null && !effect.OutcomeType.IsAssignableFrom(game.OutcomeType))
+                {
+                    Debug.LogWarning($"{name}: {effect.GetType().Name} reads {effect.OutcomeType.Name}, but {game.GetType().Name} rolls {game.OutcomeType.Name} — it never triggers.", this);
+                }
+            }
         }
     }
 }

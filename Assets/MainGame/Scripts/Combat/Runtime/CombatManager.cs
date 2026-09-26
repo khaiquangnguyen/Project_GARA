@@ -31,11 +31,11 @@ namespace GARA.Combat
         // root, so definition.gameObject is that prefab), placed feet-first
         // at its slot anchor, then bound so its live CharacterStates and
         // AttackExecutor are usable.
-        public void GenerateParticipants(CharacterDefinition[] players, EnemyEncounterData[] enemies)
+        public void GenerateParticipants(PlayerRosterSlot[] players, EnemyRosterSlot[] enemies)
         {
             for (var i = 0; i < players.Length && i < BattleParty.Size; i++)
             {
-                var definition = players[i];
+                var definition = players[i].character;
                 if (definition == null)
                 {
                     continue;
@@ -43,6 +43,7 @@ namespace GARA.Combat
 
                 var managedCharacter = new ManagedCharacter(Guid.NewGuid().ToString(), definition.characterId);
                 var participant = CombatParticipant.FromManagedCharacter(managedCharacter, definition, FactionTag.Player);
+                participant.playerControlled = players[i].IsPlayerControlled;
                 _battle.playerParty.Slots[i].occupant = participant;
 
                 SpawnAndBind(participant, definition.gameObject, isLeft: true, i);
@@ -50,13 +51,15 @@ namespace GARA.Combat
 
             for (var i = 0; i < enemies.Length && i < BattleParty.Size; i++)
             {
-                var encounter = enemies[i];
+                var encounter = enemies[i].encounter;
                 if (encounter == null)
                 {
                     continue;
                 }
 
                 var participant = CombatParticipant.FromEnemyEncounter(encounter, FactionTag.Enemy);
+                participant.playerControlled = enemies[i].IsPlayerControlled;
+                participant.charmedToPlayerSide = enemies[i].charmedToPlayerSide;
                 _battle.enemyParty.Slots[i].occupant = participant;
 
                 SpawnAndBind(participant, encounter.definition.gameObject, isLeft: false, i);

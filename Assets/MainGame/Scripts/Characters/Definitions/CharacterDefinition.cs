@@ -79,8 +79,6 @@ namespace GARA.Characters
 
         private void OnValidate()
         {
-            palate.SanitizeInPlace(this);
-
             var seen = new HashSet<SkillCardDefinition>();
             foreach (var card in SkillCards)
             {

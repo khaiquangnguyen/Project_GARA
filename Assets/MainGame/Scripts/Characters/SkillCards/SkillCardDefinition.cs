@@ -88,6 +88,10 @@ namespace GARA.Characters
         // perfectEffects.
         protected virtual bool HasPerfectEffects => true;
 
+        // True when every "hit" event of the card's clips lands an impact,
+        // whatever the spec's own impactOnEveryHit says.
+        public virtual bool ImpactOnEveryHit => false;
+
         // Completes the moment it begins.
         private class InstantSkillInputSession : ISkillInputSession
         {

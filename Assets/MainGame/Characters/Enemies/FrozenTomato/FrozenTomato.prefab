@@ -200,7 +200,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3662008488019087220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df8b1f504802141559300367a73fee48, type: 3}
+  m_Script: {fileID: 11500000, guid: 085e7f64769c7427d9e60490da5f5151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Characters::GARA.Characters.CharacterDefinition
   characterId: frozen_tomato
@@ -223,7 +223,6 @@ MonoBehaviour:
   palate:
     canBeFed: 0
     favoriteFlavors: 0
-    fullnessCapacity: 0
   hpHeartAnchor: {fileID: 1267899089328944600}
 --- !u!114 &1118167080659379036
 MonoBehaviour:

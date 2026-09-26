@@ -40,7 +40,10 @@ MonoBehaviour:
     - GARA.Characters
     - GARA.Characters.Chef
     - GARA.Characters.Dancer
+    - GARA.Characters.Enemy
+    - GARA.Characters.FrogBard
     - GARA.Characters.Gambler
+    - GARA.Characters.Noir
     - GARA.Chords
     - GARA.Combat
     - GARA.Countdowns

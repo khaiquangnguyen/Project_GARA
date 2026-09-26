@@ -11,5 +11,8 @@ namespace GARA.Characters
         ICombatTarget Self { get; }
         IEnumerable<ICombatTarget> Allies { get; }
         IEnumerable<ICombatTarget> Enemies { get; }
+
+        // Battle-wide, shared by every participant's query.
+        NoirWorld NoirWorld { get; }
     }
 }

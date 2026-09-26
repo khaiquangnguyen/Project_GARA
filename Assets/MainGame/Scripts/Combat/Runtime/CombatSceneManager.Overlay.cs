@@ -5,6 +5,7 @@ using GARA.InputSets;
 using GARA.Rhythm;
 using GARA.ShakeBalance;
 using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -56,6 +57,12 @@ namespace GARA.Combat
         [Tooltip("PlayerEffectDummy's OnJumpSuccessEffect child.")]
         [SerializeField] private GameObject playerJumpSuccessEffectTemplate;
 
+        [Tooltip("PlayerEffectDummy's OnActiveActorEffect child.")]
+        [SerializeField] private GameObject playerActiveActorEffectTemplate;
+
+        [Tooltip("PlayerEffectDummy's OnNoirifiedEffect child.")]
+        [SerializeField] private GameObject playerNoirifiedEffectTemplate;
+
         [Header("Enemy Character Effects")]
         [Tooltip("EnemyEffectDummy's OnNotTargetedEffect child.")]
         [SerializeField] private GameObject enemyNotTargetedEffectTemplate;
@@ -71,6 +78,12 @@ namespace GARA.Combat
 
         [Tooltip("EnemyEffectDummy's OnJumpSuccessEffect child.")]
         [SerializeField] private GameObject enemyJumpSuccessEffectTemplate;
+
+        [Tooltip("EnemyEffectDummy's OnActiveActorEffect child.")]
+        [SerializeField] private GameObject enemyActiveActorEffectTemplate;
+
+        [Tooltip("EnemyEffectDummy's OnNoirifiedEffect child.")]
+        [SerializeField] private GameObject enemyNoirifiedEffectTemplate;
 
         [Header("Enemy HP")]
         [Tooltip("Spawned on each enemy's HP heart anchor at battle start; only shown while that enemy is targeted.")]
@@ -147,6 +160,8 @@ namespace GARA.Combat
                 CloneEffectOntoEveryCharacter(playerHitEffectTemplate, enemyHitEffectTemplate);
                 CloneEffectOntoEveryCharacter(playerParrySuccessEffectTemplate, enemyParrySuccessEffectTemplate);
                 CloneEffectOntoEveryCharacter(playerJumpSuccessEffectTemplate, enemyJumpSuccessEffectTemplate);
+                CloneEffectOntoEveryCharacter(playerActiveActorEffectTemplate, enemyActiveActorEffectTemplate);
+                CloneEffectOntoEveryCharacter(playerNoirifiedEffectTemplate, enemyNoirifiedEffectTemplate);
                 SpawnEnemyHpHearts();
                 _hasClonedCharacterEffects = true;
             }
@@ -236,10 +251,10 @@ namespace GARA.Combat
             }
         }
 
-        // Empty on non-player turns.
+        // Empty on AI-controlled turns.
         private void RefreshSkillCardSlots(CombatParticipant actor)
         {
-            var cards = actor != null && actor.faction == FactionTag.Player ? actor.SkillCards : null;
+            var cards = actor != null && actor.IsPlayerControlled ? actor.SkillCards : null;
             for (var i = 0; i < skillCardSlots.Length; i++)
             {
                 var slot = skillCardSlots[i];
@@ -270,6 +285,16 @@ namespace GARA.Combat
                 {
                     skillCardSlots[i].SetHighlighted(i == index);
                 }
+            }
+        }
+
+        // Listeners (see OnActiveActorEffect) show or hide the current-actor
+        // marker.
+        private static void AnnounceActiveActor(CombatParticipant actor, bool isActive)
+        {
+            if (actor?.SceneRoot != null)
+            {
+                MMEventManager.TriggerEvent(new ActiveActorStateEvent(actor.SceneRoot, isActive, actor.IsPlayerControlled));
             }
         }
 

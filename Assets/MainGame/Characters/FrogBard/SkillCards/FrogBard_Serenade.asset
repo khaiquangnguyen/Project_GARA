@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629eae04fcb664701851a355167adcc1, type: 3}
+  m_Name: FrogBard_Serenade
+  m_EditorClassIdentifier: GARA.Characters.FrogBard::GARA.Characters.FrogBard.FrogBardSkillCard
+  cardId: frog_bard_serenade
+  displayName: Serenade
+  description: 'Joy: strums hard at one foe. Sadness: softer strums, and the finale saps its attack.'
+  icon: {fileID: 0}
+  targetMode: 0
+  multiTargetCount: 2
+  apCost: 0
+  mpCost: 0
+  positionMode: 1
+  effects: []
+  refundOnAbort: 0
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: 362518d5fa4c7472f9f1804319d3f6c4, type: 2}
+  finalePositionMode: 1
+  perfectEffects: []
+  bars:
+  - notes:
+    - input:
+        id: 2
+      kind: 0
+      time: 0
+      holdDuration: 0
+    move: {fileID: 11400000, guid: c9d0f32a507a14c608d6d9dbdd8f2aa9, type: 2}
+    effects:
+    - rid: 609404912810066446
+  - notes:
+    - input:
+        id: 4
+      kind: 0
+      time: 0.5
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 21577ad6c4269484997741ab6c8641c3, type: 2}
+    effects:
+    - rid: 609404912810066449
+  - notes:
+    - input:
+        id: 1
+      kind: 0
+      time: 1
+      holdDuration: 0
+    move: {fileID: 11400000, guid: c9d0f32a507a14c608d6d9dbdd8f2aa9, type: 2}
+    effects:
+    - rid: 609404912810066452
+  finaleEffects:
+  - rid: 609404912810066443
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404912810066443
+      type: {class: DualEmotionEffect, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        requiredHitRate: 1
+        joy:
+          rid: 609404912810066444
+        sadness:
+          rid: 609404912810066445
+    - rid: 609404912810066444
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 20
+    - rid: 609404912810066445
+      type: {class: StatModifierOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        stat: 3
+        amount: -4
+        turns: 2
+        onSelfInsteadOfTargets: 0
+    - rid: 609404912810066446
+      type: {class: DualEmotionEffect, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        requiredHitRate: 1
+        joy:
+          rid: 609404912810066447
+        sadness:
+          rid: 609404912810066448
+    - rid: 609404912810066447
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 10
+    - rid: 609404912810066448
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 6
+    - rid: 609404912810066449
+      type: {class: DualEmotionEffect, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        requiredHitRate: 1
+        joy:
+          rid: 609404912810066450
+        sadness:
+          rid: 609404912810066451
+    - rid: 609404912810066450
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 10
+    - rid: 609404912810066451
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 6
+    - rid: 609404912810066452
+      type: {class: DualEmotionEffect, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        requiredHitRate: 1
+        joy:
+          rid: 609404912810066453
+        sadness:
+          rid: 609404912810066454
+    - rid: 609404912810066453
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 10
+    - rid: 609404912810066454
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 6

@@ -26,9 +26,13 @@ namespace GARA.Combat
 
         private CharacterStateContext _context;
         private bool _impactInvoked;
+        private bool _impactOnEveryHit;
 
         public override void Enter(CharacterStateContext context)
         {
+            // Read before base.Enter consumes the one-play override.
+            _impactOnEveryHit = (skillCard != null && skillCard.ImpactOnEveryHit)
+                                || (NextSpec != null && NextSpec.ImpactOnEveryHit);
             base.Enter(context);
             _context = context;
             _impactInvoked = false;
@@ -38,6 +42,13 @@ namespace GARA.Combat
         {
             if (!IsHitEvent(eventName))
             {
+                return;
+            }
+
+            if (_impactOnEveryHit)
+            {
+                _impactInvoked = true;
+                _context.OnImpact?.Invoke();
                 return;
             }
 

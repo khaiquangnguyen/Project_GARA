@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd08ea8b9cf644f39ffb2526098d439, type: 3}
+  m_Name: Gambler_Poker
+  m_EditorClassIdentifier: GARA.Characters.Gambler::GARA.Characters.Gambler.GamblerSkillCard
+  cardId: gambler_poker
+  displayName: Poker
+  description: 
+  icon: {fileID: 0}
+  targetMode: 0
+  multiTargetCount: 2
+  apCost: 0
+  mpCost: 0
+  positionMode: 1
+  effects: []
+  refundOnAbort: 0
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: 402e8de2e7304f1cb28bf344911be6e0, type: 2}
+  finalePositionMode: 0
+  perfectEffects: []
+  balance: {fileID: 11400000, guid: 1659b97f439754fe2b484b810d05fef7, type: 2}
+  scoreShaping:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  game:
+    rid: 609404912810066231
+  rollEffects:
+  - rid: 609404912810066310
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404912810066231
+      type: {class: PokerHandGame, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        maxExtraDraws: 2
+    - rid: 609404912810066310
+      type: {class: SignificanceScaledDamage, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        minSignificance: 0
+        minDamage: 5
+        maxDamage: 20

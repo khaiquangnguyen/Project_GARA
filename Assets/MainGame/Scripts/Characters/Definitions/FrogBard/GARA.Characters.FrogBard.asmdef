@@ -1,0 +1,19 @@
+{
+  "name": "GARA.Characters.FrogBard",
+  "rootNamespace": "GARA.Characters.FrogBard",
+  "references": [
+    "GARA.Characters",
+    "GARA.SkillCards.Rhythm",
+    "GARA.Rhythm",
+    "NaughtyAttributes.Core"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

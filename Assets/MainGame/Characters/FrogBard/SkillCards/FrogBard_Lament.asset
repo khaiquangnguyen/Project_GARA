@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629eae04fcb664701851a355167adcc1, type: 3}
+  m_Name: FrogBard_Lament
+  m_EditorClassIdentifier: GARA.Characters.FrogBard::GARA.Characters.FrogBard.FrogBardSkillCard
+  cardId: frog_bard_lament
+  displayName: Lament
+  description: 'Joy: a rousing wail that hits every foe. Sadness: a dirge that slows every foe.'
+  icon: {fileID: 0}
+  targetMode: 1
+  multiTargetCount: 2
+  apCost: 0
+  mpCost: 0
+  positionMode: 0
+  effects: []
+  refundOnAbort: 0
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: a93ded00bd2904dc183f9432d2361f38, type: 2}
+  finalePositionMode: 0
+  perfectEffects: []
+  bars:
+  - notes:
+    - input:
+        id: 1
+      kind: 0
+      time: 0
+      holdDuration: 0
+    move: {fileID: 11400000, guid: c9d0f32a507a14c608d6d9dbdd8f2aa9, type: 2}
+    effects:
+    - rid: 609404912810066461
+  - notes:
+    - input:
+        id: 3
+      kind: 0
+      time: 0.5
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 21577ad6c4269484997741ab6c8641c3, type: 2}
+    effects:
+    - rid: 609404912810066464
+  - notes:
+    - input:
+        id: 2
+      kind: 0
+      time: 1
+      holdDuration: 0
+    move: {fileID: 11400000, guid: c9d0f32a507a14c608d6d9dbdd8f2aa9, type: 2}
+    effects:
+    - rid: 609404912810066467
+  - notes:
+    - input:
+        id: 4
+      kind: 0
+      time: 1.5
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 21577ad6c4269484997741ab6c8641c3, type: 2}
+    effects:
+    - rid: 609404912810066470
+  finaleEffects:
+  - rid: 609404912810066458
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404912810066458
+      type: {class: DualEmotionEffect, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        requiredHitRate: 0.75
+        joy:
+          rid: 609404912810066459
+        sadness:
+          rid: 609404912810066460
+    - rid: 609404912810066459
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 12
+    - rid: 609404912810066460
+      type: {class: StatModifierOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        stat: 5
+        amount: -5
+        turns: 3
+        onSelfInsteadOfTargets: 0
+    - rid: 609404912810066461
+      type: {class: DualEmotionEffect, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        requiredHitRate: 1
+        joy:
+          rid: 609404912810066462
+        sadness:
+          rid: 609404912810066463
+    - rid: 609404912810066462
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 5
+    - rid: 609404912810066463
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 3
+    - rid: 609404912810066464
+      type: {class: DualEmotionEffect, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        requiredHitRate: 1
+        joy:
+          rid: 609404912810066465
+        sadness:
+          rid: 609404912810066466
+    - rid: 609404912810066465
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 5
+    - rid: 609404912810066466
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 3
+    - rid: 609404912810066467
+      type: {class: DualEmotionEffect, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        requiredHitRate: 1
+        joy:
+          rid: 609404912810066468
+        sadness:
+          rid: 609404912810066469
+    - rid: 609404912810066468
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 5
+    - rid: 609404912810066469
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 3
+    - rid: 609404912810066470
+      type: {class: DualEmotionEffect, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        requiredHitRate: 1
+        joy:
+          rid: 609404912810066471
+        sadness:
+          rid: 609404912810066472
+    - rid: 609404912810066471
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 5
+    - rid: 609404912810066472
+      type: {class: DamageOutcome, ns: GARA.Characters.FrogBard, asm: GARA.Characters.FrogBard}
+      data:
+        damage: 3

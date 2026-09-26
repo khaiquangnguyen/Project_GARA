@@ -13,14 +13,14 @@ namespace GARA.Combat
     // The player-facing turn loop: one Combat Phase per turn, in which skill
     // cards are repeatable — each gated only by AP+MP affordability and the
     // actor's executor being idle between uses — until the player ends the
-    // phase with EndPhase (Backspace). A/D move the card highlight and
+    // phase with EndPhase (Space). A/D move the card highlight and
     // UseSkill (Enter) selects the highlighted card; the same public calls (see
     // "Skill card selection" below) are open to any other driver. A
     // card can come from anywhere in the actor's combat loadout
     // (CombatParticipant.SkillCards), whatever its length. Using a card
     // first selects it and opens its targeting (see "Target picking"); it
-    // only fires once its targets are confirmed. Non-player turns go to
-    // PerformEnemyTurn (see .EnemyTurn) — no input is read for them.
+    // only fires once its targets are confirmed. AI-controlled turns go to
+    // PerformAiTurn (see .EnemyTurn) — no input is read for them.
     public partial class CombatSceneManager
     {
         // Raised the instant a stunned (food-coma'd) actor's turn is skipped
@@ -58,6 +58,7 @@ namespace GARA.Combat
         private InputAction _targetLeft;
         private InputAction _targetRight;
         private InputAction _endPhase;
+        private InputAction _cancel;
         private InputAction _useSkill;
         private InputAction _skillLeft;
         private InputAction _skillRight;
@@ -79,6 +80,7 @@ namespace GARA.Combat
             _targetLeft = map.FindAction("TargetLeft");
             _targetRight = map.FindAction("TargetRight");
             _endPhase = map.FindAction("EndPhase");
+            _cancel = map.FindAction("Cancel");
             _useSkill = map.FindAction("UseSkill");
             _skillLeft = map.FindAction("SkillLeft");
             _skillRight = map.FindAction("SkillRight");
@@ -91,6 +93,7 @@ namespace GARA.Combat
             _targetLeft.performed += OnTargetLeft;
             _targetRight.performed += OnTargetRight;
             _endPhase.performed += OnEndCombatPhase;
+            _cancel.performed += OnCancel;
             _useSkill.performed += OnUseSkill;
             _skillLeft.performed += OnSkillLeft;
             _skillRight.performed += OnSkillRight;
@@ -98,6 +101,7 @@ namespace GARA.Combat
             EnableParry();
             EnableJump();
             CombatParticipant.Defeated += OnParticipantDefeated;
+            CombatParticipant.StatusApplied += OnParticipantStatusApplied;
 
             combatInputActions.FindActionMap("Combat").Enable();
         }
@@ -107,6 +111,7 @@ namespace GARA.Combat
             _targetLeft.performed -= OnTargetLeft;
             _targetRight.performed -= OnTargetRight;
             _endPhase.performed -= OnEndCombatPhase;
+            _cancel.performed -= OnCancel;
             _useSkill.performed -= OnUseSkill;
             _skillLeft.performed -= OnSkillLeft;
             _skillRight.performed -= OnSkillRight;
@@ -114,10 +119,12 @@ namespace GARA.Combat
             DisableParry();
             DisableJump();
             CombatParticipant.Defeated -= OnParticipantDefeated;
+            CombatParticipant.StatusApplied -= OnParticipantStatusApplied;
 
             combatInputActions.FindActionMap("Combat").Disable();
 
             AbortActiveSkillCardSession();
+            UnbindNoirWorld();
         }
 
         // Called by CombatManager once every participant is spawned and bound.
@@ -125,6 +132,7 @@ namespace GARA.Combat
         {
             _battle = battle;
             _executors = executors;
+            BindNoirWorld(_battle.NoirWorld);
 
             _battle.InitializeTurnOrder();
             RaiseTurnOrderChanged();
@@ -167,12 +175,21 @@ namespace GARA.Combat
                 RefreshTargetPreview();
             }
 
+            NotifyPassivesOfDefeat(participant);
+
             RaiseTurnOrderChanged();
         }
 
         // Slot 0 is always whoever's turn it currently is — the queue
         // itself shifts left as each turn is consumed, rather than a fixed
         // per-round slot being highlighted in place.
+        // A status (e.g. food coma) may have changed Speed.
+        private void OnParticipantStatusApplied(CombatParticipant participant)
+        {
+            _battle.RecalculateTurnOrder();
+            RaiseTurnOrderChanged();
+        }
+
         private void RaiseTurnOrderChanged()
         {
             var upcoming = _battle.GetUpcomingQueue(TurnOrderDisplaySlotCount);
@@ -422,20 +439,19 @@ namespace GARA.Combat
             }
         }
 
-        // Backspace steps back while picking — undoes the last pick, then
-        // drops the card — and ends the phase otherwise.
+        // Esc steps back while picking — undoes the last pick, then
+        // drops the card.
+        private void OnCancel(InputAction.CallbackContext ctx)
+        {
+            if (IsPickingSkillCardTargets && !UndoSkillCardTarget())
+            {
+                CancelSkillCardTargeting();
+            }
+        }
+
+        // Space ends the phase.
         private void OnEndCombatPhase(InputAction.CallbackContext ctx)
         {
-            if (IsPickingSkillCardTargets)
-            {
-                if (!UndoSkillCardTarget())
-                {
-                    CancelSkillCardTargeting();
-                }
-
-                return;
-            }
-
             if (!CanAct())
             {
                 return;
@@ -448,7 +464,7 @@ namespace GARA.Combat
         {
             return _phaseActive
                    && _actor != null
-                   && _actor.faction == FactionTag.Player
+                   && _actor.IsPlayerControlled
                    && !_actorExecutor.IsBusy
                    && _phaseActionState == PhaseActionState.Regular;
         }
@@ -497,6 +513,16 @@ namespace GARA.Combat
                 return false;
             }
 
+            StartSkillCard(card, targets);
+            return true;
+        }
+
+        // Plays the card for the current actor, whoever drives it (the
+        // player once it's paid for, or PerformAiTurn). Resolving ends
+        // once _phaseActionState is back to Regular.
+        private void StartSkillCard(SkillCardDefinition card, IReadOnlyList<ICombatTarget> targets)
+        {
+            AnnounceActiveActor(_actor, false);
             AnnounceTargetingForSkillCard(_actor, targets);
             RetreatUninvolved(_actor, targets);
 
@@ -508,11 +534,10 @@ namespace GARA.Combat
             if (_activeSession is ILiveSkillInputSession liveSession)
             {
                 BeginLiveSkillCard(card, targets, liveSession);
-                return true;
+                return;
             }
 
             _activeSession.Begin(performance => OnSkillCardInputCompleted(card, targets, performance));
-            return true;
         }
 
         // Fires once the card's input minigame finishes (including an
@@ -584,9 +609,16 @@ namespace GARA.Combat
         private void BeginPhaseForCurrentActor()
         {
             _actor = _battle.CurrentActor;
+            if (_actor == null)
+            {
+                Debug.LogError($"[{nameof(CombatSceneManager)}] No one to act — is the roster (RogueRunManager) empty?", this);
+                return;
+            }
+
             _actorExecutor = _executors[_actor];
             SetSortingOrder(_actor, 1);
-            ToggleTurnAnnouncement(_actor.faction == FactionTag.Player);
+            AnnounceActiveActor(_actor, true);
+            ToggleTurnAnnouncement(_actor.IsPlayerControlled);
             RefreshSkillCardSlots(_actor);
 
             // Timed modifiers (see TimedStatModifierSkillEffect) tick down
@@ -614,10 +646,10 @@ namespace GARA.Combat
                 return;
             }
 
-            if (_actor.faction != FactionTag.Player)
+            if (!_actor.IsPlayerControlled)
             {
                 _phaseActive = false;
-                StartCoroutine(PerformEnemyTurn(_actor, _actorExecutor));
+                StartCoroutine(PerformAiTurn(_actor, _actorExecutor));
                 return;
             }
 
@@ -648,9 +680,10 @@ namespace GARA.Combat
             AbortActiveSkillCardSession();
 
             _phaseActive = false;
-            _enemyActionInProgress = false;
+            _aiActionInProgress = false;
             targetSelector.EndSelection();
             AnnounceTargetingClearedForEnemies(_actor);
+            AnnounceActiveActor(_actor, false);
             SetSortingOrder(_actor, 0);
 
             // An extra turn (e.g. Dancer's Encore) holds the cursor so the
@@ -665,9 +698,11 @@ namespace GARA.Combat
 
             if (_battle.IsBattleOver)
             {
+                _battle.NoirWorld.Exit();
                 return;
             }
 
+            _battle.NoirWorld.TickTurn();
             BeginPhaseForCurrentActor();
         }
 
@@ -737,14 +772,12 @@ namespace GARA.Combat
 
         private List<CombatParticipant> LivingEnemiesOf(CombatParticipant actor)
         {
-            var opposing = actor.faction == FactionTag.Player ? _battle.enemyParty : _battle.playerParty;
-            return opposing.LivingMembers().ToList();
+            return LivingWhere(p => p.Allegiance != actor.Allegiance);
         }
 
         private List<CombatParticipant> LivingAlliesOf(CombatParticipant actor)
         {
-            var own = actor.faction == FactionTag.Player ? _battle.playerParty : _battle.enemyParty;
-            return own.LivingMembers().ToList();
+            return LivingWhere(p => p.Allegiance == actor.Allegiance);
         }
 
         // Every living character on either side that's neither the actor
@@ -754,6 +787,12 @@ namespace GARA.Combat
             return LivingEnemiesOf(actor).Concat(LivingAlliesOf(actor))
                 .Where(participant => participant != actor && !targets.Contains(participant))
                 .ToList();
+        }
+
+        // Slot order: the players' side first, then the enemies'.
+        private List<CombatParticipant> LivingWhere(Func<CombatParticipant, bool> predicate)
+        {
+            return _battle.playerParty.LivingMembers().Concat(_battle.enemyParty.LivingMembers()).Where(predicate).ToList();
         }
 
         private List<CombatParticipant> LivingPoolOf(CombatParticipant actor, TargetPool pool)

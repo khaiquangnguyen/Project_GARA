@@ -4,7 +4,7 @@ using UnityEngine;
 // Lives on the root of each side's effect dummy prefab (PlayerEffectDummy,
 // EnemyEffectDummy) — exposes which child GameObjects hold this dummy's
 // per-character effect components (OnNotTargetedEffect — fade and shrink —
-// OnHitEffect, OnParrySuccessEffect and OnJumpSuccessEffect) via direct Inspector-assigned references.
+// OnHitEffect, OnParrySuccessEffect, OnJumpSuccessEffect, OnActiveActorEffect and OnNoirifiedEffect) via direct Inspector-assigned references.
 // CombatSceneManager references those children directly as the templates
 // it clones onto every character of that dummy's side.
 //
@@ -31,6 +31,12 @@ public class EffectDummy : MonoBehaviour
     [Tooltip("The child GameObject holding this dummy's OnJumpSuccessEffect component — cloned onto every character at combat start.")]
     [SerializeField] private GameObject onJumpSuccessEffect;
 
+    [Tooltip("The child GameObject holding this dummy's OnActiveActorEffect component — cloned onto every character at combat start.")]
+    [SerializeField] private GameObject onActiveActorEffect;
+
+    [Tooltip("The child GameObject holding this dummy's OnNoirifiedEffect component — cloned onto every character at combat start.")]
+    [SerializeField] private GameObject onNoirifiedEffect;
+
     [Header("Preview")]
     [Tooltip("Any character prefab (Dancer, FrozenTomato, a future one, ...) to preview effects against, as if it were the previewed character in combat.")]
     [SerializeField] private GameObject previewCharacterPrefab;
@@ -40,12 +46,16 @@ public class EffectDummy : MonoBehaviour
     public GameObject OnHitEffect => onHitEffect;
     public GameObject OnParrySuccessEffect => onParrySuccessEffect;
     public GameObject OnJumpSuccessEffect => onJumpSuccessEffect;
+    public GameObject OnActiveActorEffect => onActiveActorEffect;
+    public GameObject OnNoirifiedEffect => onNoirifiedEffect;
 
     private GameObject _previewInstance;
     private readonly List<OnNotTargetedEffect> _previewNotTargetedEffects = new();
     private OnHitEffect _previewHitEffect;
     private OnParrySuccessEffect _previewParrySuccessEffect;
     private OnJumpSuccessEffect _previewJumpSuccessEffect;
+    private OnActiveActorEffect _previewActiveActorEffect;
+    private OnNoirifiedEffect _previewNoirifiedEffect;
 
     [ContextMenu("Preview/Play Not-Targeted Effect")]
     public void Preview()
@@ -191,6 +201,87 @@ public class EffectDummy : MonoBehaviour
         }
     }
 
+    [ContextMenu("Preview/Show Active Actor Marker (Player-Controlled)")]
+    public void PreviewActiveActorPlayerControlled()
+    {
+        PreviewActiveActor(true);
+    }
+
+    [ContextMenu("Preview/Show Active Actor Marker (AI-Controlled)")]
+    public void PreviewActiveActorAiControlled()
+    {
+        PreviewActiveActor(false);
+    }
+
+    private void PreviewActiveActor(bool isPlayerControlled)
+    {
+        if (previewCharacterPrefab == null || onActiveActorEffect == null)
+        {
+            Debug.LogWarning("EffectDummy.PreviewActiveActor: assign both previewCharacterPrefab and onActiveActorEffect first.", this);
+            return;
+        }
+
+        EnsurePreviewInstance();
+
+        if (_previewActiveActorEffect == null)
+        {
+            var effectClone = Instantiate(onActiveActorEffect, _previewInstance.transform, false);
+            _previewActiveActorEffect = effectClone.GetComponent<OnActiveActorEffect>();
+        }
+
+        if (_previewActiveActorEffect == null)
+        {
+            Debug.LogWarning("EffectDummy.PreviewActiveActor: onActiveActorEffect has no OnActiveActorEffect component.", this);
+            return;
+        }
+
+        _previewActiveActorEffect.OnTrigger(isPlayerControlled);
+    }
+
+    [ContextMenu("Preview/Hide Active Actor Marker")]
+    public void RestoreActiveActorPreview()
+    {
+        if (_previewActiveActorEffect != null)
+        {
+            _previewActiveActorEffect.OnDone();
+        }
+    }
+
+    [ContextMenu("Preview/Play Noirified Effect")]
+    public void PreviewNoirified()
+    {
+        if (previewCharacterPrefab == null || onNoirifiedEffect == null)
+        {
+            Debug.LogWarning("EffectDummy.PreviewNoirified: assign both previewCharacterPrefab and onNoirifiedEffect first.", this);
+            return;
+        }
+
+        EnsurePreviewInstance();
+
+        if (_previewNoirifiedEffect == null)
+        {
+            var effectClone = Instantiate(onNoirifiedEffect, _previewInstance.transform, false);
+            _previewNoirifiedEffect = effectClone.GetComponent<OnNoirifiedEffect>();
+        }
+
+        if (_previewNoirifiedEffect == null)
+        {
+            Debug.LogWarning("EffectDummy.PreviewNoirified: onNoirifiedEffect has no OnNoirifiedEffect component.", this);
+            return;
+        }
+
+        _previewNoirifiedEffect.OnTrigger();
+    }
+
+    [ContextMenu("Preview/Restore Noirified Effect")]
+    public void RestoreNoirifiedPreview()
+    {
+        if (_previewNoirifiedEffect != null)
+        {
+            _previewNoirifiedEffect.OnDone();
+        }
+    }
+
     private void EnsurePreviewInstance()
     {
         if (_previewInstance != null)
@@ -222,6 +313,8 @@ public class EffectDummy : MonoBehaviour
         _previewHitEffect = null;
         _previewParrySuccessEffect = null;
         _previewJumpSuccessEffect = null;
+        _previewActiveActorEffect = null;
+        _previewNoirifiedEffect = null;
     }
 
     private void OnDestroy()
