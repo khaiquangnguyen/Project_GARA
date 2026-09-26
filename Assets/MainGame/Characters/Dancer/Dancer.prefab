@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85d6664bbb164fca918db3485159ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.IdleState
-  positionMode: 0
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: idle
   loop: 1
@@ -68,7 +67,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d58d8ed5a7e74d6298eeacacb042dc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.HitState
-  positionMode: 0
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: hit
   loop: 0
@@ -84,7 +82,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c899a15e2636c4b419aec0d14b9a05d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DeathState
-  positionMode: 0
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: death
   loop: 0
@@ -100,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7fbfac6709143d0a3298f258aa2bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.ParryState
-  positionMode: 0
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: parry-1
   loop: 0
@@ -116,7 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da93c804da1654cc88ab03c1a6b9fd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.JumpState
-  positionMode: 0
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: idle
   loop: 1
@@ -132,7 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a546739be2e7549b49adfd5ae8478299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerFabulousState
-  positionMode: 0
   skillCard: {fileID: 11400000, guid: 1d24cdfb438e5419da7114a214a84198, type: 2}
 --- !u!114 &2762323635188462187
 MonoBehaviour:
@@ -146,7 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94dbb24330ea6453fa1ffa7dc0a2a436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerServeState
-  positionMode: 0
   skillCard: {fileID: 11400000, guid: 82cbe38c9c6f7454eb41684b6900422a, type: 2}
 --- !u!114 &4011800275172657183
 MonoBehaviour:
@@ -160,7 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916b9be4f8c234c88b18ba666ceb3cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerFierceState
-  positionMode: 0
   skillCard: {fileID: 11400000, guid: 3ab1053043888451eb0717462813b21d, type: 2}
 --- !u!114 &5535124410395038728
 MonoBehaviour:
@@ -174,7 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bed1ee2a455342d296fa68d806b962a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerDivineState
-  positionMode: 0
   skillCard: {fileID: 11400000, guid: a14dcca265d58448aaae0fca13860940, type: 2}
 --- !u!1 &7753796104726555178
 GameObject:
@@ -419,11 +410,25 @@ MonoBehaviour:
   allowedEquipmentSlots: 
   defaultState: {fileID: 6683238165070620661}
   maxCombatSkillCards: 4
-  passives: []
+  passives:
+  - {fileID: 11400000, guid: 715b78b53f9a14bc8b74e63919b4da0e, type: 2}
   palate:
     canBeFed: 0
     favoriteFlavors: 0
     fullnessCapacity: 0
+  hpHeartAnchor: {fileID: 0}
+  specialTiering:
+    okThreshold: 0.35
+    goodThreshold: 0.65
+    perfectThreshold: 0.9
+  specialTiming:
+    leadIn: 1
+    tailOut: 0.25
+    windows:
+      perfect: 0.05
+      good: 0.1
+      ok: 0.15
+      holdReleaseTolerance: 0.1
 --- !u!114 &1076281139041943887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,7 +441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84dc4729cd36e43e2ab38845456b4cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MoveForwardState
-  positionMode: 2
   duration: 0.25
   curveX:
     serializedVersion: 2
@@ -511,7 +515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66e41026b2e141918c39b8839799063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MoveBackwardState
-  positionMode: 2
   duration: 0.25
   curveX:
     serializedVersion: 2

@@ -22,5 +22,8 @@ namespace GARA.Characters
         public abstract void OnSkillCardResolved(in PassiveContext context, PassiveRuntimeState state);
 
         public virtual IValueRangeRoller GetRangeRoller(PassiveRuntimeState state) => null;
+
+        // Asked once as the owner's turn ends; true grants them another turn.
+        public virtual bool TryConsumeExtraTurn(PassiveRuntimeState state) => false;
     }
 }

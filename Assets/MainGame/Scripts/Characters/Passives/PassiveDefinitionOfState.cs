@@ -30,5 +30,12 @@ namespace GARA.Characters
         }
 
         protected virtual IValueRangeRoller GetRangeRoller(TState state) => null;
+
+        public sealed override bool TryConsumeExtraTurn(PassiveRuntimeState state)
+        {
+            return state is TState typed && TryConsumeExtraTurn(typed);
+        }
+
+        protected virtual bool TryConsumeExtraTurn(TState state) => false;
     }
 }

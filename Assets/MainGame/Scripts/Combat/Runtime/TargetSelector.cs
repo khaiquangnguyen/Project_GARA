@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using Spine.Unity;
 using UnityEngine;
 
 namespace GARA.Combat
 {
-    // Owns the target cursor and the placeholder indicators rendered at the
-    // feet of whoever's selected. Opened once a skill card is chosen and
+    // Owns the target cursor and the indicators rendered above the
+    // head of whoever's selected. Opened once a skill card is chosen and
     // closed the instant it fires or is cancelled. Candidates can be enemies
     // or allies; this class just cycles whatever list it was given.
     public class TargetSelector : MonoBehaviour
@@ -112,9 +113,22 @@ namespace GARA.Combat
                 _indicators[i].SetActive(show);
                 if (show)
                 {
-                    _indicators[i].transform.position = selected[i].SceneTransform.position;
+                    _indicators[i].transform.position = TopOf(selected[i]);
                 }
             }
+        }
+
+        // Top-centre of the participant's Spine mesh, or its root if it has none.
+        private static Vector3 TopOf(CombatParticipant participant)
+        {
+            var skeleton = participant.SceneRoot.GetComponentInChildren<SkeletonRenderer>();
+            if (skeleton == null || !skeleton.TryGetComponent<MeshRenderer>(out var meshRenderer))
+            {
+                return participant.SceneTransform.position;
+            }
+
+            var bounds = meshRenderer.bounds;
+            return new Vector3(bounds.center.x, bounds.max.y, participant.SceneTransform.position.z);
         }
     }
 }

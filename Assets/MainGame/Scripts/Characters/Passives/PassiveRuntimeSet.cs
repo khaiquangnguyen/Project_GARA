@@ -76,6 +76,19 @@ namespace GARA.Characters
             return false;
         }
 
+        // Asks every passive (no short-circuit) so each clears its own pending
+        // flag; multiple grants still collapse into one extra turn.
+        public bool TryConsumeExtraTurn()
+        {
+            var granted = false;
+            foreach (var passive in _passives)
+            {
+                granted |= passive.TryConsumeExtraTurn(_statesByDefinition[passive]);
+            }
+
+            return granted;
+        }
+
         public void ResetAll()
         {
             foreach (var state in _statesByDefinition.Values)

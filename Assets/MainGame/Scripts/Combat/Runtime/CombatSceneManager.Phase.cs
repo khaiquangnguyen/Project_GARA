@@ -653,7 +653,14 @@ namespace GARA.Combat
             AnnounceTargetingClearedForEnemies(_actor);
             SetSortingOrder(_actor, 0);
 
-            _battle.AdvanceTurn();
+            // An extra turn (e.g. Dancer's Encore) holds the cursor so the
+            // same actor starts a fresh phase.
+            var extraTurn = !_actor.IsDefeated && _actor.Passives.TryConsumeExtraTurn();
+            if (!extraTurn)
+            {
+                _battle.AdvanceTurn();
+            }
+
             RaiseTurnOrderChanged();
 
             if (_battle.IsBattleOver)
