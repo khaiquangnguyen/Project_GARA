@@ -8,7 +8,10 @@ namespace GARA.Characters
         Noirified,
         Charmed,
         Slowed,
-        Weakened
+        Weakened,
+        Evasive,
+        Invulnerable,
+        Powered
     }
 
     // One active status inflicted on a participant. Deliberately data-only and
@@ -25,6 +28,12 @@ namespace GARA.Characters
         public int bonusDamageTakenPerHit;
         public float incomingDamageMultiplier = 1f;
         public float speedMultiplier = 1f;
+
+        // Negates the next incoming hit, then is used up (one per stack).
+        public bool evadesNextHit;
+
+        // Negates every incoming hit while it lasts.
+        public bool negatesHits;
 
         // Scales the damage this character's own skills deal.
         public float outgoingDamageMultiplier = 1f;

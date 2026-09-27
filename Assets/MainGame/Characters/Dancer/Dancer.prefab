@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 916b9be4f8c234c88b18ba666ceb3cfd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerFierceState
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerShadowDanceState
   skillCard: {fileID: 11400000, guid: 3ab1053043888451eb0717462813b21d, type: 2}
 --- !u!114 &5535124410395038728
 MonoBehaviour:
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bed1ee2a455342d296fa68d806b962a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerDivineState
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerSpotlightState
   skillCard: {fileID: 11400000, guid: a14dcca265d58448aaae0fca13860940, type: 2}
 --- !u!114 &3154187737443750635
 MonoBehaviour:

@@ -16,4 +16,6 @@ MonoBehaviour:
   animationName: special
   range: 1
   hitFeedback: {fileID: 825474723826213862, guid: 91e7a7c0f3e6404db35dcdc9a41cd1b8, type: 3}
+  impactOnEveryHit: 0
+  lightEffect: {fileID: 0}
   perfectAnnouncementDrop: {fileID: 5488480876363534256, guid: 4791c96f637e4651925a4ea3f6e3dde7, type: 3}

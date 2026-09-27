@@ -1361,6 +1361,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurnAvatar
   spriteRenderer: {fileID: 505762397}
+--- !u!1 &506781521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 506781523}
+  - component: {fileID: 506781522}
+  - component: {fileID: 506781524}
+  m_Layer: 0
+  m_Name: NoirWorldScreenEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &506781522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506781521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7074ce32cd6a94ffdb9fd14a2dce273e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NoirWorldScreenEffect
+  spec: {fileID: 11400000, guid: a5517ddadf9ad4f5dbca54b51a926772, type: 2}
+  worldCamera: {fileID: 1175990122}
+  grainVolume: {fileID: 506781524}
+--- !u!4 &506781523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506781521}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &506781524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506781521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 10
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 0}
+  m_SceneObjectReference:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
 --- !u!1 &509413128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,6 +1635,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2097038157}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &663441921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8274794569405792528, guid: b5e187cb941304c44b72728bc50f12c7, type: 3}
+  m_PrefabInstance: {fileID: 1504165455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &663441924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663441921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &691013030
 GameObject:
   m_ObjectHideFlags: 0
@@ -4298,7 +4415,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8274794569405792528, guid: b5e187cb941304c44b72728bc50f12c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 663441924}
   m_SourcePrefab: {fileID: 100100000, guid: b5e187cb941304c44b72728bc50f12c7, type: 3}
 --- !u!114 &1504165456 stripped
 MonoBehaviour:
@@ -5279,14 +5399,14 @@ MonoBehaviour:
   playerParrySuccessEffectTemplate: {fileID: 3401488061189719013, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
   playerJumpSuccessEffectTemplate: {fileID: 331152434699064910, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
   playerActiveActorEffectTemplate: {fileID: 4517199274371294702, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
-  playerNoirifiedEffectTemplate: {fileID: 0}
+  playerNoirifiedEffectTemplate: {fileID: 40183474075950735, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
   enemyNotTargetedEffectTemplate: {fileID: 4760853153468329946, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyNotTargetedShrinkEffectTemplate: {fileID: 3198688047819919781, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyHitEffectTemplate: {fileID: 4724413725210982919, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyParrySuccessEffectTemplate: {fileID: 5950136697058328324, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyJumpSuccessEffectTemplate: {fileID: 8467334021156729000, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyActiveActorEffectTemplate: {fileID: 6468845237024180897, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
-  enemyNoirifiedEffectTemplate: {fileID: 0}
+  enemyNoirifiedEffectTemplate: {fileID: 960220785317284898, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyHpHeartPrefab: {fileID: 4787717028545996810, guid: 71d8fbdc5752443519c2a92adff2b318, type: 3}
   rhythmVisualDriver: {fileID: 719048227}
   inputSetVisualDriver: {fileID: 2073647041}
@@ -5319,6 +5439,7 @@ MonoBehaviour:
   fadeIfNotTargeted: 1
   shrinkIfNotTargeted: 1
   retreatIfNotTargeted: 1
+  showFinaleSpotlight: 0
   jumpSpec: {fileID: 11400000, guid: 467ee0f188f0143fcbabb2cf4ccf09dc, type: 2}
   parrySpec: {fileID: 11400000, guid: c729104e41a3489a9b7cb97da29f36d9, type: 2}
 --- !u!4 &1653656579
@@ -7131,3 +7252,4 @@ SceneRoots:
   - {fileID: 1439436604}
   - {fileID: 343887093}
   - {fileID: 864459318}
+  - {fileID: 506781523}

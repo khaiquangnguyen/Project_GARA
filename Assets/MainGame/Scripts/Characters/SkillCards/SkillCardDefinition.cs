@@ -76,6 +76,12 @@ namespace GARA.Characters
 
         public bool refundOnAbort;
 
+        [Tooltip("Optional. Prefab (EncoreSpotlightEffect at its root) whose beams sweep onto the targets the moment the card is used, flaring on its finale's hit (or when it ends).")]
+        public GameObject spotlight;
+
+        [Tooltip("Optional. Prefab (ShadowScreenEffect at its root) that blacks out the stage and silhouettes the user on a lit screen the moment the card is used, until its finale's hit (or it ends).")]
+        public GameObject shadowScreen;
+
         [Tooltip("Seconds the actor holds after the card's last swing before walking back, so the attack doesn't end abruptly.")]
         [Min(0f)]
         public float endDelay = 0.3f;

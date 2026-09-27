@@ -10,7 +10,7 @@ namespace GARA.Combat
     // Shared "play one Spine clip" behavior; subclasses say which clip
     // (NamedSpineAnimationState by name, AttackSpecAnimationState through
     // an AttackAnimationSpec). Concrete leaf subclasses
-    // (DancerDivineState, IdleState, ...) exist only so each is its own distinct
+    // (DancerSpotlightState, IdleState, ...) exist only so each is its own distinct
     // type — CharacterState resolution assumes at most one instance of a
     // given concrete type per prefab, so every state needs a real subclass
     // even when the behavior is identical. States may live on a child of

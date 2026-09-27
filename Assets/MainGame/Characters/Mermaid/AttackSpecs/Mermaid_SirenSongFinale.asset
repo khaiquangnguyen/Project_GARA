@@ -17,4 +17,5 @@ MonoBehaviour:
   range: 1
   hitFeedback: {fileID: 825474723826213862, guid: e510044674904d4fac89b88cf49a16a1, type: 3}
   impactOnEveryHit: 0
+  lightEffect: {fileID: 0}
   perfectAnnouncementDrop: {fileID: 0}

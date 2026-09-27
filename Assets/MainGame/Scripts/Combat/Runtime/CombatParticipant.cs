@@ -299,7 +299,36 @@ namespace GARA.Combat
                 return;
             }
 
+            if (IsInvulnerable)
+            {
+                MMEventManager.TriggerEvent(new InvulnerableBlockStateEvent(SceneRoot));
+                return;
+            }
+
+            if (amount > 0 && TryConsumeEvasion())
+            {
+                MMEventManager.TriggerEvent(new EvadeSuccessStateEvent(SceneRoot));
+                return;
+            }
+
             ApplyDamageCore(ModifyIncomingDamage(amount));
+        }
+
+        public bool IsInvulnerable => _statuses.Exists(status => status.negatesHits && !status.IsExpired);
+
+        public int EvasionStacks => _statuses.Count(status => status.evadesNextHit && !status.IsExpired);
+
+        // Uses up one evasion stack, if any.
+        private bool TryConsumeEvasion()
+        {
+            var index = _statuses.FindIndex(status => status.evadesNextHit && !status.IsExpired);
+            if (index < 0)
+            {
+                return false;
+            }
+
+            _statuses.RemoveAt(index);
+            return true;
         }
 
         // Applies every active status's incoming-damage shaping: multipliers

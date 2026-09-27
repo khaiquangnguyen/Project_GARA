@@ -28,18 +28,39 @@ namespace GARA.Combat
             ICombatTarget pendingMoveTarget = null;
             AttackAnimationSpec pendingMoveSpec = null;
             var pendingMoveIndex = -1;
+            var spotlight = ShowSpotlight(card, targets);
+            var shadowScreen = ShowShadowScreen(card, _performer ?? actor);
 
             session.StepPerformed += OnStep;
             session.StepStarting += OnStepStarting;
             executor.ActionFinished += OnStepFinished;
 
-            if (card.positionMode == ActionPositionMode.MoveInFrontOfEnemy && targets.Count > 0)
+            if (shadowScreen != null && shadowScreen.IntroDuration > 0f)
             {
-                executor.MoveInFrontOf(TargetsOf(false, 0)[0], state, BeginSession, session.OpeningMove);
+                StartCoroutine(StartAfterIntro(shadowScreen.IntroDuration));
             }
             else
             {
-                BeginSession();
+                BeginCard();
+            }
+
+            // Lets the shadow screen close and light up before the first move.
+            IEnumerator StartAfterIntro(float seconds)
+            {
+                yield return new WaitForSeconds(seconds);
+                BeginCard();
+            }
+
+            void BeginCard()
+            {
+                if (card.positionMode == ActionPositionMode.MoveInFrontOfEnemy && targets.Count > 0)
+                {
+                    executor.MoveInFrontOf(TargetsOf(false, 0)[0], state, BeginSession, session.OpeningMove);
+                }
+                else
+                {
+                    BeginSession();
+                }
             }
 
             void BeginSession()
@@ -107,6 +128,15 @@ namespace GARA.Combat
 
                     ApplyStepEffects();
                     LandDrops();
+                    if (step.isFinale && spotlight != null)
+                    {
+                        spotlight.Hit();
+                    }
+
+                    if (step.isFinale && shadowScreen != null)
+                    {
+                        shadowScreen.Hit();
+                    }
                 });
 
                 void ApplyStepEffects()
@@ -255,6 +285,15 @@ namespace GARA.Combat
             {
                 yield return new WaitUntil(() => !executor.IsBusy && !finalePending);
                 Unsubscribe();
+                if (spotlight != null)
+                {
+                    spotlight.Hit();
+                }
+
+                if (shadowScreen != null)
+                {
+                    shadowScreen.Hit();
+                }
 
                 if (notify)
                 {
@@ -361,17 +400,83 @@ namespace GARA.Combat
             return drops;
         }
 
+        // Spawns the card's spotlight over the targets, held until the caller
+        // reports the hit. Null when the card has none.
+        private static EncoreSpotlightEffect ShowSpotlight(SkillCardDefinition card, IReadOnlyList<ICombatTarget> targets)
+        {
+            // Unity's == null, as in DropPerfectAnnouncements.
+            var template = card.spotlight;
+            if (template == null)
+            {
+                return null;
+            }
+
+            if (!template.TryGetComponent<EncoreSpotlightEffect>(out _))
+            {
+                Debug.LogWarning($"[{nameof(CombatSceneManager)}] {card.name}: spotlight has no {nameof(EncoreSpotlightEffect)}.", template);
+                return null;
+            }
+
+            var anchors = new List<Transform>();
+            var aimOffsets = new List<Vector3>();
+            foreach (var target in targets)
+            {
+                if (target is CombatParticipant participant && participant.SceneTransform != null)
+                {
+                    anchors.Add(participant.SceneTransform);
+                    aimOffsets.Add(CentreOf(participant) - participant.SceneTransform.position);
+                }
+            }
+
+            var spotlight = Instantiate(template).GetComponent<EncoreSpotlightEffect>();
+            spotlight.Show(anchors, aimOffsets);
+            return spotlight;
+        }
+
+        // Spawns the card's shadow screen around the performer, held until
+        // the caller reports the hit. Null when the card has none.
+        private static ShadowScreenEffect ShowShadowScreen(SkillCardDefinition card, CombatParticipant performer)
+        {
+            // Unity's == null, as in DropPerfectAnnouncements.
+            var template = card.shadowScreen;
+            if (template == null || performer.SceneRoot == null)
+            {
+                return null;
+            }
+
+            if (!template.TryGetComponent<ShadowScreenEffect>(out _))
+            {
+                Debug.LogWarning($"[{nameof(CombatSceneManager)}] {card.name}: shadow screen has no {nameof(ShadowScreenEffect)}.", template);
+                return null;
+            }
+
+            var shadowScreen = Instantiate(template).GetComponent<ShadowScreenEffect>();
+            shadowScreen.Show(performer.SceneRoot, BodyBoundsOf(performer));
+            return shadowScreen;
+        }
+
+        // Height assumed for a participant without a Spine mesh.
+        private const float FallbackBodyHeight = 2f;
+
         // Centre of the participant's Spine mesh, or its root if it has none.
         private static Vector3 CentreOf(CombatParticipant participant)
         {
+            var bounds = BodyBoundsOf(participant);
+            return new Vector3(bounds.center.x, bounds.center.y, participant.SceneTransform.position.z);
+        }
+
+        // Bounds of the participant's Spine mesh, or a body standing on its
+        // root if it has none.
+        private static Bounds BodyBoundsOf(CombatParticipant participant)
+        {
             var skeleton = participant.SceneRoot.GetComponentInChildren<SkeletonRenderer>();
-            if (skeleton == null || !skeleton.TryGetComponent<MeshRenderer>(out var meshRenderer))
+            if (skeleton != null && skeleton.TryGetComponent<MeshRenderer>(out var meshRenderer))
             {
-                return participant.SceneTransform.position;
+                return meshRenderer.bounds;
             }
 
-            var bounds = meshRenderer.bounds;
-            return new Vector3(bounds.center.x, bounds.center.y, participant.SceneTransform.position.z);
+            var root = participant.SceneTransform.position;
+            return new Bounds(root + Vector3.up * (FallbackBodyHeight * 0.5f), new Vector3(1f, FallbackBodyHeight, 0f));
         }
     }
 }

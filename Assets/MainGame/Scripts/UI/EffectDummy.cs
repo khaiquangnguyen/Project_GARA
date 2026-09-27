@@ -4,7 +4,8 @@ using UnityEngine;
 // Lives on the root of each side's effect dummy prefab (PlayerEffectDummy,
 // EnemyEffectDummy) — exposes which child GameObjects hold this dummy's
 // per-character effect components (OnNotTargetedEffect — fade and shrink —
-// OnHitEffect, OnParrySuccessEffect, OnJumpSuccessEffect, OnActiveActorEffect and OnNoirifiedEffect) via direct Inspector-assigned references.
+// OnHitEffect, OnParrySuccessEffect, OnJumpSuccessEffect, OnEvadeSuccessEffect,
+// OnInvulnerableBlockEffect, OnActiveActorEffect and OnNoirifiedEffect) via direct Inspector-assigned references.
 // CombatSceneManager references those children directly as the templates
 // it clones onto every character of that dummy's side.
 //
@@ -31,6 +32,12 @@ public class EffectDummy : MonoBehaviour
     [Tooltip("The child GameObject holding this dummy's OnJumpSuccessEffect component — cloned onto every character at combat start.")]
     [SerializeField] private GameObject onJumpSuccessEffect;
 
+    [Tooltip("The child GameObject holding this dummy's OnEvadeSuccessEffect component — cloned onto every character at combat start.")]
+    [SerializeField] private GameObject onEvadeSuccessEffect;
+
+    [Tooltip("The child GameObject holding this dummy's OnInvulnerableBlockEffect component — cloned onto every character at combat start.")]
+    [SerializeField] private GameObject onInvulnerableBlockEffect;
+
     [Tooltip("The child GameObject holding this dummy's OnActiveActorEffect component — cloned onto every character at combat start.")]
     [SerializeField] private GameObject onActiveActorEffect;
 
@@ -46,6 +53,8 @@ public class EffectDummy : MonoBehaviour
     public GameObject OnHitEffect => onHitEffect;
     public GameObject OnParrySuccessEffect => onParrySuccessEffect;
     public GameObject OnJumpSuccessEffect => onJumpSuccessEffect;
+    public GameObject OnEvadeSuccessEffect => onEvadeSuccessEffect;
+    public GameObject OnInvulnerableBlockEffect => onInvulnerableBlockEffect;
     public GameObject OnActiveActorEffect => onActiveActorEffect;
     public GameObject OnNoirifiedEffect => onNoirifiedEffect;
 
@@ -54,6 +63,8 @@ public class EffectDummy : MonoBehaviour
     private OnHitEffect _previewHitEffect;
     private OnParrySuccessEffect _previewParrySuccessEffect;
     private OnJumpSuccessEffect _previewJumpSuccessEffect;
+    private OnEvadeSuccessEffect _previewEvadeSuccessEffect;
+    private OnInvulnerableBlockEffect _previewInvulnerableBlockEffect;
     private OnActiveActorEffect _previewActiveActorEffect;
     private OnNoirifiedEffect _previewNoirifiedEffect;
 
@@ -201,6 +212,70 @@ public class EffectDummy : MonoBehaviour
         }
     }
 
+    [ContextMenu("Preview/Play Evade Success Effect")]
+    public void PreviewEvadeSuccess()
+    {
+        if (previewCharacterPrefab == null || onEvadeSuccessEffect == null)
+        {
+            Debug.LogWarning("EffectDummy.PreviewEvadeSuccess: assign both previewCharacterPrefab and onEvadeSuccessEffect first.", this);
+            return;
+        }
+
+        EnsurePreviewInstance();
+
+        var effectClone = Instantiate(onEvadeSuccessEffect, _previewInstance.transform, false);
+        _previewEvadeSuccessEffect = effectClone.GetComponent<OnEvadeSuccessEffect>();
+
+        if (_previewEvadeSuccessEffect == null)
+        {
+            Debug.LogWarning("EffectDummy.PreviewEvadeSuccess: onEvadeSuccessEffect has no OnEvadeSuccessEffect component.", this);
+            return;
+        }
+
+        _previewEvadeSuccessEffect.OnTrigger();
+    }
+
+    [ContextMenu("Preview/Restore Evade Success Effect")]
+    public void RestoreEvadeSuccessPreview()
+    {
+        if (_previewEvadeSuccessEffect != null)
+        {
+            _previewEvadeSuccessEffect.OnDone();
+        }
+    }
+
+    [ContextMenu("Preview/Play Invulnerable Block Effect")]
+    public void PreviewInvulnerableBlock()
+    {
+        if (previewCharacterPrefab == null || onInvulnerableBlockEffect == null)
+        {
+            Debug.LogWarning("EffectDummy.PreviewInvulnerableBlock: assign both previewCharacterPrefab and onInvulnerableBlockEffect first.", this);
+            return;
+        }
+
+        EnsurePreviewInstance();
+
+        var effectClone = Instantiate(onInvulnerableBlockEffect, _previewInstance.transform, false);
+        _previewInvulnerableBlockEffect = effectClone.GetComponent<OnInvulnerableBlockEffect>();
+
+        if (_previewInvulnerableBlockEffect == null)
+        {
+            Debug.LogWarning("EffectDummy.PreviewInvulnerableBlock: onInvulnerableBlockEffect has no OnInvulnerableBlockEffect component.", this);
+            return;
+        }
+
+        _previewInvulnerableBlockEffect.OnTrigger();
+    }
+
+    [ContextMenu("Preview/Restore Invulnerable Block Effect")]
+    public void RestoreInvulnerableBlockPreview()
+    {
+        if (_previewInvulnerableBlockEffect != null)
+        {
+            _previewInvulnerableBlockEffect.OnDone();
+        }
+    }
+
     [ContextMenu("Preview/Show Active Actor Marker (Player-Controlled)")]
     public void PreviewActiveActorPlayerControlled()
     {
@@ -313,6 +388,8 @@ public class EffectDummy : MonoBehaviour
         _previewHitEffect = null;
         _previewParrySuccessEffect = null;
         _previewJumpSuccessEffect = null;
+        _previewEvadeSuccessEffect = null;
+        _previewInvulnerableBlockEffect = null;
         _previewActiveActorEffect = null;
         _previewNoirifiedEffect = null;
     }

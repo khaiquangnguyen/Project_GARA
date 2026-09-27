@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1268473996996760843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4416353635528973273}
+  - component: {fileID: 7411609872120540331}
+  m_Layer: 0
+  m_Name: EncoreSpotlight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4416353635528973273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268473996996760843}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7411609872120540331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268473996996760843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23b7e7b0ef2b4e19b5f5f7c20a68210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.EncoreSpotlightEffect
+  beamProfile: {fileID: 11400000, guid: 044199099b32c4d1b9cb19b97b70ddd7, type: 2}
+  beams:
+  - color: {r: 1, g: 0.85, b: 0.35, a: 1}
+    sourceOffset: -6
+    sweepFrom: 4
+    swayPhase: 0
+  - color: {r: 1, g: 0.45, b: 0.8, a: 1}
+    sourceOffset: 0
+    sweepFrom: -4.5
+    swayPhase: 2.1
+  - color: {r: 0.4, g: 0.85, b: 1, a: 1}
+    sourceOffset: 6
+    sweepFrom: -3
+    swayPhase: 4.2
+  sourceHeight: 12
+  sweepDuration: 0.5
+  swayWidth: 0.35
+  swaySpeed: 7
+  fadeInDuration: 0.15
+  hitFlare: 2.5
+  hitFlareDuration: 0.3
+  hitBurst: {fileID: 0}
+  holdAfterHit: 0.8
+  fadeOutDuration: 0.35

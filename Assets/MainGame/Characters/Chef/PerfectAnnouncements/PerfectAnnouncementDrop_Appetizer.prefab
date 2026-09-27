@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d17a6a1cc954cfcb428b4637a576b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.PerfectAnnouncementDropEffect
+  landBurst: {fileID: 7753939865943417536, guid: e089e34f47c4445a8a81fd2e83e4df82, type: 3}
   spriteRenderer: {fileID: 7716958397625611228}
   direction: 3
   distance: 5

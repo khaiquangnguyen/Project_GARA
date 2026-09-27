@@ -57,6 +57,12 @@ namespace GARA.Combat
         [Tooltip("PlayerEffectDummy's OnJumpSuccessEffect child.")]
         [SerializeField] private GameObject playerJumpSuccessEffectTemplate;
 
+        [Tooltip("PlayerEffectDummy's OnEvadeSuccessEffect child.")]
+        [SerializeField] private GameObject playerEvadeSuccessEffectTemplate;
+
+        [Tooltip("PlayerEffectDummy's OnInvulnerableBlockEffect child.")]
+        [SerializeField] private GameObject playerInvulnerableBlockEffectTemplate;
+
         [Tooltip("PlayerEffectDummy's OnActiveActorEffect child.")]
         [SerializeField] private GameObject playerActiveActorEffectTemplate;
 
@@ -78,6 +84,12 @@ namespace GARA.Combat
 
         [Tooltip("EnemyEffectDummy's OnJumpSuccessEffect child.")]
         [SerializeField] private GameObject enemyJumpSuccessEffectTemplate;
+
+        [Tooltip("EnemyEffectDummy's OnEvadeSuccessEffect child.")]
+        [SerializeField] private GameObject enemyEvadeSuccessEffectTemplate;
+
+        [Tooltip("EnemyEffectDummy's OnInvulnerableBlockEffect child.")]
+        [SerializeField] private GameObject enemyInvulnerableBlockEffectTemplate;
 
         [Tooltip("EnemyEffectDummy's OnActiveActorEffect child.")]
         [SerializeField] private GameObject enemyActiveActorEffectTemplate;
@@ -160,6 +172,8 @@ namespace GARA.Combat
                 CloneEffectOntoEveryCharacter(playerHitEffectTemplate, enemyHitEffectTemplate);
                 CloneEffectOntoEveryCharacter(playerParrySuccessEffectTemplate, enemyParrySuccessEffectTemplate);
                 CloneEffectOntoEveryCharacter(playerJumpSuccessEffectTemplate, enemyJumpSuccessEffectTemplate);
+                CloneEffectOntoEveryCharacter(playerEvadeSuccessEffectTemplate, enemyEvadeSuccessEffectTemplate);
+                CloneEffectOntoEveryCharacter(playerInvulnerableBlockEffectTemplate, enemyInvulnerableBlockEffectTemplate);
                 CloneEffectOntoEveryCharacter(playerActiveActorEffectTemplate, enemyActiveActorEffectTemplate);
                 CloneEffectOntoEveryCharacter(playerNoirifiedEffectTemplate, enemyNoirifiedEffectTemplate);
                 SpawnEnemyHpHearts();

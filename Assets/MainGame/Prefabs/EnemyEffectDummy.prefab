@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &960220785317284898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8987175671816229088}
+  - component: {fileID: 6519818186540983017}
+  m_Layer: 0
+  m_Name: OnNoirifiedEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8987175671816229088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960220785317284898}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5567117200594246684}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6519818186540983017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960220785317284898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f57efab7079e460aafc743cec89bb7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OnNoirifiedEffect
+  spec: {fileID: 11400000, guid: a8c6990008faf45e1beaa2c25f832802, type: 2}
 --- !u!1 &1243670273345128457
 GameObject:
   m_ObjectHideFlags: 0
@@ -37,6 +82,7 @@ Transform:
   - {fileID: 7008634869641955396}
   - {fileID: 7211578064161846870}
   - {fileID: 2619686048070855284}
+  - {fileID: 8987175671816229088}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3393515598234778370
@@ -57,6 +103,7 @@ MonoBehaviour:
   onParrySuccessEffect: {fileID: 5950136697058328324}
   onJumpSuccessEffect: {fileID: 8467334021156729000}
   onActiveActorEffect: {fileID: 6468845237024180897}
+  onNoirifiedEffect: {fileID: 960220785317284898}
   previewCharacterPrefab: {fileID: 8714998848808443449, guid: e9ca41a216ddb40d092c391f7f1d50b6, type: 3}
 --- !u!1 &2206541996209231579
 GameObject:

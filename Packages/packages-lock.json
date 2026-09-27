@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.distantlands.lumen": {
+      "version": "file:com.distantlands.lumen",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.esotericsoftware.spine.addressables": {
       "version": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Modules/com.esotericsoftware.spine.addressables#4.3",
       "depth": 0,

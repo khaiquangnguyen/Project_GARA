@@ -5,13 +5,17 @@ using MoreMountains.Tools;
 using Spine.Unity;
 using UnityEngine;
 
-// Drains its owner to black and white once it's noirified
+// Turns its owner Sin City black and white once it's noirified
 // (StatusAppliedStateEvent), by swapping the owner's atlas materials for
-// grayscale copies and fading their _GrayPhase.
+// GARA/Spine/Skeleton Sin City copies: a negative flash then a hard cut in
+// (or a fade, without a flash), faded back out on restore. Also worn by
+// everyone while the Noir World look is up, for the white rim.
 // Cloned onto each character from the effect dummy, like OnHitEffect.
 public class OnNoirifiedEffect : MonoBehaviour, MMEventListener<StatusAppliedStateEvent>
 {
     private static readonly int GrayPhaseId = Shader.PropertyToID("_GrayPhase");
+    private static readonly int OutlineColorId = Shader.PropertyToID("_OutlineColor");
+    private static readonly int OutlineWidthId = Shader.PropertyToID("_OutlineWidth");
 
     [SerializeField] private NoirifiedSpec spec;
 
@@ -23,6 +27,9 @@ public class OnNoirifiedEffect : MonoBehaviour, MMEventListener<StatusAppliedSta
     private float _toPhase;
     private float _fadeStartedAt;
     private bool _fading;
+    private float _flashEndsAt = -1f;
+    private bool _noirified;
+    private bool _inNoirWorld;
 
     private void Awake()
     {
@@ -33,11 +40,15 @@ public class OnNoirifiedEffect : MonoBehaviour, MMEventListener<StatusAppliedSta
     private void OnEnable()
     {
         this.MMEventStartListening<StatusAppliedStateEvent>();
+        NoirWorldScreenEffect.Shown += OnNoirWorldShown;
+        NoirWorldScreenEffect.Hidden += OnNoirWorldHidden;
     }
 
     private void OnDisable()
     {
         this.MMEventStopListening<StatusAppliedStateEvent>();
+        NoirWorldScreenEffect.Shown -= OnNoirWorldShown;
+        NoirWorldScreenEffect.Hidden -= OnNoirWorldHidden;
     }
 
     private void OnDestroy()
@@ -55,12 +66,52 @@ public class OnNoirifiedEffect : MonoBehaviour, MMEventListener<StatusAppliedSta
         OnTrigger();
     }
 
+    private void OnNoirWorldShown()
+    {
+        var wasShowing = _noirified || _inNoirWorld;
+        _inNoirWorld = true;
+        if (!wasShowing)
+        {
+            Show();
+        }
+    }
+
+    private void OnNoirWorldHidden()
+    {
+        _inNoirWorld = false;
+        if (!_noirified)
+        {
+            Hide();
+        }
+    }
+
     // Public so EffectDummy's preview can play it without combat running.
     public void OnTrigger()
     {
-        if (spec == null || spec.GrayscaleShader == null)
+        var wasShowing = _noirified || _inNoirWorld;
+        _noirified = true;
+        if (!wasShowing)
         {
-            Debug.LogWarning($"{nameof(OnNoirifiedEffect)} on {name} needs a spec with a grayscale shader.", this);
+            Show();
+        }
+    }
+
+    // Fades back to full colour (unless the Noir World still needs the look),
+    // then puts the original materials back.
+    public void OnDone()
+    {
+        _noirified = false;
+        if (!_inNoirWorld)
+        {
+            Hide();
+        }
+    }
+
+    private void Show()
+    {
+        if (spec == null || spec.Shader == null)
+        {
+            Debug.LogWarning($"{nameof(OnNoirifiedEffect)} on {name} needs a spec with a Sin City shader.", this);
             return;
         }
 
@@ -69,11 +120,19 @@ public class OnNoirifiedEffect : MonoBehaviour, MMEventListener<StatusAppliedSta
             return;
         }
 
-        FadeTo(spec.GrayAmount);
+        // Edit-mode previews get no Update to end a flash, so they just cut.
+        if (spec.InvertFlashDuration > 0f && Application.isPlaying)
+        {
+            _fading = false;
+            _flashEndsAt = Time.time + spec.InvertFlashDuration;
+            SetPhase(spec.Amount);
+            return;
+        }
+
+        FadeTo(spec.Amount);
     }
 
-    // Fades back to full colour, then puts the original materials back.
-    public void OnDone()
+    private void Hide()
     {
         if (_grayByOriginal.Count == 0)
         {
@@ -85,6 +144,7 @@ public class OnNoirifiedEffect : MonoBehaviour, MMEventListener<StatusAppliedSta
 
     private void FadeTo(float phase)
     {
+        _flashEndsAt = -1f;
         _fromPhase = _phase;
         _toPhase = phase;
         _fadeStartedAt = Time.time;
@@ -99,6 +159,12 @@ public class OnNoirifiedEffect : MonoBehaviour, MMEventListener<StatusAppliedSta
 
     private void Update()
     {
+        if (_flashEndsAt >= 0f && Time.time >= _flashEndsAt)
+        {
+            _flashEndsAt = -1f;
+            SetPhase(_phase);
+        }
+
         if (!_fading)
         {
             return;
@@ -124,12 +190,18 @@ public class OnNoirifiedEffect : MonoBehaviour, MMEventListener<StatusAppliedSta
         }
     }
 
+    // Re-applies the whole spec too, so tweaking it mid-play shows next change.
     private void SetPhase(float phase)
     {
         _phase = phase;
+        var invert = _flashEndsAt >= 0f ? 1f : 0f;
+        var rim = spec.RimColor * phase;
         foreach (var gray in _grayByOriginal.Values)
         {
+            spec.Look.ApplyTo(gray, invert);
             gray.SetFloat(GrayPhaseId, phase);
+            gray.SetColor(OutlineColorId, rim);
+            gray.SetFloat(OutlineWidthId, spec.RimWidth);
         }
     }
 
@@ -161,15 +233,15 @@ public class OnNoirifiedEffect : MonoBehaviour, MMEventListener<StatusAppliedSta
                     continue;
                 }
 
-                var gray = new Material(spec.GrayscaleShader) { name = original.name + " (Noir)" };
+                var gray = new Material(spec.Shader) { name = original.name + " (Noir)" };
                 gray.CopyPropertiesFromMaterial(original);
                 gray.shaderKeywords = original.shaderKeywords;
-                gray.SetFloat(GrayPhaseId, _phase);
                 _grayByOriginal[original] = gray;
                 _skeletonRenderer.CustomMaterialOverride[original] = gray;
             }
         }
 
+        SetPhase(_phase);
         return _grayByOriginal.Count > 0;
     }
 
@@ -195,5 +267,6 @@ public class OnNoirifiedEffect : MonoBehaviour, MMEventListener<StatusAppliedSta
         _grayByOriginal.Clear();
         _phase = 0f;
         _fading = false;
+        _flashEndsAt = -1f;
     }
 }

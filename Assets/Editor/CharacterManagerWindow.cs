@@ -16,7 +16,8 @@ namespace GARA.EditorTools
     // and — in play mode — a test bench that plays any of a battle
     // participant's skill cards right now (turn order, costs, loadout and
     // side ignored), normally, perfectly or with random misses, and swaps
-    // any roster slot for another character (restarting the battle).
+    // any roster slot for another character (restarting the battle), and
+    // previews the noir looks (one character noirified, or the Noir World).
     public class CharacterManagerWindow : EditorWindow
     {
         private CharacterDefinition _character;
@@ -205,6 +206,8 @@ namespace GARA.EditorTools
                 return;
             }
 
+            DrawNoirWorldLook();
+
             var current = participants.FindIndex(IsSelected);
             var picked = EditorGUILayout.Popup("Participant", current, participants.Select(Describe).ToArray());
             if (picked != current && picked >= 0)
@@ -222,6 +225,8 @@ namespace GARA.EditorTools
             }
 
             var participant = participants[current];
+            DrawNoirifiedLook(participant);
+
             var blocker = manager.DebugPlayBlocker;
             if (blocker != null)
             {
@@ -242,6 +247,61 @@ namespace GARA.EditorTools
             }
 
             EditorGUILayout.Space();
+        }
+
+        // Look only: no Noir World is entered, nothing ticks or ends it.
+        private static void DrawNoirWorldLook()
+        {
+            var screenEffect = FindAnyObjectByType<NoirWorldScreenEffect>();
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                EditorGUILayout.LabelField("Noir World look (whole screen)");
+                using (new EditorGUI.DisabledScope(screenEffect == null))
+                {
+                    if (GUILayout.Button("Show", GUILayout.Width(70)))
+                    {
+                        screenEffect.Show();
+                    }
+
+                    if (GUILayout.Button("Hide", GUILayout.Width(70)))
+                    {
+                        screenEffect.Hide();
+                    }
+                }
+            }
+
+            if (screenEffect == null)
+            {
+                EditorGUILayout.HelpBox("No NoirWorldScreenEffect in the scene.", MessageType.None);
+            }
+        }
+
+        // Look only: the participant isn't given the Noirified status.
+        private static void DrawNoirifiedLook(CombatParticipant participant)
+        {
+            var root = participant.SceneRoot;
+            var effect = root != null ? root.GetComponentInChildren<OnNoirifiedEffect>(true) : null;
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                EditorGUILayout.LabelField("Noirified look (this character)");
+                using (new EditorGUI.DisabledScope(effect == null))
+                {
+                    if (GUILayout.Button("Noirify", GUILayout.Width(70)))
+                    {
+                        effect.OnTrigger();
+                    }
+
+                    if (GUILayout.Button("Restore", GUILayout.Width(70)))
+                    {
+                        effect.OnDone();
+                    }
+                }
+            }
+
+            if (effect == null)
+            {
+                EditorGUILayout.HelpBox("No OnNoirifiedEffect on this character (is it on its side's effect dummy?).", MessageType.None);
+            }
         }
 
         // The Character field names this participant (its live instance, or

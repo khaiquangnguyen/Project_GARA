@@ -37,6 +37,7 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
+    - DistantLands.Lumen.Runtime
     - GARA.Characters
     - GARA.Characters.Chef
     - GARA.Characters.Dancer
