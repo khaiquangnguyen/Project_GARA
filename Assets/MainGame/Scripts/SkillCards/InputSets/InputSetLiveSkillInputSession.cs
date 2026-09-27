@@ -18,6 +18,8 @@ namespace GARA.SkillCards.InputSets
 
         public event Action<SkillStep> StepPerformed;
 
+        public event Action<int, AttackAnimationSpec> StepStarting;
+
         public AttackAnimationSpec OpeningMove => _card.OpeningMove;
 
         public InputSetLiveSkillInputSession(InputSetCollectionPlayer player, LiveInputSetSkillCard card, SkillPerformanceTiering tiering, InputSetScoreModel scoreModel)
@@ -40,7 +42,21 @@ namespace GARA.SkillCards.InputSets
             _runner = _player.CurrentRunner;
             if (_runner != null)
             {
+                _runner.SetStarted += OnSetStarted;
                 _runner.SetFinished += OnSetFinished;
+                // Play() starts the runner, so the first set is already up.
+                if (_runner.IsRunning)
+                {
+                    OnSetStarted(_runner.CurrentSetIndex, _runner.CurrentAttempt);
+                }
+            }
+        }
+
+        private void OnSetStarted(int setIndex, int attempt)
+        {
+            if (attempt == 1)
+            {
+                StepStarting?.Invoke(setIndex, _card.Steps[setIndex].move);
             }
         }
 
@@ -64,13 +80,14 @@ namespace GARA.SkillCards.InputSets
                 return;
             }
 
-            StepPerformed?.Invoke(new SkillStep(step.move, _card.BuildPerformance(stepReport, _tiering, _scoreModel), triggered, false));
+            StepPerformed?.Invoke(new SkillStep(step.move, _card.BuildPerformance(stepReport, _tiering, _scoreModel), triggered, false, result.SetIndex));
         }
 
         private void Complete(InputSetCompletionReport report, Action<SkillPerformance> onCompleted)
         {
             if (_runner != null)
             {
+                _runner.SetStarted -= OnSetStarted;
                 _runner.SetFinished -= OnSetFinished;
                 _runner = null;
             }

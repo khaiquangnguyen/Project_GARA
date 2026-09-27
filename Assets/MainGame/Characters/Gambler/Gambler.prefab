@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.IdleState
   skeletonRendererRef: {fileID: 3087890397650794365}
   animationName: idle
+  alternateClips: []
   loop: 1
 --- !u!114 &5917023449987817518
 MonoBehaviour:
@@ -69,6 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.HitState
   skeletonRendererRef: {fileID: 3087890397650794365}
   animationName: hit
+  alternateClips: []
   loop: 0
 --- !u!114 &1866869588007374722
 MonoBehaviour:
@@ -84,6 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DeathState
   skeletonRendererRef: {fileID: 3087890397650794365}
   animationName: death
+  alternateClips: []
   loop: 0
 --- !u!114 &8243712881889770498
 MonoBehaviour:
@@ -99,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.ParryState
   skeletonRendererRef: {fileID: 3087890397650794365}
   animationName: parry-1
+  alternateClips: []
   loop: 0
 --- !u!114 &4139947279185182830
 MonoBehaviour:
@@ -114,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.JumpState
   skeletonRendererRef: {fileID: 3087890397650794365}
   animationName: idle
+  alternateClips: []
   loop: 1
 --- !u!114 &8857900721202847605
 MonoBehaviour:
@@ -393,7 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GARA.Characters::GARA.Characters.CharacterDefinition
   characterId: gambler
-  displayName: Dancer
+  displayName: Gambler
   portrait: {fileID: -855298285791758126, guid: 7850844cc519947e5b27019ff0aab7e1, type: 3}
   faction: 0
   baseStats:
@@ -407,7 +412,7 @@ MonoBehaviour:
   levelUnlockedAbilities: []
   allowedEquipmentSlots: 
   defaultState: {fileID: 846184373085390317}
-  maxCombatSkillCards: 4
+  maxCombatSkillCards: 6
   passives: []
   palate:
     canBeFed: 0

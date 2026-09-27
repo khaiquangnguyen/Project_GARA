@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f0e53ca46954f1499a6975e56a9d89b, type: 3}
-  m_Name: Dancer_ServeFinale
+  m_Name: Mermaid_SirenSongFinale
   m_EditorClassIdentifier: GARA.Characters::GARA.Characters.FinaleAttackAnimationSpec
   skeletonData: {fileID: 11400000, guid: 56e53593a549a482ea10d743e6fef56d, type: 2}
   animationName: special
   range: 1
   hitFeedback: {fileID: 825474723826213862, guid: e510044674904d4fac89b88cf49a16a1, type: 3}
-  perfectAnnouncementDrop: {fileID: 2992109876589051284, guid: 7303572acafa4691b34d3465930d88b3, type: 3}
+  impactOnEveryHit: 0
+  perfectAnnouncementDrop: {fileID: 0}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349d098f374c249e39bfaed521296a29, type: 3}
+  m_Name: RecordingPassive
+  m_EditorClassIdentifier: GARA.Characters.Filmmaker::GARA.Characters.Filmmaker.RecordingPassive
+  passiveId: recording
+  displayName: Recording
+  description: Each special hit records its targets. A fully recorded enemy gives a one-time Replay of one of its skills, performed by a stand-in in its form while the Filmmaker falls back.
+  icon: {fileID: 0}
+  fullStacks: 3
+  maxHeldReplays: 1
+  replayMode: 0

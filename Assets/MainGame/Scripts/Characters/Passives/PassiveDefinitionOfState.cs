@@ -36,6 +36,18 @@ namespace GARA.Characters
         {
         }
 
+        public sealed override void OnBattleStarted(in PassiveContext context, PassiveRuntimeState state)
+        {
+            if (state is TState typed)
+            {
+                OnBattleStarted(in context, typed);
+            }
+        }
+
+        protected virtual void OnBattleStarted(in PassiveContext context, TState state)
+        {
+        }
+
         public sealed override IValueRangeRoller GetRangeRoller(PassiveRuntimeState state)
         {
             return state is TState typed ? GetRangeRoller(typed) : null;

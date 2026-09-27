@@ -76,6 +76,22 @@ namespace GARA.Characters
             }
         }
 
+        public void NotifyBattleStarted(in PassiveContext context)
+        {
+            foreach (var passive in _passives)
+            {
+                var state = _statesByDefinition[passive];
+                try
+                {
+                    passive.OnBattleStarted(in context, state);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
+            }
+        }
+
         public bool TryGetRangeRoller(out IValueRangeRoller roller)
         {
             foreach (var passive in _passives)

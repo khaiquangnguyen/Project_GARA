@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 390ec546ba458469e9c10bd4d971a611, type: 3}
+  m_Name: Noir_Stakeout
+  m_EditorClassIdentifier: GARA.Characters::GARA.Characters.SkillCardDefinition
+  cardId: noir_stakeout
+  displayName: Stakeout
+  description: Watches every foe at once.
+  icon: {fileID: 0}
+  targetMode: 1
+  multiTargetCount: 2
+  apCost: 0
+  mpCost: 0
+  positionMode: 0
+  effects:
+  - {fileID: 11400000, guid: 2f643fce0630b4449a9232d2bc277e6c, type: 2}
+  refundOnAbort: 0
+  endDelay: 0.3
+  animationSpec: {fileID: 11400000, guid: e28d47fc30a0641fb92422ba8472848f, type: 2}
+  finalePositionMode: 0
+  perfectEffects: []

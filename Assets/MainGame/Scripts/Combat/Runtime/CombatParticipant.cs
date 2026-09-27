@@ -34,9 +34,52 @@ namespace GARA.Combat
         public bool charmedToPlayerSide;
 
         // The side this character fights for; decides allies and opponents.
-        public FactionTag Allegiance => charmedToPlayerSide ? FactionTag.Player : faction;
+        // A charm status overrides the roster's charm.
+        public FactionTag Allegiance => CharmedTo ?? (charmedToPlayerSide ? FactionTag.Player : faction);
 
-        public bool IsPlayerControlled => playerControlled || charmedToPlayerSide;
+        // Whose skill is resolving; its outgoing-damage statuses (e.g.
+        // weakened) scale every hit it deals. Set by CombatSceneManager
+        // around each effect it applies.
+        public static CombatParticipant DamageSource { get; set; }
+
+        public float OutgoingDamageMultiplier
+        {
+            get
+            {
+                var multiplier = 1f;
+                foreach (var status in _statuses)
+                {
+                    if (!status.IsExpired)
+                    {
+                        multiplier *= status.outgoingDamageMultiplier;
+                    }
+                }
+
+                return multiplier;
+            }
+        }
+
+        public bool IsPlayerControlled => CharmedTo is FactionTag side
+            ? side == FactionTag.Player
+            : playerControlled || charmedToPlayerSide;
+
+        // The side an active charm status puts this character on, if any.
+        public FactionTag? CharmedTo
+        {
+            get
+            {
+                FactionTag? side = null;
+                foreach (var status in _statuses)
+                {
+                    if (status.charmedTo.HasValue && !status.IsExpired)
+                    {
+                        side = status.charmedTo;
+                    }
+                }
+
+                return side;
+            }
+        }
 
         public StatBlock baseCombatStats;
         public int currentHp;
@@ -72,6 +115,22 @@ namespace GARA.Combat
         private List<SkillCardDefinition> _skillCards = new();
 
         public IReadOnlyList<SkillCardDefinition> SkillCards => _skillCards;
+
+        // Set as each card starts; one-time cards aren't recorded.
+        public SkillCardDefinition LastUsedSkillCard { get; set; }
+
+        public void AddSkillCard(SkillCardDefinition card)
+        {
+            if (card != null)
+            {
+                _skillCards.Add(card);
+            }
+        }
+
+        public bool RemoveSkillCard(SkillCardDefinition card)
+        {
+            return _skillCards.Remove(card);
+        }
 
         // Active statuses (e.g. food coma). Mirrors _timedModifiers' shape
         // but kept separate — a status shapes incoming damage/turn-skipping,
@@ -133,6 +192,22 @@ namespace GARA.Combat
                 _skillCards = encounter.definition.ResolveCombatLoadout()
             };
             return participant;
+        }
+
+        // A body that performs a skill for someone else (see
+        // FormReplaySkillCard); never joins a party, so nothing targets it.
+        public static CombatParticipant CreateStandIn(CharacterDefinition form, FactionTag faction)
+        {
+            var stats = form.GetStatsAtLevel(1);
+            return new CombatParticipant
+            {
+                participantId = System.Guid.NewGuid().ToString(),
+                definition = form,
+                faction = faction,
+                baseCombatStats = stats,
+                currentHp = Mathf.Max(1, stats.MaxHp.Value),
+                speed = stats.Speed.Value
+            };
         }
 
         public bool TryGetSkillCard(int index, out SkillCardDefinition card)
@@ -238,7 +313,7 @@ namespace GARA.Combat
                 return amount;
             }
 
-            var result = (float)amount;
+            var result = amount * (DamageSource?.OutgoingDamageMultiplier ?? 1f);
             var flatBonus = 0;
             foreach (var status in _statuses)
             {
@@ -260,6 +335,23 @@ namespace GARA.Combat
         // must NOT be re-shaped by the very status inflicting it).
         // Already-defeated characters take no further damage, so the death
         // reaction and Defeated fire exactly once, on the killing blow.
+        public void Heal(int amount)
+        {
+            if (IsDefeated || amount <= 0)
+            {
+                return;
+            }
+
+            var healed = Mathf.Min(GetCurrentStats().MaxHp.Value, currentHp + amount);
+            if (healed == currentHp)
+            {
+                return;
+            }
+
+            currentHp = healed;
+            HpChanged?.Invoke(this);
+        }
+
         private void ApplyDamageCore(int amount)
         {
             if (IsDefeated)
@@ -376,12 +468,31 @@ namespace GARA.Combat
         // entries. Skip statuses are ticked separately by ConsumeSkippedTurn,
         // from inside
         // the turn-skip itself, so the count of skipped turns is exactly the
-        // authored duration.
+        // authored duration. Charms likewise tick in ConsumeCharmedTurn.
         public void TickStatuses()
         {
             for (var i = _statuses.Count - 1; i >= 0; i--)
             {
-                if (_statuses[i].skipsTurn)
+                if (_statuses[i].skipsTurn || _statuses[i].charmedTo.HasValue)
+                {
+                    continue;
+                }
+
+                _statuses[i].remainingTurns--;
+                if (_statuses[i].IsExpired)
+                {
+                    _statuses.RemoveAt(i);
+                }
+            }
+        }
+
+        // Burns one turn of every charm, at the end of a turn taken charmed,
+        // so a charm lasts exactly its authored number of turns.
+        public void ConsumeCharmedTurn()
+        {
+            for (var i = _statuses.Count - 1; i >= 0; i--)
+            {
+                if (!_statuses[i].charmedTo.HasValue)
                 {
                     continue;
                 }
@@ -509,6 +620,11 @@ namespace GARA.Combat
         // Notifies every passive on this participant that a skill card has
         // finished resolving (its effects have run) — once per card, from
         // either the one-shot or the live skill-card path.
+        public void NotifyBattleStarted(IBattleQuery battle)
+        {
+            Passives.NotifyBattleStarted(new PassiveContext(battle, this, null, null, default));
+        }
+
         public void NotifySkillCardResolved(IBattleQuery battle, SkillCardDefinition card, IReadOnlyList<ICombatTarget> targets, SkillPerformance performance)
         {
             Passives.NotifySkillCardResolved(new PassiveContext(battle, this, card, targets, performance));
@@ -518,11 +634,17 @@ namespace GARA.Combat
         bool ICombatTarget.IsDefeated => IsDefeated;
         StatBlock ICombatTarget.CurrentStats => GetCurrentStats();
         void ICombatTarget.ApplyDamage(int amount) => ApplyDamage(amount);
+        void ICombatTarget.Heal(int amount) => Heal(amount);
         PassiveRuntimeSet ICombatTarget.Passives => Passives;
         PalateProfile ICombatTarget.Palate => Palate;
         int ICombatTarget.Fullness => Fullness;
         FeedResult ICombatTarget.Feed(int amount) => Feed(amount);
         void ICombatTarget.ApplyStatus(StatusEffectInstance status) => ApplyStatus(status);
         bool ICombatTarget.HasStatus(StatusEffectKind kind) => HasStatus(kind);
+        CharacterDefinition ICombatTarget.Definition => definition;
+        IReadOnlyList<SkillCardDefinition> ICombatTarget.SkillCards => SkillCards;
+        SkillCardDefinition ICombatTarget.LastUsedSkillCard => LastUsedSkillCard;
+        void ICombatTarget.AddSkillCard(SkillCardDefinition card) => AddSkillCard(card);
+        bool ICombatTarget.RemoveSkillCard(SkillCardDefinition card) => RemoveSkillCard(card);
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GARA.Characters
 {
@@ -33,7 +34,34 @@ namespace GARA.Characters
         [Min(1)]
         public int multiTargetCount = 2;
 
+        [Tooltip("Live cards: which picks each step hits. The finale is set separately (finaleTargeting).")]
+        [ShowIf(nameof(HasSeveralTargets))]
+        [FormerlySerializedAs("stepsTakeTurnsAmongTargets")]
+        public StepTargeting stepTargeting;
+
+        [Tooltip("Live cards: which picks the finale hits.")]
+        [ShowIf(nameof(HasSeveralTargets))]
+        [FormerlySerializedAs("finaleHitsOneRandomPick")]
+        public FinaleTargeting finaleTargeting;
+
+        [Tooltip("Live cards: the user's allies step off stage for the card, then come back for the finale and dance along (a random clip each, until real dance clips exist).")]
+        [BoxGroup(FinaleGroup)]
+        [ShowIf(nameof(IsLive))]
+        public bool alliesJoinFinale;
+
+        [Tooltip("Seconds from the finale starting that the returning allies dance (random clips back to back), cut off when it runs out.")]
+        [BoxGroup(FinaleGroup)]
+        [ShowIf(nameof(alliesJoinFinale))]
+        [Min(0f)]
+        public float allyDanceDuration = 1f;
+
+        [Tooltip("Live cards: each step snaps in front of its target instead of walking there — for steps too fast to walk between.")]
+        [ShowIf(nameof(IsLive))]
+        public bool teleportBetweenSteps;
+
         private bool IsMultiTarget => targetMode.IsMulti();
+
+        private bool HasSeveralTargets => targetMode.IsMulti() || targetMode.IsAll();
 
         public int apCost;
 
@@ -63,6 +91,12 @@ namespace GARA.Characters
         [ShowIf(nameof(IsLive))]
         public ActionPositionMode finalePositionMode;
 
+        [Tooltip("Seconds between the last step's swing finishing and the finale starting, so the actor can reposition or animate first.")]
+        [BoxGroup(FinaleGroup)]
+        [ShowIf(nameof(IsLive))]
+        [Min(0f)]
+        public float finaleDelay = 0.5f;
+
         [Tooltip("Resolved by a live card's perfect finale instead of effects.")]
         [BoxGroup(FinaleGroup)]
         [ShowIf(nameof(HasPerfectEffects))]
@@ -87,6 +121,10 @@ namespace GARA.Characters
         // False when a subclass authors its own finale effects; hides
         // perfectEffects.
         protected virtual bool HasPerfectEffects => true;
+
+        // True when the card leaves its user's hand once played (e.g. a
+        // FormReplaySkillCard).
+        public virtual bool IsOneTimeUse => false;
 
         // True when every "hit" event of the card's clips lands an impact,
         // whatever the spec's own impactOnEveryHit says.

@@ -31,6 +31,15 @@ namespace GARA.InputSets
 
         public InputSetCollectionRunner CurrentRunner => _runner;
 
+        // Dev-only: plays the next collection by itself instead of reading
+        // input; back to Off once that collection ends.
+        public AutoPlayMode AutoPlay { get; set; }
+
+        private const float AutoPressInterval = 0.12f;
+        private const int AutoWrongAttempts = 2;
+
+        private bool[] _autoFailSets;
+        private float _autoPressTimer;
         public void Play(InputSetCollectionDefinition definition, Action<InputSetCompletionReport> onCompleted = null)
         {
             Abort();
@@ -41,6 +50,7 @@ namespace GARA.InputSets
             _runner.Completed += HandleCompleted;
 
             inputMap?.EnableAll();
+            PrepareAutoPlay(definition);
 
             // Raised before Start() so visuals are bound when Start() fires the first SetStarted
             // (and, for an empty set collection, Completed — which raises AnySetCollectionEnded in order).
@@ -79,7 +89,68 @@ namespace GARA.InputSets
                 return;
             }
 
-            _poller.Poll(HandlePressed, null);
+            if (AutoPlay == AutoPlayMode.Off)
+            {
+                _poller.Poll(HandlePressed, null);
+                return;
+            }
+
+            _autoPressTimer -= Time.deltaTime;
+            if (_autoPressTimer <= 0f)
+            {
+                _autoPressTimer = AutoPressInterval;
+                AutoPress();
+            }
+        }
+
+        // RandomFail marks some sets (at least one) to be fumbled.
+        private void PrepareAutoPlay(InputSetCollectionDefinition definition)
+        {
+            var setCount = definition != null ? definition.Sets.Length : 0;
+            _autoFailSets = new bool[setCount];
+            _autoPressTimer = AutoPressInterval;
+            if (AutoPlay != AutoPlayMode.RandomFail || setCount == 0)
+            {
+                return;
+            }
+
+            for (var i = 0; i < setCount; i++)
+            {
+                _autoFailSets[i] = UnityEngine.Random.value < 0.35f;
+            }
+
+            _autoFailSets[UnityEngine.Random.Range(0, setCount)] = true;
+        }
+
+        // The expected input, or a wrong one on a fumbled set's first
+        // attempts (it clears after that if retries never run out).
+        private void AutoPress()
+        {
+            if (!(_runner.ExpectedInput is InputToken expected))
+            {
+                return;
+            }
+
+            var fumble = _runner.CurrentSetIndex < _autoFailSets.Length
+                         && _autoFailSets[_runner.CurrentSetIndex]
+                         && _runner.CurrentAttempt <= AutoWrongAttempts;
+            _runner.Press(fumble ? WrongInput(expected) : expected);
+        }
+
+        private InputToken WrongInput(InputToken expected)
+        {
+            if (inputMap != null)
+            {
+                foreach (var entry in inputMap.Entries)
+                {
+                    if (entry.token != expected)
+                    {
+                        return entry.token;
+                    }
+                }
+            }
+
+            return new InputToken(expected.Id + 1);
         }
 
         private void HandlePressed(InputToken token)
@@ -89,6 +160,7 @@ namespace GARA.InputSets
 
         private void HandleCompleted(InputSetCompletionReport report)
         {
+            AutoPlay = AutoPlayMode.Off;
             AnySetCollectionEnded?.Invoke(_runner);
             _onCompleted?.Invoke(report);
             SetCollectionCompleted?.Invoke(report);

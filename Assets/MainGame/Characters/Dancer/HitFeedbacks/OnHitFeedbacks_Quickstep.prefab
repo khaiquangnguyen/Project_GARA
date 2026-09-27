@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1143087401857596257}
   - component: {fileID: 4749971823037995521}
   m_Layer: 0
-  m_Name: OnHitFeedbacks_Serve
+  m_Name: OnHitFeedbacks_Quickstep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

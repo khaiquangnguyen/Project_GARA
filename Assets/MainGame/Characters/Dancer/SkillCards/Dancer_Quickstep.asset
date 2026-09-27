@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ec927e6866f447eaa2be8e5d2a91d38, type: 3}
-  m_Name: Dancer_Serve
+  m_Name: Dancer_Quickstep
   m_EditorClassIdentifier: GARA.Characters.Dancer::GARA.Characters.Dancer.DancerSkillCard
-  cardId: dancer_serve
-  displayName: Serve
-  description: 
+  cardId: dancer_quickstep
+  displayName: Quickstep
+  description: Six quick taps, each one a strike. Hit every note for the finale.
   icon: {fileID: 21300000, guid: 472ac21e5b78c4e63bedc5622e90faa4, type: 3}
   targetMode: 0
   multiTargetCount: 2
@@ -36,7 +36,7 @@ MonoBehaviour:
       holdDuration: 0
     move: {fileID: 11400000, guid: d75deaed033a4abd89d12309d6b360a9, type: 2}
     effects:
-    - rid: 609404912810066076
+    - rid: 609404922736672813
   - notes:
     - input:
         id: 4
@@ -45,7 +45,7 @@ MonoBehaviour:
       holdDuration: 0
     move: {fileID: 11400000, guid: 402e8de2e7304f1cb28bf344911be6e0, type: 2}
     effects:
-    - rid: 609404912810066077
+    - rid: 609404922736672814
   - notes:
     - input:
         id: 2
@@ -54,7 +54,7 @@ MonoBehaviour:
       holdDuration: 0
     move: {fileID: 11400000, guid: d75deaed033a4abd89d12309d6b360a9, type: 2}
     effects:
-    - rid: 609404912810066078
+    - rid: 609404922736672815
   - notes:
     - input:
         id: 4
@@ -63,29 +63,55 @@ MonoBehaviour:
       holdDuration: 0
     move: {fileID: 11400000, guid: 402e8de2e7304f1cb28bf344911be6e0, type: 2}
     effects:
-    - rid: 609404912810066079
+    - rid: 609404922736672816
+  - notes:
+    - input:
+        id: 2
+      kind: 0
+      time: 2
+      holdDuration: 0
+    move: {fileID: 11400000, guid: d75deaed033a4abd89d12309d6b360a9, type: 2}
+    effects:
+    - rid: 609404922736672817
+  - notes:
+    - input:
+        id: 4
+      kind: 0
+      time: 2.5
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 402e8de2e7304f1cb28bf344911be6e0, type: 2}
+    effects:
+    - rid: 609404922736672818
   finaleEffects:
   - rid: 609404912810066080
   references:
     version: 2
     RefIds:
-    - rid: 609404912810066076
-      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
-      data:
-        damage: 10
-    - rid: 609404912810066077
-      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
-      data:
-        damage: 10
-    - rid: 609404912810066078
-      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
-      data:
-        damage: 10
-    - rid: 609404912810066079
-      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
-      data:
-        damage: 10
     - rid: 609404912810066080
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404922736672813
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404922736672814
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404922736672815
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404922736672816
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404922736672817
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404922736672818
       type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
       data:
         damage: 10

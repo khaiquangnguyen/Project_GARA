@@ -1,0 +1,201 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec927e6866f447eaa2be8e5d2a91d38, type: 3}
+  m_Name: Dancer_DancingQueen
+  m_EditorClassIdentifier: GARA.Characters.Dancer::GARA.Characters.Dancer.DancerSkillCard
+  cardId: dancer_dancing_queen
+  displayName: Dancing Queen
+  description: 'Twelve fast notes, each a strike on a random foe, hitting harder every four notes. Hit them all to tire every foe she struck: 25% slower and 25% weaker through their next turn.'
+  icon: {fileID: 8301727546360207315, guid: 983103a9046fa4d769d9c44177b38885, type: 3}
+  targetMode: 1
+  multiTargetCount: 2
+  stepTargeting: 2
+  finaleTargeting: 2
+  teleportBetweenSteps: 1
+  apCost: 0
+  mpCost: 0
+  positionMode: 1
+  effects: []
+  refundOnAbort: 0
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: a4b4c1421c100445e9659d12c2f704bc, type: 2}
+  finalePositionMode: 0
+  finaleDelay: 0.5
+  perfectEffects: []
+  bars:
+  - notes:
+    - input:
+        id: 2
+      kind: 0
+      time: 0
+      holdDuration: 0
+    move: {fileID: 11400000, guid: b0a9c0ba48944adfb8c33c717583b063, type: 2}
+    effects:
+    - rid: 609404922736672965
+  - notes:
+    - input:
+        id: 4
+      kind: 0
+      time: 0.25
+      holdDuration: 0
+    move: {fileID: 11400000, guid: d75deaed033a4abd89d12309d6b360a9, type: 2}
+    effects:
+    - rid: 609404922736672966
+  - notes:
+    - input:
+        id: 2
+      kind: 0
+      time: 0.5
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 402e8de2e7304f1cb28bf344911be6e0, type: 2}
+    effects:
+    - rid: 609404922736672967
+  - notes:
+    - input:
+        id: 4
+      kind: 0
+      time: 0.75
+      holdDuration: 0
+    move: {fileID: 11400000, guid: c9719d9785d243209997c50ff460ec41, type: 2}
+    effects:
+    - rid: 609404922736672968
+  - notes:
+    - input:
+        id: 1
+      kind: 0
+      time: 1
+      holdDuration: 0
+    move: {fileID: 11400000, guid: b0a9c0ba48944adfb8c33c717583b063, type: 2}
+    effects:
+    - rid: 609404922736672969
+  - notes:
+    - input:
+        id: 3
+      kind: 0
+      time: 1.25
+      holdDuration: 0
+    move: {fileID: 11400000, guid: d75deaed033a4abd89d12309d6b360a9, type: 2}
+    effects:
+    - rid: 609404922736672970
+  - notes:
+    - input:
+        id: 1
+      kind: 0
+      time: 1.5
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 402e8de2e7304f1cb28bf344911be6e0, type: 2}
+    effects:
+    - rid: 609404922736672971
+  - notes:
+    - input:
+        id: 3
+      kind: 0
+      time: 1.75
+      holdDuration: 0
+    move: {fileID: 11400000, guid: c9719d9785d243209997c50ff460ec41, type: 2}
+    effects:
+    - rid: 609404922736672972
+  - notes:
+    - input:
+        id: 2
+      kind: 0
+      time: 2
+      holdDuration: 0
+    move: {fileID: 11400000, guid: b0a9c0ba48944adfb8c33c717583b063, type: 2}
+    effects:
+    - rid: 609404922736672973
+  - notes:
+    - input:
+        id: 1
+      kind: 0
+      time: 2.25
+      holdDuration: 0
+    move: {fileID: 11400000, guid: d75deaed033a4abd89d12309d6b360a9, type: 2}
+    effects:
+    - rid: 609404922736672974
+  - notes:
+    - input:
+        id: 4
+      kind: 0
+      time: 2.5
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 402e8de2e7304f1cb28bf344911be6e0, type: 2}
+    effects:
+    - rid: 609404922736672975
+  - notes:
+    - input:
+        id: 3
+      kind: 0
+      time: 2.75
+      holdDuration: 0
+    move: {fileID: 11400000, guid: c9719d9785d243209997c50ff460ec41, type: 2}
+    effects:
+    - rid: 609404922736672976
+  finaleEffects:
+  - rid: 609404922736672986
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404922736672965
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 5
+    - rid: 609404922736672966
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 5
+    - rid: 609404922736672967
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 5
+    - rid: 609404922736672968
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 5
+    - rid: 609404922736672969
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 7
+    - rid: 609404922736672970
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 7
+    - rid: 609404922736672971
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 7
+    - rid: 609404922736672972
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 7
+    - rid: 609404922736672973
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404922736672974
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404922736672975
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404922736672976
+      type: {class: AllNotesHitRequiredForDamage, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        damage: 10
+    - rid: 609404922736672986
+      type: {class: AllNotesHitRequiredForTired, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        speedReduction: 0.25
+        damageReduction: 0.25
+        turns: 2

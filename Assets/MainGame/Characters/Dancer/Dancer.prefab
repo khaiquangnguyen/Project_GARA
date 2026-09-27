@@ -14,10 +14,12 @@ GameObject:
   - component: {fileID: 8135769160124919445}
   - component: {fileID: 8115682968760053704}
   - component: {fileID: 701774666510319452}
-  - component: {fileID: 187036711498518172}
+  - component: {fileID: 8491623939604292895}
   - component: {fileID: 2762323635188462187}
   - component: {fileID: 4011800275172657183}
   - component: {fileID: 5535124410395038728}
+  - component: {fileID: 3154187737443750635}
+  - component: {fileID: 8351071278468476693}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -54,6 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.IdleState
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: idle
+  alternateClips: []
   loop: 1
 --- !u!114 &4343542595800764247
 MonoBehaviour:
@@ -69,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.HitState
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: hit
+  alternateClips: []
   loop: 0
 --- !u!114 &8135769160124919445
 MonoBehaviour:
@@ -84,6 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DeathState
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: death
+  alternateClips: []
   loop: 0
 --- !u!114 &8115682968760053704
 MonoBehaviour:
@@ -99,6 +104,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.ParryState
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: parry-1
+  alternateClips:
+  - parry-2
+  - parry-3
   loop: 0
 --- !u!114 &701774666510319452
 MonoBehaviour:
@@ -114,8 +122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.JumpState
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: idle
+  alternateClips: []
   loop: 1
---- !u!114 &187036711498518172
+--- !u!114 &8491623939604292895
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,10 +133,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 525333047013397211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a546739be2e7549b49adfd5ae8478299, type: 3}
+  m_Script: {fileID: 11500000, guid: b8b3712330b644f1ab54bddbdb76d561, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerFabulousState
-  skillCard: {fileID: 11400000, guid: 1d24cdfb438e5419da7114a214a84198, type: 2}
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerTwinStrikeState
+  skillCard: {fileID: 11400000, guid: 1aedb8188f3b241c1b1284e91a9b8539, type: 2}
 --- !u!114 &2762323635188462187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +176,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerDivineState
   skillCard: {fileID: 11400000, guid: a14dcca265d58448aaae0fca13860940, type: 2}
+--- !u!114 &3154187737443750635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525333047013397211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e452011ebe4d2475cae9d9ade3f60694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerDancingQueenState
+  skillCard: {fileID: 11400000, guid: 034dedf7d849341b384a0491882f4023, type: 2}
+--- !u!114 &8351071278468476693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525333047013397211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3383a9ce47daa4171be92624fc35395d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerStandingOvationState
+  skillCard: {fileID: 11400000, guid: afa5d613d99f54cb88d33c2b67676eb5, type: 2}
 --- !u!1 &7753796104726555178
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +444,7 @@ MonoBehaviour:
   levelUnlockedAbilities: []
   allowedEquipmentSlots: 
   defaultState: {fileID: 6683238165070620661}
-  maxCombatSkillCards: 4
+  maxCombatSkillCards: 6
   passives:
   - {fileID: 11400000, guid: 715b78b53f9a14bc8b74e63919b4da0e, type: 2}
   palate:

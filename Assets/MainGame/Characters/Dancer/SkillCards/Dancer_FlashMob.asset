@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec927e6866f447eaa2be8e5d2a91d38, type: 3}
+  m_Name: Dancer_FlashMob
+  m_EditorClassIdentifier: GARA.Characters.Dancer::GARA.Characters.Dancer.DancerSkillCard
+  cardId: dancer_flash_mob
+  displayName: Flash Mob
+  description: Two bars of four notes; each cleared bar heals the Dancer. Hit every note and the whole party joins in, healing everyone.
+  icon: {fileID: 21300000, guid: 93baf545ce849416a97884164e5ef972, type: 3}
+  targetMode: 3
+  multiTargetCount: 2
+  stepTargeting: 0
+  finaleTargeting: 0
+  alliesJoinFinale: 1
+  allyDanceDuration: 1
+  teleportBetweenSteps: 0
+  apCost: 0
+  mpCost: 0
+  positionMode: 0
+  effects: []
+  refundOnAbort: 0
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: cf4f43ce80f454e01ad61a8140724725, type: 2}
+  finalePositionMode: 0
+  finaleDelay: 0.5
+  perfectEffects: []
+  bars:
+  - notes:
+    - input:
+        id: 1
+      kind: 0
+      time: 0
+      holdDuration: 0
+    - input:
+        id: 4
+      kind: 0
+      time: 0.4
+      holdDuration: 0
+    - input:
+        id: 3
+      kind: 0
+      time: 0.8
+      holdDuration: 0
+    - input:
+        id: 2
+      kind: 0
+      time: 1.2
+      holdDuration: 0
+    move: {fileID: 11400000, guid: d75deaed033a4abd89d12309d6b360a9, type: 2}
+    effects:
+    - rid: 609404922736673060
+  - notes:
+    - input:
+        id: 2
+      kind: 0
+      time: 1.8
+      holdDuration: 0
+    - input:
+        id: 3
+      kind: 0
+      time: 2.2
+      holdDuration: 0
+    - input:
+        id: 4
+      kind: 0
+      time: 2.6
+      holdDuration: 0
+    - input:
+        id: 1
+      kind: 0
+      time: 3
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 402e8de2e7304f1cb28bf344911be6e0, type: 2}
+    effects:
+    - rid: 609404922736673061
+  finaleEffects:
+  - rid: 609404922736673059
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404922736673059
+      type: {class: AllNotesHitRequiredForHeal, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        heal: 15
+        selfOnly: 0
+    - rid: 609404922736673060
+      type: {class: AllNotesHitRequiredForHeal, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        heal: 10
+        selfOnly: 1
+    - rid: 609404922736673061
+      type: {class: AllNotesHitRequiredForHeal, ns: GARA.Characters.Dancer, asm: GARA.Characters.Dancer}
+      data:
+        heal: 10
+        selfOnly: 1

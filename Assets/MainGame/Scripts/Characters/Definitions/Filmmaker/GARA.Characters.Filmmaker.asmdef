@@ -1,0 +1,19 @@
+{
+  "name": "GARA.Characters.Filmmaker",
+  "rootNamespace": "GARA.Characters.Filmmaker",
+  "references": [
+    "GARA.Characters",
+    "GARA.SkillCards.InputSets",
+    "GARA.InputSets",
+    "GARA.Input"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

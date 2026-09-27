@@ -204,6 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.IdleState
   skeletonRendererRef: {fileID: 4193280515711190986}
   animationName: idle
+  alternateClips: []
   loop: 1
 --- !u!114 &5640343501613836901
 MonoBehaviour:
@@ -219,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.HitState
   skeletonRendererRef: {fileID: 4193280515711190986}
   animationName: hit
+  alternateClips: []
   loop: 0
 --- !u!114 &1165024444568223716
 MonoBehaviour:
@@ -234,6 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DeathState
   skeletonRendererRef: {fileID: 4193280515711190986}
   animationName: death
+  alternateClips: []
   loop: 0
 --- !u!114 &3975124284949450235
 MonoBehaviour:
@@ -249,6 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.ParryState
   skeletonRendererRef: {fileID: 4193280515711190986}
   animationName: parry-1
+  alternateClips: []
   loop: 0
 --- !u!114 &1864920420015462010
 MonoBehaviour:
@@ -264,6 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.JumpState
   skeletonRendererRef: {fileID: 4193280515711190986}
   animationName: idle
+  alternateClips: []
   loop: 1
 --- !u!114 &2736365162217774028
 MonoBehaviour:
@@ -543,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GARA.Characters::GARA.Characters.CharacterDefinition
   characterId: chef
-  displayName: Dancer
+  displayName: Chef
   portrait: {fileID: -855298285791758126, guid: 7850844cc519947e5b27019ff0aab7e1, type: 3}
   faction: 0
   baseStats:
@@ -557,7 +562,7 @@ MonoBehaviour:
   levelUnlockedAbilities: []
   allowedEquipmentSlots: 
   defaultState: {fileID: 7846002877895991161}
-  maxCombatSkillCards: 4
+  maxCombatSkillCards: 6
   passives:
   - {fileID: 11400000, guid: b9394474aa7a41989b03790f2c5b3a80, type: 2}
   palate:

@@ -19,16 +19,23 @@ namespace GARA.Combat
         {
             var battleQuery = _battle.QueryFor(_actor);
             var actor = _actor;
-            var executor = _actorExecutor;
-            var state = actor.SkillCardStateOf(card);
+            var executor = _performerExecutor;
+            var state = PerformerStateOf(card);
             var stepsLanded = 0;
+            var finalePending = false;
+            var stepPicks = new Dictionary<int, IReadOnlyList<ICombatTarget>>();
+            var struck = new List<ICombatTarget>();
+            ICombatTarget pendingMoveTarget = null;
+            AttackAnimationSpec pendingMoveSpec = null;
+            var pendingMoveIndex = -1;
 
             session.StepPerformed += OnStep;
+            session.StepStarting += OnStepStarting;
             executor.ActionFinished += OnStepFinished;
 
             if (card.positionMode == ActionPositionMode.MoveInFrontOfEnemy && targets.Count > 0)
             {
-                executor.MoveInFrontOf(targets[0], state, BeginSession, session.OpeningMove);
+                executor.MoveInFrontOf(TargetsOf(false, 0)[0], state, BeginSession, session.OpeningMove);
             }
             else
             {
@@ -49,38 +56,109 @@ namespace GARA.Combat
 
             void OnStep(SkillStep step)
             {
+                if (step.isFinale)
+                {
+                    finalePending = true;
+                    StartCoroutine(PlayFinaleAfterDelay(step));
+                    return;
+                }
+
+                PlayStep(step);
+            }
+
+            // Lets the last step's swing finish, then holds finaleDelay.
+            IEnumerator PlayFinaleAfterDelay(SkillStep step)
+            {
+                yield return new WaitUntil(() => !executor.IsBusy);
+                if (card.finaleDelay > 0f)
+                {
+                    yield return new WaitForSeconds(card.finaleDelay);
+                }
+
+                PlayStep(step);
+                finalePending = false;
+            }
+
+            void PlayStep(SkillStep step)
+            {
                 stepsLanded++;
                 List<PerfectAnnouncementDropEffect> drops = null;
                 var positionMode = step.isFinale ? card.finalePositionMode : card.positionMode;
-                executor.PlayAction(state, targets, positionMode, spec: step.animation, beforeAttack: BeforeAttack, onImpact: () =>
+                var stepTargets = TargetsOf(step.isFinale, step.index);
+                if (pendingMoveIndex == step.index)
+                {
+                    pendingMoveTarget = null;
+                }
+
+                if (step.isFinale && card.alliesJoinFinale)
+                {
+                    BringAlliesBackToDance(actor, card.allyDanceDuration);
+                }
+
+                var teleport = card.teleportBetweenSteps && !step.isFinale;
+                executor.PlayAction(state, stepTargets, positionMode, spec: step.animation, beforeAttack: BeforeAttack, teleport: teleport, onImpact: () =>
                 {
                     var move = step.animation != null ? step.animation : card.animationSpec;
                     executor.PlayHitFeedback(move != null ? move.HitFeedback : null);
-
-                    if (drops != null)
+                    if (step.isFinale && move is FinaleAttackAnimationSpec finale)
                     {
-                        foreach (var drop in drops)
-                        {
-                            if (drop != null)
-                            {
-                                drop.Land();
-                            }
-                        }
+                        executor.PlayHitFeedback(finale.LightEffect);
                     }
 
+                    ApplyStepEffects();
+                    LandDrops();
+                });
+
+                void ApplyStepEffects()
+                {
                     if (step.effects == null)
                     {
                         return;
                     }
 
-                    foreach (var effect in step.effects)
+                    if (!step.isFinale)
                     {
-                        if (effect != null)
+                        foreach (var target in stepTargets)
                         {
-                            effect.ApplyEffect(new SkillEffectContext(battleQuery, actor, targets, step.performance));
+                            if (!struck.Contains(target))
+                            {
+                                struck.Add(target);
+                            }
                         }
                     }
-                });
+
+                    CombatParticipant.DamageSource = actor;
+                    try
+                    {
+                        foreach (var effect in step.effects)
+                        {
+                            if (effect != null)
+                            {
+                                effect.ApplyEffect(new SkillEffectContext(battleQuery, actor, stepTargets, step.performance));
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        CombatParticipant.DamageSource = null;
+                    }
+                }
+
+                void LandDrops()
+                {
+                    if (drops == null)
+                    {
+                        return;
+                    }
+
+                    foreach (var drop in drops)
+                    {
+                        if (drop != null)
+                        {
+                            drop.Land();
+                        }
+                    }
+                }
 
                 // Runs right before the swing, so the drop is timed from it.
                 float BeforeAttack()
@@ -90,19 +168,76 @@ namespace GARA.Combat
                         return 0f;
                     }
 
-                    drops = DropPerfectAnnouncements(card, state, targets, executor, out var leadIn);
+                    drops = DropPerfectAnnouncements(card, state, stepTargets, executor, out var leadIn);
                     return leadIn;
                 }
+            }
+
+            // Moves in front of the starting step's own target, so the
+            // performer is already there while its input plays.
+            void OnStepStarting(int index, AttackAnimationSpec move)
+            {
+                if (card.positionMode != ActionPositionMode.MoveInFrontOfEnemy || move == null || targets.Count == 0)
+                {
+                    return;
+                }
+
+                pendingMoveTarget = TargetsOf(false, index)[0];
+                pendingMoveSpec = move;
+                pendingMoveIndex = index;
+                if (!executor.IsBusy)
+                {
+                    MoveToPendingTarget();
+                }
+            }
+
+            void MoveToPendingTarget()
+            {
+                if (pendingMoveTarget == null || _activeSession != session)
+                {
+                    return;
+                }
+
+                var target = pendingMoveTarget;
+                pendingMoveTarget = null;
+                executor.MoveInFrontOf(target, state, null, pendingMoveSpec, card.teleportBetweenSteps);
+            }
+
+            // A step's picks are decided once, so getting into position and
+            // the swing agree; a random pick that died since is re-picked.
+            IReadOnlyList<ICombatTarget> TargetsOf(bool isFinale, int index)
+            {
+                if (isFinale && card.finaleTargeting == FinaleTargeting.PicksStruckBySteps)
+                {
+                    return struck;
+                }
+
+                if (isFinale || index < 0)
+                {
+                    return StepTargets(card, targets, isFinale, index);
+                }
+
+                if (!stepPicks.TryGetValue(index, out var picks)
+                    || (card.stepTargeting == StepTargeting.RandomLivingPick && picks.Count > 0 && picks[0].IsDefeated))
+                {
+                    picks = StepTargets(card, targets, false, index);
+                    stepPicks[index] = picks;
+                }
+
+                return picks;
             }
 
             void OnStepFinished()
             {
                 executor.ReturnToIdle();
+                MoveToPendingTarget();
             }
 
             void OnCompleted(SkillPerformance performance)
             {
                 session.StepPerformed -= OnStep;
+                session.StepStarting -= OnStepStarting;
+                pendingMoveTarget = null;
                 _activeSession = null;
                 _phaseActionState = PhaseActionState.SkillCardResolving;
                 skillCardInputHost.RaiseInputPhaseEnded(performance);
@@ -118,7 +253,7 @@ namespace GARA.Combat
 
             IEnumerator FinishLiveSkillCard(SkillCardDefinition finishedCard, IReadOnlyList<ICombatTarget> finishedTargets, SkillPerformance performance, bool notify)
             {
-                yield return new WaitUntil(() => !executor.IsBusy);
+                yield return new WaitUntil(() => !executor.IsBusy && !finalePending);
                 Unsubscribe();
 
                 if (notify)
@@ -132,10 +267,58 @@ namespace GARA.Combat
             void Unsubscribe()
             {
                 session.StepPerformed -= OnStep;
+                session.StepStarting -= OnStepStarting;
                 executor.ActionFinished -= OnStepFinished;
             }
         }
     
+        // Every pick, unless the card narrows it: a step per stepTargeting,
+        // the finale per finaleTargeting (struck picks are tracked by the
+        // caller).
+        private static IReadOnlyList<ICombatTarget> StepTargets(SkillCardDefinition card, IReadOnlyList<ICombatTarget> targets, bool isFinale, int index)
+        {
+            if (targets.Count == 0)
+            {
+                return targets;
+            }
+
+            if (isFinale)
+            {
+                return card.finaleTargeting == FinaleTargeting.OneRandomPick ? new[] { RandomLivingPick(targets) } : targets;
+            }
+
+            if (index < 0)
+            {
+                return targets;
+            }
+
+            switch (card.stepTargeting)
+            {
+                case StepTargeting.TakeTurns:
+                    return new[] { targets[index % targets.Count] };
+                case StepTargeting.RandomLivingPick:
+                    return new[] { RandomLivingPick(targets) };
+                default:
+                    return targets;
+            }
+        }
+
+        // Any pick when none is left alive.
+        private static ICombatTarget RandomLivingPick(IReadOnlyList<ICombatTarget> targets)
+        {
+            var living = new List<ICombatTarget>();
+            foreach (var target in targets)
+            {
+                if (!target.IsDefeated)
+                {
+                    living.Add(target);
+                }
+            }
+
+            var pool = living.Count > 0 ? (IReadOnlyList<ICombatTarget>)living : targets;
+            return pool[Random.Range(0, pool.Count)];
+        }
+
         // Spawns the finale spec's drop effect at each target, released so it
         // lands on the finale's hit event. leadIn is how long the finale must
         // wait to start when the drop is longer than its time-to-hit. Null
@@ -143,7 +326,10 @@ namespace GARA.Combat
         private static List<PerfectAnnouncementDropEffect> DropPerfectAnnouncements(SkillCardDefinition card, CharacterState state, IReadOnlyList<ICombatTarget> targets, AttackExecutor executor, out float leadIn)
         {
             leadIn = 0f;
-            if (!(card.animationSpec is FinaleAttackAnimationSpec { PerfectAnnouncementDrop: { } template }))
+            // Unity's == null, not a pattern: an unassigned field is a fake
+            // null that a pattern match lets through.
+            var template = card.animationSpec is FinaleAttackAnimationSpec finale ? finale.PerfectAnnouncementDrop : null;
+            if (template == null)
             {
                 return null;
             }

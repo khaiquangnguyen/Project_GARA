@@ -21,6 +21,8 @@ namespace GARA.SkillCards.Rhythm
 
         public event Action<SkillStep> StepPerformed;
 
+        public event Action<int, AttackAnimationSpec> StepStarting;
+
         public AttackAnimationSpec OpeningMove => _card.OpeningMove;
 
         public RhythmLiveSkillInputSession(RhythmSequencePlayer player, RhythmSkillCard card, SkillPerformanceTiering tiering)
@@ -51,6 +53,7 @@ namespace GARA.SkillCards.Rhythm
             if (_runner != null)
             {
                 _runner.NoteJudged += OnNoteJudged;
+                RaiseStepStarting(0);
             }
         }
 
@@ -68,7 +71,18 @@ namespace GARA.SkillCards.Rhythm
             _judgedCount[barIndex]++;
             _barResults[barIndex].Add(result);
 
-            if (_judgedCount[barIndex] < sequence.Bars[barIndex].notes.Length || bar.move == null)
+            if (_judgedCount[barIndex] < sequence.Bars[barIndex].notes.Length)
+            {
+                return;
+            }
+
+            PerformBar(barIndex, bar);
+            RaiseStepStarting(barIndex + 1);
+        }
+
+        private void PerformBar(int barIndex, RhythmCardBar bar)
+        {
+            if (bar.move == null)
             {
                 return;
             }
@@ -81,7 +95,15 @@ namespace GARA.SkillCards.Rhythm
                 return;
             }
 
-            StepPerformed?.Invoke(new SkillStep(bar.move, RhythmPerformanceMapper.Map(barReport, _tiering), triggered, false));
+            StepPerformed?.Invoke(new SkillStep(bar.move, RhythmPerformanceMapper.Map(barReport, _tiering), triggered, false, barIndex));
+        }
+
+        private void RaiseStepStarting(int barIndex)
+        {
+            if (barIndex < _card.Bars.Count)
+            {
+                StepStarting?.Invoke(barIndex, _card.Bars[barIndex].move);
+            }
         }
 
         private void Complete(RhythmCompletionReport report, Action<SkillPerformance> onCompleted)

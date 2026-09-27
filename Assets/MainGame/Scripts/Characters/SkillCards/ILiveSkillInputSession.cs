@@ -8,6 +8,10 @@ namespace GARA.Characters
     {
         event Action<SkillStep> StepPerformed;
 
+        // A step's input is starting: its index and the move it will play
+        // (null if none), so the performer can get into position early.
+        event Action<int, AttackAnimationSpec> StepStarting;
+
         // The first step's move, whose range the pre-input dash stands at.
         // Null when there's none to aim for.
         AttackAnimationSpec OpeningMove { get; }

@@ -40,7 +40,7 @@ namespace GARA.Characters
         [Header("Skill Cards")]
         [Tooltip("How many skill cards this character can bring into a single battle.")]
         [Min(1)]
-        public int maxCombatSkillCards = 4;
+        public int maxCombatSkillCards = 6;
 
         // Every card this character can know: the card of each skill-card
         // state under it, in hierarchy order. The full pool, not what's usable

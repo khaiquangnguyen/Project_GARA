@@ -1,0 +1,16 @@
+{
+  "name": "GARA.Characters.Mimic",
+  "rootNamespace": "GARA.Characters.Mimic",
+  "references": [
+    "GARA.Characters"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -27,6 +27,11 @@ namespace GARA.Characters
         {
         }
 
+        // Once, before the battle's first turn. context.Card is null.
+        public virtual void OnBattleStarted(in PassiveContext context, PassiveRuntimeState state)
+        {
+        }
+
         public virtual IValueRangeRoller GetRangeRoller(PassiveRuntimeState state) => null;
 
         // Asked once as the owner's turn ends; true grants them another turn.

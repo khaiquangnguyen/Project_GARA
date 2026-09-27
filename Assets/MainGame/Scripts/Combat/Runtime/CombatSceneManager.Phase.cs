@@ -134,6 +134,11 @@ namespace GARA.Combat
             _executors = executors;
             BindNoirWorld(_battle.NoirWorld);
 
+            foreach (var participant in _battle.AllParticipants)
+            {
+                participant.NotifyBattleStarted(_battle.QueryFor(participant));
+            }
+
             _battle.InitializeTurnOrder();
             RaiseTurnOrderChanged();
             StartCoroutine(BeginFirstPhaseAfterDelay());
@@ -159,8 +164,10 @@ namespace GARA.Combat
 
             ClearTargetPicking();
             HideTargetDisplays();
+            EndPerformance();
             SnapRetreatedBack();
             _phaseActionState = PhaseActionState.Regular;
+            EndDebugPlay();
         }
 
         // Drops the just-defeated participant from whatever's currently
@@ -525,6 +532,18 @@ namespace GARA.Combat
             AnnounceActiveActor(_actor, false);
             AnnounceTargetingForSkillCard(_actor, targets);
             RetreatUninvolved(_actor, targets);
+            RetreatAlliesForFinale(_actor, card);
+            BeginPerformance(card);
+
+            if (card.IsOneTimeUse)
+            {
+                _actor.RemoveSkillCard(card);
+                RefreshHand();
+            }
+            else
+            {
+                _actor.LastUsedSkillCard = card;
+            }
 
             _phaseActionState = PhaseActionState.SkillCardInput;
             skillCardInputHost.RaiseInputPhaseStarted(card);
@@ -555,36 +574,45 @@ namespace GARA.Combat
             {
                 _actor.RefundResources(card.apCost, card.mpCost);
                 AnnounceTargetingClearedForSkillCard(_actor);
-                StartCoroutine(FinishSkillCardResolving(_actorExecutor));
+                StartCoroutine(FinishSkillCardResolving(_performerExecutor));
                 return;
             }
 
             var battleQuery = _battle.QueryFor(_actor);
             var actingParticipant = _actor;
-            _actorExecutor.PlayAction(_actor.SkillCardStateOf(card), targets, card.positionMode, onImpact: () =>
+            var performerExecutor = _performerExecutor;
+            performerExecutor.PlayAction(PerformerStateOf(card), targets, card.positionMode, onImpact: () =>
             {
-                foreach (var effect in card.effects)
+                CombatParticipant.DamageSource = actingParticipant;
+                try
                 {
-                    if (effect != null)
+                    foreach (var effect in card.effects)
                     {
-                        effect.Resolve(new SkillEffectContext(battleQuery, actingParticipant, targets, performance));
+                        if (effect != null)
+                        {
+                            effect.Resolve(new SkillEffectContext(battleQuery, actingParticipant, targets, performance));
+                        }
                     }
+                }
+                finally
+                {
+                    CombatParticipant.DamageSource = null;
                 }
 
                 actingParticipant.NotifySkillCardResolved(battleQuery, card, targets, performance);
             });
-            _actorExecutor.ActionFinished += OnSkillCardActionFinished;
+            performerExecutor.ActionFinished += OnSkillCardActionFinished;
 
             void OnSkillCardActionFinished()
             {
-                _actorExecutor.ActionFinished -= OnSkillCardActionFinished;
-                StartCoroutine(EndSkillCard(_actor, _actorExecutor, card.endDelay));
+                performerExecutor.ActionFinished -= OnSkillCardActionFinished;
+                StartCoroutine(EndSkillCard(actingParticipant, performerExecutor, card.endDelay));
             }
         }
 
         // Holds the actor's last pose for holdSeconds, then walks everyone
         // back and finishes resolving.
-        private IEnumerator EndSkillCard(CombatParticipant actor, AttackExecutor actorExecutor, float holdSeconds)
+        private IEnumerator EndSkillCard(CombatParticipant actor, AttackExecutor performerExecutor, float holdSeconds)
         {
             if (holdSeconds > 0f)
             {
@@ -592,18 +620,28 @@ namespace GARA.Combat
             }
 
             AnnounceTargetingClearedForSkillCard(actor);
-            actorExecutor.ReturnToStandardPosition();
-            yield return FinishSkillCardResolving(actorExecutor);
+            performerExecutor.ReturnToStandardPosition();
+            yield return FinishSkillCardResolving(performerExecutor);
         }
 
         // Resolving only ends — and input only unlocks — once the actor and
         // everyone who retreated for this card are back in formation, so the
-        // next card never starts while someone's still walking back.
-        private IEnumerator FinishSkillCardResolving(AttackExecutor actorExecutor)
+        // next card never starts while someone's still walking back. A
+        // replay's stand-in leaves first, then the actor steps back in.
+        private IEnumerator FinishSkillCardResolving(AttackExecutor performerExecutor)
         {
+            if (_standInRoot != null)
+            {
+                yield return new WaitUntil(() => !performerExecutor.IsBusy);
+                EndPerformance();
+            }
+
             yield return ReturnRetreated();
-            yield return new WaitUntil(() => !actorExecutor.IsBusy);
+            yield return new WaitUntil(() => !_actorExecutor.IsBusy && _finaleDancersPending <= 0);
+            _finaleDancersPending = 0;
+            RefreshHand();
             _phaseActionState = PhaseActionState.Regular;
+            EndDebugPlay();
         }
 
         private void BeginPhaseForCurrentActor()
@@ -685,6 +723,8 @@ namespace GARA.Combat
             AnnounceTargetingClearedForEnemies(_actor);
             AnnounceActiveActor(_actor, false);
             SetSortingOrder(_actor, 0);
+
+            _actor.ConsumeCharmedTurn();
 
             // An extra turn (e.g. Dancer's Encore) holds the cursor so the
             // same actor starts a fresh phase.

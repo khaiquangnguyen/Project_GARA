@@ -12,12 +12,17 @@ namespace GARA.Characters
         public readonly IReadOnlyList<ISkillEffect> effects;
         public readonly bool isFinale;
 
-        public SkillStep(AttackAnimationSpec animation, SkillPerformance performance, IReadOnlyList<ISkillEffect> effects, bool isFinale)
+        // The step's place in its card (bar/set index); -1 when it has none
+        // (e.g. the finale).
+        public readonly int index;
+
+        public SkillStep(AttackAnimationSpec animation, SkillPerformance performance, IReadOnlyList<ISkillEffect> effects, bool isFinale, int index = -1)
         {
             this.animation = animation;
             this.performance = performance;
             this.effects = effects;
             this.isFinale = isFinale;
+            this.index = index;
         }
     }
 }

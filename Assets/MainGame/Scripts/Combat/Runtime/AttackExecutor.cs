@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using GARA.Characters;
+using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -47,6 +48,8 @@ namespace GARA.Combat
         private Func<float> _pendingBeforeAttack;
 
         private readonly Dictionary<GameObject, IAttackHitFeedback> _hitFeedbacks = new();
+
+        private Spine.TrackEntry _emote;
 
         public bool IsBusy => _isBusy;
         public CombatParticipant Participant => _participant;
@@ -101,7 +104,9 @@ namespace GARA.Combat
         // only. The move-in range comes from whichever spec will play.
         // beforeAttack (optional) runs right before the attack state plays,
         // after any move-in; it returns seconds to hold the attack back.
-        public void PlayAction(CharacterState assetSideState, IReadOnlyList<ICombatTarget> targets, ActionPositionMode positionMode, Action onImpact = null, AttackAnimationSpec spec = null, Func<float> beforeAttack = null)
+        // teleport (optional) snaps a MoveInFrontOfEnemy move-in into place
+        // and swings at once, for steps too fast to walk between.
+        public void PlayAction(CharacterState assetSideState, IReadOnlyList<ICombatTarget> targets, ActionPositionMode positionMode, Action onImpact = null, AttackAnimationSpec spec = null, Func<float> beforeAttack = null, bool teleport = false)
         {
             var liveState = _participant.ResolveLiveState(assetSideState);
             if (liveState == null)
@@ -125,7 +130,14 @@ namespace GARA.Combat
                 && targets.Count > 0
                 && targets[0] is CombatParticipant frontTarget)
             {
-                var destination = CombatSpacing.PositionInFrontOfEnemy(_participant, frontTarget, RangeOf(liveState));
+                var destination = CombatSpacing.PositionInFrontOfEnemy(_standardPosition, frontTarget, RangeOf(liveState));
+                if (teleport)
+                {
+                    _participant.SceneTransform.position = destination;
+                    BeginAttackState();
+                    return;
+                }
+
                 MoveThenAttack(_moveForwardState, destination, targets);
             }
             else if (positionMode == ActionPositionMode.StayAtOriginalPosition && _moveBackwardState != null)
@@ -162,6 +174,56 @@ namespace GARA.Combat
         public void ReturnToIdle()
         {
             EnterDefaultState();
+        }
+
+        // Plays one of this character's clips at random, outside any state —
+        // a placeholder dance until real dance clips exist — then idles.
+        // Never death, hit or idle. Busy while it plays.
+        public void PlayRandomEmote()
+        {
+            var skeleton = _participant.SceneRoot.GetComponentInChildren<SkeletonAnimation>();
+            if (IsDead || skeleton == null || skeleton.Skeleton == null)
+            {
+                return;
+            }
+
+            var clips = new List<string>();
+            foreach (var animation in skeleton.Skeleton.Data.Animations)
+            {
+                var clip = animation.Name.ToLowerInvariant();
+                if (!clip.Contains("death") && !clip.Contains("hit") && !clip.Contains("idle"))
+                {
+                    clips.Add(animation.Name);
+                }
+            }
+
+            if (clips.Count == 0)
+            {
+                return;
+            }
+
+            _isBusy = true;
+            _emote = skeleton.AnimationState.SetAnimation(0, clips[UnityEngine.Random.Range(0, clips.Count)], false);
+            _emote.Complete += OnEmoteComplete;
+        }
+
+        // Cuts a PlayRandomEmote short and idles; no-op when none is playing.
+        public void StopEmote()
+        {
+            if (_emote == null)
+            {
+                return;
+            }
+
+            OnEmoteComplete(_emote);
+        }
+
+        private void OnEmoteComplete(Spine.TrackEntry entry)
+        {
+            entry.Complete -= OnEmoteComplete;
+            _emote = null;
+            _isBusy = false;
+            ReturnToIdle();
         }
 
         // Plays a hit-feedback prefab on this character, spawning it under
@@ -201,7 +263,7 @@ namespace GARA.Combat
         // Dashes up to target at assetSideState's attack range, or spec's
         // when given (as MoveInFrontOfEnemy does before a swing), idles
         // there, then calls onArrived. Calls straight back if there's nothing to dash for.
-        public void MoveInFrontOf(ICombatTarget target, CharacterState assetSideState, Action onArrived, AttackAnimationSpec spec = null)
+        public void MoveInFrontOf(ICombatTarget target, CharacterState assetSideState, Action onArrived, AttackAnimationSpec spec = null, bool teleport = false)
         {
             if (_moveForwardState == null || !(target is CombatParticipant enemy))
             {
@@ -210,7 +272,12 @@ namespace GARA.Combat
             }
 
             var range = spec != null ? spec.Range : RangeOf(_participant.ResolveLiveState(assetSideState));
-            var destination = CombatSpacing.PositionInFrontOfEnemy(_participant, enemy, range);
+            var destination = CombatSpacing.PositionInFrontOfEnemy(_standardPosition, enemy, range);
+            if (teleport)
+            {
+                _participant.SceneTransform.position = destination;
+            }
+
             if (Vector3.Distance(_participant.SceneTransform.position, destination) <= AlreadyAtDestinationDistance)
             {
                 onArrived?.Invoke();

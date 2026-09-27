@@ -218,7 +218,7 @@ MonoBehaviour:
   levelUnlockedAbilities: []
   allowedEquipmentSlots: 
   defaultState: {fileID: 8427294588567716401}
-  maxCombatSkillCards: 4
+  maxCombatSkillCards: 6
   passives: []
   palate:
     canBeFed: 0

@@ -2,15 +2,16 @@ using UnityEngine;
 
 namespace GARA.Combat
 {
-    // "In front of the enemy": range units along X from the target, on
-    // whichever side the attacker is currently standing.
+    // "In front of the enemy": range units along X from the target, on the
+    // side the attacker's home spot is on — not where it stands now, so an
+    // attacker already among the enemies (e.g. between two targets of one
+    // card) still lands on its own side.
     public static class CombatSpacing
     {
-        public static Vector3 PositionInFrontOfEnemy(CombatParticipant attacker, CombatParticipant enemy, float range)
+        public static Vector3 PositionInFrontOfEnemy(Vector3 attackerHome, CombatParticipant enemy, float range)
         {
             var enemyPosition = enemy.SceneTransform.position;
-            var attackerPosition = attacker.SceneTransform.position;
-            var sideSign = Mathf.Sign(attackerPosition.x - enemyPosition.x);
+            var sideSign = Mathf.Sign(attackerHome.x - enemyPosition.x);
 
             if (sideSign == 0f)
             {

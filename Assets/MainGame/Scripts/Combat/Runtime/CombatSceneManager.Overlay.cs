@@ -26,7 +26,7 @@ namespace GARA.Combat
         [SerializeField] private TurnAvatar[] turnOrderSlots = new TurnAvatar[6];
 
         [Tooltip("Shows the acting player's combat loadout, in order.")]
-        [SerializeField] private SkillCardSlot[] skillCardSlots = new SkillCardSlot[4];
+        [SerializeField] private SkillCardSlot[] skillCardSlots = new SkillCardSlot[6];
 
         [Tooltip("Shown while a player character is acting, hidden otherwise.")]
         [SerializeField] private GameObject playerTurnAnnouncement;

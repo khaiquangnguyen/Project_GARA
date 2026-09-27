@@ -18,6 +18,13 @@ namespace GARA.Characters.Gambler
 
         public event Action<SkillStep> StepPerformed;
 
+        // A single step with nothing to get into position for.
+        public event Action<int, AttackAnimationSpec> StepStarting
+        {
+            add { }
+            remove { }
+        }
+
         public AttackAnimationSpec OpeningMove => _card.animationSpec;
 
         public GamblerLiveSkillInputSession(ShakeBalancePlayer player, GamblerSkillCard card, SkillPerformanceTiering tiering)

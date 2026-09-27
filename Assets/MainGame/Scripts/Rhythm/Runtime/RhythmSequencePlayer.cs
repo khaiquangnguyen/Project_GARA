@@ -22,6 +22,12 @@ namespace GARA.Rhythm
         private Action<RhythmCompletionReport> _onCompletedCallback;
 
         public bool IsPlaying => _currentRunner != null && _currentRunner.IsRunning;
+
+        // Dev-only: plays the next sequence by itself instead of reading
+        // input; back to Off once that sequence ends.
+        public AutoPlayMode AutoPlay { get; set; }
+
+        private bool[] _autoHandled;
         public RhythmSequenceRunner CurrentRunner => _currentRunner;
 
         public event Action<RhythmCompletionReport> SequenceCompleted;
@@ -59,8 +65,44 @@ namespace GARA.Rhythm
             _currentRunner.Completed += HandleCompleted;
 
             inputMap?.EnableAll();
+            PrepareAutoPlay(definition);
             _currentRunner.Start();
             AnySequenceStarted?.Invoke(_currentRunner);
+        }
+
+        // RandomFail marks some notes (at least one) to be left unplayed.
+        private void PrepareAutoPlay(RhythmSequenceDefinition definition)
+        {
+            var notes = definition.Notes;
+            _autoHandled = new bool[notes.Count];
+            if (AutoPlay != AutoPlayMode.RandomFail || notes.Count == 0)
+            {
+                return;
+            }
+
+            for (var i = 0; i < notes.Count; i++)
+            {
+                _autoHandled[i] = UnityEngine.Random.value < 0.35f;
+            }
+
+            _autoHandled[UnityEngine.Random.Range(0, notes.Count)] = true;
+        }
+
+        // Presses each note the moment its time arrives — well inside Perfect.
+        private void AutoPress()
+        {
+            var notes = _currentRunner.Definition.Notes;
+            var leadIn = _currentRunner.Definition.LeadIn;
+            for (var i = 0; i < notes.Count && IsPlaying; i++)
+            {
+                if (_autoHandled[i] || _currentRunner.ElapsedTime < leadIn + notes[i].time)
+                {
+                    continue;
+                }
+
+                _autoHandled[i] = true;
+                _currentRunner.Press(notes[i].input);
+            }
         }
 
         public void Abort()
@@ -81,8 +123,16 @@ namespace GARA.Rhythm
                 return;
             }
 
-            _poller.Poll(_onTokenPressed, _onTokenReleased);
+            if (AutoPlay == AutoPlayMode.Off)
+            {
+                _poller.Poll(_onTokenPressed, _onTokenReleased);
+            }
+
             _currentRunner.Tick(useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime);
+            if (AutoPlay != AutoPlayMode.Off && IsPlaying)
+            {
+                AutoPress();
+            }
         }
 
         private void OnDisable()
@@ -105,6 +155,7 @@ namespace GARA.Rhythm
 
         private void HandleCompleted(RhythmCompletionReport report)
         {
+            AutoPlay = AutoPlayMode.Off;
             _currentRunner.Completed -= HandleCompleted;
             AnySequenceEnded?.Invoke(_currentRunner);
             SequenceCompleted?.Invoke(report);

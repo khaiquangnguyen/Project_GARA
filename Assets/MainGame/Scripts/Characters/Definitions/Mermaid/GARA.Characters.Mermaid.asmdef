@@ -1,0 +1,18 @@
+{
+  "name": "GARA.Characters.Mermaid",
+  "rootNamespace": "GARA.Characters.Mermaid",
+  "references": [
+    "GARA.Characters",
+    "GARA.SkillCards.Rhythm",
+    "GARA.Rhythm"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

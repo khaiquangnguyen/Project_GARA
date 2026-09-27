@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace GARA.Characters
 {
     // The combat-interaction surface a CharacterState is allowed to
@@ -9,6 +11,9 @@ namespace GARA.Characters
         bool IsDefeated { get; }
         StatBlock CurrentStats { get; }
         void ApplyDamage(int amount);
+
+        // Restores HP up to max; never revives the defeated.
+        void Heal(int amount);
 
         // Implementation lives on CombatParticipant (GARA.Combat) — out of
         // scope here. Declared on the interface so GARA.Characters-side
@@ -35,5 +40,19 @@ namespace GARA.Characters
         // StatusEffectInstance. Implementation lives on CombatParticipant.
         void ApplyStatus(StatusEffectInstance status);
         bool HasStatus(StatusEffectKind kind);
+
+        // What this character is and can play — lets a passive copy its
+        // skills (see FormReplaySkillCard). Implementation lives on
+        // CombatParticipant.
+        CharacterDefinition Definition { get; }
+        IReadOnlyList<SkillCardDefinition> SkillCards { get; }
+
+        // The last card it played this battle, or null.
+        SkillCardDefinition LastUsedSkillCard { get; }
+
+        // Adds a card to this character's hand for the rest of the battle
+        // (or until played, for a one-time card).
+        void AddSkillCard(SkillCardDefinition card);
+        bool RemoveSkillCard(SkillCardDefinition card);
     }
 }

@@ -5,7 +5,10 @@ namespace GARA.Characters
     public enum StatusEffectKind
     {
         FoodComa,
-        Noirified
+        Noirified,
+        Charmed,
+        Slowed,
+        Weakened
     }
 
     // One active status inflicted on a participant. Deliberately data-only and
@@ -22,6 +25,15 @@ namespace GARA.Characters
         public int bonusDamageTakenPerHit;
         public float incomingDamageMultiplier = 1f;
         public float speedMultiplier = 1f;
+
+        // Scales the damage this character's own skills deal.
+        public float outgoingDamageMultiplier = 1f;
+
+        // Set on a charm: the side the character fights for (and whose
+        // player/AI picks its cards) while it lasts. Counts down per turn
+        // taken charmed, not at turn start.
+        public FactionTag? charmedTo;
+
         public string sourceId;
 
         public StatusEffectInstance(StatusEffectKind kind, int remainingTurns, string sourceId)
@@ -35,6 +47,11 @@ namespace GARA.Characters
         public static StatusEffectInstance Permanent(StatusEffectKind kind, string sourceId)
         {
             return new StatusEffectInstance(kind, 0, sourceId) { permanent = true };
+        }
+
+        public static StatusEffectInstance Charm(FactionTag side, int turns, string sourceId)
+        {
+            return new StatusEffectInstance(StatusEffectKind.Charmed, turns, sourceId) { charmedTo = side };
         }
 
         public bool IsExpired => !permanent && remainingTurns <= 0;

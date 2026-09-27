@@ -41,8 +41,11 @@ MonoBehaviour:
     - GARA.Characters.Chef
     - GARA.Characters.Dancer
     - GARA.Characters.Enemy
+    - GARA.Characters.Filmmaker
     - GARA.Characters.FrogBard
     - GARA.Characters.Gambler
+    - GARA.Characters.Mermaid
+    - GARA.Characters.Mimic
     - GARA.Characters.Noir
     - GARA.Chords
     - GARA.Combat
