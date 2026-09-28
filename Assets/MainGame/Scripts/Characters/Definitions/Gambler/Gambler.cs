@@ -10,10 +10,21 @@ namespace GARA.Characters.Gambler
         [SerializeField]
         private SkillPerformanceTiering specialTiering = SkillPerformanceTiering.Default;
 
+        [Tooltip("Landing the exact count cheats the card's game.")]
+        [SerializeField]
+        private CheatShake cheatShake = CheatShake.Default;
+
         public SkillPerformanceTiering SpecialTiering => specialTiering;
+
+        public CheatShake CheatShake => cheatShake;
 
         private void OnValidate()
         {
+            if (cheatShake.leftToken == cheatShake.rightToken || cheatShake.doneToken == cheatShake.leftToken || cheatShake.doneToken == cheatShake.rightToken)
+            {
+                Debug.LogWarning($"{name}: the cheat shake's left, right and done tokens must all differ.", this);
+            }
+
             foreach (var card in SkillCards)
             {
                 if (card != null && !(card is GamblerSkillCard))

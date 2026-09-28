@@ -15,9 +15,11 @@ GameObject:
   - component: {fileID: 8243712881889770498}
   - component: {fileID: 4139947279185182830}
   - component: {fileID: 8857900721202847605}
-  - component: {fileID: 5725523540070064675}
   - component: {fileID: 132441261096690328}
   - component: {fileID: 8609759192445773032}
+  - component: {fileID: 7719384412093517765}
+  - component: {fileID: 5695780498843054112}
+  - component: {fileID: 369497775675598092}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -133,19 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerFabulousState
   skillCard: {fileID: 11400000, guid: 5119aae8ca3a64eed836a5eb2901a5a3, type: 2}
---- !u!114 &5725523540070064675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424849482280128526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f672f99f836b4374a27ebb84d44bc3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerServeState
-  skillCard: {fileID: 11400000, guid: 04a02c06e1ce54e0a88d60e047ecc0d9, type: 2}
 --- !u!114 &132441261096690328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +161,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DancerSpotlightState
   skillCard: {fileID: 11400000, guid: e1515ce9398fe489fb198177588ec581, type: 2}
+--- !u!114 &7719384412093517765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424849482280128526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b097f06f5b345e69ea875106fe1db90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.GamblerDuelRouletteState
+  skillCard: {fileID: 11400000, guid: 21fb7f61e11f45b7b86601eccab4c7fd, type: 2}
+--- !u!114 &5695780498843054112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424849482280128526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c4681e4be8c94ffc8c501ad3a463393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.GamblerCritRouletteState
+  skillCard: {fileID: 11400000, guid: 2a6697678a92c4996b75027c0ad4fc4a, type: 2}
+--- !u!114 &369497775675598092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424849482280128526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f3a5b9f066c42449266e4137714f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.GamblerCoinThrowState
+  skillCard: {fileID: 11400000, guid: 150ce17766b254e74977f1138ca600b9, type: 2}
 --- !u!1 &5586921312400213813
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,10 +446,19 @@ MonoBehaviour:
     canBeFed: 0
     favoriteFlavors: 0
   hpHeartAnchor: {fileID: 0}
+  statusBarAnchor: {fileID: 0}
   specialTiering:
     okThreshold: 0.35
     goodThreshold: 0.65
     perfectThreshold: 0.9
+  cheatSequence:
+    tokens:
+    - id: 1
+    - id: 2
+    - id: 3
+    - id: 4
+    length: 10
+    timeLimit: 5
 --- !u!1 &5671173921607218382
 GameObject:
   m_ObjectHideFlags: 0

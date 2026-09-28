@@ -24,18 +24,12 @@ namespace GARA.ShakeBalance
         [SerializeField]
         private InputToken rightToken = new InputToken(4);
 
+        [Tooltip("Seconds to fill the meter before the run fails.")]
         [SerializeField]
-        private bool useCashOutToken = true;
+        private float duration = 4f;
 
         [SerializeField]
-        private InputToken cashOutToken = new InputToken(1);
-
-        [Tooltip("Seconds until the run ends on its own. 0 = no limit.")]
-        [SerializeField]
-        private float duration;
-
-        [SerializeField]
-        private float baseInstability = 0.8f;
+        private float baseInstability = 1.2f;
 
         [SerializeField]
         private float instabilityGrowth = 0.02f;
@@ -55,11 +49,13 @@ namespace GARA.ShakeBalance
         private float goodZone = 0.35f;
 
         [SerializeField]
-        private float bankTimeConstant = 8f;
+        private float perfectFillSeconds = 1.5f;
 
-        [Range(0f, 1f)]
         [SerializeField]
-        private float keepOnFall = 0.5f;
+        private float goodFillSeconds = 3f;
+
+        [SerializeField]
+        private float offDrainPerSecond = 0.25f;
 
         private ShakeBalanceVisualDriver _driver;
         private InputTokenPoller _poller;
@@ -106,9 +102,9 @@ namespace GARA.ShakeBalance
 
             _runner?.Abort();
 
-            _definition = ShakeBalanceDefinition.CreateRuntime(leftToken, rightToken, useCashOutToken ? cashOutToken : (InputToken?)null, duration);
+            _definition = ShakeBalanceDefinition.CreateRuntime(leftToken, rightToken, duration);
             _definition.SetDifficulty(baseInstability, instabilityGrowth, baseNoise, noiseGrowth);
-            _definition.SetScoring(perfectZone, goodZone, bankTimeConstant, keepOnFall);
+            _definition.SetScoring(perfectZone, goodZone, perfectFillSeconds, goodFillSeconds, offDrainPerSecond);
 
             _poller = new InputTokenPoller(inputMap);
             _runner = new ShakeBalanceRunner(_definition);

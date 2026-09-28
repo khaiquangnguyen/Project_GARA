@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6540164db668443ab8d05c1975f6ab79, type: 3}
   m_Name: InputSetVisualSpec
   m_EditorClassIdentifier: GARA.InputSets::GARA.InputSets.InputSetVisualSpec
-  tokenSpacing: 1.1
+  tokenSpacing: 1.4
   tokenIcons:
   - token:
       id: 1

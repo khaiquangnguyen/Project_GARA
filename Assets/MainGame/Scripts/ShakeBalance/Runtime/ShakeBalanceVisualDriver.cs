@@ -3,13 +3,14 @@ using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GARA.ShakeBalance
 {
     /// <summary>
     /// Drives the on-screen presentation of a <see cref="ShakeBalanceRunner"/>: moves a needle along
     /// the track to the balance value, tints it by zone, sizes the perfect/good zone bands, tilts an
-    /// optional target (a pan, a plate stack), and fills the result and time-left bars. Plays an
+    /// optional target (a pan, a plate stack), and fills the meter and time-left bars. Plays an
     /// optional <see cref="MMF_Player"/> at each key moment. Purely visual — all judging stays in
     /// <see cref="ShakeBalanceRunner"/>; this only reads it. Lives in the scene, not on a character:
     /// whoever owns the scene's visuals calls <see cref="Show"/> and <see cref="Hide"/> as runs
@@ -45,11 +46,12 @@ namespace GARA.ShakeBalance
         [SerializeField]
         private Transform tiltTarget;
 
-        [Tooltip("Optional. What cashing out right now would keep (0-1). Turn off its Hide Bar At Zero and Bump Scale On Change — it's updated every frame and starts empty.")]
+        [Tooltip("Optional. The meter (0-1); full succeeds. Turn off its Hide Bar At Zero and Bump Scale On Change — it's updated every frame and starts empty.")]
+        [FormerlySerializedAs("resultBar")]
         [SerializeField]
-        private MMHealthBar resultBar;
+        private MMHealthBar meterBar;
 
-        [Tooltip("Optional. Time left in the run; hidden when the run has no duration. Turn off its Hide Bar At Zero and Bump Scale On Change.")]
+        [Tooltip("Optional. Time left in the run. Turn off its Hide Bar At Zero and Bump Scale On Change.")]
         [SerializeField]
         private MMHealthBar timerBar;
 
@@ -86,9 +88,10 @@ namespace GARA.ShakeBalance
         [SerializeField]
         private MMF_Player enteredOffFeedback;
 
-        [Tooltip("Played at the track when the player cashes out, in addition to Balance Ended.")]
+        [Tooltip("Played at the track when the meter fills, in addition to Balance Ended.")]
+        [FormerlySerializedAs("cashedOutFeedback")]
         [SerializeField]
-        private MMF_Player cashedOutFeedback;
+        private MMF_Player succeededFeedback;
 
         [Tooltip("Played at the needle when the value falls off an edge, in addition to Balance Ended.")]
         [SerializeField]
@@ -170,7 +173,7 @@ namespace GARA.ShakeBalance
             SizeZoneBands(runner.Definition);
             if (timerBar != null)
             {
-                timerBar.gameObject.SetActive(runner.Definition.Duration > 0f);
+                timerBar.gameObject.SetActive(true);
             }
 
             Refresh(runner);
@@ -221,15 +224,14 @@ namespace GARA.ShakeBalance
                 tiltTarget.localRotation = _tiltBaseRotation * spec.TiltFor(value);
             }
 
-            if (resultBar != null)
+            if (meterBar != null)
             {
-                resultBar.UpdateBar(runner.CurrentResult, 0f, 1f, true);
+                meterBar.UpdateBar(runner.Meter, 0f, 1f, true);
             }
 
-            var duration = runner.Definition.Duration;
-            if (timerBar != null && duration > 0f)
+            if (timerBar != null)
             {
-                timerBar.UpdateBar(runner.TimeRemaining, 0f, duration, true);
+                timerBar.UpdateBar(runner.TimeRemaining, 0f, runner.Definition.Duration, true);
             }
         }
 
@@ -267,15 +269,15 @@ namespace GARA.ShakeBalance
             // the end feedbacks play. Hide follows from whoever owns the run.
             Refresh(_boundRunner);
 
-            if (resultBar != null)
+            if (meterBar != null)
             {
-                resultBar.UpdateBar(report.Result, 0f, 1f, true);
+                meterBar.UpdateBar(report.Meter, 0f, 1f, true);
             }
 
             switch (report.EndReason)
             {
-                case ShakeBalanceEndReason.CashedOut:
-                    PlayFeedback(cashedOutFeedback, track.position);
+                case ShakeBalanceEndReason.Succeeded:
+                    PlayFeedback(succeededFeedback, track.position);
                     break;
                 case ShakeBalanceEndReason.Fell:
                     PlayFeedback(fellFeedback, needle.position);

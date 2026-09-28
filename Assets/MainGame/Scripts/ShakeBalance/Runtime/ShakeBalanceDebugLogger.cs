@@ -35,8 +35,8 @@ namespace GARA.ShakeBalance
         /// <summary>One-line summary shared by every ShakeBalance log.</summary>
         public static string Describe(ShakeBalanceReport report)
         {
-            return $"result={report.Result:P0} (unpenalized {report.UnpenalizedResult:P0}), end={report.EndReason}, " +
-                   $"avgQuality={report.AverageQuality:P0}, perfect={report.PerfectTime:F1}s good={report.GoodTime:F1}s off={report.OffTime:F1}s, " +
+            return $"end={report.EndReason}, meter={report.Meter:P0}, " +
+                   $"perfect={report.PerfectTime:F1}s good={report.GoodTime:F1}s off={report.OffTime:F1}s, " +
                    $"pushes={report.Pushes}, instability={report.FinalInstability:F2}, elapsed={report.Elapsed:F2}s";
         }
     }

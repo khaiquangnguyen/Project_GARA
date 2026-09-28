@@ -1,19 +1,30 @@
+using System.Collections.Generic;
+
 namespace GARA.Characters.Gambler
 {
+    // Every coin of one toss; true is heads.
     public sealed class CoinTossOutcome : GambleOutcome
     {
-        public readonly bool Heads;
+        public readonly IReadOnlyList<bool> Faces;
+        public readonly int HeadsCount;
 
-        public CoinTossOutcome(bool heads)
+        public CoinTossOutcome(IReadOnlyList<bool> faces)
         {
-            Heads = heads;
+            Faces = faces;
+            foreach (var heads in faces)
+            {
+                if (heads)
+                {
+                    HeadsCount++;
+                }
+            }
         }
 
-        public override float Significance => Heads ? 1f : 0f;
+        public override float Significance => Faces.Count > 0 ? HeadsCount / (float)Faces.Count : 0f;
 
         public override string ToString()
         {
-            return $"Coin: {(Heads ? "Heads" : "Tails")}";
+            return $"Coins: {HeadsCount}/{Faces.Count} heads";
         }
     }
 }

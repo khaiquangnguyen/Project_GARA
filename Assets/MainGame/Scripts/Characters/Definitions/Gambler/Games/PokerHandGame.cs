@@ -1,19 +1,22 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace GARA.Characters.Gambler
 {
-    // Deals 5 from a fresh deck; luck deals extra hands and keeps the best.
+    // Deals 5 from a fresh deck. Cheat: extra hands are dealt and the best
+    // is kept.
     [Serializable]
     public class PokerHandGame : GamblingGame<PokerHandOutcome>
     {
-        [Tooltip("Extra hands dealt at full luck; the best one is kept.")]
+        [Tooltip("Cheat: extra hands dealt; the best one is kept.")]
+        [FormerlySerializedAs("maxExtraDraws")]
         [Min(0)]
-        public int maxExtraDraws = 2;
+        public int cheatExtraDraws = 2;
 
-        protected override PokerHandOutcome RollTyped(float luck, IGambleRandom rng)
+        protected override PokerHandOutcome RollTyped(bool cheated, IGambleRandom rng)
         {
-            var draws = 1 + Mathf.RoundToInt(maxExtraDraws * luck);
+            var draws = 1 + (cheated ? cheatExtraDraws : 0);
             PlayingCard[] best = null;
             var bestRank = PokerHandRank.HighCard;
             for (var i = 0; i < draws; i++)

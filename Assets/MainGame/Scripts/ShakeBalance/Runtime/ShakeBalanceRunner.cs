@@ -6,7 +6,7 @@ namespace GARA.ShakeBalance
 {
     /// <summary>
     /// Drives a <see cref="ShakeBalanceDefinition"/>: simulates the drifting value, applies pushes,
-    /// banks quality and reports the result. Plain C# so it can be unit tested and driven by any
+    /// fills the meter and reports whether it filled in time. Plain C# so it can be unit tested and driven by any
     /// host; pass a seed for a reproducible wobble.
     /// </summary>
     public sealed class ShakeBalanceRunner
@@ -20,7 +20,7 @@ namespace GARA.ShakeBalance
         private float _noiseTarget;
         private float _noiseTimer;
         private float _elapsedTime;
-        private float _bank;
+        private float _meter;
         private float _perfectTime;
         private float _goodTime;
         private float _offTime;
@@ -49,15 +49,11 @@ namespace GARA.ShakeBalance
 
         public ShakeBalanceZone Zone => _zone;
         public float ElapsedTime => _elapsedTime;
-        public float Bank => _bank;
+        /// <summary>0-1; full succeeds.</summary>
+        public float Meter => _meter;
         public float Instability => _definition.InstabilityAt(_elapsedTime);
 
-        /// <summary>What cashing out right now would keep.</summary>
-        public float CurrentResult => _definition.ResultFor(_bank);
-
-        public float TimeRemaining => _definition.Duration <= 0f
-            ? float.PositiveInfinity
-            : Mathf.Max(0f, _definition.Duration - _elapsedTime);
+        public float TimeRemaining => Mathf.Max(0f, _definition.Duration - _elapsedTime);
 
         /// <summary>Null until the run ends.</summary>
         public ShakeBalanceReport Report => _report;
@@ -70,7 +66,7 @@ namespace GARA.ShakeBalance
             _noiseTarget = NextNoiseTarget();
             _noiseTimer = 0f;
             _elapsedTime = 0f;
-            _bank = 0f;
+            _meter = 0f;
             _perfectTime = 0f;
             _goodTime = 0f;
             _offTime = 0f;
@@ -106,7 +102,13 @@ namespace GARA.ShakeBalance
             SetZone(_definition.ZoneAt(_value));
             Accumulate(_zone, deltaSeconds);
 
-            if (_definition.Duration > 0f && _elapsedTime >= _definition.Duration)
+            if (_meter >= 1f)
+            {
+                Finish(ShakeBalanceEndReason.Succeeded);
+                return;
+            }
+
+            if (_elapsedTime >= _definition.Duration)
             {
                 Finish(ShakeBalanceEndReason.TimeUp);
             }
@@ -116,12 +118,6 @@ namespace GARA.ShakeBalance
         {
             if (!_isRunning)
             {
-                return;
-            }
-
-            if (_definition.UseCashOutToken && token == _definition.CashOutToken)
-            {
-                Finish(ShakeBalanceEndReason.CashedOut);
                 return;
             }
 
@@ -142,15 +138,6 @@ namespace GARA.ShakeBalance
             _velocity += direction * _definition.PushStrength;
             _pushes++;
             Pushed?.Invoke(direction);
-        }
-
-        /// <summary>Ends the run as a cash out — keeps the full result.</summary>
-        public void Stop()
-        {
-            if (_isRunning)
-            {
-                Finish(ShakeBalanceEndReason.CashedOut);
-            }
         }
 
         public void Abort()
@@ -181,7 +168,7 @@ namespace GARA.ShakeBalance
 
         private void Accumulate(ShakeBalanceZone zone, float deltaSeconds)
         {
-            _bank += _definition.QualityOf(zone) * deltaSeconds;
+            _meter = Mathf.Clamp01(_meter + _definition.FillRateOf(zone) * deltaSeconds);
 
             switch (zone)
             {
@@ -212,14 +199,10 @@ namespace GARA.ShakeBalance
         {
             _isRunning = false;
 
-            var unpenalized = CurrentResult;
             _report = new ShakeBalanceReport
             {
-                Result = reason == ShakeBalanceEndReason.Fell ? unpenalized * _definition.KeepOnFall : unpenalized,
-                UnpenalizedResult = unpenalized,
-                Bank = _bank,
+                Meter = _meter,
                 Elapsed = _elapsedTime,
-                AverageQuality = _elapsedTime > 0f ? _bank / _elapsedTime : 0f,
                 PerfectTime = _perfectTime,
                 GoodTime = _goodTime,
                 OffTime = _offTime,

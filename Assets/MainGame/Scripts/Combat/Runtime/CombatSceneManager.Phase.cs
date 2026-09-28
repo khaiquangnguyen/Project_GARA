@@ -549,6 +549,7 @@ namespace GARA.Combat
             skillCardInputHost.RaiseInputPhaseStarted(card);
 
             skillCardInputHost.Actor = _actor.definition;
+            skillCardInputHost.IsPlayerControlled = _actor.IsPlayerControlled;
             _activeSession = card.CreateInputSession(skillCardInputHost);
             if (_activeSession is ILiveSkillInputSession liveSession)
             {

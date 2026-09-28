@@ -1,0 +1,68 @@
+{ "skeleton": { "images": "~/Desktop/images/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "cookie", "bone": "root", "attachment": "cookie" },
+	{ "name": "leg_L", "bone": "root", "attachment": "leg_L" },
+	{ "name": "leg_R", "bone": "root", "attachment": "leg_R" },
+	{ "name": "hand_R_2", "bone": "root", "attachment": "hand_R_2" },
+	{ "name": "hand_R_1", "bone": "root", "attachment": "hand_R_1" },
+	{ "name": "hand_L_2", "bone": "root", "attachment": "hand_L_2" },
+	{ "name": "hand_L_1", "bone": "root", "attachment": "hand_L_1" },
+	{ "name": "head", "bone": "root", "attachment": "head" },
+	{ "name": "body", "bone": "root", "attachment": "body" },
+	{ "name": "bowtie", "bone": "root", "attachment": "bowtie" },
+	{ "name": "eye_open", "bone": "root", "attachment": "eye_open" },
+	{ "name": "eye_close", "bone": "root" },
+	{ "name": "hair_2", "bone": "root", "attachment": "hair_2" },
+	{ "name": "hair_1", "bone": "root", "attachment": "hair_1" }
+],
+"skins": {
+	"default": {
+		"cookie": {
+			"cookie": { "x": 464.5, "y": -653, "width": 395, "height": 170 }
+		},
+		"leg_L": {
+			"leg_L": { "x": 452.5, "y": -603, "width": 39, "height": 58 }
+		},
+		"leg_R": {
+			"leg_R": { "x": 509, "y": -600.5, "width": 38, "height": 59 }
+		},
+		"hand_R_2": {
+			"hand_R_2": { "x": 580, "y": -600, "width": 48, "height": 44 }
+		},
+		"hand_R_1": {
+			"hand_R_1": { "x": 576, "y": -562, "width": 56, "height": 76 }
+		},
+		"hand_L_2": {
+			"hand_L_2": { "x": 359, "y": -476, "width": 46, "height": 42 }
+		},
+		"hand_L_1": {
+			"hand_L_1": { "x": 376.5, "y": -511.5, "width": 65, "height": 67 }
+		},
+		"head": {
+			"head": { "x": 473.5, "y": -403.5, "width": 237, "height": 235 }
+		},
+		"body": {
+			"body": { "x": 480.5, "y": -539.5, "width": 181, "height": 105 }
+		},
+		"bowtie": {
+			"bowtie": { "x": 453, "y": -531.5, "width": 56, "height": 37 }
+		},
+		"eye_open": {
+			"eye_open": { "x": 472.5, "y": -467, "width": 97, "height": 62 }
+		},
+		"eye_close": {
+			"eye_close": { "x": 472.5, "y": -467, "width": 97, "height": 62 }
+		},
+		"hair_2": {
+			"hair_2": { "x": 538.5, "y": -452.5, "width": 61, "height": 71 }
+		},
+		"hair_1": {
+			"hair_1": { "x": 484.5, "y": -429.5, "width": 87, "height": 69 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}

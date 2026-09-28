@@ -49,12 +49,6 @@ namespace GARA.ShakeBalance
             _runner.Start();
         }
 
-        /// <summary>Ends the run as a cash out — keeps the full result.</summary>
-        public void Stop()
-        {
-            _runner?.Stop();
-        }
-
         /// <summary>Cuts the run short; onCompleted still fires, with an Aborted report.</summary>
         public void Abort()
         {

@@ -5,19 +5,25 @@ using UnityEngine;
 namespace GARA.InputSets
 {
     /// <summary>
-    /// Visual for one token in the current set's row. Its persistent look (pending / current /
-    /// accepted) is a tint from the driver's <see cref="InputSetVisualSpec"/>; everything transient
+    /// Visual for one token in the current set's row: an icon sitting on an optional holder. Only the
+    /// icon turns to the token's rotation, so one arrow sprite serves every direction while the holder
+    /// stays upright. Its persistent look (pending / current / accepted) is a tint on the icon from
+    /// the driver's <see cref="InputSetVisualSpec"/>; everything transient
     /// is an <see cref="MMF_Player"/>. The optional state feedbacks can overlap each other and the
-    /// tint, so they should animate scale/position/child objects rather than this sprite's color.
+    /// tint, so they should animate scale/position/child objects rather than the icon's color.
     /// Once its set finishes the token only plays its cleared or failed exit feedback, which owns
     /// how it leaves and ends by disabling it — returning it to the driver's pool. Pooled:
     /// <see cref="Place"/> undoes whatever the previous use's feedbacks changed.
     /// </summary>
-    [RequireComponent(typeof(SpriteRenderer))]
     public class InputSetTokenView : MonoBehaviour
     {
+        [Tooltip("The token's icon — tinted per state and turned to the token's rotation. Keep it on a child so the holder doesn't turn with it.")]
         [SerializeField]
-        private SpriteRenderer spriteRenderer;
+        private SpriteRenderer icon;
+
+        [Tooltip("Optional. Upright background behind the icon.")]
+        [SerializeField]
+        private SpriteRenderer holder;
 
         [Tooltip("Optional. Played when this token becomes the next one to press, and stopped when it stops being it — e.g. a looping pulse.")]
         [SerializeField]
@@ -45,24 +51,24 @@ namespace GARA.InputSets
 
         private Sprite _baseSprite;
         private Vector3 _baseScale;
+        private Color _baseHolderColor;
         private bool _isCurrent;
-
-        private void Reset()
-        {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-        }
 
         private void Awake()
         {
-            if (spriteRenderer == null)
+            if (icon == null)
             {
-                spriteRenderer = GetComponent<SpriteRenderer>();
+                throw new InvalidOperationException($"{nameof(InputSetTokenView)} on '{name}' has no icon assigned.");
             }
 
             // Pooled instances are created inactive, so this first runs on first use —
             // still the authored prefab values, which Place restores on every reuse.
-            _baseSprite = spriteRenderer.sprite;
+            _baseSprite = icon.sprite;
             _baseScale = transform.localScale;
+            if (holder != null)
+            {
+                _baseHolderColor = holder.color;
+            }
 
             if (clearedExitFeedback == null)
             {
@@ -75,18 +81,24 @@ namespace GARA.InputSets
             }
         }
 
-        /// <summary>Call right after taking this token from the pool (and activating it). <paramref name="sprite"/> null keeps the prefab's sprite.</summary>
+        /// <summary>Call right after taking this token from the pool (and activating it). <paramref name="sprite"/> null keeps the prefab's sprite; <paramref name="rotation"/> turns the icon only.</summary>
         public void Place(Vector3 position, Sprite sprite, Quaternion rotation)
         {
-            transform.SetPositionAndRotation(position, rotation);
+            transform.SetPositionAndRotation(position, Quaternion.identity);
             transform.localScale = _baseScale;
-            spriteRenderer.sprite = sprite != null ? sprite : _baseSprite;
+            icon.transform.localRotation = rotation;
+            icon.sprite = sprite != null ? sprite : _baseSprite;
+            if (holder != null)
+            {
+                holder.color = _baseHolderColor;
+            }
+
             _isCurrent = false;
         }
 
         public void SetState(InputSetTokenState state, Color color)
         {
-            spriteRenderer.color = color;
+            icon.color = color;
 
             var isCurrent = state == InputSetTokenState.Current;
             if (isCurrent == _isCurrent)

@@ -20,6 +20,7 @@ namespace GARA.Combat
 
         public MonoBehaviour CoroutineRunner => this;
         public CharacterDefinition Actor { get; set; }
+        public bool IsPlayerControlled { get; set; } = true;
 
         public T GetDriver<T>() where T : Component
         {

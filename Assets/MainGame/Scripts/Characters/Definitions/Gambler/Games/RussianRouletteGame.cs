@@ -12,14 +12,14 @@ namespace GARA.Characters.Gambler
         [Min(0)]
         public int loaded = 1;
 
-        [Tooltip("Fraction of the fire chance removed at full luck.")]
-        [Range(0, 1)]
-        public float luckSafety = 0.5f;
+        [Tooltip("Cheat: bullets loaded on top of loaded.")]
+        [Min(0)]
+        public int cheatBullets = 1;
 
-        protected override RussianRouletteOutcome RollTyped(float luck, IGambleRandom rng)
+        protected override RussianRouletteOutcome RollTyped(bool cheated, IGambleRandom rng)
         {
-            var loadedCount = Mathf.Min(loaded, chambers);
-            var fireChance = loadedCount / (float)chambers * (1f - luckSafety * luck);
+            var loadedCount = Mathf.Min(loaded + (cheated ? cheatBullets : 0), chambers);
+            var fireChance = loadedCount / (float)chambers;
             var fired = rng.Value01() < fireChance;
             return new RussianRouletteOutcome(fired, rng.Range(0, chambers), chambers, loadedCount);
         }

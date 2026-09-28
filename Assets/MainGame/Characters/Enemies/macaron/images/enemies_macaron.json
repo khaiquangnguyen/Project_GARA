@@ -1,0 +1,56 @@
+{ "skeleton": { "images": "/d/Cooking_meomeo/macaron/images/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "leg_L", "bone": "root", "attachment": "leg_L" },
+	{ "name": "leg_R", "bone": "root", "attachment": "leg_R" },
+	{ "name": "body_1", "bone": "root", "attachment": "body_1" },
+	{ "name": "body_3", "bone": "root", "attachment": "body_3" },
+	{ "name": "body_2", "bone": "root", "attachment": "body_2" },
+	{ "name": "head_2", "bone": "root", "attachment": "head_2" },
+	{ "name": "head_1", "bone": "root", "attachment": "head_1" },
+	{ "name": "hair", "bone": "root", "attachment": "hair" },
+	{ "name": "mouth", "bone": "root", "attachment": "mouth" },
+	{ "name": "eye_L", "bone": "root", "attachment": "eye_L" },
+	{ "name": "eye_R", "bone": "root", "attachment": "eye_R" }
+],
+"skins": {
+	"default": {
+		"leg_L": {
+			"leg_L": { "x": 473.5, "y": -681, "width": 33, "height": 36 }
+		},
+		"leg_R": {
+			"leg_R": { "x": 510.5, "y": -681, "width": 33, "height": 36 }
+		},
+		"body_1": {
+			"body_1": { "x": 492, "y": -655.5, "width": 76, "height": 47 }
+		},
+		"body_3": {
+			"body_3": { "x": 491.5, "y": -651, "width": 175, "height": 76 }
+		},
+		"body_2": {
+			"body_2": { "x": 476, "y": -636.5, "width": 150, "height": 73 }
+		},
+		"head_2": {
+			"head_2": { "x": 487.5, "y": -582, "width": 215, "height": 114 }
+		},
+		"head_1": {
+			"head_1": { "x": 482, "y": -508.5, "width": 228, "height": 139 }
+		},
+		"hair": {
+			"hair": { "x": 475, "y": -523, "width": 208, "height": 94 }
+		},
+		"mouth": {
+			"mouth": { "x": 468, "y": -592.5, "width": 22, "height": 19 }
+		},
+		"eye_L": {
+			"eye_L": { "x": 439.5, "y": -614, "width": 59, "height": 54 }
+		},
+		"eye_R": {
+			"eye_R": { "x": 518.5, "y": -604, "width": 75, "height": 62 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}

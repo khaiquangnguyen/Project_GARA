@@ -4,12 +4,10 @@ using UnityEngine;
 namespace GARA.ShakeBalance
 {
     /// <summary>
-    /// A balance minigame: a value in [-1, 1] drifts away from the center on its own, harder the
-    /// longer the run lasts, and two tokens push it left and right. Time spent near the center
-    /// banks quality, and the result is that bank on a saturating curve — so the player can keep
-    /// going as long as they like, but the result only ever approaches 1. The run ends when the
-    /// player cashes out (keeps the full result), the value falls off an edge (keeps
-    /// <see cref="KeepOnFall"/> of it), or the optional duration runs out.
+    /// A balance minigame with one goal: a value in [-1, 1] drifts away from the center on its
+    /// own and two tokens push it left and right. Time near the center fills a meter; filling it
+    /// before the duration runs out succeeds and ends the run. Running out of time or letting the
+    /// value fall off an edge fails.
     /// </summary>
     [CreateAssetMenu(menuName = "GARA/Shake Balance/Shake Balance", fileName = "ShakeBalance")]
     public class ShakeBalanceDefinition : ScriptableObject
@@ -20,13 +18,6 @@ namespace GARA.ShakeBalance
 
         [SerializeField]
         private InputToken rightToken;
-
-        [Tooltip("When on, pressing the cash out token ends the run and keeps the full result. When off, the run only ends by falling, by the duration, or externally.")]
-        [SerializeField]
-        private bool useCashOutToken = true;
-
-        [SerializeField]
-        private InputToken cashOutToken;
 
         [Header("Push")]
         [Tooltip("Velocity added by one tap. The distance a lone tap travels is Push Strength / Push Damping.")]
@@ -43,7 +34,7 @@ namespace GARA.ShakeBalance
         [Tooltip("How strongly the value is pulled away from the center, per unit of distance, per second.")]
         [Min(0f)]
         [SerializeField]
-        private float baseInstability = 0.8f;
+        private float baseInstability = 1.2f;
 
         [Tooltip("Instability added per second of play — what keeps a long run from staying safe.")]
         [Min(0f)]
@@ -76,31 +67,29 @@ namespace GARA.ShakeBalance
         [SerializeField]
         private float goodZone = 0.35f;
 
-        [Tooltip("Quality banked per second while in the good (but not perfect) zone. Outside it banks nothing.")]
-        [Range(0f, 1f)]
-        [SerializeField]
-        private float goodZoneQuality = 0.5f;
-
-        [Header("Result")]
-        [Tooltip("Seconds of perfect play for the result to reach ~63%. ~3x this reaches ~95%. The result never reaches 100%.")]
+        [Header("Meter")]
+        [Tooltip("Seconds in the perfect zone to fill the meter from empty.")]
         [Min(0.01f)]
         [SerializeField]
-        private float bankTimeConstant = 8f;
+        private float perfectFillSeconds = 1.5f;
 
-        [Tooltip("Fraction of the result kept when the value falls off an edge.")]
-        [Range(0f, 1f)]
+        [Tooltip("Seconds in the good (but not perfect) zone to fill the meter from empty.")]
+        [Min(0.01f)]
         [SerializeField]
-        private float keepOnFall = 0.5f;
+        private float goodFillSeconds = 3f;
 
-        [Tooltip("Seconds until the run ends on its own, keeping the full result. 0 = no limit.")]
+        [Tooltip("Meter lost per second outside the good zone.")]
         [Min(0f)]
         [SerializeField]
-        private float duration;
+        private float offDrainPerSecond = 0.25f;
+
+        [Tooltip("Seconds to fill the meter before the run fails.")]
+        [Min(0.1f)]
+        [SerializeField]
+        private float duration = 4f;
 
         public InputToken LeftToken => leftToken;
         public InputToken RightToken => rightToken;
-        public bool UseCashOutToken => useCashOutToken;
-        public InputToken CashOutToken => cashOutToken;
         public float PushStrength => pushStrength;
         public float PushDamping => pushDamping;
         public float BaseInstability => baseInstability;
@@ -110,20 +99,18 @@ namespace GARA.ShakeBalance
         public float NoiseChangeInterval => noiseChangeInterval;
         public float PerfectZone => perfectZone;
         public float GoodZone => goodZone;
-        public float GoodZoneQuality => goodZoneQuality;
-        public float BankTimeConstant => bankTimeConstant;
-        public float KeepOnFall => keepOnFall;
+        public float PerfectFillSeconds => perfectFillSeconds;
+        public float GoodFillSeconds => goodFillSeconds;
+        public float OffDrainPerSecond => offDrainPerSecond;
         public float Duration => duration;
 
         /// <summary>Builds an in-memory definition (not saved as an asset) with default tuning — for tests and generated runs. Caller owns destroying it.</summary>
-        public static ShakeBalanceDefinition CreateRuntime(InputToken leftToken, InputToken rightToken, InputToken? cashOutToken, float duration)
+        public static ShakeBalanceDefinition CreateRuntime(InputToken leftToken, InputToken rightToken, float duration)
         {
             var definition = CreateInstance<ShakeBalanceDefinition>();
             definition.leftToken = leftToken;
             definition.rightToken = rightToken;
-            definition.useCashOutToken = cashOutToken.HasValue;
-            definition.cashOutToken = cashOutToken ?? default;
-            definition.duration = duration;
+            definition.duration = Mathf.Max(0.1f, duration);
             return definition;
         }
 
@@ -137,12 +124,13 @@ namespace GARA.ShakeBalance
         }
 
         /// <summary>Overrides the scoring knobs of a runtime definition, e.g. from a test harness.</summary>
-        public void SetScoring(float perfectZone, float goodZone, float bankTimeConstant, float keepOnFall)
+        public void SetScoring(float perfectZone, float goodZone, float perfectFillSeconds, float goodFillSeconds, float offDrainPerSecond)
         {
             this.perfectZone = perfectZone;
             this.goodZone = Mathf.Max(perfectZone, goodZone);
-            this.bankTimeConstant = Mathf.Max(0.01f, bankTimeConstant);
-            this.keepOnFall = keepOnFall;
+            this.perfectFillSeconds = Mathf.Max(0.01f, perfectFillSeconds);
+            this.goodFillSeconds = Mathf.Max(0.01f, goodFillSeconds);
+            this.offDrainPerSecond = Mathf.Max(0f, offDrainPerSecond);
         }
 
         /// <summary>Instability after <paramref name="elapsed"/> seconds of play.</summary>
@@ -157,12 +145,6 @@ namespace GARA.ShakeBalance
             return baseNoise + noiseGrowth * elapsed;
         }
 
-        /// <summary>Result (0 to just under 1) for a quality bank of <paramref name="bank"/> seconds.</summary>
-        public float ResultFor(float bank)
-        {
-            return 1f - Mathf.Exp(-Mathf.Max(0f, bank) / bankTimeConstant);
-        }
-
         public ShakeBalanceZone ZoneAt(float value)
         {
             var distance = Mathf.Abs(value);
@@ -174,16 +156,17 @@ namespace GARA.ShakeBalance
             return distance <= goodZone ? ShakeBalanceZone.Good : ShakeBalanceZone.Off;
         }
 
-        public float QualityOf(ShakeBalanceZone zone)
+        /// <summary>Meter gained per second in <paramref name="zone"/>; negative drains it.</summary>
+        public float FillRateOf(ShakeBalanceZone zone)
         {
             switch (zone)
             {
                 case ShakeBalanceZone.Perfect:
-                    return 1f;
+                    return 1f / perfectFillSeconds;
                 case ShakeBalanceZone.Good:
-                    return goodZoneQuality;
+                    return 1f / goodFillSeconds;
                 default:
-                    return 0f;
+                    return -offDrainPerSecond;
             }
         }
 
@@ -197,11 +180,6 @@ namespace GARA.ShakeBalance
             if (leftToken == rightToken)
             {
                 Debug.LogWarning($"[{name}] ShakeBalanceDefinition: left and right tokens are the same.", this);
-            }
-
-            if (useCashOutToken && (cashOutToken == leftToken || cashOutToken == rightToken))
-            {
-                Debug.LogWarning($"[{name}] ShakeBalanceDefinition: the cash out token is also a push token.", this);
             }
         }
     }

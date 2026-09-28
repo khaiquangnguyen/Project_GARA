@@ -2,13 +2,14 @@ using System;
 
 namespace GARA.Characters.Gambler
 {
-    // Rolled when a Gambler card is played; luck (0-1) tilts the odds.
+    // Rolled when a Gambler card is played; a successful cheat (the shake
+    // balance filled) tips the roll the game's own way.
     [Serializable]
     public abstract class GamblingGame
     {
         public abstract Type OutcomeType { get; }
 
-        public abstract GambleOutcome Roll(float luck, IGambleRandom rng);
+        public abstract GambleOutcome Roll(bool cheated, IGambleRandom rng);
     }
 
     [Serializable]
@@ -16,11 +17,11 @@ namespace GARA.Characters.Gambler
     {
         public override Type OutcomeType => typeof(TOutcome);
 
-        public override GambleOutcome Roll(float luck, IGambleRandom rng)
+        public override GambleOutcome Roll(bool cheated, IGambleRandom rng)
         {
-            return RollTyped(luck, rng);
+            return RollTyped(cheated, rng);
         }
 
-        protected abstract TOutcome RollTyped(float luck, IGambleRandom rng);
+        protected abstract TOutcome RollTyped(bool cheated, IGambleRandom rng);
     }
 }

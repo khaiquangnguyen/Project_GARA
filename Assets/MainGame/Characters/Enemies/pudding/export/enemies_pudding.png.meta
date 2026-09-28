@@ -1,0 +1,691 @@
+fileFormatVersion: 2
+guid: 74a61e18b665a4dc3a512026a029738d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5454319669213644421
+    second: enemies_pudding_0
+  - first:
+      213: 5549969315953010115
+    second: enemies_pudding_1
+  - first:
+      213: 7013125287482285871
+    second: enemies_pudding_2
+  - first:
+      213: 3971015868164958012
+    second: enemies_pudding_3
+  - first:
+      213: -4468330583010852076
+    second: enemies_pudding_4
+  - first:
+      213: 1197302005090793462
+    second: enemies_pudding_5
+  - first:
+      213: -845862201536887175
+    second: enemies_pudding_6
+  - first:
+      213: -4615603281246631691
+    second: enemies_pudding_7
+  - first:
+      213: 1637092107363752281
+    second: enemies_pudding_8
+  - first:
+      213: -5039756960398756132
+    second: enemies_pudding_9
+  - first:
+      213: -4444799537462639990
+    second: enemies_pudding_10
+  - first:
+      213: 5699399842532479457
+    second: enemies_pudding_11
+  - first:
+      213: 9015824580517390212
+    second: enemies_pudding_12
+  - first:
+      213: -78341428916645862
+    second: enemies_pudding_13
+  - first:
+      213: 8059328377705528147
+    second: enemies_pudding_14
+  - first:
+      213: 9114178232028661642
+    second: enemies_pudding_15
+  - first:
+      213: -4724365004225262233
+    second: enemies_pudding_16
+  - first:
+      213: -2474187306736204087
+    second: enemies_pudding_17
+  - first:
+      213: 5935482249616475264
+    second: enemies_pudding_18
+  - first:
+      213: 6987113188806525696
+    second: enemies_pudding_19
+  - first:
+      213: 2498785455506894189
+    second: enemies_pudding_20
+  - first:
+      213: -7973362359219767447
+    second: enemies_pudding_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: enemies_pudding_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 615
+        height: 460
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b793819b82d5e44b0800000000000000
+      internalID: -5454319669213644421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_1
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 343
+        width: 147
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c562b710b3750d40800000000000000
+      internalID: 5549969315953010115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_2
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 343
+        width: 186
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2fd0b5ba40a35160800000000000000
+      internalID: 7013125287482285871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_3
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 432
+        width: 57
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c37696b84e1eb1730800000000000000
+      internalID: 3971015868164958012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_4
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 432
+        width: 62
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 413cf9c420d4df1c0800000000000000
+      internalID: -4468330583010852076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_5
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 436
+        width: 41
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f7bc4e74dbad9010800000000000000
+      internalID: 1197302005090793462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_6
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 428
+        width: 55
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 976c67c2fc4e244f0800000000000000
+      internalID: -845862201536887175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_7
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 435
+        width: 31
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f8ca2d254512ffb0800000000000000
+      internalID: -4615603281246631691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_8
+      rect:
+        serializedVersion: 2
+        x: 1210
+        y: 303
+        width: 208
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9591304199e18b610800000000000000
+      internalID: 1637092107363752281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_9
+      rect:
+        serializedVersion: 2
+        x: 1419
+        y: 300
+        width: 116
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd6312d0fbf2f0ab0800000000000000
+      internalID: -5039756960398756132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_10
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 342
+        width: 75
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8208b7ce56e052c0800000000000000
+      internalID: -4444799537462639990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_11
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 342
+        width: 55
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e1d017c5f5581f40800000000000000
+      internalID: 5699399842532479457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_12
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 342
+        width: 62
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48769f620b4ae1d70800000000000000
+      internalID: 9015824580517390212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_13
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 402
+        width: 51
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a101a3ea2eca9eef0800000000000000
+      internalID: -78341428916645862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_14
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 407
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35bfc59957c78df60800000000000000
+      internalID: 8059328377705528147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_15
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 1
+        width: 326
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a878aa320d01c7e70800000000000000
+      internalID: 9114178232028661642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_16
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 342
+        width: 62
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76dcdd53f0faf6eb0800000000000000
+      internalID: -4724365004225262233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_17
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 300
+        width: 209
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c6453ad0cbe9add0800000000000000
+      internalID: -2474187306736204087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_18
+      rect:
+        serializedVersion: 2
+        x: 1771
+        y: 300
+        width: 19
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 084c60398a11f5250800000000000000
+      internalID: 5935482249616475264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_19
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 1
+        width: 562
+        height: 299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00382480d6637f060800000000000000
+      internalID: 6987113188806525696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_20
+      rect:
+        serializedVersion: 2
+        x: 1744
+        y: 300
+        width: 27
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6da665f1287da220800000000000000
+      internalID: 2498785455506894189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_pudding_21
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 37
+        width: 132
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9673c31dd2de85190800000000000000
+      internalID: -7973362359219767447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      enemies_pudding_0: -5454319669213644421
+      enemies_pudding_1: 5549969315953010115
+      enemies_pudding_10: -4444799537462639990
+      enemies_pudding_11: 5699399842532479457
+      enemies_pudding_12: 9015824580517390212
+      enemies_pudding_13: -78341428916645862
+      enemies_pudding_14: 8059328377705528147
+      enemies_pudding_15: 9114178232028661642
+      enemies_pudding_16: -4724365004225262233
+      enemies_pudding_17: -2474187306736204087
+      enemies_pudding_18: 5935482249616475264
+      enemies_pudding_19: 6987113188806525696
+      enemies_pudding_2: 7013125287482285871
+      enemies_pudding_20: 2498785455506894189
+      enemies_pudding_21: -7973362359219767447
+      enemies_pudding_3: 3971015868164958012
+      enemies_pudding_4: -4468330583010852076
+      enemies_pudding_5: 1197302005090793462
+      enemies_pudding_6: -845862201536887175
+      enemies_pudding_7: -4615603281246631691
+      enemies_pudding_8: 1637092107363752281
+      enemies_pudding_9: -5039756960398756132
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

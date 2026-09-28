@@ -40,10 +40,6 @@ namespace GARA.InputSets
         [SerializeField]
         private InputSetTimerView setCollectionTimer;
 
-        [Tooltip("Optional. Shown only while a set collection is being presented — enabled by Show, disabled by Hide.")]
-        [SerializeField]
-        private GameObject background;
-
         [Header("Feedbacks (optional)")]
         [Tooltip("Played at the row anchor when a set collection starts showing.")]
         [SerializeField]
@@ -113,7 +109,6 @@ namespace GARA.InputSets
             }
 
             SetTimersVisible(false);
-            SetBackgroundVisible(false);
         }
 
         private void OnDestroy()
@@ -140,7 +135,6 @@ namespace GARA.InputSets
             _boundRunner.InputAccepted += HandleInputAccepted;
             _boundRunner.SetFailed += HandleSetFailed;
             _boundRunner.SetFinished += HandleSetFinished;
-            SetBackgroundVisible(true);
             PlayFeedback(setCollectionStartedFeedback, rowAnchor.position);
 
             if (_boundRunner.IsRunning)
@@ -208,7 +202,6 @@ namespace GARA.InputSets
             _rowSetIndex = -1;
             _acceptedCount = 0;
             SetTimersVisible(false);
-            SetBackgroundVisible(false);
         }
 
         private void HandleSetStarted(int setIndex, int attempt)
@@ -423,14 +416,6 @@ namespace GARA.InputSets
             if (setCollectionTimer != null)
             {
                 setCollectionTimer.SetVisible(visible);
-            }
-        }
-
-        private void SetBackgroundVisible(bool visible)
-        {
-            if (background != null)
-            {
-                background.SetActive(visible);
             }
         }
 

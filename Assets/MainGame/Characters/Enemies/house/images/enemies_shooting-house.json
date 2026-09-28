@@ -1,0 +1,92 @@
+{ "skeleton": { "images": "/e/CUONGINGLE/ENEMY/house/images/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "Layer 1", "bone": "root", "attachment": "Layer 1" },
+	{ "name": "leg_R", "bone": "root", "attachment": "leg_R" },
+	{ "name": "leg_L", "bone": "root", "attachment": "leg_L" },
+	{ "name": "hand_L_2", "bone": "root", "attachment": "hand_L_2" },
+	{ "name": "hand_L_1", "bone": "root", "attachment": "hand_L_1" },
+	{ "name": "gun_1", "bone": "root", "attachment": "gun_1" },
+	{ "name": "gun_2", "bone": "root", "attachment": "gun_2" },
+	{ "name": "hand_R_2", "bone": "root", "attachment": "hand_R_2" },
+	{ "name": "hand_R_1", "bone": "root", "attachment": "hand_R_1" },
+	{ "name": "body", "bone": "root", "attachment": "body" },
+	{ "name": "bow-tie", "bone": "root", "attachment": "bow-tie" },
+	{ "name": "roof_2", "bone": "root", "attachment": "roof_2" },
+	{ "name": "face", "bone": "root", "attachment": "face" },
+	{ "name": "eyvrow", "bone": "root", "attachment": "eyvrow" },
+	{ "name": "eye_open", "bone": "root", "attachment": "eye_open" },
+	{ "name": "eye_close", "bone": "root" },
+	{ "name": "roof_1", "bone": "root", "attachment": "roof_1" },
+	{ "name": "chimney", "bone": "root", "attachment": "chimney" },
+	{ "name": "button_2", "bone": "root", "attachment": "button_2" },
+	{ "name": "button_1", "bone": "root", "attachment": "button_1" }
+],
+"skins": {
+	"default": {
+		"Layer 1": {
+			"Layer 1": { "x": 500, "y": -500, "width": 1002, "height": 1002 }
+		},
+		"leg_R": {
+			"leg_R": { "x": 520.5, "y": -577.5, "width": 41, "height": 57 }
+		},
+		"leg_L": {
+			"leg_L": { "x": 467, "y": -578, "width": 40, "height": 58 }
+		},
+		"hand_L_2": {
+			"hand_L_2": { "x": 429, "y": -538, "width": 74, "height": 94 }
+		},
+		"hand_L_1": {
+			"hand_L_1": { "x": 417, "y": -562, "width": 52, "height": 50 }
+		},
+		"gun_1": {
+			"gun_1": { "x": 346, "y": -555.5, "width": 250, "height": 147 }
+		},
+		"gun_2": {
+			"gun_2": { "x": 239, "y": -584.5, "width": 70, "height": 105 }
+		},
+		"hand_R_2": {
+			"hand_R_2": { "x": 574, "y": -552, "width": 74, "height": 94 }
+		},
+		"hand_R_1": {
+			"hand_R_1": { "x": 586, "y": -576, "width": 52, "height": 50 }
+		},
+		"body": {
+			"body": { "x": 493, "y": -527, "width": 132, "height": 92 }
+		},
+		"bow-tie": {
+			"bow-tie": { "x": 481.5, "y": -512.5, "width": 115, "height": 79 }
+		},
+		"roof_2": {
+			"roof_2": { "x": 391, "y": -388, "width": 174, "height": 198 }
+		},
+		"face": {
+			"face": { "x": 491, "y": -425.5, "width": 246, "height": 185 }
+		},
+		"eyvrow": {
+			"eyvrow": { "x": 428, "y": -392, "width": 46, "height": 46 }
+		},
+		"eye_open": {
+			"eye_open": { "x": 438.5, "y": -450, "width": 101, "height": 82 }
+		},
+		"eye_close": {
+			"eye_close": { "x": 438.5, "y": -450, "width": 101, "height": 82 }
+		},
+		"roof_1": {
+			"roof_1": { "x": 556.5, "y": -385, "width": 297, "height": 230 }
+		},
+		"chimney": {
+			"chimney": { "x": 546, "y": -323, "width": 80, "height": 142 }
+		},
+		"button_2": {
+			"button_2": { "x": 464.5, "y": -539, "width": 19, "height": 18 }
+		},
+		"button_1": {
+			"button_1": { "x": 467, "y": -555.5, "width": 14, "height": 13 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}

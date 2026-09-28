@@ -1,0 +1,535 @@
+fileFormatVersion: 2
+guid: 3f1c3ee515bb041c594dc4a769b14c81
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5694514993246691235
+    second: enemies_macaron_0
+  - first:
+      213: -6150666905157919481
+    second: enemies_macaron_1
+  - first:
+      213: 5993187533068152609
+    second: enemies_macaron_2
+  - first:
+      213: -4371122591615094475
+    second: enemies_macaron_3
+  - first:
+      213: -4195979366298198713
+    second: enemies_macaron_4
+  - first:
+      213: 9176178270337797568
+    second: enemies_macaron_5
+  - first:
+      213: 9167420178821712888
+    second: enemies_macaron_6
+  - first:
+      213: 42861124417733523
+    second: enemies_macaron_7
+  - first:
+      213: 283329310113679288
+    second: enemies_macaron_8
+  - first:
+      213: -8708170550688272585
+    second: enemies_macaron_9
+  - first:
+      213: -6777178175869015254
+    second: enemies_macaron_10
+  - first:
+      213: 5911184358408425616
+    second: enemies_macaron_11
+  - first:
+      213: 303596344591428266
+    second: enemies_macaron_12
+  - first:
+      213: -1836833218897250699
+    second: enemies_macaron_13
+  - first:
+      213: -4442874858162032621
+    second: enemies_macaron_14
+  - first:
+      213: -2390037444528951693
+    second: enemies_macaron_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: enemies_macaron_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 615
+        height: 460
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3afda9c273bf60f40800000000000000
+      internalID: 5694514993246691235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_1
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 342
+        width: 213
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70d9f42990174aaa0800000000000000
+      internalID: -6150666905157919481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_2
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 436
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12fa3dcde441c2350800000000000000
+      internalID: 5993187533068152609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_3
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 342
+        width: 208
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 531f8118927a653c0800000000000000
+      internalID: -4371122591615094475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_4
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 300
+        width: 228
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74d5de26ff2e4c5c0800000000000000
+      internalID: -4195979366298198713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_5
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 412
+        width: 59
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cd8427f485585f70800000000000000
+      internalID: 9176178270337797568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_6
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 413
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb8a61e418393f70800000000000000
+      internalID: 9167420178821712888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_7
+      rect:
+        serializedVersion: 2
+        x: 1541
+        y: 413
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 393c79f27f5489000800000000000000
+      internalID: 42861124417733523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_8
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 343
+        width: 150
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b748c3a1869ee300800000000000000
+      internalID: 283329310113679288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_9
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 300
+        width: 162
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73f25b2a50d562780800000000000000
+      internalID: -8708170550688272585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_10
+      rect:
+        serializedVersion: 2
+        x: 1609
+        y: 379
+        width: 76
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2b2cc72b50a2f1a0800000000000000
+      internalID: -6777178175869015254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_11
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 1
+        width: 326
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09097cceadeb80250800000000000000
+      internalID: 5911184358408425616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_12
+      rect:
+        serializedVersion: 2
+        x: 1611
+        y: 301
+        width: 103
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaaaa725447963400800000000000000
+      internalID: 303596344591428266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_13
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 300
+        width: 62
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 576fdfb5be14286e0800000000000000
+      internalID: -1836833218897250699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_14
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 37
+        width: 132
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 310fcb91bdcb752c0800000000000000
+      internalID: -4442874858162032621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_macaron_15
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 1
+        width: 562
+        height: 299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37e28fe6b91e4ded0800000000000000
+      internalID: -2390037444528951693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      enemies_macaron_0: 5694514993246691235
+      enemies_macaron_1: -6150666905157919481
+      enemies_macaron_10: -6777178175869015254
+      enemies_macaron_11: 5911184358408425616
+      enemies_macaron_12: 303596344591428266
+      enemies_macaron_13: -1836833218897250699
+      enemies_macaron_14: -4442874858162032621
+      enemies_macaron_15: -2390037444528951693
+      enemies_macaron_2: 5993187533068152609
+      enemies_macaron_3: -4371122591615094475
+      enemies_macaron_4: -4195979366298198713
+      enemies_macaron_5: 9176178270337797568
+      enemies_macaron_6: 9167420178821712888
+      enemies_macaron_7: 42861124417733523
+      enemies_macaron_8: 283329310113679288
+      enemies_macaron_9: -8708170550688272585
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

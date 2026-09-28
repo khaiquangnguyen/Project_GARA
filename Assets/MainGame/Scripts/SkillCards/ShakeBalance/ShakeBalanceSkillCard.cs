@@ -6,7 +6,7 @@ using UnityEngine;
 namespace GARA.SkillCards.ShakeBalance
 {
     // Class-agnostic skill card whose input minigame is a ShakeBalance run
-    // (keep a drifting value centered with left/right, cash out whenever).
+    // (keep a drifting value centered with left/right to fill a meter).
     // Lives outside GARA.Characters so that assembly never has to depend on
     // GARA.ShakeBalance directly.
     [CreateAssetMenu(menuName = "GARA/Skill Cards/Shake Balance Skill Card", fileName = "ShakeBalanceSkillCard")]
@@ -16,9 +16,7 @@ namespace GARA.SkillCards.ShakeBalance
         [Expandable]
         private ShakeBalanceDefinition balance;
 
-        // Maps the run's 0-1 result to the 0-1 score. The result only
-        // approaches 1, so a curve that reaches 1 early (e.g. at 0.9) makes
-        // Perfect reachable.
+        // Maps the run's result (1 filled, 0 failed) to the 0-1 score.
         [SerializeField]
         private AnimationCurve scoreShaping = AnimationCurve.Linear(0, 0, 1, 1);
 
@@ -41,12 +39,6 @@ namespace GARA.SkillCards.ShakeBalance
             if (balance == null)
             {
                 Debug.LogWarning($"{name}: ShakeBalanceSkillCard has no balance definition assigned.", this);
-                return;
-            }
-
-            if (!balance.UseCashOutToken && balance.Duration <= 0f)
-            {
-                Debug.LogWarning($"{name}: ShakeBalanceSkillCard's balance has no cash out token and no duration — it only ends when the player falls.", this);
             }
         }
     }

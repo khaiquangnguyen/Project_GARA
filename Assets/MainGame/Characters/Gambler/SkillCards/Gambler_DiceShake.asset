@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd08ea8b9cf644f39ffb2526098d439, type: 3}
+  m_Name: Gambler_DiceShake
+  m_EditorClassIdentifier: GARA.Characters.Gambler::GARA.Characters.Gambler.GamblerSkillCard
+  cardId: gambler_dice_shake
+  displayName: Dice Shake
+  description: 
+  icon: {fileID: 0}
+  targetMode: 1
+  multiTargetCount: 2
+  stepTargeting: 2
+  finaleTargeting: 0
+  alliesJoinFinale: 0
+  allyDanceDuration: 1
+  teleportBetweenSteps: 0
+  apCost: 0
+  mpCost: 0
+  positionMode: 1
+  effects: []
+  refundOnAbort: 0
+  spotlight: {fileID: 0}
+  shadowScreen: {fileID: 0}
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: c9719d9785d243209997c50ff460ec41, type: 2}
+  finalePositionMode: 0
+  finaleDelay: 0.5
+  perfectEffects: []
+  game:
+    rid: 609404963404120227
+  rollEffects:
+  - rid: 609404963404120228
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404963404120227
+      type: {class: DiceGame, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        count: 3
+        sides: 6
+        cheatRerollBelow: 3
+    - rid: 609404963404120228
+      type: {class: DiceTotalDamage, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        damagePerPip: 3

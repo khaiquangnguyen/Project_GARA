@@ -3,8 +3,10 @@
   "rootNamespace": "GARA.Characters.Gambler",
   "references": [
     "GARA.Characters",
-    "GARA.ShakeBalance",
-    "NaughtyAttributes.Core"
+    "GARA.Input",
+    "Unity.TextMeshPro",
+    "NaughtyAttributes.Core",
+    "UnityEngine.UI"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

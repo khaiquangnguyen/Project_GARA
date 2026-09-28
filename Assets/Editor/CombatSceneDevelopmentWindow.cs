@@ -85,18 +85,12 @@ namespace GARA.EditorTools
         [SerializeField]
         private InputToken shakeBalanceRightToken = new InputToken(4);
 
+        [Tooltip("Seconds to fill the meter before the run fails.")]
         [SerializeField]
-        private bool shakeBalanceUseCashOutToken = true;
+        private float shakeBalanceDuration = 4f;
 
         [SerializeField]
-        private InputToken shakeBalanceCashOutToken = new InputToken(1);
-
-        [Tooltip("Seconds until the run ends on its own. 0 = no limit.")]
-        [SerializeField]
-        private float shakeBalanceDuration;
-
-        [SerializeField]
-        private float shakeBalanceBaseInstability = 0.8f;
+        private float shakeBalanceBaseInstability = 1.2f;
 
         [SerializeField]
         private float shakeBalanceInstabilityGrowth = 0.02f;
@@ -116,11 +110,13 @@ namespace GARA.EditorTools
         private float shakeBalanceGoodZone = 0.35f;
 
         [SerializeField]
-        private float shakeBalanceBankTimeConstant = 8f;
+        private float shakeBalancePerfectFillSeconds = 1.5f;
 
-        [Range(0f, 1f)]
         [SerializeField]
-        private float shakeBalanceKeepOnFall = 0.5f;
+        private float shakeBalanceGoodFillSeconds = 3f;
+
+        [SerializeField]
+        private float shakeBalanceOffDrainPerSecond = 0.25f;
 
         [Tooltip("Seconds the view's position shake lasts.")]
         [SerializeField]
@@ -229,9 +225,9 @@ namespace GARA.EditorTools
 
             _shakeBalanceExpanded = DrawSection("Shake Balance", _shakeBalanceExpanded, new[]
             {
-                nameof(shakeBalanceInputMap), nameof(shakeBalanceLeftToken), nameof(shakeBalanceRightToken), nameof(shakeBalanceUseCashOutToken), nameof(shakeBalanceCashOutToken),
+                nameof(shakeBalanceInputMap), nameof(shakeBalanceLeftToken), nameof(shakeBalanceRightToken),
                 nameof(shakeBalanceDuration), nameof(shakeBalanceBaseInstability), nameof(shakeBalanceInstabilityGrowth), nameof(shakeBalanceBaseNoise), nameof(shakeBalanceNoiseGrowth),
-                nameof(shakeBalancePerfectZone), nameof(shakeBalanceGoodZone), nameof(shakeBalanceBankTimeConstant), nameof(shakeBalanceKeepOnFall)
+                nameof(shakeBalancePerfectZone), nameof(shakeBalanceGoodZone), nameof(shakeBalancePerfectFillSeconds), nameof(shakeBalanceGoodFillSeconds), nameof(shakeBalanceOffDrainPerSecond)
             }, IsPlaying<ShakeBalancePlayer>(p => p.IsPlaying), RunShakeBalanceTest);
 
             _viewShakeExpanded = DrawSection("View Shake", _viewShakeExpanded, new[]
@@ -354,10 +350,9 @@ namespace GARA.EditorTools
                 return;
             }
 
-            var cashOutToken = shakeBalanceUseCashOutToken ? shakeBalanceCashOutToken : (InputToken?)null;
-            var definition = ShakeBalanceDefinition.CreateRuntime(shakeBalanceLeftToken, shakeBalanceRightToken, cashOutToken, shakeBalanceDuration);
+            var definition = ShakeBalanceDefinition.CreateRuntime(shakeBalanceLeftToken, shakeBalanceRightToken, shakeBalanceDuration);
             definition.SetDifficulty(shakeBalanceBaseInstability, shakeBalanceInstabilityGrowth, shakeBalanceBaseNoise, shakeBalanceNoiseGrowth);
-            definition.SetScoring(shakeBalancePerfectZone, shakeBalanceGoodZone, shakeBalanceBankTimeConstant, shakeBalanceKeepOnFall);
+            definition.SetScoring(shakeBalancePerfectZone, shakeBalanceGoodZone, shakeBalancePerfectFillSeconds, shakeBalanceGoodFillSeconds, shakeBalanceOffDrainPerSecond);
 
             var player = GetHostPlayer<ShakeBalancePlayer>(shakeBalanceInputMap);
             player.Play(definition, report =>

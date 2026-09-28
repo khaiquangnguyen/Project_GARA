@@ -6,19 +6,13 @@ namespace GARA.ShakeBalance
     /// </summary>
     public sealed class ShakeBalanceReport
     {
-        /// <summary>Final 0-1 result, after the fall penalty.</summary>
-        public float Result;
+        /// <summary>1 when the meter filled in time, else 0.</summary>
+        public float Result => Succeeded ? 1f : 0f;
 
-        /// <summary>Result before the fall penalty.</summary>
-        public float UnpenalizedResult;
-
-        /// <summary>Quality-weighted seconds banked (1 per second in the perfect zone).</summary>
-        public float Bank;
+        /// <summary>Meter at the end of the run, 0-1.</summary>
+        public float Meter;
 
         public float Elapsed;
-
-        /// <summary>Bank / Elapsed: how well-balanced the run was on average, independent of its length.</summary>
-        public float AverageQuality;
 
         public float PerfectTime;
         public float GoodTime;
@@ -30,6 +24,7 @@ namespace GARA.ShakeBalance
 
         public ShakeBalanceEndReason EndReason;
 
+        public bool Succeeded => EndReason == ShakeBalanceEndReason.Succeeded;
         public bool Fell => EndReason == ShakeBalanceEndReason.Fell;
         public bool WasAborted => EndReason == ShakeBalanceEndReason.Aborted;
     }

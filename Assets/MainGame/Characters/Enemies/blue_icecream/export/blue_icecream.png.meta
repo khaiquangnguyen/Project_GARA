@@ -1,0 +1,1809 @@
+fileFormatVersion: 2
+guid: 16920f1bad7d34c6d849d9915a326ed4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8086257608854207629
+    second: blue_icecream_0
+  - first:
+      213: 35376334637341309
+    second: blue_icecream_1
+  - first:
+      213: -2474812203780150664
+    second: blue_icecream_2
+  - first:
+      213: -350675075537165950
+    second: blue_icecream_3
+  - first:
+      213: -9095085155851631269
+    second: blue_icecream_4
+  - first:
+      213: 5716582219882746436
+    second: blue_icecream_5
+  - first:
+      213: -7232691320698826481
+    second: blue_icecream_6
+  - first:
+      213: -3083145293076889517
+    second: blue_icecream_7
+  - first:
+      213: 1323702904670187432
+    second: blue_icecream_8
+  - first:
+      213: 5239073296308450168
+    second: blue_icecream_9
+  - first:
+      213: 2443148028157223595
+    second: blue_icecream_10
+  - first:
+      213: -3956401735744376341
+    second: blue_icecream_11
+  - first:
+      213: 3172218247891792950
+    second: blue_icecream_12
+  - first:
+      213: 2975013209283760411
+    second: blue_icecream_13
+  - first:
+      213: -2198087688895137336
+    second: blue_icecream_14
+  - first:
+      213: 902850573358703687
+    second: blue_icecream_15
+  - first:
+      213: 4453991030133350397
+    second: blue_icecream_16
+  - first:
+      213: 4262445607741882378
+    second: blue_icecream_17
+  - first:
+      213: -297690294317515823
+    second: blue_icecream_18
+  - first:
+      213: -5559888033466732696
+    second: blue_icecream_19
+  - first:
+      213: 2441221235357211220
+    second: blue_icecream_20
+  - first:
+      213: 8949432712691950221
+    second: blue_icecream_21
+  - first:
+      213: 3496887508899937860
+    second: blue_icecream_22
+  - first:
+      213: 2604055648138353952
+    second: blue_icecream_23
+  - first:
+      213: 7298402757040836537
+    second: blue_icecream_24
+  - first:
+      213: -7228492769264596885
+    second: blue_icecream_25
+  - first:
+      213: -7596100011174317557
+    second: blue_icecream_26
+  - first:
+      213: -5321650026258417767
+    second: blue_icecream_27
+  - first:
+      213: -8214835199304813355
+    second: blue_icecream_28
+  - first:
+      213: 963495660533472722
+    second: blue_icecream_29
+  - first:
+      213: 3831064608440865108
+    second: blue_icecream_30
+  - first:
+      213: 3810206378129458281
+    second: blue_icecream_31
+  - first:
+      213: 614683462901609961
+    second: blue_icecream_32
+  - first:
+      213: 179679207577068482
+    second: blue_icecream_33
+  - first:
+      213: 8775143957184257767
+    second: blue_icecream_34
+  - first:
+      213: -1723541353341733301
+    second: blue_icecream_35
+  - first:
+      213: -9173005650974852068
+    second: blue_icecream_36
+  - first:
+      213: -5094717152692214258
+    second: blue_icecream_37
+  - first:
+      213: -8961782258204955317
+    second: blue_icecream_38
+  - first:
+      213: 6120034691583260002
+    second: blue_icecream_39
+  - first:
+      213: -39689235379879948
+    second: blue_icecream_40
+  - first:
+      213: -8364228777710866193
+    second: blue_icecream_41
+  - first:
+      213: -2480204682757522057
+    second: blue_icecream_42
+  - first:
+      213: -2157189183598844188
+    second: blue_icecream_43
+  - first:
+      213: -7015590727718027832
+    second: blue_icecream_44
+  - first:
+      213: 8910818944793677479
+    second: blue_icecream_45
+  - first:
+      213: -3549067349856963624
+    second: blue_icecream_46
+  - first:
+      213: 815147078534918346
+    second: blue_icecream_47
+  - first:
+      213: 182481979584912354
+    second: blue_icecream_48
+  - first:
+      213: 7011907203485620510
+    second: blue_icecream_49
+  - first:
+      213: 8894652878047829841
+    second: blue_icecream_50
+  - first:
+      213: -1468010216706570635
+    second: blue_icecream_51
+  - first:
+      213: -427462948314893673
+    second: blue_icecream_52
+  - first:
+      213: -5647498950991976720
+    second: blue_icecream_53
+  - first:
+      213: -7933443753826614522
+    second: blue_icecream_54
+  - first:
+      213: 1843399822692740458
+    second: blue_icecream_55
+  - first:
+      213: -6792802716332003428
+    second: blue_icecream_56
+  - first:
+      213: 9093071625235450880
+    second: blue_icecream_57
+  - first:
+      213: -3854503394027042228
+    second: blue_icecream_58
+  - first:
+      213: 5242446634296419318
+    second: blue_icecream_59
+  - first:
+      213: 8103788844186290894
+    second: blue_icecream_60
+  - first:
+      213: 7643271880649938133
+    second: blue_icecream_61
+  - first:
+      213: 1287085710013054
+    second: blue_icecream_62
+  - first:
+      213: -642874176042445999
+    second: blue_icecream_63
+  - first:
+      213: 4554766786677584392
+    second: blue_icecream_64
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: blue_icecream_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1218
+        width: 400
+        height: 530
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8cfd02d378283070800000000000000
+      internalID: 8086257608854207629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_1
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 1188
+        width: 432
+        height: 570
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7a9383c69ead7000800000000000000
+      internalID: 35376334637341309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_2
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 1702
+        width: 69
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87ae1eba963b7add0800000000000000
+      internalID: -2474812203780150664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_3
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 1140
+        width: 299
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 281260370e6222bf0800000000000000
+      internalID: -350675075537165950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_4
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 1654
+        width: 99
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5509831d34c7c180800000000000000
+      internalID: -9095085155851631269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_5
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 1654
+        width: 82
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 442dc61cd31655f40800000000000000
+      internalID: 5716582219882746436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_6
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 1655
+        width: 151
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0112b3709150ab90800000000000000
+      internalID: -7232691320698826481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_7
+      rect:
+        serializedVersion: 2
+        x: 1466
+        y: 1654
+        width: 182
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3500c3fe0b77635d0800000000000000
+      internalID: -3083145293076889517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_8
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 1630
+        width: 166
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8afe40d47ccbe5210800000000000000
+      internalID: 1323702904670187432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_9
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 1140
+        width: 435
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87333bab76de4b840800000000000000
+      internalID: 5239073296308450168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_10
+      rect:
+        serializedVersion: 2
+        x: 1567
+        y: 1510
+        width: 124
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba2e100ff2ec7e120800000000000000
+      internalID: 2443148028157223595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_11
+      rect:
+        serializedVersion: 2
+        x: 1723
+        y: 1518
+        width: 75
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be1b73055990819c0800000000000000
+      internalID: -3956401735744376341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_12
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 1529
+        width: 91
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6343a9770bbf50c20800000000000000
+      internalID: 3172218247891792950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_13
+      rect:
+        serializedVersion: 2
+        x: 1901
+        y: 1412
+        width: 115
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b11147560ce594920800000000000000
+      internalID: 2975013209283760411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_14
+      rect:
+        serializedVersion: 2
+        x: 1567
+        y: 1283
+        width: 89
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c9fe3694e2de71e0800000000000000
+      internalID: -2198087688895137336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_15
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 1372
+        width: 107
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 744ad4e10d1978c00800000000000000
+      internalID: 902850573358703687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_16
+      rect:
+        serializedVersion: 2
+        x: 1798
+        y: 1372
+        width: 85
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dffdfdf5e31cfcd30800000000000000
+      internalID: 4453991030133350397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_17
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 1153
+        width: 95
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0001e362bf372b30800000000000000
+      internalID: 4262445607741882378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_18
+      rect:
+        serializedVersion: 2
+        x: 1716
+        y: 1246
+        width: 93
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1db7f1a21446edbf0800000000000000
+      internalID: -297690294317515823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_19
+      rect:
+        serializedVersion: 2
+        x: 1811
+        y: 1214
+        width: 71
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86f25468a4f47d2b0800000000000000
+      internalID: -5559888033466732696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_20
+      rect:
+        serializedVersion: 2
+        x: 1898
+        y: 1216
+        width: 93
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45a5b9787c5f0e120800000000000000
+      internalID: 2441221235357211220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_21
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 1086
+        width: 181
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d82a345d2a5c23c70800000000000000
+      internalID: 8949432712691950221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_22
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 1188
+        width: 53
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44e3b7b79a0778030800000000000000
+      internalID: 3496887508899937860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_23
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 616
+        width: 434
+        height: 572
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02dd2aaa0d6732420800000000000000
+      internalID: 2604055648138353952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_24
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 571
+        width: 458
+        height: 569
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bf862193a2294560800000000000000
+      internalID: 7298402757040836537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_25
+      rect:
+        serializedVersion: 2
+        x: 1322
+        y: 992
+        width: 73
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b680182ef1c3fab90800000000000000
+      internalID: -7228492769264596885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_26
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 1050
+        width: 86
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b023d93294b359690800000000000000
+      internalID: -7596100011174317557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_27
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 1041
+        width: 112
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9973be51f73b526b0800000000000000
+      internalID: -5321650026258417767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_28
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 1041
+        width: 162
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d4bf0909ea0ffd80800000000000000
+      internalID: -8214835199304813355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_29
+      rect:
+        serializedVersion: 2
+        x: 1838
+        y: 1035
+        width: 89
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dd5abcc2360f5d00800000000000000
+      internalID: 963495660533472722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_30
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 865
+        width: 108
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45150b9a6fcaa2530800000000000000
+      internalID: 3831064608440865108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_31
+      rect:
+        serializedVersion: 2
+        x: 1432
+        y: 963
+        width: 75
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9648559738290e430800000000000000
+      internalID: 3810206378129458281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_32
+      rect:
+        serializedVersion: 2
+        x: 1687
+        y: 951
+        width: 98
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e5be8f4a5bc78800800000000000000
+      internalID: 614683462901609961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_33
+      rect:
+        serializedVersion: 2
+        x: 1928
+        y: 963
+        width: 70
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c3a72d89495e7200800000000000000
+      internalID: 179679207577068482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_34
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 616
+        width: 341
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ee12e4bfe297c970800000000000000
+      internalID: 8775143957184257767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_35
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 816
+        width: 75
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b46be565540c418e0800000000000000
+      internalID: -1723541353341733301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_36
+      rect:
+        serializedVersion: 2
+        x: 1606
+        y: 877
+        width: 78
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1c3efa06ffe2b080800000000000000
+      internalID: -9173005650974852068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_37
+      rect:
+        serializedVersion: 2
+        x: 1811
+        y: 821
+        width: 84
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e06e0ba1ebdeb49b0800000000000000
+      internalID: -5094717152692214258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_38
+      rect:
+        serializedVersion: 2
+        x: 1908
+        y: 780
+        width: 101
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4dab49848a51a380800000000000000
+      internalID: -8961782258204955317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_39
+      rect:
+        serializedVersion: 2
+        x: 1326
+        y: 780
+        width: 92
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26533ec602bbee450800000000000000
+      internalID: 6120034691583260002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_40
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 779
+        width: 96
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ff76c7c9def27ff0800000000000000
+      internalID: -39689235379879948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_41
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 271
+        width: 390
+        height: 509
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe0b1740e3a4ceb80800000000000000
+      internalID: -8364228777710866193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_42
+      rect:
+        serializedVersion: 2
+        x: 1718
+        y: 780
+        width: 93
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77d3af15bfa849dd0800000000000000
+      internalID: -2480204682757522057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_43
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 671
+        width: 82
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e6a646eddf1012e0800000000000000
+      internalID: -2157189183598844188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_44
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 685
+        width: 104
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cdb7d0476d93ae90800000000000000
+      internalID: -7015590727718027832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_45
+      rect:
+        serializedVersion: 2
+        x: 1503
+        y: 604
+        width: 100
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ae8f366e9699ab70800000000000000
+      internalID: 8910818944793677479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_46
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 460
+        height: 615
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d3b6df8c0e2fbec0800000000000000
+      internalID: -3549067349856963624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_47
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 571
+        width: 64
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac075c7f2fbff4b00800000000000000
+      internalID: 815147078534918346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_48
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 571
+        width: 58
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2eb9113c46e488200800000000000000
+      internalID: 182481979584912354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_49
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 571
+        width: 58
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1953cd637c4f4160800000000000000
+      internalID: 7011907203485620510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_50
+      rect:
+        serializedVersion: 2
+        x: 1427
+        y: 604
+        width: 76
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15f527caaa7207b70800000000000000
+      internalID: 8894652878047829841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_51
+      rect:
+        serializedVersion: 2
+        x: 1503
+        y: 514
+        width: 93
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5768f8a5c7490abe0800000000000000
+      internalID: -1468010216706570635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_52
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 1
+        width: 406
+        height: 570
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 792bc0b96b8511af0800000000000000
+      internalID: -427462948314893673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_53
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 571
+        width: 60
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f66bb430ad00a1b0800000000000000
+      internalID: -5647498950991976720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_54
+      rect:
+        serializedVersion: 2
+        x: 867
+        y: 1
+        width: 434
+        height: 564
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6038f9760feb6e190800000000000000
+      internalID: -7933443753826614522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_55
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 452
+        width: 89
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6d6e9a3f52159910800000000000000
+      internalID: 1843399822692740458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_56
+      rect:
+        serializedVersion: 2
+        x: 1478
+        y: 425
+        width: 64
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9fe8b75bed1bb1a0800000000000000
+      internalID: -6792802716332003428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_57
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 316
+        width: 106
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00cc75b4774113e70800000000000000
+      internalID: 9093071625235450880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_58
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 240
+        width: 81
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4a0b7dc59d028ac0800000000000000
+      internalID: -3854503394027042228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_59
+      rect:
+        serializedVersion: 2
+        x: 1502
+        y: 293
+        width: 108
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f32e2f2079e0c840800000000000000
+      internalID: 5242446634296419318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_60
+      rect:
+        serializedVersion: 2
+        x: 1383
+        y: 131
+        width: 105
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eca4f70a401767070800000000000000
+      internalID: 8103788844186290894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_61
+      rect:
+        serializedVersion: 2
+        x: 1478
+        y: 46
+        width: 87
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d41fd7974b521a60800000000000000
+      internalID: 7643271880649938133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_62
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 2
+        width: 329
+        height: 268
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e727a8ef892940000800000000000000
+      internalID: 1287085710013054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_63
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 1
+        width: 89
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 153d7bdc75d0417f0800000000000000
+      internalID: -642874176042445999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blue_icecream_64
+      rect:
+        serializedVersion: 2
+        x: 1567
+        y: 1
+        width: 66
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8023aa2a248c53f30800000000000000
+      internalID: 4554766786677584392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      blue_icecream_0: 8086257608854207629
+      blue_icecream_1: 35376334637341309
+      blue_icecream_10: 2443148028157223595
+      blue_icecream_11: -3956401735744376341
+      blue_icecream_12: 3172218247891792950
+      blue_icecream_13: 2975013209283760411
+      blue_icecream_14: -2198087688895137336
+      blue_icecream_15: 902850573358703687
+      blue_icecream_16: 4453991030133350397
+      blue_icecream_17: 4262445607741882378
+      blue_icecream_18: -297690294317515823
+      blue_icecream_19: -5559888033466732696
+      blue_icecream_2: -2474812203780150664
+      blue_icecream_20: 2441221235357211220
+      blue_icecream_21: 8949432712691950221
+      blue_icecream_22: 3496887508899937860
+      blue_icecream_23: 2604055648138353952
+      blue_icecream_24: 7298402757040836537
+      blue_icecream_25: -7228492769264596885
+      blue_icecream_26: -7596100011174317557
+      blue_icecream_27: -5321650026258417767
+      blue_icecream_28: -8214835199304813355
+      blue_icecream_29: 963495660533472722
+      blue_icecream_3: -350675075537165950
+      blue_icecream_30: 3831064608440865108
+      blue_icecream_31: 3810206378129458281
+      blue_icecream_32: 614683462901609961
+      blue_icecream_33: 179679207577068482
+      blue_icecream_34: 8775143957184257767
+      blue_icecream_35: -1723541353341733301
+      blue_icecream_36: -9173005650974852068
+      blue_icecream_37: -5094717152692214258
+      blue_icecream_38: -8961782258204955317
+      blue_icecream_39: 6120034691583260002
+      blue_icecream_4: -9095085155851631269
+      blue_icecream_40: -39689235379879948
+      blue_icecream_41: -8364228777710866193
+      blue_icecream_42: -2480204682757522057
+      blue_icecream_43: -2157189183598844188
+      blue_icecream_44: -7015590727718027832
+      blue_icecream_45: 8910818944793677479
+      blue_icecream_46: -3549067349856963624
+      blue_icecream_47: 815147078534918346
+      blue_icecream_48: 182481979584912354
+      blue_icecream_49: 7011907203485620510
+      blue_icecream_5: 5716582219882746436
+      blue_icecream_50: 8894652878047829841
+      blue_icecream_51: -1468010216706570635
+      blue_icecream_52: -427462948314893673
+      blue_icecream_53: -5647498950991976720
+      blue_icecream_54: -7933443753826614522
+      blue_icecream_55: 1843399822692740458
+      blue_icecream_56: -6792802716332003428
+      blue_icecream_57: 9093071625235450880
+      blue_icecream_58: -3854503394027042228
+      blue_icecream_59: 5242446634296419318
+      blue_icecream_6: -7232691320698826481
+      blue_icecream_60: 8103788844186290894
+      blue_icecream_61: 7643271880649938133
+      blue_icecream_62: 1287085710013054
+      blue_icecream_63: -642874176042445999
+      blue_icecream_64: 4554766786677584392
+      blue_icecream_7: -3083145293076889517
+      blue_icecream_8: 1323702904670187432
+      blue_icecream_9: 5239073296308450168
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

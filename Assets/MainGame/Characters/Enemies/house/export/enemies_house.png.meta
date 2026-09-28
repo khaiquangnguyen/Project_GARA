@@ -1,0 +1,1211 @@
+fileFormatVersion: 2
+guid: 611da16a721124b61b41fd4089073912
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3767564413968607787
+    second: enemies_house_0
+  - first:
+      213: -571058997815270541
+    second: enemies_house_1
+  - first:
+      213: -3199255065043498024
+    second: enemies_house_2
+  - first:
+      213: -5826097493061793763
+    second: enemies_house_3
+  - first:
+      213: 1684377780708908080
+    second: enemies_house_4
+  - first:
+      213: 6915585373476587293
+    second: enemies_house_5
+  - first:
+      213: 6264978462423760945
+    second: enemies_house_6
+  - first:
+      213: 2113737913644219390
+    second: enemies_house_7
+  - first:
+      213: -8737992548029474611
+    second: enemies_house_8
+  - first:
+      213: 4766478638853925455
+    second: enemies_house_9
+  - first:
+      213: -9148248259621994732
+    second: enemies_house_10
+  - first:
+      213: -3558585201843451218
+    second: enemies_house_11
+  - first:
+      213: 4831272968389417269
+    second: enemies_house_12
+  - first:
+      213: -6443479510959600677
+    second: enemies_house_13
+  - first:
+      213: 262849870260782568
+    second: enemies_house_14
+  - first:
+      213: -5699467342003368257
+    second: enemies_house_15
+  - first:
+      213: -6550427993462714182
+    second: enemies_house_16
+  - first:
+      213: 6718678396900841417
+    second: enemies_house_17
+  - first:
+      213: 3957722152796289499
+    second: enemies_house_18
+  - first:
+      213: -5893170822411027730
+    second: enemies_house_19
+  - first:
+      213: -9079016795130460028
+    second: enemies_house_20
+  - first:
+      213: -5962453657692665029
+    second: enemies_house_21
+  - first:
+      213: 5284869059638811978
+    second: enemies_house_22
+  - first:
+      213: 6869702695380525949
+    second: enemies_house_23
+  - first:
+      213: 170098157276319985
+    second: enemies_house_24
+  - first:
+      213: 7551956095862728807
+    second: enemies_house_25
+  - first:
+      213: 4627274505610506876
+    second: enemies_house_26
+  - first:
+      213: 6195248188609318574
+    second: enemies_house_27
+  - first:
+      213: -9073851422728971896
+    second: enemies_house_28
+  - first:
+      213: 4907607516127850452
+    second: enemies_house_29
+  - first:
+      213: -569085490599123009
+    second: enemies_house_30
+  - first:
+      213: -5364994053075662440
+    second: enemies_house_31
+  - first:
+      213: -8548266411335337108
+    second: enemies_house_32
+  - first:
+      213: 781505399363150837
+    second: enemies_house_33
+  - first:
+      213: 7022574356885195810
+    second: enemies_house_34
+  - first:
+      213: -1868202284014493825
+    second: enemies_house_35
+  - first:
+      213: 5104547459359376399
+    second: enemies_house_36
+  - first:
+      213: 4958698675771770027
+    second: enemies_house_37
+  - first:
+      213: 6575242327015926258
+    second: enemies_house_38
+  - first:
+      213: 6652613824371639649
+    second: enemies_house_39
+  - first:
+      213: 7309473718683664058
+    second: enemies_house_40
+  - first:
+      213: -8422769079609569919
+    second: enemies_house_41
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: enemies_house_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 941
+        width: 179
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d59ffc702ce6bbc0800000000000000
+      internalID: -3767564413968607787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_1
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 944
+        width: 45
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3732e69fdd03318f0800000000000000
+      internalID: -571058997815270541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_2
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 946
+        width: 28
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8db863ef776f993d0800000000000000
+      internalID: -3199255065043498024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_3
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 889
+        width: 204
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d180243b23b852fa0800000000000000
+      internalID: -5826097493061793763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_4
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 870
+        width: 80
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03c17b6daac106710800000000000000
+      internalID: 1684377780708908080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_5
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 923
+        width: 74
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1785ffb14819ff50800000000000000
+      internalID: 6915585373476587293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_6
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 943
+        width: 41
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 130cd32e7bca1f650800000000000000
+      internalID: 6264978462423760945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_7
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 712
+        width: 297
+        height: 229
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efbf903fe61855d10800000000000000
+      internalID: 2113737913644219390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_8
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 870
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc851bcc21a6cb680800000000000000
+      internalID: -8737992548029474611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_9
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 826
+        width: 74
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4a2062711fe52240800000000000000
+      internalID: 4766478638853925455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_10
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 883
+        width: 40
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41f35286da4ea0180800000000000000
+      internalID: -9148248259621994732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_11
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 722
+        width: 250
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaac825fc9d5d9ec0800000000000000
+      internalID: -3558585201843451218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_12
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 832
+        width: 52
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5395cc5ea212c0340800000000000000
+      internalID: 4831272968389417269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_13
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 833
+        width: 45
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdbceb716892496a0800000000000000
+      internalID: -6443479510959600677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_14
+      rect:
+        serializedVersion: 2
+        x: 747
+        y: 853
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e5c62a7094d5a300800000000000000
+      internalID: 262849870260782568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_15
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 735
+        width: 122
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbe03f646ac67e0b0800000000000000
+      internalID: -5699467342003368257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_16
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 807
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab051e212743815a0800000000000000
+      internalID: -6550427993462714182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_17
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 807
+        width: 53
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c79d57a76a8d3d50800000000000000
+      internalID: 6718678396900841417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_18
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 736
+        width: 105
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd9fd1d3457ace630800000000000000
+      internalID: 3957722152796289499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_19
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 729
+        width: 56
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eea7e714c50473ea0800000000000000
+      internalID: -5893170822411027730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_20
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 537
+        width: 246
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4888178d35ad00280800000000000000
+      internalID: -9079016795130460028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_21
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 721
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3b008f1dfb114da0800000000000000
+      internalID: -5962453657692665029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_22
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 537
+        width: 165
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4d5938c860a75940800000000000000
+      internalID: 5284869059638811978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_23
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 650
+        width: 56
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7323b64436165f50800000000000000
+      internalID: 6869702695380525949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_24
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 473
+        width: 353
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f057617f5f4c5200800000000000000
+      internalID: 170098157276319985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_25
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 508
+        width: 48
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7686e35ae00fdc860800000000000000
+      internalID: 7551956095862728807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_26
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 372
+        width: 112
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c72b22185a1673040800000000000000
+      internalID: 4627274505610506876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_27
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 534
+        width: 64
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaec0795761f9f550800000000000000
+      internalID: 6195248188609318574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_28
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 214
+        width: 358
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8891193d434331280800000000000000
+      internalID: -9073851422728971896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_29
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 264
+        width: 265
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4df66d7c8035b1440800000000000000
+      internalID: 4907607516127850452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_30
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 372
+        width: 279
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb7a20ee2c33a18f0800000000000000
+      internalID: -569085490599123009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_31
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 321
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 899875c6556bb85b0800000000000000
+      internalID: -5364994053075662440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_32
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 294
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6b34f25df47e5980800000000000000
+      internalID: -8548266411335337108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_33
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 267
+        width: 129
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f32717250778da00800000000000000
+      internalID: 781505399363150837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_34
+      rect:
+        serializedVersion: 2
+        x: 762
+        y: 271
+        width: 35
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22cc8ee9b22357160800000000000000
+      internalID: 7022574356885195810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_35
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 169
+        width: 42
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7f1ebcbbefc216e0800000000000000
+      internalID: -1868202284014493825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_36
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 411
+        height: 213
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f040d368edef6d640800000000000000
+      internalID: 5104547459359376399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_37
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 214
+        width: 52
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba4839d5c26d0d440800000000000000
+      internalID: 4958698675771770027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_38
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 169
+        width: 246
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f9a5ed2f04ff3b50800000000000000
+      internalID: 6575242327015926258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_39
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 174
+        width: 84
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1654685b605d25c50800000000000000
+      internalID: 6652613824371639649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_40
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 178
+        width: 36
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abe7131be97707560800000000000000
+      internalID: 7309473718683664058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemies_house_41
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 1
+        width: 426
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18d4ab8d5205c1b80800000000000000
+      internalID: -8422769079609569919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      enemies_house_0: -3767564413968607787
+      enemies_house_1: -571058997815270541
+      enemies_house_10: -9148248259621994732
+      enemies_house_11: -3558585201843451218
+      enemies_house_12: 4831272968389417269
+      enemies_house_13: -6443479510959600677
+      enemies_house_14: 262849870260782568
+      enemies_house_15: -5699467342003368257
+      enemies_house_16: -6550427993462714182
+      enemies_house_17: 6718678396900841417
+      enemies_house_18: 3957722152796289499
+      enemies_house_19: -5893170822411027730
+      enemies_house_2: -3199255065043498024
+      enemies_house_20: -9079016795130460028
+      enemies_house_21: -5962453657692665029
+      enemies_house_22: 5284869059638811978
+      enemies_house_23: 6869702695380525949
+      enemies_house_24: 170098157276319985
+      enemies_house_25: 7551956095862728807
+      enemies_house_26: 4627274505610506876
+      enemies_house_27: 6195248188609318574
+      enemies_house_28: -9073851422728971896
+      enemies_house_29: 4907607516127850452
+      enemies_house_3: -5826097493061793763
+      enemies_house_30: -569085490599123009
+      enemies_house_31: -5364994053075662440
+      enemies_house_32: -8548266411335337108
+      enemies_house_33: 781505399363150837
+      enemies_house_34: 7022574356885195810
+      enemies_house_35: -1868202284014493825
+      enemies_house_36: 5104547459359376399
+      enemies_house_37: 4958698675771770027
+      enemies_house_38: 6575242327015926258
+      enemies_house_39: 6652613824371639649
+      enemies_house_4: 1684377780708908080
+      enemies_house_40: 7309473718683664058
+      enemies_house_41: -8422769079609569919
+      enemies_house_5: 6915585373476587293
+      enemies_house_6: 6264978462423760945
+      enemies_house_7: 2113737913644219390
+      enemies_house_8: -8737992548029474611
+      enemies_house_9: 4766478638853925455
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

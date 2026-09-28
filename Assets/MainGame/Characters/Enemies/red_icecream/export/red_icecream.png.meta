@@ -1,0 +1,1237 @@
+fileFormatVersion: 2
+guid: 329262d272a91442b8f7ee8cbe2dc0fe
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6232888157854450515
+    second: red_icecream_0
+  - first:
+      213: 5865471510714951129
+    second: red_icecream_1
+  - first:
+      213: -5843464312337303623
+    second: red_icecream_2
+  - first:
+      213: 6140386938949573367
+    second: red_icecream_3
+  - first:
+      213: 512200116413094688
+    second: red_icecream_4
+  - first:
+      213: 9045223472339736074
+    second: red_icecream_5
+  - first:
+      213: -8420172599182565116
+    second: red_icecream_6
+  - first:
+      213: 3127406565320137507
+    second: red_icecream_7
+  - first:
+      213: -2159499111503469777
+    second: red_icecream_8
+  - first:
+      213: -3769652609043430817
+    second: red_icecream_9
+  - first:
+      213: -2306634048945434022
+    second: red_icecream_10
+  - first:
+      213: -36471757444694269
+    second: red_icecream_11
+  - first:
+      213: -2716603930172005817
+    second: red_icecream_12
+  - first:
+      213: 2952605624313541074
+    second: red_icecream_13
+  - first:
+      213: -1331997185095544912
+    second: red_icecream_14
+  - first:
+      213: 818417144751934645
+    second: red_icecream_15
+  - first:
+      213: -7805191743648026624
+    second: red_icecream_16
+  - first:
+      213: 766479170974118211
+    second: red_icecream_17
+  - first:
+      213: -6762950635625796663
+    second: red_icecream_18
+  - first:
+      213: 3226611852075660545
+    second: red_icecream_19
+  - first:
+      213: 5560400481122432745
+    second: red_icecream_20
+  - first:
+      213: 6028923150147374327
+    second: red_icecream_21
+  - first:
+      213: -4395327503577267717
+    second: red_icecream_22
+  - first:
+      213: 3852206394732543415
+    second: red_icecream_23
+  - first:
+      213: 4387560682773750481
+    second: red_icecream_24
+  - first:
+      213: 7629949958390227560
+    second: red_icecream_25
+  - first:
+      213: -815394697073612791
+    second: red_icecream_26
+  - first:
+      213: -4560817628719124980
+    second: red_icecream_27
+  - first:
+      213: -8943655991598213390
+    second: red_icecream_28
+  - first:
+      213: -5945953035647170558
+    second: red_icecream_29
+  - first:
+      213: 5624001457523586139
+    second: red_icecream_30
+  - first:
+      213: 6850188221992411787
+    second: red_icecream_31
+  - first:
+      213: 1048709889884388951
+    second: red_icecream_32
+  - first:
+      213: -4282895084304044918
+    second: red_icecream_33
+  - first:
+      213: -1116481823936244452
+    second: red_icecream_34
+  - first:
+      213: -2535626691469892495
+    second: red_icecream_35
+  - first:
+      213: 8092701272475050140
+    second: red_icecream_36
+  - first:
+      213: -3151898072756321262
+    second: red_icecream_37
+  - first:
+      213: 5256330021944674458
+    second: red_icecream_38
+  - first:
+      213: -6844444631045751314
+    second: red_icecream_39
+  - first:
+      213: -2594680612233440094
+    second: red_icecream_40
+  - first:
+      213: 8678427873471445951
+    second: red_icecream_41
+  - first:
+      213: 8557211142598879366
+    second: red_icecream_42
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: red_icecream_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 709
+        width: 27
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dacb8526e355089a0800000000000000
+      internalID: -6232888157854450515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_1
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 709
+        width: 22
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d5a65c2347566150800000000000000
+      internalID: 5865471510714951129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_2
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 664
+        width: 82
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b7767dfa28d7eea0800000000000000
+      internalID: -5843464312337303623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_3
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 663
+        width: 56
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fa99874369073550800000000000000
+      internalID: 6140386938949573367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_4
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 664
+        width: 42
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02b57b8ca43bb1700800000000000000
+      internalID: 512200116413094688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_5
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 664
+        width: 42
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a06d5de03d6178d70800000000000000
+      internalID: 9045223472339736074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_6
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 706
+        width: 81
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 401ee3e02a9852b80800000000000000
+      internalID: -8420172599182565116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_7
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 706
+        width: 46
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32b912293b7c66b20800000000000000
+      internalID: 3127406565320137507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_8
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 714
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f236016effae702e0800000000000000
+      internalID: -2159499111503469777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_9
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 702
+        width: 65
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f52875face08fabc0800000000000000
+      internalID: -3769652609043430817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_10
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 702
+        width: 72
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5259c5bd803dffd0800000000000000
+      internalID: -2306634048945434022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_11
+      rect:
+        serializedVersion: 2
+        x: 1136
+        y: 713
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30fbc2d312d6e7ff0800000000000000
+      internalID: -36471757444694269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_12
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 702
+        width: 27
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 742eaa26e1fac4ad0800000000000000
+      internalID: -2716603930172005817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_13
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 702
+        width: 52
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d17707fb23c9f820800000000000000
+      internalID: 2952605624313541074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_14
+      rect:
+        serializedVersion: 2
+        x: 1358
+        y: 616
+        width: 162
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bf4f8c0e9bc38de0800000000000000
+      internalID: -1331997185095544912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_15
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 603
+        width: 218
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bc47079e0a9b5b00800000000000000
+      internalID: 818417144751934645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_16
+      rect:
+        serializedVersion: 2
+        x: 1739
+        y: 604
+        width: 108
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0003c0c76736ea390800000000000000
+      internalID: -7805191743648026624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_17
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 410
+        width: 562
+        height: 303
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 341f5a9beb413aa00800000000000000
+      internalID: 766479170974118211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_18
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 680
+        width: 69
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cba5028a3c2522a0800000000000000
+      internalID: -6762950635625796663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_19
+      rect:
+        serializedVersion: 2
+        x: 877
+        y: 696
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 105f807526a37cc20800000000000000
+      internalID: 3226611852075660545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_20
+      rect:
+        serializedVersion: 2
+        x: 1130
+        y: 703
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e6b63ef6c28a2d40800000000000000
+      internalID: 5560400481122432745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_21
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 629
+        width: 118
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fcc9a699a90ba350800000000000000
+      internalID: 6028923150147374327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_22
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 680
+        width: 68
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf1c5c54ce8a003c0800000000000000
+      internalID: -4395327503577267717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_23
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 676
+        width: 65
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bd758f5e49c57530800000000000000
+      internalID: 3852206394732543415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_24
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 616
+        width: 365
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d22337d13fb3ec30800000000000000
+      internalID: 4387560682773750481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_25
+      rect:
+        serializedVersion: 2
+        x: 1848
+        y: 655
+        width: 35
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8622bdbdf0703e960800000000000000
+      internalID: 7629949958390227560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_26
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 410
+        width: 240
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 908a039d7d22fa4f0800000000000000
+      internalID: -815394697073612791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_27
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 649
+        width: 65
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0e6bdae788b4b0c0800000000000000
+      internalID: -4560817628719124980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_28
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 531
+        width: 51
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f69e7bd240c1e380800000000000000
+      internalID: -8943655991598213390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_29
+      rect:
+        serializedVersion: 2
+        x: 1848
+        y: 499
+        width: 159
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2084813973bbb7da0800000000000000
+      internalID: -5945953035647170558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_30
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 410
+        width: 132
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b54f8f347877c0e40800000000000000
+      internalID: 5624001457523586139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_31
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 1
+        width: 460
+        height: 615
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b822c60e4e1c01f50800000000000000
+      internalID: 6850188221992411787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_32
+      rect:
+        serializedVersion: 2
+        x: 1574
+        y: 471
+        width: 181
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75e7ffaa614cd8e00800000000000000
+      internalID: 1048709889884388951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_33
+      rect:
+        serializedVersion: 2
+        x: 1791
+        y: 539
+        width: 48
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8c6ac1dc991094c0800000000000000
+      internalID: -4282895084304044918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_34
+      rect:
+        serializedVersion: 2
+        x: 1791
+        y: 499
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c15991e42b57180f0800000000000000
+      internalID: -1116481823936244452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_35
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 989
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17420fb55f4afccd0800000000000000
+      internalID: -2535626691469892495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_36
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 410
+        width: 53
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c902a3b2eec0f4070800000000000000
+      internalID: 8092701272475050140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_37
+      rect:
+        serializedVersion: 2
+        x: 1791
+        y: 377
+        width: 218
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2140f1df6653244d0800000000000000
+      internalID: -3151898072756321262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_38
+      rect:
+        serializedVersion: 2
+        x: 1791
+        y: 237
+        width: 218
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a98cb344e4c32f840800000000000000
+      internalID: 5256330021944674458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_39
+      rect:
+        serializedVersion: 2
+        x: 1796
+        y: 369
+        width: 29
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eed30b91fd5a301a0800000000000000
+      internalID: -6844444631045751314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_40
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 1
+        width: 345
+        height: 326
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a49b3afab7ddfbd0800000000000000
+      internalID: -2594680612233440094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_41
+      rect:
+        serializedVersion: 2
+        x: 1798
+        y: 2
+        width: 194
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbb3d1fab28ff6870800000000000000
+      internalID: 8678427873471445951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_icecream_42
+      rect:
+        serializedVersion: 2
+        x: 1988
+        y: 67
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 688ee96323251c670800000000000000
+      internalID: 8557211142598879366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      red_icecream_0: -6232888157854450515
+      red_icecream_1: 5865471510714951129
+      red_icecream_10: -2306634048945434022
+      red_icecream_11: -36471757444694269
+      red_icecream_12: -2716603930172005817
+      red_icecream_13: 2952605624313541074
+      red_icecream_14: -1331997185095544912
+      red_icecream_15: 818417144751934645
+      red_icecream_16: -7805191743648026624
+      red_icecream_17: 766479170974118211
+      red_icecream_18: -6762950635625796663
+      red_icecream_19: 3226611852075660545
+      red_icecream_2: -5843464312337303623
+      red_icecream_20: 5560400481122432745
+      red_icecream_21: 6028923150147374327
+      red_icecream_22: -4395327503577267717
+      red_icecream_23: 3852206394732543415
+      red_icecream_24: 4387560682773750481
+      red_icecream_25: 7629949958390227560
+      red_icecream_26: -815394697073612791
+      red_icecream_27: -4560817628719124980
+      red_icecream_28: -8943655991598213390
+      red_icecream_29: -5945953035647170558
+      red_icecream_3: 6140386938949573367
+      red_icecream_30: 5624001457523586139
+      red_icecream_31: 6850188221992411787
+      red_icecream_32: 1048709889884388951
+      red_icecream_33: -4282895084304044918
+      red_icecream_34: -1116481823936244452
+      red_icecream_35: -2535626691469892495
+      red_icecream_36: 8092701272475050140
+      red_icecream_37: -3151898072756321262
+      red_icecream_38: 5256330021944674458
+      red_icecream_39: -6844444631045751314
+      red_icecream_4: 512200116413094688
+      red_icecream_40: -2594680612233440094
+      red_icecream_41: 8678427873471445951
+      red_icecream_42: 8557211142598879366
+      red_icecream_5: 9045223472339736074
+      red_icecream_6: -8420172599182565116
+      red_icecream_7: 3127406565320137507
+      red_icecream_8: -2159499111503469777
+      red_icecream_9: -3769652609043430817
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,76 @@
+{ "skeleton": { "images": "/d/Cooking_meomeo/red_icecream/images/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "leg_R", "bone": "root", "attachment": "leg_R" },
+	{ "name": "leg_L", "bone": "root", "attachment": "leg_L" },
+	{ "name": "hand_2", "bone": "root", "attachment": "hand_2" },
+	{ "name": "hand_1", "bone": "root", "attachment": "hand_1" },
+	{ "name": "body_2", "bone": "root", "attachment": "body_2" },
+	{ "name": "body_1", "bone": "root", "attachment": "body_1" },
+	{ "name": "cone", "bone": "root", "attachment": "cone" },
+	{ "name": "head", "bone": "root", "attachment": "head" },
+	{ "name": "eye_open", "bone": "root", "attachment": "eye_open" },
+	{ "name": "pupil", "bone": "root", "attachment": "pupil" },
+	{ "name": "eye_close", "bone": "root" },
+	{ "name": "hair_2", "bone": "root", "attachment": "hair_2" },
+	{ "name": "hair_1", "bone": "root", "attachment": "hair_1" },
+	{ "name": "sword_1", "bone": "root", "attachment": "sword_1" },
+	{ "name": "sword_2", "bone": "root", "attachment": "sword_2" },
+	{ "name": "sword_3", "bone": "root", "attachment": "sword_3" }
+],
+"skins": {
+	"default": {
+		"leg_R": {
+			"leg_R": { "x": 525, "y": -581.5, "width": 42, "height": 57 }
+		},
+		"leg_L": {
+			"leg_L": { "x": 475, "y": -580.5, "width": 42, "height": 57 }
+		},
+		"hand_2": {
+			"hand_2": { "x": 458.5, "y": -543, "width": 61, "height": 82 }
+		},
+		"hand_1": {
+			"hand_1": { "x": 432.5, "y": -571.5, "width": 39, "height": 35 }
+		},
+		"body_2": {
+			"body_2": { "x": 502.5, "y": -546, "width": 119, "height": 108 }
+		},
+		"body_1": {
+			"body_1": { "x": 530, "y": -559.5, "width": 40, "height": 43 }
+		},
+		"cone": {
+			"cone": { "x": 589.5, "y": -341, "width": 159, "height": 156 }
+		},
+		"head": {
+			"head": { "x": 526.5, "y": -399.5, "width": 285, "height": 271 }
+		},
+		"eye_open": {
+			"eye_open": { "x": 474, "y": -436, "width": 118, "height": 56 }
+		},
+		"pupil": {
+			"pupil": { "x": 474, "y": -439, "width": 48, "height": 30 }
+		},
+		"eye_close": {
+			"eye_close": { "x": 474, "y": -436, "width": 118, "height": 56 }
+		},
+		"hair_2": {
+			"hair_2": { "x": 391, "y": -373, "width": 58, "height": 56 }
+		},
+		"hair_1": {
+			"hair_1": { "x": 508.5, "y": -390, "width": 121, "height": 54 }
+		},
+		"sword_1": {
+			"sword_1": { "x": 349, "y": -493, "width": 256, "height": 244 }
+		},
+		"sword_2": {
+			"sword_2": { "x": 216.5, "y": -635, "width": 87, "height": 346 }
+		},
+		"sword_3": {
+			"sword_3": { "x": 75.5, "y": -635.5, "width": 87, "height": 367 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}

@@ -1,0 +1,80 @@
+{ "skeleton": { "images": "/e/CUONGINGLE/ENEMY/pudding/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "body", "bone": "root", "attachment": "body" },
+	{ "name": "leg_R", "bone": "root", "attachment": "leg_R" },
+	{ "name": "leg_L", "bone": "root", "attachment": "leg_L" },
+	{ "name": "hand_R_2", "bone": "root", "attachment": "hand_R_2" },
+	{ "name": "hand_R_1", "bone": "root", "attachment": "hand_R_1" },
+	{ "name": "hand_L_2", "bone": "root", "attachment": "hand_L_2" },
+	{ "name": "hand_L_1", "bone": "root", "attachment": "hand_L_1" },
+	{ "name": "face_2", "bone": "root", "attachment": "face_2" },
+	{ "name": "face_1", "bone": "root", "attachment": "face_1" },
+	{ "name": "eye_R", "bone": "root", "attachment": "eye_R" },
+	{ "name": "eye_L", "bone": "root", "attachment": "eye_L" },
+	{ "name": "eyebrow_R", "bone": "root", "attachment": "eyebrow_R" },
+	{ "name": "eyebrow_L", "bone": "root", "attachment": "eyebrow_L" },
+	{ "name": "cream_1", "bone": "root", "attachment": "cream_1" },
+	{ "name": "cherry", "bone": "root", "attachment": "cherry" },
+	{ "name": "whip", "bone": "root", "attachment": "whip" },
+	{ "name": "cream_2", "bone": "root", "attachment": "cream_2" }
+],
+"skins": {
+	"default": {
+		"body": {
+			"body": { "x": 494, "y": -551.5, "width": 88, "height": 55 }
+		},
+		"leg_R": {
+			"leg_R": { "x": 518.5, "y": -579, "width": 43, "height": 58 }
+		},
+		"leg_L": {
+			"leg_L": { "x": 468, "y": -578.5, "width": 42, "height": 57 }
+		},
+		"hand_R_2": {
+			"hand_R_2": { "x": 536.5, "y": -562, "width": 19, "height": 56 }
+		},
+		"hand_R_1": {
+			"hand_R_1": { "x": 533, "y": -580, "width": 28, "height": 22 }
+		},
+		"hand_L_2": {
+			"hand_L_2": { "x": 452, "y": -561, "width": 20, "height": 56 }
+		},
+		"hand_L_1": {
+			"hand_L_1": { "x": 445.5, "y": -578.5, "width": 27, "height": 23 }
+		},
+		"face_2": {
+			"face_2": { "x": 491.5, "y": -521.5, "width": 209, "height": 83 }
+		},
+		"face_1": {
+			"face_1": { "x": 487.5, "y": -441.5, "width": 203, "height": 191 }
+		},
+		"eye_R": {
+			"eye_R": { "x": 526.5, "y": -464, "width": 87, "height": 66 }
+		},
+		"eye_L": {
+			"eye_L": { "x": 434.5, "y": -464, "width": 67, "height": 72 }
+		},
+		"eyebrow_R": {
+			"eyebrow_R": { "x": 504, "y": -420.5, "width": 54, "height": 41 }
+		},
+		"eyebrow_L": {
+			"eyebrow_L": { "x": 446.5, "y": -412.5, "width": 31, "height": 25 }
+		},
+		"cream_1": {
+			"cream_1": { "x": 506, "y": -371, "width": 186, "height": 114 }
+		},
+		"cherry": {
+			"cherry": { "x": 466.5, "y": -318.5, "width": 89, "height": 75 }
+		},
+		"whip": {
+			"whip": { "x": 461.5, "y": -239.5, "width": 147, "height": 129 }
+		},
+		"cream_2": {
+			"cream_2": { "x": 485.5, "y": -341, "width": 53, "height": 40 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}

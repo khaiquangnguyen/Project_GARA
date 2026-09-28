@@ -13,5 +13,8 @@ namespace GARA.Characters
 
         // The character using the card.
         CharacterDefinition Actor { get; }
+
+        // False when the AI plays the card, so the session decides itself.
+        bool IsPlayerControlled { get; }
     }
 }
