@@ -101,6 +101,13 @@ namespace GARA.Combat
         [Tooltip("Spawned on each enemy's HP heart anchor at battle start; only shown while that enemy is targeted.")]
         [SerializeField] private HpHeartView enemyHpHeartPrefab;
 
+        [Header("Player Status Bars")]
+        [Tooltip("Spawned under each player character at battle start; always shown.")]
+        [SerializeField] private StatusBarView playerStatusBarPrefab;
+
+        [Tooltip("From the character's starting spot, used when its definition has no statusBarAnchor.")]
+        [SerializeField] private Vector3 playerStatusBarOffset = new(-0.56f, -0.81f, 0f);
+
         [Header("Minigame Visual Drivers")]
 
         [Tooltip("Scene instance of the RhythmVisualDriver prefab — shown whenever any rhythm sequence starts.")]
@@ -125,6 +132,10 @@ namespace GARA.Combat
 
         private readonly Dictionary<CombatParticipant, HpHeartView> _hpHearts = new();
 
+        private readonly Dictionary<CombatParticipant, StatusBarView> _statusBars = new();
+
+        private readonly HashSet<CombatParticipant> _targetDisplayTargets = new();
+
         private void EnableOverlay()
         {
             RhythmSequencePlayer.AnySequenceStarted += ShowRhythmSequence;
@@ -134,6 +145,8 @@ namespace GARA.Combat
             ShakeBalancePlayer.AnyBalanceStarted += ShowShakeBalance;
             ShakeBalancePlayer.AnyBalanceEnded += HideShakeBalance;
             CombatParticipant.HpChanged += RefreshHpHeart;
+            CombatParticipant.HpChanged += RefreshStatusBar;
+            CombatParticipant.MpChanged += RefreshStatusBar;
         }
 
         private void DisableOverlay()
@@ -145,6 +158,8 @@ namespace GARA.Combat
             ShakeBalancePlayer.AnyBalanceStarted -= ShowShakeBalance;
             ShakeBalancePlayer.AnyBalanceEnded -= HideShakeBalance;
             CombatParticipant.HpChanged -= RefreshHpHeart;
+            CombatParticipant.HpChanged -= RefreshStatusBar;
+            CombatParticipant.MpChanged -= RefreshStatusBar;
         }
 
         private void RefreshTurnOrder(Sprite[] portraits)
@@ -177,6 +192,7 @@ namespace GARA.Combat
                 CloneEffectOntoEveryCharacter(playerActiveActorEffectTemplate, enemyActiveActorEffectTemplate);
                 CloneEffectOntoEveryCharacter(playerNoirifiedEffectTemplate, enemyNoirifiedEffectTemplate);
                 SpawnEnemyHpHearts();
+                SpawnPlayerStatusBars();
                 _hasClonedCharacterEffects = true;
             }
 
@@ -237,19 +253,75 @@ namespace GARA.Combat
             }
         }
 
-        // Shows the per-character target displays (the HP heart for now) on
-        // exactly these participants and hides them everywhere else. New
-        // target-only displays get toggled here too.
+        // Unanchored bars stay at the starting spot, so lunges don't drag them.
+        private void SpawnPlayerStatusBars()
+        {
+            if (playerStatusBarPrefab == null)
+            {
+                return;
+            }
+
+            foreach (var (participant, executor) in _executors)
+            {
+                if (participant.faction != FactionTag.Player)
+                {
+                    continue;
+                }
+
+                var definition = executor.GetComponent<CharacterDefinition>();
+                var anchor = definition != null ? definition.statusBarAnchor : null;
+                var bar = anchor != null
+                    ? Instantiate(playerStatusBarPrefab, anchor, false)
+                    : Instantiate(playerStatusBarPrefab, executor.transform.position + playerStatusBarOffset, Quaternion.identity, transform);
+                _statusBars[participant] = bar;
+                RefreshStatusBar(participant);
+            }
+
+            RefreshStatusBarVisibility();
+        }
+
+        private void RefreshStatusBar(CombatParticipant participant)
+        {
+            if (_statusBars.TryGetValue(participant, out var bar) && bar != null)
+            {
+                var stats = participant.GetCurrentStats();
+                bar.SetHp(participant.currentHp, stats.MaxHp.Value);
+                bar.SetMp(participant.currentMp, stats.MaxMp.Value);
+            }
+        }
+
+        // Only the player-controlled actor's bar shows, plus the bars of any
+        // allies its skill is targeting.
+        private void RefreshStatusBarVisibility()
+        {
+            var playerActor = _actor != null && _actor.IsPlayerControlled ? _actor : null;
+            foreach (var (participant, bar) in _statusBars)
+            {
+                if (bar != null)
+                {
+                    var shown = playerActor != null
+                        && (participant == playerActor || _targetDisplayTargets.Contains(participant));
+                    bar.gameObject.SetActive(shown);
+                }
+            }
+        }
+
+        // Shows the per-character target displays (the HP heart and ally
+        // status bars) on exactly these participants and hides them
+        // everywhere else. New target-only displays get toggled here too.
         private void ShowTargetDisplays(IEnumerable<CombatParticipant> targets)
         {
-            var shown = new HashSet<CombatParticipant>(targets);
+            _targetDisplayTargets.Clear();
+            _targetDisplayTargets.UnionWith(targets);
             foreach (var (participant, heart) in _hpHearts)
             {
                 if (heart != null)
                 {
-                    heart.gameObject.SetActive(shown.Contains(participant));
+                    heart.gameObject.SetActive(_targetDisplayTargets.Contains(participant));
                 }
             }
+
+            RefreshStatusBarVisibility();
         }
 
         private void HideTargetDisplays()

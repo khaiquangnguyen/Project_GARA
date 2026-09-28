@@ -154,6 +154,9 @@ namespace GARA.Combat
         // Raised after every change to currentHp, so HP displays can follow.
         public static event Action<CombatParticipant> HpChanged;
 
+        // Raised after every change to currentMp, so MP displays can follow.
+        public static event Action<CombatParticipant> MpChanged;
+
         public static CombatParticipant FromManagedCharacter(ManagedCharacter character, CharacterDefinition definition, FactionTag faction)
         {
             // Snapshot: out-of-battle modifiers are baked into the baseline at
@@ -579,6 +582,11 @@ namespace GARA.Combat
             }
 
             currentMp -= amount;
+            if (amount > 0)
+            {
+                MpChanged?.Invoke(this);
+            }
+
             return true;
         }
 
@@ -593,6 +601,11 @@ namespace GARA.Combat
 
             currentAp -= apCost;
             currentMp -= mpCost;
+            if (mpCost != 0)
+            {
+                MpChanged?.Invoke(this);
+            }
+
             return true;
         }
 
@@ -604,6 +617,10 @@ namespace GARA.Combat
         {
             currentAp += apCost;
             currentMp += mpCost;
+            if (mpCost != 0)
+            {
+                MpChanged?.Invoke(this);
+            }
         }
 
         // Called once the character's prefab has been instantiated for this

@@ -77,6 +77,10 @@ namespace GARA.Characters
         [Tooltip("Where this enemy's HP heart sits.")]
         public Transform hpHeartAnchor;
 
+        [Header("Status Bar (players)")]
+        [Tooltip("Optional: the HP/MP bar follows this. Unset, it stays at the character's starting spot.")]
+        public Transform statusBarAnchor;
+
         private void OnValidate()
         {
             var seen = new HashSet<SkillCardDefinition>();

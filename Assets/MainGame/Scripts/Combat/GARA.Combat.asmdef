@@ -7,6 +7,7 @@
     "spine-csharp",
     "Unity.InputSystem",
     "UnityEngine.UI",
+    "Unity.TextMeshPro",
     "MoreMountains.Tools",
     "NaughtyAttributes.Core",
     "GARA.Rhythm",

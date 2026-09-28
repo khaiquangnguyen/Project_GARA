@@ -5398,6 +5398,8 @@ MonoBehaviour:
   playerHitEffectTemplate: {fileID: 4724413725210982919, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
   playerParrySuccessEffectTemplate: {fileID: 3401488061189719013, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
   playerJumpSuccessEffectTemplate: {fileID: 331152434699064910, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
+  playerEvadeSuccessEffectTemplate: {fileID: 0}
+  playerInvulnerableBlockEffectTemplate: {fileID: 0}
   playerActiveActorEffectTemplate: {fileID: 4517199274371294702, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
   playerNoirifiedEffectTemplate: {fileID: 40183474075950735, guid: 5beee59fe527b4fcb924d20d19190c9e, type: 3}
   enemyNotTargetedEffectTemplate: {fileID: 4760853153468329946, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
@@ -5405,9 +5407,13 @@ MonoBehaviour:
   enemyHitEffectTemplate: {fileID: 4724413725210982919, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyParrySuccessEffectTemplate: {fileID: 5950136697058328324, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyJumpSuccessEffectTemplate: {fileID: 8467334021156729000, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
+  enemyEvadeSuccessEffectTemplate: {fileID: 0}
+  enemyInvulnerableBlockEffectTemplate: {fileID: 0}
   enemyActiveActorEffectTemplate: {fileID: 6468845237024180897, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyNoirifiedEffectTemplate: {fileID: 960220785317284898, guid: b9284ac94a3584117a20bf56016cd53a, type: 3}
   enemyHpHeartPrefab: {fileID: 4787717028545996810, guid: 71d8fbdc5752443519c2a92adff2b318, type: 3}
+  playerStatusBarPrefab: {fileID: 3631926607111946726, guid: 89f1f140985754fb3940b1b62045a490, type: 3}
+  playerStatusBarOffset: {x: 0, y: -0.5, z: 0}
   rhythmVisualDriver: {fileID: 719048227}
   inputSetVisualDriver: {fileID: 2073647041}
   shakeBalanceVisualDriver: {fileID: 1270247268}
@@ -5439,7 +5445,6 @@ MonoBehaviour:
   fadeIfNotTargeted: 1
   shrinkIfNotTargeted: 1
   retreatIfNotTargeted: 1
-  showFinaleSpotlight: 0
   jumpSpec: {fileID: 11400000, guid: 467ee0f188f0143fcbabb2cf4ccf09dc, type: 2}
   parrySpec: {fileID: 11400000, guid: c729104e41a3489a9b7cb97da29f36d9, type: 2}
 --- !u!4 &1653656579

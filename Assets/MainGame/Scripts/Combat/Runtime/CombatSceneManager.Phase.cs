@@ -658,6 +658,7 @@ namespace GARA.Combat
             AnnounceActiveActor(_actor, true);
             ToggleTurnAnnouncement(_actor.IsPlayerControlled);
             RefreshSkillCardSlots(_actor);
+            RefreshStatusBarVisibility();
 
             // Timed modifiers (see TimedStatModifierSkillEffect) tick down
             // at the start of THEIR OWNER's own turn, not on every global

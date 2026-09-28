@@ -142,6 +142,8 @@ namespace GARA.Combat
                 AnnounceActiveActor(_actor, true);
                 RefreshHand();
             }
+
+            RefreshStatusBarVisibility();
         }
     }
 }
