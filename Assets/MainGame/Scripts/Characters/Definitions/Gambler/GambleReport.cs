@@ -3,16 +3,16 @@ namespace GARA.Characters.Gambler
     // SkillPerformance.Details of a Gambler card. Outcome is null if aborted.
     public sealed class GambleReport
     {
-        public CheatShakeReport Cheat { get; }
+        public QteReport Qte { get; }
 
         public GambleOutcome Outcome { get; }
 
-        // The cheat shake landed the exact count, so the roll was cheated.
-        public bool Cheated => Cheat != null && Cheat.Cleared;
+        // The QTE was hit, so the roll was cheated (single-roll cards).
+        public bool Cheated => Qte != null && Qte.AllHit;
 
-        public GambleReport(CheatShakeReport cheat, GambleOutcome outcome)
+        public GambleReport(QteReport qte, GambleOutcome outcome)
         {
-            Cheat = cheat;
+            Qte = qte;
             Outcome = outcome;
         }
     }

@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using GARA.Characters;
 using GARA.Input;
-using GARA.InputSets;
-using GARA.Rhythm;
 using UnityEngine;
 
 namespace GARA.Combat
@@ -95,17 +93,7 @@ namespace GARA.Combat
             _actor = performer;
             _actorExecutor = executor;
 
-            var rhythm = skillCardInputHost.GetDriver<RhythmSequencePlayer>();
-            if (rhythm != null)
-            {
-                rhythm.AutoPlay = mode;
-            }
-
-            var inputSets = skillCardInputHost.GetDriver<InputSetCollectionPlayer>();
-            if (inputSets != null)
-            {
-                inputSets.AutoPlay = mode;
-            }
+            skillCardInputHost.SetAutoPlay(mode);
 
             Debug.Log($"[{nameof(CombatSceneManager)}] Test-playing {card.displayName} as {performer.definition.displayName} ({mode}) on {string.Join(", ", targets.Select(t => t.definition.displayName))}.");
             StartSkillCard(card, targets.Cast<ICombatTarget>().ToList());
@@ -121,17 +109,7 @@ namespace GARA.Combat
             }
 
             _debugPlaying = false;
-            var rhythm = skillCardInputHost.GetDriver<RhythmSequencePlayer>();
-            if (rhythm != null)
-            {
-                rhythm.AutoPlay = AutoPlayMode.Off;
-            }
-
-            var inputSets = skillCardInputHost.GetDriver<InputSetCollectionPlayer>();
-            if (inputSets != null)
-            {
-                inputSets.AutoPlay = AutoPlayMode.Off;
-            }
+            skillCardInputHost.SetAutoPlay(AutoPlayMode.Off);
 
             _actor = _debugSavedActor;
             _actorExecutor = _debugSavedExecutor;

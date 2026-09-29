@@ -6,19 +6,20 @@ using UnityEngine;
 
 namespace GARA.Characters.Gambler
 {
-    // The cheat shake, then the game rolled, cheated if it landed; the card's
-    // move plays once per strike (GamblerSkillCard.StrikesFor), each with
-    // the effects the roll triggered.
-    internal sealed class GamblerLiveSkillInputSession : ILiveSkillInputSession
+    // One QTE, then the game rolled, cheated if it was hit; the card's
+    // move plays once per strike (GamblerSkillCard.StrikesFor), one after
+    // another, each with the effects the roll triggered.
+    internal sealed class GamblerLiveSkillInputSession : ISequentialLiveSkillInputSession
     {
         private static readonly IGambleRandom Rng = new UnityGambleRandom();
 
-        private readonly CheatShakePlayer _player;
-        private readonly CheatShake _cheat;
+        private readonly QtePlayer _player;
+        private readonly Qte _qte;
         private readonly bool _isPlayerControlled;
         private readonly MonoBehaviour _runner;
         private readonly GamblerSkillCard _card;
         private readonly SkillPerformanceTiering _tiering;
+        private readonly float _revealSeconds;
 
         private Action<SkillPerformance> _onCompleted;
         private Coroutine _strikes;
@@ -35,14 +36,15 @@ namespace GARA.Characters.Gambler
 
         public AttackAnimationSpec OpeningMove => _card.animationSpec;
 
-        public GamblerLiveSkillInputSession(CheatShakePlayer player, CheatShake cheat, bool isPlayerControlled, MonoBehaviour runner, GamblerSkillCard card, SkillPerformanceTiering tiering)
+        public GamblerLiveSkillInputSession(QtePlayer player, Qte qte, bool isPlayerControlled, MonoBehaviour runner, GamblerSkillCard card, SkillPerformanceTiering tiering, float revealSeconds)
         {
             _player = player;
-            _cheat = cheat;
+            _qte = qte;
             _isPlayerControlled = isPlayerControlled;
             _runner = runner;
             _card = card;
             _tiering = tiering;
+            _revealSeconds = card.showOutcome ? revealSeconds : 0f;
         }
 
         public void Begin(Action<SkillPerformance> onCompleted)
@@ -54,12 +56,12 @@ namespace GARA.Characters.Gambler
                 return;
             }
 
-            _player.Play(_cheat, _isPlayerControlled, OnCheatEnded);
+            _player.Play(_qte, 1, _isPlayerControlled, OnInputEnded);
         }
 
         public void Abort()
         {
-            // Fires OnCheatEnded with an aborted report mid-run.
+            // Fires OnInputEnded with an aborted report mid-run.
             _player?.Abort();
             if (_strikes == null)
             {
@@ -71,22 +73,23 @@ namespace GARA.Characters.Gambler
             Complete(SkillPerformance.Failed(_performance.Details));
         }
 
-        private void OnCheatEnded(CheatShakeReport cheat)
+        private void OnInputEnded(QteReport qte)
         {
-            if (cheat.WasAborted)
+            if (qte.WasAborted)
             {
-                Complete(SkillPerformance.Failed(new GambleReport(cheat, null)));
+                Complete(SkillPerformance.Failed(new GambleReport(qte, null)));
                 return;
             }
 
-            var cheated = cheat.Cleared;
+            var cheated = qte.AllHit;
             var score = cheated ? 1f : 0f;
             var outcome = _card.game.Roll(cheated, Rng);
-            _performance = new SkillPerformance(score, _tiering.Evaluate(score), false, new GambleReport(cheat, outcome));
+            _performance = new SkillPerformance(score, _tiering.Evaluate(score), false, new GambleReport(qte, outcome));
             var triggered = Triggered(outcome, _performance);
             var strikes = triggered != null ? _card.StrikesFor(outcome) : 0;
             Debug.Log($"[{nameof(GamblerLiveSkillInputSession)}] {_card.name}: {(cheated ? "cheated" : "fair")} — {outcome} — {strikes} strike(s)");
-            if (strikes <= 1)
+            GambleEvents.RaiseRolled(_card, outcome, cheated);
+            if (strikes <= 1 && _revealSeconds <= 0f)
             {
                 if (strikes == 1)
                 {
@@ -100,8 +103,14 @@ namespace GARA.Characters.Gambler
             _strikes = _runner.StartCoroutine(StrikeRepeatedly(triggered, strikes));
         }
 
+        // Shows the roll first, then strikes.
         private IEnumerator StrikeRepeatedly(IReadOnlyList<ISkillEffect> triggered, int strikes)
         {
+            if (_revealSeconds > 0f)
+            {
+                yield return new WaitForSeconds(_revealSeconds);
+            }
+
             for (var index = 0; index < strikes; index++)
             {
                 if (index > 0)
@@ -118,7 +127,13 @@ namespace GARA.Characters.Gambler
 
         private void Strike(IReadOnlyList<ISkillEffect> triggered, int index)
         {
-            StepPerformed?.Invoke(new SkillStep(_card.animationSpec, _performance, triggered, false, index));
+            var effects = new List<ISkillEffect>(triggered.Count);
+            foreach (var effect in triggered)
+            {
+                effects.Add(effect is GambleEffect gamble ? gamble.ForStrike(index) : effect);
+            }
+
+            StepPerformed?.Invoke(new SkillStep(_card.animationSpec, _performance, effects, false, index));
         }
 
         private void Complete(SkillPerformance performance)

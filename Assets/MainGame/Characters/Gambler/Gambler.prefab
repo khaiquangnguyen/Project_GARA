@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b097f06f5b345e69ea875106fe1db90, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.GamblerDuelRouletteState
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.GamblerRouletteMagDumpState
   skillCard: {fileID: 11400000, guid: 21fb7f61e11f45b7b86601eccab4c7fd, type: 2}
 --- !u!114 &5695780498843054112
 MonoBehaviour:
@@ -451,14 +451,16 @@ MonoBehaviour:
     okThreshold: 0.35
     goodThreshold: 0.65
     perfectThreshold: 0.9
-  cheatSequence:
-    tokens:
-    - id: 1
-    - id: 2
-    - id: 3
-    - id: 4
-    length: 10
-    timeLimit: 5
+  qte:
+    token:
+      id: 3
+    sweepSeconds: 1.2
+    windowDegrees: 40
+    windowStartMin: 120
+    windowStartMax: 280
+    secondsBetween: 0.25
+    aiSuccessChance: 0.5
+  outcomeRevealSeconds: 1.2
 --- !u!1 &5671173921607218382
 GameObject:
   m_ObjectHideFlags: 0

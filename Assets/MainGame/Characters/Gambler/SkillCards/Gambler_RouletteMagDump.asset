@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a83326225074b42bceb8502c1b4639a, type: 3}
+  m_Name: Gambler_RouletteMagDump
+  m_EditorClassIdentifier: GARA.Characters.Gambler::GARA.Characters.Gambler.PerPressGambleSkillCard
+  cardId: gambler_roulette_mag_dump
+  displayName: Roulette Mag Dump
+  description: 
+  icon: {fileID: 0}
+  targetMode: 0
+  multiTargetCount: 2
+  stepTargeting: 0
+  finaleTargeting: 0
+  alliesJoinFinale: 0
+  allyDanceDuration: 1
+  teleportBetweenSteps: 0
+  apCost: 0
+  mpCost: 0
+  positionMode: 1
+  effects: []
+  refundOnAbort: 0
+  spotlight: {fileID: 0}
+  shadowScreen: {fileID: 0}
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: d75deaed033a4abd89d12309d6b360a9, type: 2}
+  finalePositionMode: 0
+  finaleDelay: 0.5
+  perfectEffects: []
+  game:
+    rid: 609404912810067001
+  rollEffects:
+  - rid: 609404912810067002
+  showOutcome: 0
+  overrideQte: 1
+  qte:
+    token:
+      id: 3
+    sweepSeconds: 1
+    windowDegrees: 90
+    windowStartMin: 270
+    windowStartMax: 270
+    secondsBetween: 0.25
+    overlapInterval: 0.5
+    aiSuccessChance: 0.6
+  qteCount: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404912810067001
+      type: {class: RouletteBarrageGame, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        shots: 6
+        chambers: 6
+        loaded: 1
+        cheatBullets: 1
+        spinEachPull: 0
+    - rid: 609404912810067002
+      type: {class: MagDumpShotDamage, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        baseDamage: 20
+        damageLostPerWhiff: 3
+        minDamage: 1

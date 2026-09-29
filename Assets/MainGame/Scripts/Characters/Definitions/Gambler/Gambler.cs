@@ -10,21 +10,23 @@ namespace GARA.Characters.Gambler
         [SerializeField]
         private SkillPerformanceTiering specialTiering = SkillPerformanceTiering.Default;
 
-        [Tooltip("Landing the exact count cheats the card's game.")]
+        [Tooltip("The timing prompt every card plays. A single-roll card cheats its game on a hit; a per-press card plays one press per hit.")]
         [SerializeField]
-        private CheatShake cheatShake = CheatShake.Default;
+        private Qte qte = Qte.Default;
+
+        [Tooltip("Seconds the roll is shown before the card's move plays.")]
+        [Min(0f)]
+        [SerializeField]
+        private float outcomeRevealSeconds = 1.2f;
 
         public SkillPerformanceTiering SpecialTiering => specialTiering;
 
-        public CheatShake CheatShake => cheatShake;
+        public float OutcomeRevealSeconds => outcomeRevealSeconds;
+
+        public Qte Qte => qte;
 
         private void OnValidate()
         {
-            if (cheatShake.leftToken == cheatShake.rightToken || cheatShake.doneToken == cheatShake.leftToken || cheatShake.doneToken == cheatShake.rightToken)
-            {
-                Debug.LogWarning($"{name}: the cheat shake's left, right and done tokens must all differ.", this);
-            }
-
             foreach (var card in SkillCards)
             {
                 if (card != null && !(card is GamblerSkillCard))

@@ -16,13 +16,17 @@ namespace GARA.Characters
         // (e.g. the finale).
         public readonly int index;
 
-        public SkillStep(AttackAnimationSpec animation, SkillPerformance performance, IReadOnlyList<ISkillEffect> effects, bool isFinale, int index = -1)
+        // The attack plays but lands nothing: no hit feedback, no effects.
+        public readonly bool whiffs;
+
+        public SkillStep(AttackAnimationSpec animation, SkillPerformance performance, IReadOnlyList<ISkillEffect> effects, bool isFinale, int index = -1, bool whiffs = false)
         {
             this.animation = animation;
             this.performance = performance;
             this.effects = effects;
             this.isFinale = isFinale;
             this.index = index;
+            this.whiffs = whiffs;
         }
     }
 }

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f977b6218a9041f385e39d36cf4d04d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a83326225074b42bceb8502c1b4639a, type: 3}
   m_Name: Gambler_CoinThrow
-  m_EditorClassIdentifier: GARA.Characters.Gambler::GARA.Characters.Gambler.CoinThrowSkillCard
+  m_EditorClassIdentifier: GARA.Characters.Gambler::GARA.Characters.Gambler.PerPressGambleSkillCard
   cardId: gambler_coin_throw
   displayName: Coin Throw
   description: 
@@ -39,7 +39,8 @@ MonoBehaviour:
     rid: 609404963404120239
   rollEffects:
   - rid: 609404963404120240
-  secondsBetweenStrikes: 0.6
+  showOutcome: 0
+  qteCount: 4
   references:
     version: 2
     RefIds:

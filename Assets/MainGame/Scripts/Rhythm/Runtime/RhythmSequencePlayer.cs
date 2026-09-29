@@ -6,7 +6,7 @@ using UnityEngine;
 namespace GARA.Rhythm
 {
     /// <summary>MonoBehaviour host that drives a <see cref="RhythmSequenceRunner"/> from Update().</summary>
-    public class RhythmSequencePlayer : MonoBehaviour
+    public class RhythmSequencePlayer : MonoBehaviour, IAutoPlayable
     {
         [SerializeField]
         [Expandable]

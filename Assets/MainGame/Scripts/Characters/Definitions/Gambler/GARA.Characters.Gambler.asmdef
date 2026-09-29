@@ -4,6 +4,7 @@
   "references": [
     "GARA.Characters",
     "GARA.Input",
+    "GARA.InputSets",
     "Unity.TextMeshPro",
     "NaughtyAttributes.Core",
     "UnityEngine.UI"

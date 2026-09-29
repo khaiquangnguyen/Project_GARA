@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d5f546a0a7e4383a744b55b354aee6, type: 3}
+  m_Name: SlotMachinePassive
+  m_EditorClassIdentifier: GARA.Characters.Gambler::GARA.Characters.Gambler.SlotMachinePassive
+  passiveId: slot_machine
+  displayName: Slot Machine
+  description: 'Every card pulls the lever: each of 3 reels pays its symbol''s reward. All 3 on one symbol hits the jackpot instead.'
+  icon: {fileID: 0}
+  reelCount: 3
+  spinOnAbort: 0
+  symbols:
+  - symbolName: Cherry
+    icon: {fileID: 0}
+    weight: 1
+    reward:
+      rid: 609404985650708609
+    jackpotReward:
+      rid: 609404985650708610
+  - symbolName: Bomb
+    icon: {fileID: 0}
+    weight: 1
+    reward:
+      rid: 609404985650708611
+    jackpotReward:
+      rid: 609404985650708612
+  - symbolName: Fist
+    icon: {fileID: 0}
+    weight: 1
+    reward:
+      rid: 609404985650708613
+    jackpotReward:
+      rid: 609404985650708614
+  - symbolName: Shield
+    icon: {fileID: 0}
+    weight: 1
+    reward:
+      rid: 609404985650708615
+    jackpotReward:
+      rid: 609404985650708616
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404985650708609
+      type: {class: SelfHealSlotReward, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        amount: 8
+    - rid: 609404985650708610
+      type: {class: SelfHealSlotReward, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        amount: 40
+    - rid: 609404985650708611
+      type: {class: DamageSlotReward, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        damage: 6
+        targetMode: 1
+        multiTargetCount: 1
+    - rid: 609404985650708612
+      type: {class: DamageSlotReward, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        damage: 30
+        targetMode: 1
+        multiTargetCount: 1
+    - rid: 609404985650708613
+      type: {class: PowerUpSlotReward, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        damageIncrease: 0.2
+        turns: 2
+    - rid: 609404985650708614
+      type: {class: PowerUpSlotReward, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        damageIncrease: 1
+        turns: 3
+    - rid: 609404985650708615
+      type: {class: SelfStatSlotReward, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        stat: 4
+        magnitude: 3
+        turns: 2
+    - rid: 609404985650708616
+      type: {class: SelfStatSlotReward, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        stat: 4
+        magnitude: 12
+        turns: 3

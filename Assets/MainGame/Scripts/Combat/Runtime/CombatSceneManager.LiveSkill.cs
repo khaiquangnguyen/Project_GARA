@@ -28,6 +28,8 @@ namespace GARA.Combat
             ICombatTarget pendingMoveTarget = null;
             AttackAnimationSpec pendingMoveSpec = null;
             var pendingMoveIndex = -1;
+            var sequential = session is ISequentialLiveSkillInputSession;
+            var queuedSteps = new Queue<SkillStep>();
             var spotlight = ShowSpotlight(card, targets);
             var shadowScreen = ShowShadowScreen(card, _performer ?? actor);
 
@@ -84,13 +86,19 @@ namespace GARA.Combat
                     return;
                 }
 
+                if (sequential && (executor.IsBusy || queuedSteps.Count > 0))
+                {
+                    queuedSteps.Enqueue(step);
+                    return;
+                }
+
                 PlayStep(step);
             }
 
             // Lets the last step's swing finish, then holds finaleDelay.
             IEnumerator PlayFinaleAfterDelay(SkillStep step)
             {
-                yield return new WaitUntil(() => !executor.IsBusy);
+                yield return new WaitUntil(() => !executor.IsBusy && queuedSteps.Count == 0);
                 if (card.finaleDelay > 0f)
                 {
                     yield return new WaitForSeconds(card.finaleDelay);
@@ -119,6 +127,11 @@ namespace GARA.Combat
                 var teleport = card.teleportBetweenSteps && !step.isFinale;
                 executor.PlayAction(state, stepTargets, positionMode, spec: step.animation, beforeAttack: BeforeAttack, teleport: teleport, onImpact: () =>
                 {
+                    if (step.whiffs)
+                    {
+                        return;
+                    }
+
                     var move = step.animation != null ? step.animation : card.animationSpec;
                     executor.PlayHitFeedback(move != null ? move.HitFeedback : null);
                     if (step.isFinale && move is FinaleAttackAnimationSpec finale)
@@ -260,6 +273,12 @@ namespace GARA.Combat
             void OnStepFinished()
             {
                 executor.ReturnToIdle();
+                if (queuedSteps.Count > 0)
+                {
+                    PlayStep(queuedSteps.Dequeue());
+                    return;
+                }
+
                 MoveToPendingTarget();
             }
 
@@ -270,6 +289,11 @@ namespace GARA.Combat
                 pendingMoveTarget = null;
                 _activeSession = null;
                 _phaseActionState = PhaseActionState.SkillCardResolving;
+                if (performance.WasAborted)
+                {
+                    queuedSteps.Clear();
+                }
+
                 skillCardInputHost.RaiseInputPhaseEnded(performance);
 
                 var refunded = performance.WasAborted && card.refundOnAbort && stepsLanded == 0;
@@ -283,7 +307,7 @@ namespace GARA.Combat
 
             IEnumerator FinishLiveSkillCard(SkillCardDefinition finishedCard, IReadOnlyList<ICombatTarget> finishedTargets, SkillPerformance performance, bool notify)
             {
-                yield return new WaitUntil(() => !executor.IsBusy && !finalePending);
+                yield return new WaitUntil(() => !executor.IsBusy && !finalePending && queuedSteps.Count == 0);
                 Unsubscribe();
                 if (spotlight != null)
                 {

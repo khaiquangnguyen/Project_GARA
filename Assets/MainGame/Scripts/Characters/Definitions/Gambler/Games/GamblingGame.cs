@@ -2,8 +2,8 @@ using System;
 
 namespace GARA.Characters.Gambler
 {
-    // Rolled when a Gambler card is played; a successful cheat (the shake
-    // balance filled) tips the roll the game's own way.
+    // Rolled when a Gambler card is played; a successful cheat (the QTE
+    // hit) tips the roll the game's own way.
     [Serializable]
     public abstract class GamblingGame
     {

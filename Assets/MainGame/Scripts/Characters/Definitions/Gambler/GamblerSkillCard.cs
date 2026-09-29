@@ -5,12 +5,13 @@ using UnityEngine;
 
 namespace GARA.Characters.Gambler
 {
-    // Landing the cheat shake's exact count cheats the card's game; the roll gates
-    // which effects land on the card's move (animationSpec).
+    // Hitting the QTE cheats the card's game; the roll gates which effects
+    // land on the card's move (animationSpec).
     [CreateAssetMenu(menuName = "GARA/Characters/Gambler/Gamble Card", fileName = "GambleCard")]
     public class GamblerSkillCard : SkillCardDefinition
     {
         private const string GambleGroup = "Gamble";
+        private const string QteGroup = "QTE";
 
         [BoxGroup(GambleGroup)]
         [SerializeReference]
@@ -22,13 +23,24 @@ namespace GARA.Characters.Gambler
         [SubclassPicker]
         public GambleEffect[] rollEffects = Array.Empty<GambleEffect>();
 
+        [Tooltip("Show the roll on GambleOutcomeView and hold the Gambler's reveal pause before striking.")]
+        public bool showOutcome = true;
+
+        [Tooltip("Play this card's own QTE instead of the Gambler's shared one.")]
+        [BoxGroup(QteGroup)]
+        public bool overrideQte;
+
+        [BoxGroup(QteGroup)]
+        [ShowIf(nameof(overrideQte))]
+        public Qte qte = Qte.Default;
+
         protected override bool HasCardEffects => false;
 
         protected override bool HasPerfectEffects => false;
 
         public override ISkillInputSession CreateInputSession(ISkillInputHost host)
         {
-            return new GamblerLiveSkillInputSession(host.GetDriver<CheatShakePlayer>(), CheatShakeOf(host), host.IsPlayerControlled, host.CoroutineRunner, this, TieringOf(host));
+            return new GamblerLiveSkillInputSession(host.GetDriver<QtePlayer>(), QteFor(host), host.IsPlayerControlled, host.CoroutineRunner, this, TieringOf(host), RevealSecondsOf(host));
         }
 
         // How many times the move plays for this roll; 0 = it doesn't.
@@ -39,14 +51,25 @@ namespace GARA.Characters.Gambler
 
         public virtual float SecondsBetweenStrikes => 0f;
 
-        protected static CheatShake CheatShakeOf(ISkillInputHost host)
+        // This card's QTE if it declares one, else the Gambler's.
+        protected Qte QteFor(ISkillInputHost host)
         {
-            return host.Actor is Gambler gambler ? gambler.CheatShake : CheatShake.Default;
+            if (overrideQte)
+            {
+                return qte;
+            }
+
+            return host.Actor is Gambler gambler ? gambler.Qte : Qte.Default;
         }
 
         protected static SkillPerformanceTiering TieringOf(ISkillInputHost host)
         {
             return host.Actor is Gambler gambler ? gambler.SpecialTiering : SkillPerformanceTiering.Default;
+        }
+
+        protected static float RevealSecondsOf(ISkillInputHost host)
+        {
+            return host.Actor is Gambler gambler ? gambler.OutcomeRevealSeconds : 0f;
         }
 
         protected virtual void OnValidate()

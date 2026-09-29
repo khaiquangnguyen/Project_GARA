@@ -1,5 +1,6 @@
 using System;
 using GARA.Characters;
+using GARA.Input;
 using UnityEngine;
 
 namespace GARA.Combat
@@ -33,6 +34,18 @@ namespace GARA.Combat
             }
 
             return null;
+        }
+
+        // Sets every driver that can play itself (Character Test window).
+        public void SetAutoPlay(AutoPlayMode mode)
+        {
+            foreach (var driver in drivers)
+            {
+                if (driver is IAutoPlayable autoPlayable)
+                {
+                    autoPlayable.AutoPlay = mode;
+                }
+            }
         }
 
         public void RaiseInputPhaseStarted(SkillCardDefinition card)

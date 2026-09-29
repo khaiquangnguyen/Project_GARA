@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a83326225074b42bceb8502c1b4639a, type: 3}
+  m_Name: Gambler_RouletteBarrage
+  m_EditorClassIdentifier: GARA.Characters.Gambler::GARA.Characters.Gambler.PerPressGambleSkillCard
+  cardId: gambler_roulette_barrage
+  displayName: Roulette Barrage
+  description: 
+  icon: {fileID: 0}
+  targetMode: 1
+  multiTargetCount: 2
+  stepTargeting: 2
+  finaleTargeting: 0
+  alliesJoinFinale: 0
+  allyDanceDuration: 1
+  teleportBetweenSteps: 0
+  apCost: 0
+  mpCost: 0
+  positionMode: 0
+  effects: []
+  refundOnAbort: 0
+  spotlight: {fileID: 0}
+  shadowScreen: {fileID: 0}
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: 402e8de2e7304f1cb28bf344911be6e0, type: 2}
+  finalePositionMode: 0
+  finaleDelay: 0.5
+  perfectEffects: []
+  game:
+    rid: 609404912810066231
+  rollEffects:
+  - rid: 609404912810066310
+  showOutcome: 0
+  qteCount: 8
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404912810066231
+      type: {class: RouletteBarrageGame, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        shots: 0
+        chambers: 6
+        loaded: 1
+        cheatBullets: 1
+        spinEachPull: 1
+    - rid: 609404912810066310
+      type: {class: GambleStrikeDamage, ns: GARA.Characters.Gambler, asm: GARA.Characters.Gambler}
+      data:
+        damage: 15

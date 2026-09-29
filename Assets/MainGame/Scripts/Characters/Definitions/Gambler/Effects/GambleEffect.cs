@@ -14,6 +14,13 @@ namespace GARA.Characters.Gambler
 
         public abstract void ApplyEffect(in SkillEffectContext context);
 
+        // What this effect applies on strike (0-based); override to vary it
+        // per strike.
+        public virtual ISkillEffect ForStrike(int strike)
+        {
+            return this;
+        }
+
         protected static GambleOutcome OutcomeOf(in SkillEffectContext context)
         {
             return context.Performance.TryGetDetails<GambleReport>(out var report) ? report.Outcome : null;

@@ -9,7 +9,7 @@ namespace GARA.InputSets
     /// MonoBehaviour driver that polls an <see cref="InputTokenMap"/> and feeds presses into
     /// an <see cref="InputSetCollectionRunner"/>.
     /// </summary>
-    public class InputSetCollectionPlayer : MonoBehaviour
+    public class InputSetCollectionPlayer : MonoBehaviour, IAutoPlayable
     {
         [SerializeField]
         [Expandable]

@@ -39,11 +39,11 @@ MonoBehaviour:
     - Assembly-CSharp-firstpass
     - DistantLands.Lumen.Runtime
     - GARA.Characters
+    - GARA.Characters.Bard
     - GARA.Characters.Chef
     - GARA.Characters.Dancer
     - GARA.Characters.Enemy
     - GARA.Characters.Filmmaker
-    - GARA.Characters.FrogBard
     - GARA.Characters.Gambler
     - GARA.Characters.Mermaid
     - GARA.Characters.Mimic
@@ -55,11 +55,9 @@ MonoBehaviour:
     - GARA.InputCombos
     - GARA.InputSets
     - GARA.Rhythm
-    - GARA.Shake
     - GARA.ShakeBalance
     - GARA.SkillCards.InputSets
     - GARA.SkillCards.Rhythm
-    - GARA.SkillCards.Shake
     - GARA.SkillCards.ShakeBalance
     - Kybernetik.Animancer
     - Kybernetik.Animancer.FSM
