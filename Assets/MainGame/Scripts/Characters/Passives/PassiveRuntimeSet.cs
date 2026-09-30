@@ -92,6 +92,70 @@ namespace GARA.Characters
             }
         }
 
+        public void NotifyHealed(ICombatTarget self, ICombatTarget target, int amount)
+        {
+            foreach (var passive in _passives)
+            {
+                var state = _statesByDefinition[passive];
+                try
+                {
+                    passive.OnHealed(self, target, amount, state);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
+            }
+        }
+
+        public void NotifyStatusInflicted(ICombatTarget self, ICombatTarget target, StatusEffectInstance status, bool isNew)
+        {
+            foreach (var passive in _passives)
+            {
+                var state = _statesByDefinition[passive];
+                try
+                {
+                    passive.OnStatusInflicted(self, target, status, isNew, state);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
+            }
+        }
+
+        public void NotifyHitTaken(ICombatTarget self, ICombatTarget attacker, int damage)
+        {
+            foreach (var passive in _passives)
+            {
+                var state = _statesByDefinition[passive];
+                try
+                {
+                    passive.OnHitTaken(self, attacker, damage, state);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
+            }
+        }
+
+        public void NotifyParried(ICombatTarget self, ICombatTarget attacker)
+        {
+            foreach (var passive in _passives)
+            {
+                var state = _statesByDefinition[passive];
+                try
+                {
+                    passive.OnParried(self, attacker, state);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
+            }
+        }
+
         public void NotifySkillPerfectlyParried(ICombatTarget self, ICombatTarget attacker, SkillCardDefinition card)
         {
             foreach (var passive in _passives)
@@ -100,6 +164,22 @@ namespace GARA.Characters
                 try
                 {
                     passive.OnSkillPerfectlyParried(self, attacker, card, state);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
+            }
+        }
+
+        public void NotifyStatusApplied(ICombatTarget self, ICombatTarget target, StatusEffectInstance status)
+        {
+            foreach (var passive in _passives)
+            {
+                var state = _statesByDefinition[passive];
+                try
+                {
+                    passive.OnStatusApplied(self, target, status, state);
                 }
                 catch (Exception ex)
                 {

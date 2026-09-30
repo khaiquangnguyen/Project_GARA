@@ -24,14 +24,16 @@ namespace GARA.Characters
         OneCharacter,
         AllCharacters,
         MultiCharacterWithRepeat,
-        MultiCharacterNoRepeat
+        MultiCharacterNoRepeat,
+        Self
     }
 
     public enum TargetPool
     {
         Enemies,
         Friendlies,
-        Everyone
+        Everyone,
+        Self
     }
 
     public static class SpecialTargetModeExtensions
@@ -50,6 +52,8 @@ namespace GARA.Characters
                 case SpecialTargetMode.MultiCharacterWithRepeat:
                 case SpecialTargetMode.MultiCharacterNoRepeat:
                     return TargetPool.Everyone;
+                case SpecialTargetMode.Self:
+                    return TargetPool.Self;
                 default:
                     return TargetPool.Enemies;
             }
@@ -62,7 +66,8 @@ namespace GARA.Characters
 
         public static bool IsAll(this SpecialTargetMode mode)
         {
-            return mode is SpecialTargetMode.AllEnemy or SpecialTargetMode.AllFriendly or SpecialTargetMode.AllCharacters;
+            // Self is the whole of its one-character pool.
+            return mode is SpecialTargetMode.AllEnemy or SpecialTargetMode.AllFriendly or SpecialTargetMode.AllCharacters or SpecialTargetMode.Self;
         }
 
         public static bool IsMulti(this SpecialTargetMode mode)
@@ -93,8 +98,10 @@ namespace GARA.Characters
         // Resolves targets out of an already-gathered pool of living
         // characters with no player choosing (enemy turns, passives): One
         // picks at random, All takes the whole pool, Multi picks at random
-        // per its repeat rule. Empty when the pool is.
-        public static List<T> PickRandomTargets<T>(this SpecialTargetMode mode, IReadOnlyList<T> pool, int multiTargetCount)
+        // per its repeat rule. Empty when the pool is. fillWithRepeats keeps a
+        // NoRepeat mode's full count on a too-small pool (e.g. narrowed by
+        // taunt): everyone once, then repeats.
+        public static List<T> PickRandomTargets<T>(this SpecialTargetMode mode, IReadOnlyList<T> pool, int multiTargetCount, bool fillWithRepeats = false)
         {
             if (pool.Count == 0)
             {
@@ -106,7 +113,9 @@ namespace GARA.Characters
                 return new List<T>(pool);
             }
 
-            var count = mode.IsSingle() ? 1 : mode.ResolveMultiTargetCount(multiTargetCount, pool.Count);
+            var count = mode.IsSingle() ? 1
+                : fillWithRepeats ? Mathf.Max(1, multiTargetCount)
+                : mode.ResolveMultiTargetCount(multiTargetCount, pool.Count);
             var picks = new List<T>(count);
             if (mode.AllowsRepeatTargets())
             {
@@ -121,6 +130,11 @@ namespace GARA.Characters
             var remaining = new List<T>(pool);
             for (var i = 0; i < count; i++)
             {
+                if (remaining.Count == 0)
+                {
+                    remaining.AddRange(pool);
+                }
+
                 var index = Random.Range(0, remaining.Count);
                 picks.Add(remaining[index]);
                 remaining.RemoveAt(index);

@@ -70,10 +70,10 @@ namespace GARA.Combat
                 return false;
             }
 
-            var pool = LivingPoolOf(performer, card.targetMode.GetPool());
+            var pool = LivingPoolFor(performer, card, out var allowRepeats);
             var targets = card.targetMode.IsSingle()
                 ? pool.OrderBy(_ => Random.value).Take(1).ToList()
-                : card.targetMode.PickRandomTargets(pool, card.multiTargetCount);
+                : card.targetMode.PickRandomTargets(pool, card.multiTargetCount, allowRepeats);
             if (targets.Count == 0)
             {
                 error = $"No living targets for {card.displayName} ({card.targetMode}).";

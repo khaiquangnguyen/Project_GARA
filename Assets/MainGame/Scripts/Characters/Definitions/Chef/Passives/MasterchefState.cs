@@ -1,25 +1,33 @@
-using System.Collections.Generic;
+using System;
 
 namespace GARA.Characters.Chef
 {
-    // Mastery stacks per flavor, earned by filling up enemies.
+    // The Chef's satiety bar and the Masterchef stacks it has earned.
     public sealed class MasterchefState : PassiveRuntimeState
     {
-        private readonly Dictionary<FlavorTag, int> _masteryByFlavor = new Dictionary<FlavorTag, int>();
+        public int Satiety { get; private set; }
 
-        public int MasteryOf(FlavorTag flavor)
-        {
-            return _masteryByFlavor.TryGetValue(flavor, out var stacks) ? stacks : 0;
-        }
+        public int Stacks { get; private set; }
 
-        public void AddMastery(FlavorTag flavor)
+        // True when this fills the bar; the overflow carries over, short of
+        // a second fill.
+        public bool AddSatiety(int amount, int capacity)
         {
-            _masteryByFlavor[flavor] = MasteryOf(flavor) + 1;
+            Satiety += amount;
+            if (Satiety < capacity)
+            {
+                return false;
+            }
+
+            Satiety = Math.Min(Satiety - capacity, capacity - 1);
+            Stacks++;
+            return true;
         }
 
         public override void Reset()
         {
-            _masteryByFlavor.Clear();
+            Satiety = 0;
+            Stacks = 0;
         }
     }
 }

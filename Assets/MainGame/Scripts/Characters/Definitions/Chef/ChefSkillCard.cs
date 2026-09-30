@@ -14,29 +14,7 @@ namespace GARA.Characters.Chef
         [SerializeField]
         private int keyStepIndex = -1;
 
-        [SerializeField]
-        private FlavorTag flavors;
-
-        [Tooltip("Fullness this dish fills before any flavor-pair bonus (see MasterchefPassive).")]
-        [Min(0)]
-        [SerializeField]
-        private int baseFullness = 30;
-
-        [Tooltip("Set on a variation to point at the dish it re-seasons. UI groups variations under their base card; mechanically ignored.")]
-        [SerializeField]
-        private ChefSkillCard variationOf;
-
         public int KeyStepIndex => keyStepIndex;
-
-        public FlavorTag Flavors => flavors;
-
-        public int BaseFullness => baseFullness;
-
-        public ChefSkillCard VariationOf => variationOf;
-
-        public bool IsVariation => variationOf != null;
-
-        public ChefSkillCard RootCard => variationOf != null ? variationOf : this;
 
         protected override SkillPerformanceTiering TieringFor(CharacterDefinition actor)
         {
@@ -65,11 +43,6 @@ namespace GARA.Characters.Chef
             base.OnValidate();
 
             keyStepIndex = Mathf.Clamp(keyStepIndex, -1, Steps.Count - 1);
-
-            if (variationOf != null && variationOf.flavors == flavors)
-            {
-                Debug.LogWarning($"{name}: variationOf is set to {variationOf.name}, but both share the same flavors ({flavors}) — this isn't actually a re-seasoning.", this);
-            }
         }
     }
 }

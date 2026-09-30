@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace GARA.Characters
@@ -28,18 +29,18 @@ namespace GARA.Characters
         // GARA.Combat.
         PassiveRuntimeSet Passives { get; }
 
-        // Cooking (Chef): whether/how this target can be fed, and its
-        // current fullness. Implementation lives on CombatParticipant
-        // (GARA.Combat) — declared here so the Chef's Masterchef passive
-        // can feed a target without depending on GARA.Combat.
-        PalateProfile Palate { get; }
-        int Fullness { get; }
-        FeedResult Feed(int amount);
-
         // Generic status application (e.g. food coma) — see
         // StatusEffectInstance. Implementation lives on CombatParticipant.
         void ApplyStatus(StatusEffectInstance status);
         bool HasStatus(StatusEffectKind kind);
+
+        // Opponents' target-picking cards skip it / must pick it.
+        bool IsUntargetable { get; }
+        bool IsTaunting { get; }
+
+        // Removes every active status (or those match picks) and returns
+        // them, e.g. to move them onto another character.
+        List<StatusEffectInstance> TakeStatuses(Predicate<StatusEffectInstance> match = null);
 
         // What this character is and can play — lets a passive copy its
         // skills (see FormReplaySkillCard). Implementation lives on

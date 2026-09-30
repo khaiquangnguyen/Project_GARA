@@ -34,8 +34,34 @@ namespace GARA.Characters
         {
         }
 
+        // The owner's skill just restored HP to target (the owner included).
+        public virtual void OnHealed(ICombatTarget self, ICombatTarget target, int amount, PassiveRuntimeState state)
+        {
+        }
+
+        // The owner's skill just gave target a status; isNew = it had none
+        // of that kind yet.
+        public virtual void OnStatusInflicted(ICombatTarget self, ICombatTarget target, StatusEffectInstance status, bool isNew, PassiveRuntimeState state)
+        {
+        }
+
+        // The owner was hit by attacker's skill (the hit landed).
+        public virtual void OnHitTaken(ICombatTarget self, ICombatTarget attacker, int damage, PassiveRuntimeState state)
+        {
+        }
+
+        // The owner parried one hit of attacker's skill.
+        public virtual void OnParried(ICombatTarget self, ICombatTarget attacker, PassiveRuntimeState state)
+        {
+        }
+
         // The owner parried every hit attacker's card aimed at them.
         public virtual void OnSkillPerfectlyParried(ICombatTarget self, ICombatTarget attacker, SkillCardDefinition card, PassiveRuntimeState state)
+        {
+        }
+
+        // Any participant (the owner included) just gained or extended a status.
+        public virtual void OnStatusApplied(ICombatTarget self, ICombatTarget target, StatusEffectInstance status, PassiveRuntimeState state)
         {
         }
 

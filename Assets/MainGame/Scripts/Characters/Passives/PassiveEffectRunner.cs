@@ -47,7 +47,8 @@ namespace GARA.Characters
             {
                 case SpecialTargetMode.OneEnemy:
                 {
-                    var enemy = battle.Enemies.FirstOrDefault(candidate => !candidate.IsDefeated);
+                    var living = battle.Enemies.Where(candidate => !candidate.IsDefeated);
+                    var enemy = TargetRestrictions.Pickable(self, living, true, out _).FirstOrDefault();
                     return enemy != null ? new[] { enemy } : Array.Empty<ICombatTarget>();
                 }
                 case SpecialTargetMode.AllEnemy:
@@ -73,13 +74,26 @@ namespace GARA.Characters
                     return living;
                 }
                 default:
-                    return mode.PickRandomTargets(LivingPool(battle, self, mode.GetPool()), multiTargetCount);
+                {
+                    var pool = TargetRestrictions.Pickable(self, LivingPool(battle, self, mode.GetPool()), mode.GetPool() == TargetPool.Enemies, out var narrowedByTaunt);
+                    return mode.PickRandomTargets(pool, multiTargetCount, narrowedByTaunt);
+                }
             }
         }
 
         private static List<ICombatTarget> LivingPool(IBattleQuery battle, ICombatTarget self, TargetPool pool)
         {
             var living = new List<ICombatTarget>();
+            if (pool == TargetPool.Self)
+            {
+                if (self != null && !self.IsDefeated)
+                {
+                    living.Add(self);
+                }
+
+                return living;
+            }
+
             if (pool != TargetPool.Friendlies)
             {
                 living.AddRange(battle.Enemies.Where(candidate => !candidate.IsDefeated));

@@ -86,7 +86,7 @@ namespace GARA.Characters.Chef
                 }
             }
 
-            return new DishReport(GradeOf(tier), steps, keyStep, hasKeyStep, exquisiteSteps, ruinedSteps, anyBurnt, report, card.Flavors);
+            return new DishReport(GradeOf(tier), steps, keyStep, hasKeyStep, exquisiteSteps, ruinedSteps, anyBurnt, report);
         }
     }
 }

@@ -73,6 +73,7 @@ namespace GARA.Combat
         private SkillCardDefinition _targetingCard;
         private readonly List<ICombatTarget> _pickedTargets = new();
         private int _requiredTargetCount;
+        private bool _allowRepeatTargets;
 
         private void AwakePhase()
         {
@@ -192,10 +193,18 @@ namespace GARA.Combat
         // itself shifts left as each turn is consumed, rather than a fixed
         // per-round slot being highlighted in place.
         // A status (e.g. food coma) may have changed Speed.
-        private void OnParticipantStatusApplied(CombatParticipant participant)
+        private void OnParticipantStatusApplied(CombatParticipant target, StatusEffectInstance status)
         {
             _battle.RecalculateTurnOrder();
             RaiseTurnOrderChanged();
+
+            foreach (var participant in _battle.AllParticipants)
+            {
+                if (!participant.IsDefeated)
+                {
+                    participant.Passives.NotifyStatusApplied(participant, target, status);
+                }
+            }
         }
 
         private void RaiseTurnOrderChanged()
@@ -292,7 +301,7 @@ namespace GARA.Combat
             else
             {
                 var target = targetSelector.CurrentTarget;
-                if (!_targetingCard.targetMode.AllowsRepeatTargets() && _pickedTargets.Contains(target))
+                if (!_allowRepeatTargets && _pickedTargets.Contains(target))
                 {
                     return false;
                 }
@@ -338,10 +347,11 @@ namespace GARA.Combat
             return true;
         }
 
-        private void BeginTargetPicking(SkillCardDefinition card, List<CombatParticipant> pool, int requiredTargetCount)
+        private void BeginTargetPicking(SkillCardDefinition card, List<CombatParticipant> pool, int requiredTargetCount, bool allowRepeats)
         {
             _targetingCard = card;
             _requiredTargetCount = requiredTargetCount;
+            _allowRepeatTargets = allowRepeats;
             _pickedTargets.Clear();
             _phaseActionState = PhaseActionState.SkillCardTargeting;
             targetSelector.BeginSelection(pool, card.targetMode.IsAll());
@@ -375,6 +385,7 @@ namespace GARA.Combat
             HideTargetDisplays();
             _targetingCard = null;
             _requiredTargetCount = 0;
+            _allowRepeatTargets = false;
             _pickedTargets.Clear();
             SkillCardTargetsChanged?.Invoke(_pickedTargets, 0);
         }
@@ -517,16 +528,18 @@ namespace GARA.Combat
                 return false;
             }
 
-            var pool = LivingPoolOf(_actor, card.targetMode.GetPool());
-            var requiredTargetCount = card.targetMode.IsAll() ? pool.Count
-                : card.targetMode.IsMulti() ? card.targetMode.ResolveMultiTargetCount(card.multiTargetCount, pool.Count)
-                : Mathf.Min(1, pool.Count);
+            var pool = LivingPoolFor(_actor, card, out var allowRepeats);
+            var requiredTargetCount = pool.Count == 0 ? 0
+                : card.targetMode.IsAll() ? pool.Count
+                : !card.targetMode.IsMulti() ? 1
+                : allowRepeats ? Mathf.Max(1, card.multiTargetCount)
+                : card.targetMode.ResolveMultiTargetCount(card.multiTargetCount, pool.Count);
             if (requiredTargetCount == 0)
             {
                 return false;
             }
 
-            BeginTargetPicking(card, pool, requiredTargetCount);
+            BeginTargetPicking(card, pool, requiredTargetCount, allowRepeats);
             return true;
         }
 
@@ -554,6 +567,7 @@ namespace GARA.Combat
         // once _phaseActionState is back to Regular.
         private void StartSkillCard(SkillCardDefinition card, IReadOnlyList<ICombatTarget> targets)
         {
+            _actor.EndInteractionBoundStatuses();
             AnnounceActiveActor(_actor, false);
             AnnounceTargetingForSkillCard(_actor, targets);
             RetreatUninvolved(_actor, targets);
@@ -697,11 +711,8 @@ namespace GARA.Combat
                 _battle.RecalculateTurnOrder();
             }
 
-            // Cooking (Chef): a food-coma'd actor's statuses tick here, at
-            // the start of their own phase, same as timed modifiers above.
-            // If they're still stunned they never read input or take an
-            // enemy turn — their whole phase is just the coma's own damage
-            // tick and a brief display beat.
+            // Statuses tick at the start of the actor's own phase. A still
+            // stunned actor skips it, taking only the stun's tick damage.
             _actor.TickStatuses();
 
             if (_actor.IsStunned)
@@ -867,6 +878,23 @@ namespace GARA.Combat
             return _battle.playerParty.LivingMembers().Concat(_battle.enemyParty.LivingMembers()).Where(predicate).ToList();
         }
 
+        // What card can pick from (see TargetRestrictions); allowRepeats when
+        // its mode does or taunt narrowed the pool.
+        private List<CombatParticipant> LivingPoolFor(CombatParticipant actor, SkillCardDefinition card, out bool allowRepeats)
+        {
+            var mode = card.targetMode;
+            var pool = LivingPoolOf(actor, mode.GetPool());
+            allowRepeats = mode.AllowsRepeatTargets();
+            if (mode.IsAll())
+            {
+                return pool;
+            }
+
+            pool = TargetRestrictions.Pickable(actor, pool, mode.GetPool() == TargetPool.Enemies, out var narrowedByTaunt);
+            allowRepeats |= narrowedByTaunt;
+            return pool;
+        }
+
         private List<CombatParticipant> LivingPoolOf(CombatParticipant actor, TargetPool pool)
         {
             switch (pool)
@@ -875,6 +903,8 @@ namespace GARA.Combat
                     return LivingAlliesOf(actor);
                 case TargetPool.Everyone:
                     return LivingEnemiesOf(actor).Concat(LivingAlliesOf(actor)).ToList();
+                case TargetPool.Self:
+                    return actor.IsDefeated ? new List<CombatParticipant>() : new List<CombatParticipant> { actor };
                 default:
                     return LivingEnemiesOf(actor);
             }

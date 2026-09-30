@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Characters.Mermaid::GARA.Characters.Mermaid.SuperstarSingerPassive
   passiveId: superstar_singer
   displayName: Superstar Singer
-  description: Songs that hit every note charm their targets. A fully charmed enemy fights for the Mermaid's side, under your control, for 2 of its turns.
+  description: Every contact with a foe charms it - her hits (+10), its hits on her (+10) and her parries (+20). A fully charmed foe (100) fights for the Mermaid's side, under your control, for 2 of its turns.
   icon: {fileID: 0}
   charmCapacity: 100
   charmedTurns: 2
+  charmPerHitDealt: 10
+  charmPerHitTaken: 10
+  charmPerParry: 20

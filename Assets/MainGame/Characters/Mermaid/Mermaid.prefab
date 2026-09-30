@@ -16,7 +16,10 @@ GameObject:
   - component: {fileID: 701774666510319452}
   - component: {fileID: 8731726656337540430}
   - component: {fileID: 7807210703641071522}
-  - component: {fileID: 6197138338790069111}
+  - component: {fileID: 4311595928431763988}
+  - component: {fileID: 4909674306760253772}
+  - component: {fileID: 1820972576936807882}
+  - component: {fileID: 3561625237234594379}
   m_Layer: 0
   m_Name: States
   m_TagString: Untagged
@@ -53,6 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.IdleState
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: idle
+  alternateClips: []
   loop: 1
 --- !u!114 &4343542595800764247
 MonoBehaviour:
@@ -68,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.HitState
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: hit
+  alternateClips: []
   loop: 0
 --- !u!114 &8135769160124919445
 MonoBehaviour:
@@ -83,6 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.DeathState
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: death
+  alternateClips: []
   loop: 0
 --- !u!114 &8115682968760053704
 MonoBehaviour:
@@ -98,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.ParryState
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: parry-1
+  alternateClips: []
   loop: 0
 --- !u!114 &701774666510319452
 MonoBehaviour:
@@ -113,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Combat::GARA.Combat.JumpState
   skeletonRendererRef: {fileID: 2092571582275687145}
   animationName: idle
+  alternateClips: []
   loop: 1
 --- !u!114 &8731726656337540430
 MonoBehaviour:
@@ -125,7 +133,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 280b2e757ee8740059279826c962efe4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MermaidSirenSongState
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MermaidCharmVoiceState
   skillCard: {fileID: 11400000, guid: 7cebcc70973ea4f5c98f1a7f7631d08d, type: 2}
 --- !u!114 &7807210703641071522
 MonoBehaviour:
@@ -138,9 +146,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83e47f932b19445199ee432e1dc1092b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MermaidTidalAriaState
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MermaidVibratoState
   skillCard: {fileID: 11400000, guid: 5dfde253a84e54747a9b3a5486bbacf0, type: 2}
---- !u!114 &6197138338790069111
+--- !u!114 &4311595928431763988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,10 +157,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 525333047013397211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a2765386f1374b6181c3483ee408849, type: 3}
+  m_Script: {fileID: 11500000, guid: fdafd2c822bdd4b0b94e953c43b2e176, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MermaidPearlBalladState
-  skillCard: {fileID: 11400000, guid: c31ba4395c82d4dda9a7b2fd7691d19b, type: 2}
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MermaidGoldenScaleState
+  skillCard: {fileID: 11400000, guid: 24c9298dfb7840049809a7f5e2228b3c, type: 2}
+--- !u!114 &4909674306760253772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525333047013397211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff9cd1eab2b246a8b5114b5f519209a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MermaidStarSingerState
+  skillCard: {fileID: 11400000, guid: 3b181d123c3345be8d07769b603c812f, type: 2}
+--- !u!114 &1820972576936807882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525333047013397211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87487c8ec7e74c928068c220dc74718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MermaidHighNotesState
+  skillCard: {fileID: 11400000, guid: f67bfe1601564db39de0095aa81e72c7, type: 2}
+--- !u!114 &3561625237234594379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525333047013397211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d83e748f302646bf915126e9d9f5459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: GARA.Combat::GARA.Combat.MermaidProtectedByFansState
+  skillCard: {fileID: 11400000, guid: 8e8b4b53e19d4af18ffc6b84b54c9dcc, type: 2}
 --- !u!1 &7753796104726555178
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,10 +593,8 @@ MonoBehaviour:
   maxCombatSkillCards: 6
   passives:
   - {fileID: 11400000, guid: a9ec2d9736635402998fd673469bc1db, type: 2}
-  palate:
-    canBeFed: 0
-    favoriteFlavors: 0
   hpHeartAnchor: {fileID: 0}
+  statusBarAnchor: {fileID: 0}
   specialTiering:
     okThreshold: 0.35
     goodThreshold: 0.65

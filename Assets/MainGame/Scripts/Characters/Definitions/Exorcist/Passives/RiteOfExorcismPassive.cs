@@ -2,15 +2,15 @@ using UnityEngine;
 
 namespace GARA.Characters.Exorcist
 {
-    // Exorcist passive: every hit on an opponent brands it with Seals. At max
-    // Seals it's exorcised — its demon soul torn out — stunned, and takes
-    // extra damage until it's back on its feet.
+    // Exorcist passive: every negative status an opponent gains (from anyone)
+    // brands it with Seals, as do cards that seal directly (AddSealsEffect). At max Seals it's exorcised — its demon soul torn
+    // out — stunned, and takes extra damage until it's back on its feet.
     [CreateAssetMenu(menuName = "GARA/Characters/Passives/Rite of Exorcism", fileName = "RiteOfExorcismPassive")]
     public class RiteOfExorcismPassive : PassiveDefinition<RiteOfExorcismState>
     {
-        [Tooltip("Seals added per hit landed.")]
+        [Tooltip("Seals added per negative status an opponent gains (or has extended).")]
         [Min(1)]
-        [SerializeField] private int sealsPerHit = 1;
+        [SerializeField] private int sealsPerNegativeStatus = 1;
 
         [Tooltip("Seals that exorcise an opponent.")]
         [Min(1)]
@@ -26,14 +26,31 @@ namespace GARA.Characters.Exorcist
 
         public int MaxSeals => maxSeals;
 
-        protected override void OnHitLanded(ICombatTarget self, ICombatTarget target, int damage, RiteOfExorcismState state)
+        // No-op when self has no Rite of Exorcism passive.
+        public static void AddSeals(ICombatTarget self, ICombatTarget target, int amount)
         {
-            if (target.IsDefeated || target.Faction == self.Faction || target.HasStatus(StatusEffectKind.Exorcised))
+            if (TryFind(self, out var rite, out var state))
+            {
+                rite.Seal(self, target, amount, state);
+            }
+        }
+
+        protected override void OnStatusApplied(ICombatTarget self, ICombatTarget target, StatusEffectInstance status, RiteOfExorcismState state)
+        {
+            if (status.kind.IsNegative())
+            {
+                Seal(self, target, sealsPerNegativeStatus, state);
+            }
+        }
+
+        private void Seal(ICombatTarget self, ICombatTarget target, int amount, RiteOfExorcismState state)
+        {
+            if (target == null || target.IsDefeated || target.Faction == self.Faction || target.HasStatus(StatusEffectKind.Exorcised))
             {
                 return;
             }
 
-            var seals = state.AddSeals(target, sealsPerHit);
+            var seals = state.AddSeals(target, amount);
             Debug.Log($"[{nameof(RiteOfExorcismPassive)}] seals {Mathf.Min(seals, maxSeals)}/{maxSeals}.");
             if (seals < maxSeals)
             {
@@ -54,6 +71,27 @@ namespace GARA.Characters.Exorcist
 
         protected override void OnSkillCardResolved(in PassiveContext context, RiteOfExorcismState state)
         {
+        }
+
+        private static bool TryFind(ICombatTarget character, out RiteOfExorcismPassive rite, out RiteOfExorcismState state)
+        {
+            var passives = character?.Passives;
+            if (passives != null)
+            {
+                foreach (var passive in passives.Passives)
+                {
+                    if (passive is RiteOfExorcismPassive found && passives.GetState(passive) is RiteOfExorcismState foundState)
+                    {
+                        rite = found;
+                        state = foundState;
+                        return true;
+                    }
+                }
+            }
+
+            rite = null;
+            state = null;
+            return false;
         }
     }
 }

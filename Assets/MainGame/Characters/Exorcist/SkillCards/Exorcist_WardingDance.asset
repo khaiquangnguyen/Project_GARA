@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd61bc1280192486eaec5d7e7262ce53, type: 3}
+  m_Name: Exorcist_WardingDance
+  m_EditorClassIdentifier: GARA.Characters.Dancer::GARA.Characters.Dancer.DancerSkillCard
+  cardId: exorcist_warding_dance
+  displayName: Warding Dance
+  description: 'A warding dance: every ally gains 1 Harden (less damage taken) and every enemy gains 1 Vulnerable (more damage taken).'
+  icon: {fileID: 21300000, guid: 343de0ba1e287411a962f5f2f75f41cc, type: 3}
+  targetMode: 9
+  multiTargetCount: 2
+  stepTargeting: 0
+  finaleTargeting: 0
+  alliesJoinFinale: 0
+  allyDanceDuration: 1
+  teleportBetweenSteps: 0
+  apCost: 0
+  mpCost: 0
+  parriesToRecord: 1
+  positionMode: 1
+  effects: []
+  refundOnAbort: 0
+  spotlight: {fileID: 0}
+  shadowScreen: {fileID: 0}
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: 2a08d7f9ad6e4959a8c981158bb39ee9, type: 2}
+  finalePositionMode: 0
+  finaleDelay: 0.5
+  perfectEffects: []
+  bars:
+  - notes:
+    - input:
+        id: 1
+      kind: 0
+      time: 0
+      holdDuration: 0
+    move: {fileID: 11400000, guid: b0a9c0ba48944adfb8c33c717583b063, type: 2}
+    effects:
+    - rid: 609404985650709093
+    - rid: 609404985650709094
+  finaleEffects: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404985650709093
+      type: {class: ApplyHarden, ns: GARA.Characters.Exorcist, asm: GARA.Characters.Exorcist}
+      data:
+        gate: 0
+        damageTakenMultiplier: 0.75
+        stacks: 1
+    - rid: 609404985650709094
+      type: {class: ApplyVulnerable, ns: GARA.Characters.Exorcist, asm: GARA.Characters.Exorcist}
+      data:
+        gate: 0
+        damageTakenMultiplier: 1.25
+        stacks: 1

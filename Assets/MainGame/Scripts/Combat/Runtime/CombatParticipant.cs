@@ -137,11 +137,6 @@ namespace GARA.Combat
         // and may also feed StatBlock (see GetCurrentStats).
         private readonly List<StatusEffectInstance> _statuses = new();
 
-        // Cooking (Chef) fullness meter — see Feed. Never negative; wraps
-        // back down (with overflow carried) once it crosses
-        // PalateProfile.MaxFullness, rather than resetting to 0.
-        private int _fullness;
-
         public bool IsDefeated => currentHp <= 0;
 
         // Raised the instant a participant's HP crosses into defeated —
@@ -250,6 +245,11 @@ namespace GARA.Combat
         {
             for (var i = _timedModifiers.Count - 1; i >= 0; i--)
             {
+                if (_timedModifiers[i].permanent)
+                {
+                    continue;
+                }
+
                 _timedModifiers[i].remainingTurns--;
                 if (_timedModifiers[i].remainingTurns <= 0)
                 {
@@ -293,10 +293,16 @@ namespace GARA.Combat
                 return;
             }
 
+            var source = DamageSource;
             if (IsParrying)
             {
                 MMEventManager.TriggerEvent(new ParrySuccessStateEvent(SceneRoot));
                 ParrySucceeded?.Invoke(this);
+                if (source != null && source != this)
+                {
+                    Passives.NotifyParried(this, source);
+                }
+
                 return;
             }
 
@@ -329,10 +335,27 @@ namespace GARA.Combat
             var dealt = ModifyIncomingDamage(amount);
             ApplyDamageCore(dealt);
 
-            var source = DamageSource;
             if (source != null && source != this && dealt > 0)
             {
                 source.Passives.NotifyHitLanded(source, this, dealt);
+                Passives.NotifyHitTaken(this, source, dealt);
+            }
+        }
+
+        public bool IsUntargetable => _statuses.Exists(status => status.untargetable && !status.IsExpired);
+
+        public bool IsTaunting => _statuses.Exists(status => status.taunts && !status.IsExpired);
+
+        // Drops every status that ends once this character acts, is hurt or
+        // gains another status (e.g. invisible).
+        public void EndInteractionBoundStatuses()
+        {
+            for (var i = _statuses.Count - 1; i >= 0; i--)
+            {
+                if (_statuses[i].endsOnInteraction)
+                {
+                    RemoveStatusAt(i);
+                }
             }
         }
 
@@ -399,8 +422,15 @@ namespace GARA.Combat
                 return;
             }
 
+            var restored = healed - currentHp;
             currentHp = healed;
             HpChanged?.Invoke(this);
+
+            var source = DamageSource;
+            if (source != null)
+            {
+                source.Passives.NotifyHealed(source, this, restored);
+            }
         }
 
         private void ApplyDamageCore(int amount)
@@ -408,6 +438,11 @@ namespace GARA.Combat
             if (IsDefeated)
             {
                 return;
+            }
+
+            if (amount > 0)
+            {
+                EndInteractionBoundStatuses();
             }
 
             currentHp = Mathf.Max(0, currentHp - amount);
@@ -425,10 +460,6 @@ namespace GARA.Combat
                 executor?.PlayHitReaction();
             }
         }
-
-        public PalateProfile Palate => definition != null ? definition.palate : PalateProfile.None;
-
-        public int Fullness => _fullness;
 
         public bool IsStunned
         {
@@ -463,55 +494,58 @@ namespace GARA.Combat
             }
         }
 
-        public static event Action<CombatParticipant> FullnessChanged;
-        public static event Action<CombatParticipant> BecameFull;
-
-        // Raised after a status is added; may have changed Speed.
-        public static event Action<CombatParticipant> StatusApplied;
-
-        // Cooking (Chef): feeds this participant, returning how much
-        // fullness was gained and whether it filled up. A no-op
-        // (NotFeedable) for anything that can't be fed, is already
-        // defeated, or a non-positive amount.
-        public FeedResult Feed(int amount)
-        {
-            if (!Palate.CanBeFed || IsDefeated || amount <= 0)
-            {
-                return FeedResult.NotFeedable;
-            }
-
-            _fullness += amount;
-            const int capacity = PalateProfile.MaxFullness;
-            var becameFull = _fullness >= capacity;
-            var overflow = becameFull ? _fullness - capacity : 0;
-            if (becameFull)
-            {
-                // Carry the remainder rather than zeroing out, clamped so one
-                // huge feeding can never chain a second coma trigger on the
-                // same feed.
-                _fullness = Mathf.Clamp(overflow, 0, capacity - 1);
-            }
-
-            var result = new FeedResult(amount, _fullness, capacity, becameFull, overflow);
-            FullnessChanged?.Invoke(this);
-            if (becameFull)
-            {
-                BecameFull?.Invoke(this);
-            }
-
-            return result;
-        }
+        // Raised after a status is added (or extended); may have changed Speed.
+        public static event Action<CombatParticipant, StatusEffectInstance> StatusApplied;
 
         public void ApplyStatus(StatusEffectInstance status)
         {
-            _statuses.Add(status);
-            StatusApplied?.Invoke(this);
+            if (!status.endsOnInteraction)
+            {
+                EndInteractionBoundStatuses();
+            }
+
+            var isNew = !HasStatus(status.kind);
+
+            // Stacks as duration: each stack is a turn, one lost per turn.
+            var existing = status.kind.ExtendsOnReapply()
+                ? _statuses.Find(active => active.kind == status.kind && !active.IsExpired && !active.permanent)
+                : null;
+            if (existing != null)
+            {
+                existing.remainingTurns += status.remainingTurns;
+            }
+            else
+            {
+                _statuses.Add(status);
+            }
+
+            StatusApplied?.Invoke(this, status);
             MMEventManager.TriggerEvent(new StatusAppliedStateEvent(SceneRoot, status.kind));
+
+            var source = DamageSource;
+            if (source != null)
+            {
+                source.Passives.NotifyStatusInflicted(source, this, status, isNew);
+            }
         }
 
         public bool HasStatus(StatusEffectKind kind)
         {
             return _statuses.Exists(status => status.kind == kind && !status.IsExpired);
+        }
+
+        public List<StatusEffectInstance> TakeStatuses(Predicate<StatusEffectInstance> match = null)
+        {
+            var taken = _statuses.FindAll(status => !status.IsExpired && (match == null || match(status)));
+            for (var i = _statuses.Count - 1; i >= 0; i--)
+            {
+                if (match == null || match(_statuses[i]))
+                {
+                    RemoveStatusAt(i);
+                }
+            }
+
+            return taken;
         }
 
         // Raises StatusEndedStateEvent once the last status of its kind goes.
@@ -535,7 +569,7 @@ namespace GARA.Combat
         {
             for (var i = _statuses.Count - 1; i >= 0; i--)
             {
-                if (_statuses[i].skipsTurn || _statuses[i].charmedTo.HasValue)
+                if (_statuses[i].skipsTurn || _statuses[i].CountsDownAtTurnEnd)
                 {
                     continue;
                 }
@@ -554,7 +588,7 @@ namespace GARA.Combat
         {
             for (var i = _statuses.Count - 1; i >= 0; i--)
             {
-                if (!_statuses[i].charmedTo.HasValue)
+                if (!_statuses[i].CountsDownAtTurnEnd)
                 {
                     continue;
                 }
@@ -712,11 +746,10 @@ namespace GARA.Combat
         void ICombatTarget.ApplyDamage(int amount) => ApplyDamage(amount);
         void ICombatTarget.Heal(int amount) => Heal(amount);
         PassiveRuntimeSet ICombatTarget.Passives => Passives;
-        PalateProfile ICombatTarget.Palate => Palate;
-        int ICombatTarget.Fullness => Fullness;
-        FeedResult ICombatTarget.Feed(int amount) => Feed(amount);
         void ICombatTarget.ApplyStatus(StatusEffectInstance status) => ApplyStatus(status);
         bool ICombatTarget.HasStatus(StatusEffectKind kind) => HasStatus(kind);
+        bool ICombatTarget.IsUntargetable => IsUntargetable;
+        bool ICombatTarget.IsTaunting => IsTaunting;
         CharacterDefinition ICombatTarget.Definition => definition;
         IReadOnlyList<SkillCardDefinition> ICombatTarget.SkillCards => SkillCards;
         SkillCardDefinition ICombatTarget.LastUsedSkillCard => LastUsedSkillCard;

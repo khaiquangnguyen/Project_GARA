@@ -18,12 +18,20 @@ namespace GARA.Characters
         public int remainingTurns;
         public string sourceId;
 
+        // Lasts until the battle ends; never ticks down.
+        public bool permanent;
+
         public TimedStatModifier(StatKind stat, float magnitude, int remainingTurns, string sourceId)
         {
             this.stat = stat;
             this.magnitude = magnitude;
             this.remainingTurns = remainingTurns;
             this.sourceId = sourceId;
+        }
+
+        public static TimedStatModifier Permanent(StatKind stat, float magnitude, string sourceId)
+        {
+            return new TimedStatModifier(stat, magnitude, 0, sourceId) { permanent = true };
         }
 
         public IEnumerable<StatModifier> GetModifiers()

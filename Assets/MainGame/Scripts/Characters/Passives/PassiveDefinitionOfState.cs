@@ -50,6 +50,54 @@ namespace GARA.Characters
         {
         }
 
+        public sealed override void OnHealed(ICombatTarget self, ICombatTarget target, int amount, PassiveRuntimeState state)
+        {
+            if (state is TState typed)
+            {
+                OnHealed(self, target, amount, typed);
+            }
+        }
+
+        protected virtual void OnHealed(ICombatTarget self, ICombatTarget target, int amount, TState state)
+        {
+        }
+
+        public sealed override void OnStatusInflicted(ICombatTarget self, ICombatTarget target, StatusEffectInstance status, bool isNew, PassiveRuntimeState state)
+        {
+            if (state is TState typed)
+            {
+                OnStatusInflicted(self, target, status, isNew, typed);
+            }
+        }
+
+        protected virtual void OnStatusInflicted(ICombatTarget self, ICombatTarget target, StatusEffectInstance status, bool isNew, TState state)
+        {
+        }
+
+        public sealed override void OnHitTaken(ICombatTarget self, ICombatTarget attacker, int damage, PassiveRuntimeState state)
+        {
+            if (state is TState typed)
+            {
+                OnHitTaken(self, attacker, damage, typed);
+            }
+        }
+
+        protected virtual void OnHitTaken(ICombatTarget self, ICombatTarget attacker, int damage, TState state)
+        {
+        }
+
+        public sealed override void OnParried(ICombatTarget self, ICombatTarget attacker, PassiveRuntimeState state)
+        {
+            if (state is TState typed)
+            {
+                OnParried(self, attacker, typed);
+            }
+        }
+
+        protected virtual void OnParried(ICombatTarget self, ICombatTarget attacker, TState state)
+        {
+        }
+
         public sealed override void OnSkillPerfectlyParried(ICombatTarget self, ICombatTarget attacker, SkillCardDefinition card, PassiveRuntimeState state)
         {
             if (state is TState typed)
@@ -59,6 +107,18 @@ namespace GARA.Characters
         }
 
         protected virtual void OnSkillPerfectlyParried(ICombatTarget self, ICombatTarget attacker, SkillCardDefinition card, TState state)
+        {
+        }
+
+        public sealed override void OnStatusApplied(ICombatTarget self, ICombatTarget target, StatusEffectInstance status, PassiveRuntimeState state)
+        {
+            if (state is TState typed)
+            {
+                OnStatusApplied(self, target, status, typed);
+            }
+        }
+
+        protected virtual void OnStatusApplied(ICombatTarget self, ICombatTarget target, StatusEffectInstance status, TState state)
         {
         }
 

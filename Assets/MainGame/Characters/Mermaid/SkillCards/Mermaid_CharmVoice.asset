@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586a551dec62c4e2e8225629f84737d7, type: 3}
+  m_Name: Mermaid_CharmVoice
+  m_EditorClassIdentifier: GARA.Characters.Mermaid::GARA.Characters.Mermaid.MermaidSkillCard
+  cardId: mermaid_charm_voice
+  displayName: Charm Voice
+  description: One note. Hit it to strike one foe for 8 damage and taunt for 1 turn - foes must pick the Mermaid.
+  icon: {fileID: 0}
+  targetMode: 0
+  multiTargetCount: 2
+  apCost: 0
+  mpCost: 0
+  positionMode: 1
+  effects: []
+  refundOnAbort: 0
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: aaf2da3471a734c6786673429a338e8b, type: 2}
+  finalePositionMode: 1
+  perfectEffects: []
+  bars:
+  - notes:
+    - input:
+        id: 2
+      kind: 0
+      time: 0
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 1dafa9d9e78f94d13ab1d0742eafb57f, type: 2}
+    effects:
+    - rid: 609404922736672791
+  finaleEffects:
+  - rid: 609404922736672790
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404922736672790
+      type: {class: TauntSelf, ns: GARA.Characters.Mermaid, asm: GARA.Characters.Mermaid}
+      data:
+        gate: 2
+        turns: 1
+    - rid: 609404922736672791
+      type: {class: DamagePerHitNote, ns: GARA.Characters.Mermaid, asm: GARA.Characters.Mermaid}
+      data:
+        damagePerNote: 8

@@ -14,9 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Characters.Chef::GARA.Characters.Chef.MasterchefPassive
   passiveId: masterchef
   displayName: Masterchef
-  description: Dishes fill enemy fullness, more for each favorite flavor. A full enemy falls into a Food Coma (-20% speed, +20% damage taken) and the Chef masters its favorite flavors, filling faster with them.
+  description: Healing or newly buffing allies, and hitting or newly debuffing enemies, fills satiety. A full bar grants a Masterchef stack (a random stat up) and feeds whoever filled it - Well Fed for an ally (+20% speed, -20% damage taken), Food Coma for an enemy (-20% speed, +20% damage taken), for 2 turns.
   icon: {fileID: 0}
-  matchingPairFullness: 30
-  masteryBonusPerStack: 5
+  satietyCapacity: 100
+  satietyPerHeal: 15
+  satietyPerBuff: 25
+  satietyPerHit: 10
+  satietyPerDebuff: 25
+  statGains:
+  - stat: 3
+    amount: 2
+  - stat: 4
+    amount: 2
+  - stat: 5
+    amount: 2
+  - stat: 0
+    amount: 10
+  foodComaTurns: 2
   foodComaSpeedMultiplier: 0.8
   foodComaDamageTakenMultiplier: 1.2
+  wellFedTurns: 2
+  wellFedSpeedMultiplier: 1.2
+  wellFedDamageTakenMultiplier: 0.8

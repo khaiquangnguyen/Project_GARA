@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace GARA.Characters.Mermaid
 {
-    // Mermaid passive: her songs charm opponents (see AllNotesHitForCharm).
-    // A fully charmed opponent fights for her side, under her side's
-    // control, for a few of its own turns; its charm then starts over.
+    // Mermaid passive: every contact with an opponent — her hits, its hits on
+    // her, her parries — charms it. A fully charmed opponent fights for her
+    // side, under her side's control, for a few of its own turns.
     [CreateAssetMenu(menuName = "GARA/Characters/Passives/Superstar Singer", fileName = "SuperstarSingerPassive")]
     public class SuperstarSingerPassive : PassiveDefinition<SuperstarSingerState>
     {
@@ -15,6 +15,16 @@ namespace GARA.Characters.Mermaid
         [Tooltip("Turns (the charmed character's own) it stays charmed.")]
         [Min(1)]
         [SerializeField] private int charmedTurns = 2;
+
+        [Header("Contact charm")]
+        [Min(0)]
+        [SerializeField] private int charmPerHitDealt = 10;
+
+        [Min(0)]
+        [SerializeField] private int charmPerHitTaken = 10;
+
+        [Min(0)]
+        [SerializeField] private int charmPerParry = 20;
 
         public int CharmCapacity => charmCapacity;
 
@@ -28,23 +38,23 @@ namespace GARA.Characters.Mermaid
                 return;
             }
 
-            if (target.IsDefeated || target.Faction == singer.Faction || target.HasStatus(StatusEffectKind.Charmed))
-            {
-                return;
-            }
-
             foreach (var passive in passives.Passives)
             {
                 if (passive is SuperstarSingerPassive superstar && passives.GetState(passive) is SuperstarSingerState state)
                 {
-                    superstar.Charm(singer, target, amount, state);
+                    superstar.TryCharm(singer, target, amount, state);
                     return;
                 }
             }
         }
 
-        private void Charm(ICombatTarget singer, ICombatTarget target, int amount, SuperstarSingerState state)
+        private void TryCharm(ICombatTarget singer, ICombatTarget target, int amount, SuperstarSingerState state)
         {
+            if (amount <= 0 || target.IsDefeated || target.Faction == singer.Faction || target.HasStatus(StatusEffectKind.Charmed))
+            {
+                return;
+            }
+
             var charm = state.AddCharm(target, amount);
             Debug.Log($"[{nameof(SuperstarSingerPassive)}] charm {Mathf.Min(charm, charmCapacity)}/{charmCapacity}.");
             if (charm < charmCapacity)
@@ -58,6 +68,21 @@ namespace GARA.Characters.Mermaid
 
         protected override void OnSkillCardResolved(in PassiveContext context, SuperstarSingerState state)
         {
+        }
+
+        protected override void OnHitLanded(ICombatTarget self, ICombatTarget target, int damage, SuperstarSingerState state)
+        {
+            TryCharm(self, target, charmPerHitDealt, state);
+        }
+
+        protected override void OnHitTaken(ICombatTarget self, ICombatTarget attacker, int damage, SuperstarSingerState state)
+        {
+            TryCharm(self, attacker, charmPerHitTaken, state);
+        }
+
+        protected override void OnParried(ICombatTarget self, ICombatTarget attacker, SuperstarSingerState state)
+        {
+            TryCharm(self, attacker, charmPerParry, state);
         }
     }
 }

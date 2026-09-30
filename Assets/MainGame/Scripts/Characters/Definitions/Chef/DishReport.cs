@@ -14,7 +14,6 @@ namespace GARA.Characters.Chef
         public readonly int RuinedSteps;
         public readonly bool AnyBurnt;
         public readonly InputSetCompletionReport Source;
-        public readonly FlavorTag Flavors;
 
         public DishReport(
             DishGrade grade,
@@ -24,8 +23,7 @@ namespace GARA.Characters.Chef
             int exquisiteSteps,
             int ruinedSteps,
             bool anyBurnt,
-            InputSetCompletionReport source,
-            FlavorTag flavors)
+            InputSetCompletionReport source)
         {
             Grade = grade;
             Steps = steps;
@@ -35,7 +33,6 @@ namespace GARA.Characters.Chef
             RuinedSteps = ruinedSteps;
             AnyBurnt = anyBurnt;
             Source = source;
-            Flavors = flavors;
         }
     }
 }

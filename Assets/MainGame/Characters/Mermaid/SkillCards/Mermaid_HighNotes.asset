@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 586a551dec62c4e2e8225629f84737d7, type: 3}
+  m_Name: Mermaid_HighNotes
+  m_EditorClassIdentifier: GARA.Characters.Mermaid::GARA.Characters.Mermaid.MermaidSkillCard
+  cardId: mermaid_high_notes
+  displayName: High Notes
+  description: 4 notes. Each note hit strikes a random foe for 8 damage.
+  icon: {fileID: 0}
+  targetMode: 1
+  multiTargetCount: 2
+  apCost: 0
+  mpCost: 0
+  positionMode: 0
+  effects: []
+  refundOnAbort: 0
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: c7cf5599fce8a49c282acbfa32231bee, type: 2}
+  finalePositionMode: 0
+  perfectEffects: []
+  bars:
+  - notes:
+    - input:
+        id: 1
+      kind: 0
+      time: 0
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 1dafa9d9e78f94d13ab1d0742eafb57f, type: 2}
+    effects:
+    - rid: 609404922736672803
+  - notes:
+    - input:
+        id: 3
+      kind: 0
+      time: 0.5
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 48f47f0ffc6cc4c239b1f32e819730f2, type: 2}
+    effects:
+    - rid: 609404922736672804
+  - notes:
+    - input:
+        id: 2
+      kind: 0
+      time: 1
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 1dafa9d9e78f94d13ab1d0742eafb57f, type: 2}
+    effects:
+    - rid: 609404922736672805
+  - notes:
+    - input:
+        id: 4
+      kind: 0
+      time: 1.5
+      holdDuration: 0
+    move: {fileID: 11400000, guid: 48f47f0ffc6cc4c239b1f32e819730f2, type: 2}
+    effects:
+    - rid: 609404922736672806
+  finaleEffects: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404922736672803
+      type: {class: RandomEnemyHit, ns: GARA.Characters.Mermaid, asm: GARA.Characters.Mermaid}
+      data:
+        gate: 1
+        damage: 8
+    - rid: 609404922736672804
+      type: {class: RandomEnemyHit, ns: GARA.Characters.Mermaid, asm: GARA.Characters.Mermaid}
+      data:
+        gate: 1
+        damage: 8
+    - rid: 609404922736672805
+      type: {class: RandomEnemyHit, ns: GARA.Characters.Mermaid, asm: GARA.Characters.Mermaid}
+      data:
+        gate: 1
+        damage: 8
+    - rid: 609404922736672806
+      type: {class: RandomEnemyHit, ns: GARA.Characters.Mermaid, asm: GARA.Characters.Mermaid}
+      data:
+        gate: 1
+        damage: 8

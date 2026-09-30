@@ -71,8 +71,8 @@ namespace GARA.Combat
 
         private bool TryResolveEnemyTargets(CombatParticipant actor, SkillCardDefinition card, out IReadOnlyList<ICombatTarget> targets)
         {
-            var pool = LivingPoolOf(actor, card.targetMode.GetPool());
-            targets = card.targetMode.PickRandomTargets(pool, card.multiTargetCount).Cast<ICombatTarget>().ToArray();
+            var pool = LivingPoolFor(actor, card, out var allowRepeats);
+            targets = card.targetMode.PickRandomTargets(pool, card.multiTargetCount, allowRepeats).Cast<ICombatTarget>().ToArray();
             return targets.Count > 0;
         }
     }

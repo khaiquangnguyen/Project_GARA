@@ -2,100 +2,137 @@ using UnityEngine;
 
 namespace GARA.Characters.Chef
 {
-    // Chef passive: every dish fills its targets' fullness, more per flavor
-    // they favor. Filling a target up masters its favorite flavors and puts
-    // it in a food coma.
+    // Chef passive: healing or newly buffing allies, and hitting or newly
+    // debuffing enemies, fills satiety. A full bar grants a Masterchef stack
+    // (a random stat up) and feeds whoever filled it: Well Fed for an ally,
+    // Food Coma for an enemy.
     [CreateAssetMenu(menuName = "GARA/Characters/Passives/Masterchef", fileName = "MasterchefPassive")]
     public class MasterchefPassive : PassiveDefinition<MasterchefState>
     {
-        [Header("Fullness")]
-        [Tooltip("Extra fullness per dish flavor the target favors.")]
-        [Min(0)]
-        [SerializeField] private int matchingPairFullness = 30;
+        [Header("Satiety")]
+        [Min(1)]
+        [SerializeField] private int satietyCapacity = 100;
 
-        [Tooltip("Extra fullness per matching pair, per mastery stack of that flavor.")]
         [Min(0)]
-        [SerializeField] private int masteryBonusPerStack = 5;
+        [SerializeField] private int satietyPerHeal = 15;
 
-        [Header("Food Coma")]
+        [Tooltip("Per status an ally didn't have yet.")]
+        [Min(0)]
+        [SerializeField] private int satietyPerBuff = 25;
+
+        [Tooltip("Per hit landed on an enemy.")]
+        [Min(0)]
+        [SerializeField] private int satietyPerHit = 10;
+
+        [Tooltip("Per status an enemy didn't have yet.")]
+        [Min(0)]
+        [SerializeField] private int satietyPerDebuff = 25;
+
+        [Header("Masterchef")]
+        [Tooltip("Each stack raises one of these, picked at random.")]
+        [SerializeField] private MasterchefStatGain[] statGains =
+        {
+            new MasterchefStatGain { stat = StatKind.Attack, amount = 2f },
+            new MasterchefStatGain { stat = StatKind.Defense, amount = 2f },
+            new MasterchefStatGain { stat = StatKind.Speed, amount = 2f },
+            new MasterchefStatGain { stat = StatKind.MaxHp, amount = 10f }
+        };
+
+        [Header("Food Coma (enemy)")]
+        [Min(1)]
+        [SerializeField] private int foodComaTurns = 2;
+
         [SerializeField] private float foodComaSpeedMultiplier = 0.8f;
 
         [SerializeField] private float foodComaDamageTakenMultiplier = 1.2f;
 
+        [Header("Well Fed (ally)")]
+        [Min(1)]
+        [SerializeField] private int wellFedTurns = 2;
+
+        [SerializeField] private float wellFedSpeedMultiplier = 1.2f;
+
+        [SerializeField] private float wellFedDamageTakenMultiplier = 0.8f;
+
         protected override void OnSkillCardResolved(in PassiveContext context, MasterchefState state)
         {
-            if (!(context.Card is ChefSkillCard card) || context.CardTargets == null)
+        }
+
+        protected override void OnHealed(ICombatTarget self, ICombatTarget target, int amount, MasterchefState state)
+        {
+            if (IsAlly(self, target))
+            {
+                Fill(self, target, satietyPerHeal, state);
+            }
+        }
+
+        protected override void OnHitLanded(ICombatTarget self, ICombatTarget target, int damage, MasterchefState state)
+        {
+            if (!IsAlly(self, target))
+            {
+                Fill(self, target, satietyPerHit, state);
+            }
+        }
+
+        protected override void OnStatusInflicted(ICombatTarget self, ICombatTarget target, StatusEffectInstance status, bool isNew, MasterchefState state)
+        {
+            // Its own Well Fed / Food Coma never refills the bar.
+            if (!isNew || status.sourceId == passiveId)
             {
                 return;
             }
 
-            // Nothing got cooked, nothing to eat.
-            if (context.Performance.TryGetDetails<DishReport>(out var dish) && dish.Source != null && !DishCleared.AnyStep(dish.Source))
+            var ally = IsAlly(self, target);
+            if (ally && !status.kind.IsNegative())
+            {
+                Fill(self, target, satietyPerBuff, state);
+            }
+            else if (!ally && status.kind.IsNegative())
+            {
+                Fill(self, target, satietyPerDebuff, state);
+            }
+        }
+
+        private static bool IsAlly(ICombatTarget self, ICombatTarget target)
+        {
+            return target.Faction == self.Faction;
+        }
+
+        private void Fill(ICombatTarget self, ICombatTarget target, int amount, MasterchefState state)
+        {
+            if (amount <= 0 || !state.AddSatiety(amount, satietyCapacity))
             {
                 return;
             }
 
-            foreach (var target in context.CardTargets)
+            if (statGains.Length > 0)
             {
-                var palate = target.Palate;
-                if (!palate.CanBeFed)
-                {
-                    continue;
-                }
-
-                var result = target.Feed(FullnessFor(card, palate, state));
-                if (!result.becameFull)
-                {
-                    continue;
-                }
-
-                foreach (var flavor in palate.FavoriteFlavors.Split())
-                {
-                    state.AddMastery(flavor);
-                }
-
-                if (!target.HasStatus(StatusEffectKind.FoodComa))
-                {
-                    target.ApplyStatus(CreateFoodComa());
-                }
-            }
-        }
-
-        public int FullnessFor(ChefSkillCard card, PalateProfile palate, MasterchefState state)
-        {
-            var fullness = card.BaseFullness;
-            var favorites = palate.FavoriteFlavors;
-            foreach (var flavor in (card.Flavors & favorites).Split())
-            {
-                fullness += PairFullness(state, flavor);
+                var gain = statGains[Random.Range(0, statGains.Length)];
+                self.ApplyTimedModifier(TimedStatModifier.Permanent(gain.stat, gain.amount, passiveId));
             }
 
-            // Umami pairs with any favorite; it takes the best-mastered one.
-            if ((card.Flavors & FlavorTag.Umami) != 0 && favorites != FlavorTag.None)
+            if (!target.IsDefeated)
             {
-                var best = 0;
-                foreach (var flavor in favorites.Split())
-                {
-                    best = Mathf.Max(best, PairFullness(state, flavor));
-                }
-
-                fullness += best;
+                target.ApplyStatus(IsAlly(self, target) ? CreateWellFed() : CreateFoodComa());
             }
-
-            return fullness;
-        }
-
-        private int PairFullness(MasterchefState state, FlavorTag flavor)
-        {
-            return matchingPairFullness + masteryBonusPerStack * state.MasteryOf(flavor);
         }
 
         private StatusEffectInstance CreateFoodComa()
         {
-            var coma = StatusEffectInstance.Permanent(StatusEffectKind.FoodComa, passiveId);
-            coma.speedMultiplier = foodComaSpeedMultiplier;
-            coma.incomingDamageMultiplier = foodComaDamageTakenMultiplier;
-            return coma;
+            return new StatusEffectInstance(StatusEffectKind.FoodComa, foodComaTurns, passiveId)
+            {
+                speedMultiplier = foodComaSpeedMultiplier,
+                incomingDamageMultiplier = foodComaDamageTakenMultiplier
+            };
+        }
+
+        private StatusEffectInstance CreateWellFed()
+        {
+            return new StatusEffectInstance(StatusEffectKind.WellFed, wellFedTurns, passiveId)
+            {
+                speedMultiplier = wellFedSpeedMultiplier,
+                incomingDamageMultiplier = wellFedDamageTakenMultiplier
+            };
         }
     }
 }

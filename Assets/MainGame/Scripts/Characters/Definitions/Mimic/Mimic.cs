@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GARA.Characters.Mimic
 {
     // Has no specials of its own: its hand is its opponents' skills (see
-    // MimicryPassive), each played in the form of an opponent that has it.
+    // AspiringActorPassive), each played in the form of an opponent that has it.
     public class Mimic : CharacterDefinition
     {
         private void OnValidate()
