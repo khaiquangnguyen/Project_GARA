@@ -38,8 +38,10 @@ namespace GARA.Combat
 
             // Same path as a player's card, minus the cost.
             _aiActionInProgress = true;
+            _parriedEveryHit.Clear();
             StartSkillCard(card, targets);
             yield return new WaitUntil(() => _phaseActionState == PhaseActionState.Regular);
+            NotifyPerfectParries(actor, card);
             EndCombatPhase();
         }
 

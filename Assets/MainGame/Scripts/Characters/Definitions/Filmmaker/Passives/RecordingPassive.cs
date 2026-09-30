@@ -1,107 +1,93 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GARA.Characters.Filmmaker
 {
-    // Filmmaker passive: each special hit records its targets. A fully
-    // recorded opponent hands the Filmmaker a one-time replay of one of its
-    // skills (the last it used, else a random one), performed in its form
-    // (see FormReplaySkillCard); its recording then starts over.
+    // Filmmaker passive: each perfect parry of an opponent's skill adds a
+    // stack to that skill (stacked per skill). At its parriesToRecord, the
+    // skill is offered on the Filmmaker's turn: equipped (up to maxEquipped,
+    // replacing one when full) as a copy played in its form, or skipped.
+    // Either way its stacks count again from what's left over.
     [CreateAssetMenu(menuName = "GARA/Characters/Passives/Recording", fileName = "RecordingPassive")]
     public class RecordingPassive : PassiveDefinition<RecordingState>
     {
-        [Tooltip("Stacks that fully record an opponent.")]
+        [Tooltip("Copied skills the Filmmaker can have equipped at once.")]
         [Min(1)]
-        [SerializeField] private int fullStacks = 3;
-
-        [Tooltip("Replays the Filmmaker can hold at once; a full recording waits while at the limit.")]
-        [Min(1)]
-        [SerializeField] private int maxHeldReplays = 1;
+        [SerializeField] private int maxEquipped = 2;
 
         [SerializeField] private FormReplayMode replayMode = FormReplayMode.StandIn;
 
-        public int FullStacks => fullStacks;
-
-        // No-op unless filmmaker has this passive and target is a living
-        // opponent.
-        public static void Record(ICombatTarget filmmaker, ICombatTarget target, int stacks)
+        protected override void OnSkillPerfectlyParried(ICombatTarget self, ICombatTarget attacker, SkillCardDefinition card, RecordingState state)
         {
-            var passives = filmmaker?.Passives;
-            if (passives == null || target == null || stacks <= 0 || target.IsDefeated || target.Faction == filmmaker.Faction)
+            // A copy is recorded as the skill it copies.
+            var form = attacker?.Definition;
+            if (card is FormReplaySkillCard replay)
+            {
+                card = replay.SourceCard;
+                form = replay.Form;
+            }
+
+            if (card == null || form == null || form.FindSkillCardState(card) == null || state.IsEquipped(card))
             {
                 return;
             }
 
-            foreach (var passive in passives.Passives)
-            {
-                if (passive is RecordingPassive recording && passives.GetState(passive) is RecordingState state)
-                {
-                    recording.Record(filmmaker, target, stacks, state);
-                    return;
-                }
-            }
+            var recording = state.RecordingOf(card) ?? state.StartRecording(card);
+            recording.form = form;
+            recording.stacks++;
+            Debug.Log($"[{nameof(RecordingPassive)}] recording {card.displayName} {recording.stacks}/{card.parriesToRecord}.");
         }
 
-        private void Record(ICombatTarget filmmaker, ICombatTarget target, int stacks, RecordingState state)
+        protected override bool TryGetSkillCardOffer(ICombatTarget self, ICollection<SkillCardDefinition> offered, RecordingState state, out SkillCardOffer offer)
         {
-            var recorded = Mathf.Min(state.StacksOn(target) + stacks, fullStacks);
-            state.SetStacks(target, recorded);
-            Debug.Log($"[{nameof(RecordingPassive)}] recording {recorded}/{fullStacks} on {target.Definition?.displayName}.");
-            if (recorded < fullStacks || HeldReplays(filmmaker) >= maxHeldReplays)
+            foreach (var recording in state.recordings)
+            {
+                if (recording.stacks >= recording.card.parriesToRecord && !offered.Contains(recording.card) && !state.IsEquipped(recording.card))
+                {
+                    offer = new SkillCardOffer(this, recording.card, state.equipped.ToArray(), state.equipped.Count < maxEquipped);
+                    return true;
+                }
+            }
+
+            offer = default;
+            return false;
+        }
+
+        protected override void ResolveSkillCardOffer(ICombatTarget self, in SkillCardOffer offer, SkillCardOfferChoice choice, RecordingState state)
+        {
+            var recording = state.RecordingOf(offer.card);
+            if (recording == null)
             {
                 return;
             }
 
-            var replay = FormReplaySkillCard.Create(PickSkill(target), target.Definition, replayMode, oneTimeUse: true);
-            if (replay == null)
+            // Extra stacks carry over.
+            recording.stacks = Mathf.Max(0, recording.stacks - offer.card.parriesToRecord);
+            if (!choice.accept)
+            {
+                Debug.Log($"[{nameof(RecordingPassive)}] skipped {offer.card.displayName}.");
+                return;
+            }
+
+            if (choice.replaced is FormReplaySkillCard replaced && state.equipped.Remove(replaced))
+            {
+                self.RemoveSkillCard(replaced);
+            }
+            else if (state.equipped.Count >= maxEquipped)
             {
                 return;
             }
 
-            filmmaker.AddSkillCard(replay);
-            state.SetStacks(target, 0);
-            Debug.Log($"[{nameof(RecordingPassive)}] {target.Definition.displayName} fully recorded — got {replay.displayName}.");
-        }
-
-        private static int HeldReplays(ICombatTarget filmmaker)
-        {
-            var held = 0;
-            foreach (var card in filmmaker.SkillCards)
+            var copy = FormReplaySkillCard.Create(offer.card, recording.form, replayMode, oneTimeUse: false);
+            if (copy == null)
             {
-                if (card is FormReplaySkillCard)
-                {
-                    held++;
-                }
+                return;
             }
 
-            return held;
-        }
-
-        // Its last skill, else a random one; only skills its form can play.
-        private static SkillCardDefinition PickSkill(ICombatTarget target)
-        {
-            var form = target.Definition;
-            if (form == null)
-            {
-                return null;
-            }
-
-            var last = target.LastUsedSkillCard;
-            if (last != null && form.FindSkillCardState(last) != null)
-            {
-                return last;
-            }
-
-            var candidates = new List<SkillCardDefinition>();
-            foreach (var card in target.SkillCards)
-            {
-                if (card != null && !card.IsOneTimeUse && form.FindSkillCardState(card) != null)
-                {
-                    candidates.Add(card);
-                }
-            }
-
-            return candidates.Count > 0 ? candidates[Random.Range(0, candidates.Count)] : null;
+            state.equipped.Add(copy);
+            self.AddSkillCard(copy);
+            Debug.Log($"[{nameof(RecordingPassive)}] equipped {copy.displayName}.");
         }
 
         protected override void OnSkillCardResolved(in PassiveContext context, RecordingState state)

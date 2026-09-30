@@ -27,32 +27,34 @@ MonoBehaviour:
   animationSpec: {fileID: 11400000, guid: efdef0cdd6f1a4e89bca20179eb6557a, type: 2}
   finalePositionMode: 0
   perfectEffects: []
-  bars:
-  - notes:
-    - input:
-        id: 1
-      kind: 0
-      time: 0
-      holdDuration: 0
+  steps:
+  - set:
+      inputs:
+      - id: 1
+      - id: 3
+      - id: 1
+      timeLimit: 4
     move: {fileID: 0}
     effects: []
-  - notes:
-    - input:
-        id: 3
-      kind: 0
-      time: 0.5
-      holdDuration: 0
+  - set:
+      inputs:
+      - id: 3
+      - id: 1
+      - id: 4
+      timeLimit: 4
     move: {fileID: 0}
     effects: []
+  totalTimeLimit: 0
   finaleEffects:
   - rid: 609404912810066455
+  - rid: 609404912810066458
   references:
     version: 2
     RefIds:
     - rid: 609404912810066455
       type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
       data:
-        requiredHitRate: 0.5
+        requiredClearRate: 1
         joy:
           rid: 609404912810066456
         sadness:
@@ -71,3 +73,7 @@ MonoBehaviour:
         amount: 5
         turns: 2
         onSelfInsteadOfTargets: 0
+    - rid: 609404912810066458
+      type: {class: MoodChangeEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        change: 0

@@ -7,12 +7,14 @@ namespace GARA.Combat
     // apply there. SkillCardInput/SkillCardResolving bracket one skill-card
     // use: input while its minigame is running, resolving while
     // its animation/effects play out — both gate input handling back to a
-    // no-op until the flow returns to Regular.
+    // no-op until the flow returns to Regular. SkillCardOffer is a passive's
+    // card offer awaiting an answer as the turn starts.
     public enum PhaseActionState
     {
         Regular,
         SkillCardTargeting,
         SkillCardInput,
-        SkillCardResolving
+        SkillCardResolving,
+        SkillCardOffer
     }
 }

@@ -43,6 +43,7 @@ MonoBehaviour:
     - GARA.Characters.Chef
     - GARA.Characters.Dancer
     - GARA.Characters.Enemy
+    - GARA.Characters.Exorcist
     - GARA.Characters.Filmmaker
     - GARA.Characters.Gambler
     - GARA.Characters.Mermaid
@@ -55,10 +56,8 @@ MonoBehaviour:
     - GARA.InputCombos
     - GARA.InputSets
     - GARA.Rhythm
-    - GARA.ShakeBalance
     - GARA.SkillCards.InputSets
     - GARA.SkillCards.Rhythm
-    - GARA.SkillCards.ShakeBalance
     - Kybernetik.Animancer
     - Kybernetik.Animancer.FSM
     - Lofelt.NiceVibrations

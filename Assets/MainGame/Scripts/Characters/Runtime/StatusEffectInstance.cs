@@ -11,7 +11,9 @@ namespace GARA.Characters
         Weakened,
         Evasive,
         Invulnerable,
-        Powered
+        Powered,
+        Exorcised,
+        Shielded
     }
 
     // One active status inflicted on a participant. Deliberately data-only and
@@ -31,6 +33,9 @@ namespace GARA.Characters
 
         // Negates the next incoming hit, then is used up (one per stack).
         public bool evadesNextHit;
+
+        // Blocks the next incoming hit, then is used up (one per stack).
+        public bool blocksNextHit;
 
         // Negates every incoming hit while it lasts.
         public bool negatesHits;

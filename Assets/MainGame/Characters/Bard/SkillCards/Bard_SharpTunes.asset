@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629eae04fcb664701851a355167adcc1, type: 3}
+  m_Name: Bard_SharpTunes
+  m_EditorClassIdentifier: GARA.Characters.Bard::GARA.Characters.Bard.BardSkillCard
+  cardId: bard_sharp_tunes
+  displayName: Sharp Tunes
+  description: 'Each code cleared: Joy strikes the chosen foe, Sadness strikes 3 random foes. All cleared: every foe is slowed for 1 turn. Keeps the mood.'
+  icon: {fileID: 0}
+  targetMode: 0
+  multiTargetCount: 2
+  apCost: 0
+  mpCost: 0
+  positionMode: 1
+  effects: []
+  refundOnAbort: 0
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: 362518d5fa4c7472f9f1804319d3f6c4, type: 2}
+  finalePositionMode: 1
+  perfectEffects: []
+  steps:
+  - set:
+      inputs:
+      - id: 3
+      - id: 1
+      - id: 4
+      timeLimit: 4
+    move: {fileID: 11400000, guid: c9d0f32a507a14c608d6d9dbdd8f2aa9, type: 2}
+    effects:
+    - rid: 609404985650709100
+  - set:
+      inputs:
+      - id: 2
+      - id: 2
+      - id: 3
+      timeLimit: 4
+    move: {fileID: 11400000, guid: 21577ad6c4269484997741ab6c8641c3, type: 2}
+    effects:
+    - rid: 609404985650709103
+  - set:
+      inputs:
+      - id: 4
+      - id: 1
+      - id: 1
+      timeLimit: 4
+    move: {fileID: 11400000, guid: c9d0f32a507a14c608d6d9dbdd8f2aa9, type: 2}
+    effects:
+    - rid: 609404985650709106
+  totalTimeLimit: 0
+  finaleEffects:
+  - rid: 609404985650709109
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404985650709100
+      type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        requiredClearRate: 1
+        joy:
+          rid: 609404985650709101
+        sadness:
+          rid: 609404985650709102
+    - rid: 609404985650709101
+      type: {class: DamageOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        damage: 10
+        targets: 0
+        randomCount: 3
+    - rid: 609404985650709102
+      type: {class: DamageOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        damage: 5
+        targets: 3
+        randomCount: 3
+    - rid: 609404985650709103
+      type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        requiredClearRate: 1
+        joy:
+          rid: 609404985650709104
+        sadness:
+          rid: 609404985650709105
+    - rid: 609404985650709104
+      type: {class: DamageOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        damage: 10
+        targets: 0
+        randomCount: 3
+    - rid: 609404985650709105
+      type: {class: DamageOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        damage: 5
+        targets: 3
+        randomCount: 3
+    - rid: 609404985650709106
+      type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        requiredClearRate: 1
+        joy:
+          rid: 609404985650709107
+        sadness:
+          rid: 609404985650709108
+    - rid: 609404985650709107
+      type: {class: DamageOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        damage: 10
+        targets: 0
+        randomCount: 3
+    - rid: 609404985650709108
+      type: {class: DamageOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        damage: 5
+        targets: 3
+        randomCount: 3
+    - rid: 609404985650709109
+      type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        requiredClearRate: 1
+        joy:
+          rid: 609404985650709110
+        sadness:
+          rid: 609404985650709111
+    - rid: 609404985650709110
+      type: {class: SlowedOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        speedReduction: 0.25
+        turns: 1
+        targets: 2
+    - rid: 609404985650709111
+      type: {class: SlowedOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        speedReduction: 0.25
+        turns: 1
+        targets: 2

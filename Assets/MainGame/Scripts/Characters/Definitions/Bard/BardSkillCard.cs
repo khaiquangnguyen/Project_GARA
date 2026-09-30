@@ -1,38 +1,44 @@
 using GARA.Characters;
-using GARA.Rhythm;
-using GARA.SkillCards.Rhythm;
+using GARA.InputSets;
+using GARA.SkillCards.InputSets;
 using UnityEngine;
 
 namespace GARA.Characters.Bard
 {
-    // A song; every effect on it is a DualEmotionEffect, so it plays one way
-    // in Joy and another in Sadness.
+    // A song: each step is a stratagem code (an ordered arrow input set).
+    // Its effects are DualEmotionEffects, playing one way in Joy and another
+    // in Sadness, plus an optional MoodChangeEffect.
     [CreateAssetMenu(menuName = "GARA/Characters/Bard/Song Card", fileName = "SongCard")]
-    public class BardSkillCard : RhythmSkillCard
+    public class BardSkillCard : LiveInputSetSkillCard
     {
-        protected override RhythmSequenceTiming TimingFor(CharacterDefinition actor)
-        {
-            return actor is Bard bard ? bard.SpecialTiming : RhythmSequenceTiming.Default;
-        }
-
         protected override SkillPerformanceTiering TieringFor(CharacterDefinition actor)
         {
             return actor is Bard bard ? bard.SpecialTiering : SkillPerformanceTiering.Default;
+        }
+
+        protected override InputSetScoreModel ScoreModelFor(CharacterDefinition actor)
+        {
+            return actor is Bard bard ? bard.SpecialScoreModel : InputSetScoreModel.Default;
+        }
+
+        protected override InputSetRetryPolicy RetryPolicyFor(CharacterDefinition actor)
+        {
+            return actor is Bard bard ? bard.SpecialRetryPolicy : InputSetRetryPolicy.Default;
         }
 
         protected override void OnValidate()
         {
             base.OnValidate();
 
-            for (var b = 0; b < Bars.Count; b++)
+            for (var s = 0; s < Steps.Count; s++)
             {
-                WarnIfNotDual(Bars[b].effects, $"bar {b + 1}");
+                WarnIfNotBardEffect(Steps[s].effects, $"step {s + 1}");
             }
 
-            WarnIfNotDual(finaleEffects, "finale");
+            WarnIfNotBardEffect(finaleEffects, "finale");
         }
 
-        private void WarnIfNotDual(RhythmStepEffect[] effects, string where)
+        private void WarnIfNotBardEffect(InputSetStepEffect[] effects, string where)
         {
             if (effects == null)
             {
@@ -41,9 +47,9 @@ namespace GARA.Characters.Bard
 
             foreach (var effect in effects)
             {
-                if (effect != null && !(effect is DualEmotionEffect))
+                if (effect != null && !(effect is DualEmotionEffect) && !(effect is MoodChangeEffect))
                 {
-                    Debug.LogWarning($"{name}: {where} has a {effect.GetType().Name} — Bard effects should be DualEmotionEffect.", this);
+                    Debug.LogWarning($"{name}: {where} has a {effect.GetType().Name} — Bard effects should be DualEmotionEffect or MoodChangeEffect.", this);
                 }
             }
         }

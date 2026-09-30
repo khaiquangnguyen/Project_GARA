@@ -27,43 +27,45 @@ MonoBehaviour:
   animationSpec: {fileID: 11400000, guid: 362518d5fa4c7472f9f1804319d3f6c4, type: 2}
   finalePositionMode: 1
   perfectEffects: []
-  bars:
-  - notes:
-    - input:
-        id: 2
-      kind: 0
-      time: 0
-      holdDuration: 0
+  steps:
+  - set:
+      inputs:
+      - id: 2
+      - id: 4
+      - id: 1
+      timeLimit: 4
     move: {fileID: 11400000, guid: c9d0f32a507a14c608d6d9dbdd8f2aa9, type: 2}
     effects:
     - rid: 609404912810066446
-  - notes:
-    - input:
-        id: 4
-      kind: 0
-      time: 0.5
-      holdDuration: 0
+  - set:
+      inputs:
+      - id: 4
+      - id: 1
+      - id: 3
+      timeLimit: 4
     move: {fileID: 11400000, guid: 21577ad6c4269484997741ab6c8641c3, type: 2}
     effects:
     - rid: 609404912810066449
-  - notes:
-    - input:
-        id: 1
-      kind: 0
-      time: 1
-      holdDuration: 0
+  - set:
+      inputs:
+      - id: 1
+      - id: 3
+      - id: 2
+      timeLimit: 4
     move: {fileID: 11400000, guid: c9d0f32a507a14c608d6d9dbdd8f2aa9, type: 2}
     effects:
     - rid: 609404912810066452
+  totalTimeLimit: 0
   finaleEffects:
   - rid: 609404912810066443
+  - rid: 609404912810066455
   references:
     version: 2
     RefIds:
     - rid: 609404912810066443
       type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
       data:
-        requiredHitRate: 1
+        requiredClearRate: 1
         joy:
           rid: 609404912810066444
         sadness:
@@ -82,7 +84,7 @@ MonoBehaviour:
     - rid: 609404912810066446
       type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
       data:
-        requiredHitRate: 1
+        requiredClearRate: 1
         joy:
           rid: 609404912810066447
         sadness:
@@ -98,7 +100,7 @@ MonoBehaviour:
     - rid: 609404912810066449
       type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
       data:
-        requiredHitRate: 1
+        requiredClearRate: 1
         joy:
           rid: 609404912810066450
         sadness:
@@ -114,7 +116,7 @@ MonoBehaviour:
     - rid: 609404912810066452
       type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
       data:
-        requiredHitRate: 1
+        requiredClearRate: 1
         joy:
           rid: 609404912810066453
         sadness:
@@ -127,3 +129,7 @@ MonoBehaviour:
       type: {class: DamageOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
       data:
         damage: 6
+    - rid: 609404912810066455
+      type: {class: MoodChangeEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        change: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Characters.Filmmaker::GARA.Characters.Filmmaker.FilmmakerSkillCard
   cardId: filmmaker_wide_shot
   displayName: Wide Shot
-  description: Two long codes that hit and record every foe.
+  description: Two long codes that hit every foe.
   icon: {fileID: 0}
   targetMode: 1
   multiTargetCount: 2
@@ -38,7 +38,6 @@ MonoBehaviour:
     move: {fileID: 11400000, guid: b535cc43068ca475a938c28de4a81d6c, type: 2}
     effects:
     - rid: 609404922736672807
-    - rid: 609404922736672808
   - set:
       inputs:
       - id: 2
@@ -49,7 +48,6 @@ MonoBehaviour:
     move: {fileID: 11400000, guid: eb5c1396b20e44e2c9c326d97195ea65, type: 2}
     effects:
     - rid: 609404922736672809
-    - rid: 609404922736672810
   totalTimeLimit: 0
   finaleEffects: []
   references:
@@ -59,15 +57,7 @@ MonoBehaviour:
       type: {class: ClearedForDamage, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
       data:
         damage: 5
-    - rid: 609404922736672808
-      type: {class: ClearedForRecording, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
-      data:
-        stacks: 1
     - rid: 609404922736672809
       type: {class: ClearedForDamage, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
       data:
         damage: 5
-    - rid: 609404922736672810
-      type: {class: ClearedForRecording, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
-      data:
-        stacks: 1

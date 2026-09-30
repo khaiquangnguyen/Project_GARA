@@ -67,6 +67,10 @@ namespace GARA.Characters
 
         public int mpCost;
 
+        [Tooltip("Filmmaker: perfect parries of this skill needed to record a copy of it.")]
+        [Min(1)]
+        public int parriesToRecord = 1;
+
         [Tooltip("MoveInFrontOfEnemy stands at animationSpec's range; StayAtOriginalPosition returns to the actor's own spot first. On a live card this covers its bars; the finale uses finalePositionMode.")]
         public ActionPositionMode positionMode;
 

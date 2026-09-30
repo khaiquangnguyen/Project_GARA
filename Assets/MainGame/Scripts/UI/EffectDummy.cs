@@ -5,7 +5,8 @@ using UnityEngine;
 // EnemyEffectDummy) — exposes which child GameObjects hold this dummy's
 // per-character effect components (OnNotTargetedEffect — fade and shrink —
 // OnHitEffect, OnParrySuccessEffect, OnJumpSuccessEffect, OnEvadeSuccessEffect,
-// OnInvulnerableBlockEffect, OnActiveActorEffect and OnNoirifiedEffect) via direct Inspector-assigned references.
+// OnInvulnerableBlockEffect, OnActiveActorEffect, OnNoirifiedEffect and
+// OnExorcisedEffect) via direct Inspector-assigned references.
 // CombatSceneManager references those children directly as the templates
 // it clones onto every character of that dummy's side.
 //
@@ -44,6 +45,9 @@ public class EffectDummy : MonoBehaviour
     [Tooltip("The child GameObject holding this dummy's OnNoirifiedEffect component — cloned onto every character at combat start.")]
     [SerializeField] private GameObject onNoirifiedEffect;
 
+    [Tooltip("The child GameObject holding this dummy's OnExorcisedEffect component — cloned onto every character at combat start.")]
+    [SerializeField] private GameObject onExorcisedEffect;
+
     [Header("Preview")]
     [Tooltip("Any character prefab (Dancer, FrozenTomato, a future one, ...) to preview effects against, as if it were the previewed character in combat.")]
     [SerializeField] private GameObject previewCharacterPrefab;
@@ -57,6 +61,7 @@ public class EffectDummy : MonoBehaviour
     public GameObject OnInvulnerableBlockEffect => onInvulnerableBlockEffect;
     public GameObject OnActiveActorEffect => onActiveActorEffect;
     public GameObject OnNoirifiedEffect => onNoirifiedEffect;
+    public GameObject OnExorcisedEffect => onExorcisedEffect;
 
     private GameObject _previewInstance;
     private readonly List<OnNotTargetedEffect> _previewNotTargetedEffects = new();
@@ -67,6 +72,7 @@ public class EffectDummy : MonoBehaviour
     private OnInvulnerableBlockEffect _previewInvulnerableBlockEffect;
     private OnActiveActorEffect _previewActiveActorEffect;
     private OnNoirifiedEffect _previewNoirifiedEffect;
+    private OnExorcisedEffect _previewExorcisedEffect;
 
     [ContextMenu("Preview/Play Not-Targeted Effect")]
     public void Preview()
@@ -357,6 +363,41 @@ public class EffectDummy : MonoBehaviour
         }
     }
 
+    [ContextMenu("Preview/Play Exorcised Effect")]
+    public void PreviewExorcised()
+    {
+        if (previewCharacterPrefab == null || onExorcisedEffect == null)
+        {
+            Debug.LogWarning("EffectDummy.PreviewExorcised: assign both previewCharacterPrefab and onExorcisedEffect first.", this);
+            return;
+        }
+
+        EnsurePreviewInstance();
+
+        if (_previewExorcisedEffect == null)
+        {
+            var effectClone = Instantiate(onExorcisedEffect, _previewInstance.transform, false);
+            _previewExorcisedEffect = effectClone.GetComponent<OnExorcisedEffect>();
+        }
+
+        if (_previewExorcisedEffect == null)
+        {
+            Debug.LogWarning("EffectDummy.PreviewExorcised: onExorcisedEffect has no OnExorcisedEffect component.", this);
+            return;
+        }
+
+        _previewExorcisedEffect.OnTrigger();
+    }
+
+    [ContextMenu("Preview/Restore Exorcised Effect")]
+    public void RestoreExorcisedPreview()
+    {
+        if (_previewExorcisedEffect != null)
+        {
+            _previewExorcisedEffect.OnDone();
+        }
+    }
+
     private void EnsurePreviewInstance()
     {
         if (_previewInstance != null)
@@ -392,6 +433,7 @@ public class EffectDummy : MonoBehaviour
         _previewInvulnerableBlockEffect = null;
         _previewActiveActorEffect = null;
         _previewNoirifiedEffect = null;
+        _previewExorcisedEffect = null;
     }
 
     private void OnDestroy()

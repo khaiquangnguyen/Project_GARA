@@ -270,6 +270,10 @@ namespace GARA.Combat
 
         public static event Action<CombatParticipant> ParrySucceeded;
 
+        // A hit reached this character outside a parry window, whatever
+        // else stopped it.
+        public static event Action<CombatParticipant> HitNotParried;
+
         public bool IsJumping => Time.time < _jumpEndsAt;
 
         private float _jumpEndsAt = float.NegativeInfinity;
@@ -296,6 +300,8 @@ namespace GARA.Combat
                 return;
             }
 
+            HitNotParried?.Invoke(this);
+
             if (IsJumping)
             {
                 MMEventManager.TriggerEvent(new JumpSuccessStateEvent(SceneRoot));
@@ -308,29 +314,42 @@ namespace GARA.Combat
                 return;
             }
 
-            if (amount > 0 && TryConsumeEvasion())
+            if (amount > 0 && TryConsumeStack(status => status.blocksNextHit))
+            {
+                MMEventManager.TriggerEvent(new InvulnerableBlockStateEvent(SceneRoot));
+                return;
+            }
+
+            if (amount > 0 && TryConsumeStack(status => status.evadesNextHit))
             {
                 MMEventManager.TriggerEvent(new EvadeSuccessStateEvent(SceneRoot));
                 return;
             }
 
-            ApplyDamageCore(ModifyIncomingDamage(amount));
+            var dealt = ModifyIncomingDamage(amount);
+            ApplyDamageCore(dealt);
+
+            var source = DamageSource;
+            if (source != null && source != this && dealt > 0)
+            {
+                source.Passives.NotifyHitLanded(source, this, dealt);
+            }
         }
 
         public bool IsInvulnerable => _statuses.Exists(status => status.negatesHits && !status.IsExpired);
 
         public int EvasionStacks => _statuses.Count(status => status.evadesNextHit && !status.IsExpired);
 
-        // Uses up one evasion stack, if any.
-        private bool TryConsumeEvasion()
+        // Uses up one matching stack (e.g. evasion, shield), if any.
+        private bool TryConsumeStack(Predicate<StatusEffectInstance> match)
         {
-            var index = _statuses.FindIndex(status => status.evadesNextHit && !status.IsExpired);
+            var index = _statuses.FindIndex(status => match(status) && !status.IsExpired);
             if (index < 0)
             {
                 return false;
             }
 
-            _statuses.RemoveAt(index);
+            RemoveStatusAt(index);
             return true;
         }
 
@@ -495,6 +514,17 @@ namespace GARA.Combat
             return _statuses.Exists(status => status.kind == kind && !status.IsExpired);
         }
 
+        // Raises StatusEndedStateEvent once the last status of its kind goes.
+        private void RemoveStatusAt(int index)
+        {
+            var kind = _statuses[index].kind;
+            _statuses.RemoveAt(index);
+            if (!HasStatus(kind))
+            {
+                MMEventManager.TriggerEvent(new StatusEndedStateEvent(SceneRoot, kind));
+            }
+        }
+
         // Ticks every NON-skip status down by one turn (same "N of the owner's
         // own turns" semantics as TickTimedModifiers) and drops expired
         // entries. Skip statuses are ticked separately by ConsumeSkippedTurn,
@@ -513,7 +543,7 @@ namespace GARA.Combat
                 _statuses[i].remainingTurns--;
                 if (_statuses[i].IsExpired)
                 {
-                    _statuses.RemoveAt(i);
+                    RemoveStatusAt(i);
                 }
             }
         }
@@ -532,7 +562,7 @@ namespace GARA.Combat
                 _statuses[i].remainingTurns--;
                 if (_statuses[i].IsExpired)
                 {
-                    _statuses.RemoveAt(i);
+                    RemoveStatusAt(i);
                 }
             }
         }
@@ -549,7 +579,7 @@ namespace GARA.Combat
                 _statuses[i].remainingTurns--;
                 if (_statuses[i].IsExpired)
                 {
-                    _statuses.RemoveAt(i);
+                    RemoveStatusAt(i);
                 }
             }
         }

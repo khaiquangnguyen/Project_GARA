@@ -163,6 +163,7 @@ namespace GARA.Combat
             }
 
             ClearTargetPicking();
+            EndSkillCardOffer();
             HideTargetDisplays();
             EndPerformance();
             SnapRetreatedBack();
@@ -405,23 +406,41 @@ namespace GARA.Combat
             }
         }
 
-        // A/D move the card highlight left/right, wrapping around.
+        // A/D move the card (or offer choice) highlight, wrapping around.
         private void OnSkillLeft(InputAction.CallbackContext ctx)
         {
+            if (IsOfferingSkillCard)
+            {
+                MoveSkillCardOfferChoice(-1);
+                return;
+            }
+
             MoveSkillCardHighlight(-1);
         }
 
         private void OnSkillRight(InputAction.CallbackContext ctx)
         {
+            if (IsOfferingSkillCard)
+            {
+                MoveSkillCardOfferChoice(1);
+                return;
+            }
+
             MoveSkillCardHighlight(1);
         }
 
-        // Enter selects the highlighted card, or confirms a target while picking.
+        // Enter selects the highlighted card, or confirms a target/offer choice.
         private void OnUseSkill(InputAction.CallbackContext ctx)
         {
             if (IsPickingSkillCardTargets)
             {
                 PickSkillCardTarget();
+                return;
+            }
+
+            if (IsOfferingSkillCard)
+            {
+                ConfirmSkillCardOffer();
                 return;
             }
 
@@ -447,9 +466,15 @@ namespace GARA.Combat
         }
 
         // Esc steps back while picking — undoes the last pick, then
-        // drops the card.
+        // drops the card; skips a card offer.
         private void OnCancel(InputAction.CallbackContext ctx)
         {
+            if (IsOfferingSkillCard)
+            {
+                DeclineSkillCardOffer();
+                return;
+            }
+
             if (IsPickingSkillCardTargets && !UndoSkillCardTarget())
             {
                 CancelSkillCardTargeting();
@@ -686,15 +711,20 @@ namespace GARA.Combat
                 return;
             }
 
+            _offeredSkillCards.Clear();
             if (!_actor.IsPlayerControlled)
             {
+                ResolveAiSkillCardOffers();
                 _phaseActive = false;
                 StartCoroutine(PerformAiTurn(_actor, _actorExecutor));
                 return;
             }
 
             _phaseActive = true;
-            ResetCardHighlight();
+            if (!TryOfferNextSkillCard())
+            {
+                ResetCardHighlight();
+            }
         }
 
         // A stunned actor takes its food-coma damage, burns one turn of the

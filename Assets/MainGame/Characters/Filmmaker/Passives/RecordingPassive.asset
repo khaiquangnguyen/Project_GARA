@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Characters.Filmmaker::GARA.Characters.Filmmaker.RecordingPassive
   passiveId: recording
   displayName: Recording
-  description: Each special hit records its targets. A fully recorded enemy gives a one-time Replay of one of its skills, performed by a stand-in in its form while the Filmmaker falls back.
+  description: Each perfect parry records the enemy skill parried. A fully recorded skill can be equipped on the Filmmaker's turn (two at most, replacing one when full) and played in its user's form, or skipped.
   icon: {fileID: 0}
-  fullStacks: 3
-  maxHeldReplays: 1
+  maxEquipped: 2
   replayMode: 0

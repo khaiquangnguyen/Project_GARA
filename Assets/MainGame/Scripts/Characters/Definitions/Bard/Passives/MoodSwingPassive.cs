@@ -3,34 +3,35 @@ using UnityEngine;
 namespace GARA.Characters.Bard
 {
     // Bard passive: the Bard is always in one emotion, which decides how
-    // each special plays (see DualEmotionEffect). Every special it finishes
-    // swings it to the other emotion.
+    // each special plays (see DualEmotionEffect). Cards change it through
+    // MoodChangeEffect.
     [CreateAssetMenu(menuName = "GARA/Characters/Passives/Mood Swing", fileName = "MoodSwingPassive")]
     public class MoodSwingPassive : PassiveDefinition<MoodSwingState>
     {
         [SerializeField] private Emotion startingEmotion = Emotion.Joy;
 
-        [Tooltip("Whether an aborted special still swings the emotion.")]
-        [SerializeField] private bool swingOnAbort;
-
         // Joy when character has no Mood Swing passive.
         public static Emotion EmotionOf(ICombatTarget character)
         {
-            var passives = character?.Passives;
-            if (passives == null)
+            return TryFind(character, out var moodSwing, out var state) ? moodSwing.CurrentOf(state) : Emotion.Joy;
+        }
+
+        // No-op when character has no Mood Swing passive.
+        public static void ChangeMood(ICombatTarget character, MoodChange change)
+        {
+            if (!TryFind(character, out var moodSwing, out var state))
             {
-                return Emotion.Joy;
+                return;
             }
 
-            foreach (var passive in passives.Passives)
+            var current = moodSwing.CurrentOf(state);
+            state.current = change switch
             {
-                if (passive is MoodSwingPassive moodSwing && passives.GetState(passive) is MoodSwingState state)
-                {
-                    return moodSwing.CurrentOf(state);
-                }
-            }
-
-            return Emotion.Joy;
+                MoodChange.ToJoy => Emotion.Joy,
+                MoodChange.ToSadness => Emotion.Sadness,
+                _ => current == Emotion.Joy ? Emotion.Sadness : Emotion.Joy
+            };
+            Debug.Log($"[{nameof(MoodSwingPassive)}] mood is now {state.current}.");
         }
 
         public Emotion CurrentOf(MoodSwingState state)
@@ -40,23 +41,27 @@ namespace GARA.Characters.Bard
 
         protected override void OnSkillCardResolved(in PassiveContext context, MoodSwingState state)
         {
-            if (!(context.Card is BardSkillCard))
-            {
-                return;
-            }
-
-            if (context.Performance.WasAborted && !swingOnAbort)
-            {
-                return;
-            }
-
-            state.current = Next(CurrentOf(state));
-            Debug.Log($"[{nameof(MoodSwingPassive)}] mood swings to {state.current}.");
         }
 
-        private static Emotion Next(Emotion emotion)
+        private static bool TryFind(ICombatTarget character, out MoodSwingPassive moodSwing, out MoodSwingState state)
         {
-            return emotion == Emotion.Joy ? Emotion.Sadness : Emotion.Joy;
+            var passives = character?.Passives;
+            if (passives != null)
+            {
+                foreach (var passive in passives.Passives)
+                {
+                    if (passive is MoodSwingPassive found && passives.GetState(passive) is MoodSwingState foundState)
+                    {
+                        moodSwing = found;
+                        state = foundState;
+                        return true;
+                    }
+                }
+            }
+
+            moodSwing = null;
+            state = null;
+            return false;
         }
     }
 }

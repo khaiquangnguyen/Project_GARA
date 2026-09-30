@@ -3,8 +3,9 @@
   "rootNamespace": "GARA.Characters.Bard",
   "references": [
     "GARA.Characters",
-    "GARA.SkillCards.Rhythm",
-    "GARA.Rhythm",
+    "GARA.SkillCards.InputSets",
+    "GARA.InputSets",
+    "GARA.Input",
     "NaughtyAttributes.Core"
   ],
   "includePlatforms": [],

@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629eae04fcb664701851a355167adcc1, type: 3}
+  m_Name: Bard_SongOfVigor
+  m_EditorClassIdentifier: GARA.Characters.Bard::GARA.Characters.Bard.BardSkillCard
+  cardId: bard_song_of_vigor
+  displayName: Song of Vigor
+  description: 'Each code cleared heals the whole party for 5. All cleared: Joy heals the party for 10 more, Sadness gives it 1 shield. Always leaves the Bard in Joy.'
+  icon: {fileID: 0}
+  targetMode: 3
+  multiTargetCount: 2
+  stepTargeting: 0
+  finaleTargeting: 0
+  alliesJoinFinale: 0
+  allyDanceDuration: 1
+  teleportBetweenSteps: 0
+  apCost: 0
+  mpCost: 0
+  parriesToRecord: 1
+  positionMode: 0
+  effects: []
+  refundOnAbort: 0
+  spotlight: {fileID: 0}
+  shadowScreen: {fileID: 0}
+  endDelay: 0.5
+  animationSpec: {fileID: 11400000, guid: efdef0cdd6f1a4e89bca20179eb6557a, type: 2}
+  finalePositionMode: 0
+  finaleDelay: 0.5
+  perfectEffects: []
+  steps:
+  - set:
+      inputs:
+      - id: 3
+      - id: 3
+      - id: 1
+      timeLimit: 4
+    move: {fileID: 11400000, guid: c9d0f32a507a14c608d6d9dbdd8f2aa9, type: 2}
+    effects:
+    - rid: 609404985650708900
+  - set:
+      inputs:
+      - id: 2
+      - id: 4
+      - id: 2
+      timeLimit: 4
+    move: {fileID: 11400000, guid: 21577ad6c4269484997741ab6c8641c3, type: 2}
+    effects:
+    - rid: 609404985650708903
+  totalTimeLimit: 0
+  finaleEffects:
+  - rid: 609404985650708906
+  - rid: 609404985650708909
+  references:
+    version: 2
+    RefIds:
+    - rid: 609404985650708900
+      type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        requiredClearRate: 1
+        joy:
+          rid: 609404985650708901
+        sadness:
+          rid: 609404985650708902
+    - rid: 609404985650708901
+      type: {class: HealOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        heal: 5
+        targets: 1
+    - rid: 609404985650708902
+      type: {class: HealOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        heal: 5
+        targets: 1
+    - rid: 609404985650708903
+      type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        requiredClearRate: 1
+        joy:
+          rid: 609404985650708904
+        sadness:
+          rid: 609404985650708905
+    - rid: 609404985650708904
+      type: {class: HealOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        heal: 5
+        targets: 1
+    - rid: 609404985650708905
+      type: {class: HealOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        heal: 5
+        targets: 1
+    - rid: 609404985650708906
+      type: {class: DualEmotionEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        requiredClearRate: 1
+        joy:
+          rid: 609404985650708907
+        sadness:
+          rid: 609404985650708908
+    - rid: 609404985650708907
+      type: {class: HealOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        heal: 10
+        targets: 1
+    - rid: 609404985650708908
+      type: {class: ShieldOutcome, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        stacks: 1
+        targets: 1
+    - rid: 609404985650708909
+      type: {class: MoodChangeEffect, ns: GARA.Characters.Bard, asm: GARA.Characters.Bard}
+      data:
+        change: 1

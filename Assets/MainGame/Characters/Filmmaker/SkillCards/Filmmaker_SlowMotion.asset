@@ -36,7 +36,6 @@ MonoBehaviour:
       timeLimit: 4
     move: {fileID: 11400000, guid: b535cc43068ca475a938c28de4a81d6c, type: 2}
     effects:
-    - rid: 609404922736672811
   - set:
       inputs:
       - id: 4
@@ -45,17 +44,8 @@ MonoBehaviour:
       timeLimit: 4
     move: {fileID: 11400000, guid: eb5c1396b20e44e2c9c326d97195ea65, type: 2}
     effects:
-    - rid: 609404922736672812
   totalTimeLimit: 0
   finaleEffects: []
   references:
     version: 2
     RefIds:
-    - rid: 609404922736672811
-      type: {class: ClearedForRecording, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
-      data:
-        stacks: 2
-    - rid: 609404922736672812
-      type: {class: ClearedForRecording, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
-      data:
-        stacks: 2

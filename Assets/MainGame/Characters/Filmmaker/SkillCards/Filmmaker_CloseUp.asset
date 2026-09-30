@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Characters.Filmmaker::GARA.Characters.Filmmaker.FilmmakerSkillCard
   cardId: filmmaker_close_up
   displayName: Close-Up
-  description: Three codes, each a hit that records one foe.
+  description: Three codes, each a hit on one foe.
   icon: {fileID: 0}
   targetMode: 0
   multiTargetCount: 2
@@ -37,7 +37,6 @@ MonoBehaviour:
     move: {fileID: 11400000, guid: b535cc43068ca475a938c28de4a81d6c, type: 2}
     effects:
     - rid: 609404922736672801
-    - rid: 609404922736672802
   - set:
       inputs:
       - id: 2
@@ -47,7 +46,6 @@ MonoBehaviour:
     move: {fileID: 11400000, guid: eb5c1396b20e44e2c9c326d97195ea65, type: 2}
     effects:
     - rid: 609404922736672803
-    - rid: 609404922736672804
   - set:
       inputs:
       - id: 3
@@ -57,7 +55,6 @@ MonoBehaviour:
     move: {fileID: 11400000, guid: b535cc43068ca475a938c28de4a81d6c, type: 2}
     effects:
     - rid: 609404922736672805
-    - rid: 609404922736672806
   totalTimeLimit: 0
   finaleEffects:
   - rid: 609404922736672800
@@ -72,23 +69,11 @@ MonoBehaviour:
       type: {class: ClearedForDamage, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
       data:
         damage: 8
-    - rid: 609404922736672802
-      type: {class: ClearedForRecording, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
-      data:
-        stacks: 1
     - rid: 609404922736672803
       type: {class: ClearedForDamage, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
       data:
         damage: 8
-    - rid: 609404922736672804
-      type: {class: ClearedForRecording, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
-      data:
-        stacks: 1
     - rid: 609404922736672805
       type: {class: ClearedForDamage, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
       data:
         damage: 8
-    - rid: 609404922736672806
-      type: {class: ClearedForRecording, ns: GARA.Characters.Filmmaker, asm: GARA.Characters.Filmmaker}
-      data:
-        stacks: 1

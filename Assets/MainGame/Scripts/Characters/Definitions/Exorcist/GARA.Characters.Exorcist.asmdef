@@ -1,0 +1,18 @@
+{
+  "name": "GARA.Characters.Exorcist",
+  "rootNamespace": "GARA.Characters.Exorcist",
+  "references": [
+    "GARA.Characters",
+    "GARA.SkillCards.Rhythm",
+    "GARA.Rhythm"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

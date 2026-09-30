@@ -3,7 +3,6 @@ using GARA.Combat;
 using GARA.Input;
 using GARA.InputSets;
 using GARA.Rhythm;
-using GARA.ShakeBalance;
 using MoreMountains.Feedbacks;
 using UnityEditor;
 using UnityEngine;
@@ -15,7 +14,7 @@ namespace GARA.EditorTools
     // One place for the combat scene's development aids. The visual-driver
     // tests don't reference any driver: like a character, they play a
     // generated minigame through a real RhythmSequencePlayer /
-    // InputSetCollectionPlayer / ShakeBalancePlayer, whose static "any started/ended" events the
+    // InputSetCollectionPlayer, whose static "any started/ended" events the
     // scene's overlay already forwards to whichever driver presents it.
     public class CombatSceneDevelopmentWindow : EditorWindow
     {
@@ -76,48 +75,6 @@ namespace GARA.EditorTools
             onExhausted = ExhaustedSetBehaviour.Skip
         };
 
-        [SerializeField]
-        private InputTokenMap shakeBalanceInputMap;
-
-        [SerializeField]
-        private InputToken shakeBalanceLeftToken = new InputToken(2);
-
-        [SerializeField]
-        private InputToken shakeBalanceRightToken = new InputToken(4);
-
-        [Tooltip("Seconds to fill the meter before the run fails.")]
-        [SerializeField]
-        private float shakeBalanceDuration = 4f;
-
-        [SerializeField]
-        private float shakeBalanceBaseInstability = 1.2f;
-
-        [SerializeField]
-        private float shakeBalanceInstabilityGrowth = 0.02f;
-
-        [SerializeField]
-        private float shakeBalanceBaseNoise = 0.3f;
-
-        [SerializeField]
-        private float shakeBalanceNoiseGrowth = 0.02f;
-
-        [Range(0f, 1f)]
-        [SerializeField]
-        private float shakeBalancePerfectZone = 0.15f;
-
-        [Range(0f, 1f)]
-        [SerializeField]
-        private float shakeBalanceGoodZone = 0.35f;
-
-        [SerializeField]
-        private float shakeBalancePerfectFillSeconds = 1.5f;
-
-        [SerializeField]
-        private float shakeBalanceGoodFillSeconds = 3f;
-
-        [SerializeField]
-        private float shakeBalanceOffDrainPerSecond = 0.25f;
-
         [Tooltip("Seconds the view's position shake lasts.")]
         [SerializeField]
         private float viewShakePositionDuration = 0.25f;
@@ -171,7 +128,6 @@ namespace GARA.EditorTools
         private SerializedObject _serializedWindow;
         private bool _rhythmExpanded = true;
         private bool _inputSetExpanded = true;
-        private bool _shakeBalanceExpanded = true;
         private bool _viewShakeExpanded = true;
         private Vector2 _scroll;
 
@@ -185,12 +141,11 @@ namespace GARA.EditorTools
         {
             _serializedWindow = new SerializedObject(this);
 
-            if (rhythmInputMap == null || inputSetInputMap == null || shakeBalanceInputMap == null)
+            if (rhythmInputMap == null || inputSetInputMap == null)
             {
                 var defaultMap = FindDefaultInputMap();
                 rhythmInputMap = rhythmInputMap != null ? rhythmInputMap : defaultMap;
                 inputSetInputMap = inputSetInputMap != null ? inputSetInputMap : defaultMap;
-                shakeBalanceInputMap = shakeBalanceInputMap != null ? shakeBalanceInputMap : defaultMap;
             }
         }
 
@@ -222,13 +177,6 @@ namespace GARA.EditorTools
             {
                 nameof(inputSetInputMap), nameof(setCount), nameof(minInputsPerSet), nameof(maxInputsPerSet), nameof(setTimeLimit), nameof(setCollectionTimeLimit), nameof(retryPolicy)
             }, IsPlaying<InputSetCollectionPlayer>(p => p.IsPlaying), RunInputSetTest);
-
-            _shakeBalanceExpanded = DrawSection("Shake Balance", _shakeBalanceExpanded, new[]
-            {
-                nameof(shakeBalanceInputMap), nameof(shakeBalanceLeftToken), nameof(shakeBalanceRightToken),
-                nameof(shakeBalanceDuration), nameof(shakeBalanceBaseInstability), nameof(shakeBalanceInstabilityGrowth), nameof(shakeBalanceBaseNoise), nameof(shakeBalanceNoiseGrowth),
-                nameof(shakeBalancePerfectZone), nameof(shakeBalanceGoodZone), nameof(shakeBalancePerfectFillSeconds), nameof(shakeBalanceGoodFillSeconds), nameof(shakeBalanceOffDrainPerSecond)
-            }, IsPlaying<ShakeBalancePlayer>(p => p.IsPlaying), RunShakeBalanceTest);
 
             _viewShakeExpanded = DrawSection("View Shake", _viewShakeExpanded, new[]
             {
@@ -340,25 +288,6 @@ namespace GARA.EditorTools
                           $"({report.CompletionRate:P0}), firstTry={report.FirstTryRate:P0}, " +
                           $"attempts={report.TotalAttempts}, aborted={report.WasAborted}, " +
                           $"setCollectionTimedOut={report.SetCollectionTimedOut}, elapsed={report.TotalElapsed:F2}s");
-            });
-        }
-
-        private void RunShakeBalanceTest()
-        {
-            if (!TryGetInputMap(shakeBalanceInputMap, "Shake Balance"))
-            {
-                return;
-            }
-
-            var definition = ShakeBalanceDefinition.CreateRuntime(shakeBalanceLeftToken, shakeBalanceRightToken, shakeBalanceDuration);
-            definition.SetDifficulty(shakeBalanceBaseInstability, shakeBalanceInstabilityGrowth, shakeBalanceBaseNoise, shakeBalanceNoiseGrowth);
-            definition.SetScoring(shakeBalancePerfectZone, shakeBalanceGoodZone, shakeBalancePerfectFillSeconds, shakeBalanceGoodFillSeconds, shakeBalanceOffDrainPerSecond);
-
-            var player = GetHostPlayer<ShakeBalancePlayer>(shakeBalanceInputMap);
-            player.Play(definition, report =>
-            {
-                Destroy(definition);
-                Debug.Log($"[ShakeBalanceTest] {ShakeBalanceDebugLogger.Describe(report)}");
             });
         }
 

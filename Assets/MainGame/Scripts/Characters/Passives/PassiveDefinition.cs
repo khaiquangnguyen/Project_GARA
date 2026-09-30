@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GARA.Characters
@@ -24,6 +25,29 @@ namespace GARA.Characters
         // Any participant on either side (never the owner itself) was just
         // defeated. context.Card is null.
         public virtual void OnParticipantDefeated(in PassiveContext context, ICombatTarget defeated, PassiveRuntimeState state)
+        {
+        }
+
+        // The owner's skill just landed damage on target (not a parried,
+        // evaded or blocked hit). Fires once per hit, mid-effect.
+        public virtual void OnHitLanded(ICombatTarget self, ICombatTarget target, int damage, PassiveRuntimeState state)
+        {
+        }
+
+        // The owner parried every hit attacker's card aimed at them.
+        public virtual void OnSkillPerfectlyParried(ICombatTarget self, ICombatTarget attacker, SkillCardDefinition card, PassiveRuntimeState state)
+        {
+        }
+
+        // The next card to offer the owner as their turn starts, skipping
+        // those already offered this turn (see SkillCardOffer).
+        public virtual bool TryGetSkillCardOffer(ICombatTarget self, ICollection<SkillCardDefinition> offered, PassiveRuntimeState state, out SkillCardOffer offer)
+        {
+            offer = default;
+            return false;
+        }
+
+        public virtual void ResolveSkillCardOffer(ICombatTarget self, in SkillCardOffer offer, SkillCardOfferChoice choice, PassiveRuntimeState state)
         {
         }
 

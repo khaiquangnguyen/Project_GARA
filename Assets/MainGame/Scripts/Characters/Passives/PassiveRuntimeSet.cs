@@ -76,6 +76,60 @@ namespace GARA.Characters
             }
         }
 
+        public void NotifyHitLanded(ICombatTarget self, ICombatTarget target, int damage)
+        {
+            foreach (var passive in _passives)
+            {
+                var state = _statesByDefinition[passive];
+                try
+                {
+                    passive.OnHitLanded(self, target, damage, state);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
+            }
+        }
+
+        public void NotifySkillPerfectlyParried(ICombatTarget self, ICombatTarget attacker, SkillCardDefinition card)
+        {
+            foreach (var passive in _passives)
+            {
+                var state = _statesByDefinition[passive];
+                try
+                {
+                    passive.OnSkillPerfectlyParried(self, attacker, card, state);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
+            }
+        }
+
+        public bool TryGetSkillCardOffer(ICombatTarget self, ICollection<SkillCardDefinition> offered, out SkillCardOffer offer)
+        {
+            foreach (var passive in _passives)
+            {
+                if (passive.TryGetSkillCardOffer(self, offered, _statesByDefinition[passive], out offer))
+                {
+                    return true;
+                }
+            }
+
+            offer = default;
+            return false;
+        }
+
+        public void ResolveSkillCardOffer(ICombatTarget self, in SkillCardOffer offer, SkillCardOfferChoice choice)
+        {
+            if (offer.passive != null && _statesByDefinition.TryGetValue(offer.passive, out var state))
+            {
+                offer.passive.ResolveSkillCardOffer(self, in offer, choice, state);
+            }
+        }
+
         public void NotifyBattleStarted(in PassiveContext context)
         {
             foreach (var passive in _passives)

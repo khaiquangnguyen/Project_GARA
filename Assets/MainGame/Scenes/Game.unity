@@ -1366,7 +1366,7 @@ GameObject:
   - component: {fileID: 321997528}
   - component: {fileID: 321997529}
   m_Layer: 0
-  m_Name: AlternatingInputView
+  m_Name: QteView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1404,7 +1404,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1cf2604dfc94454fa15bf31930005ee, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Characters.Gambler::GARA.Characters.Gambler.AlternatingInputView
+  m_EditorClassIdentifier: GARA.Characters.Gambler::GARA.Characters.Gambler.QteView
   spec: {fileID: 11400000, guid: 8b9e2b4b07c4b4880958d52c42799542, type: 2}
   tokenPrefab: {fileID: 1741178163085890132, guid: b6c552ff4fc0942efa80ae5b5f0524fe, type: 3}
   anchor: {fileID: 1263426513}
@@ -1419,7 +1419,12 @@ MonoBehaviour:
   missColor: {r: 1, g: 0.35, b: 0.35, a: 1}
   hitPunchScale: 1.15
   punchSeconds: 0.15
+  fadeSeconds: 0.25
   sortingOrder: 36
+  stackOffset: {x: 1.1, y: 0.7}
+  stackScale: 0.75
+  stackFade: 0.6
+  slideSpeed: 14
   countText: {fileID: 0}
   countOffset: {x: 2.4, y: 0}
   countFontSize: 6
@@ -4801,7 +4806,6 @@ GameObject:
   - component: {fileID: 1269607422}
   - component: {fileID: 1269607426}
   - component: {fileID: 1269607425}
-  - component: {fileID: 1269607424}
   - component: {fileID: 1269607423}
   - component: {fileID: 1269607428}
   m_Layer: 0
@@ -4841,22 +4845,7 @@ MonoBehaviour:
   drivers:
   - {fileID: 1269607426}
   - {fileID: 1269607425}
-  - {fileID: 1269607424}
-  - {fileID: 0}
   - {fileID: 1269607428}
---- !u!114 &1269607424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1269607421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804e8fd696efa48d182a834b034dec3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GARA.ShakeBalance::GARA.ShakeBalance.ShakeBalancePlayer
-  inputMap: {fileID: 11400000, guid: 82bac6fcda66c4ea5a51e4b0aad05e7e, type: 2}
 --- !u!114 &1269607425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4895,76 +4884,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c273413d96ff407c977ec73b8d861d0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: GARA.Characters.Gambler::GARA.Characters.Gambler.AlternatingInputPlayer
+  m_EditorClassIdentifier: GARA.Characters.Gambler::GARA.Characters.Gambler.QtePlayer
   inputMap: {fileID: 11400000, guid: 82bac6fcda66c4ea5a51e4b0aad05e7e, type: 2}
---- !u!1001 &1270247267
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 85465440953250280, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 85465440953250280, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 85465440953250280, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 85465440953250280, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 85465440953250280, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 85465440953250280, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 85465440953250280, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 85465440953250280, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 85465440953250280, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 85465440953250280, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266921338519997993, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-      propertyPath: m_Name
-      value: '[ShakeBalanceVisualDriver]'
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
---- !u!114 &1270247268 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1849382090184949676, guid: 3f1fcb44013a8463b97551498c9204ef, type: 3}
-  m_PrefabInstance: {fileID: 1270247267}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cf551033ba8541c1ae3a28e8e017433, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: GARA.ShakeBalance::GARA.ShakeBalance.ShakeBalanceVisualDriver
 --- !u!1 &1287558313
 GameObject:
   m_ObjectHideFlags: 0
@@ -6967,7 +6888,6 @@ MonoBehaviour:
   playerStatusBarOffset: {x: 0, y: -0.5, z: 0}
   rhythmVisualDriver: {fileID: 719048227}
   inputSetVisualDriver: {fileID: 2073647041}
-  shakeBalanceVisualDriver: {fileID: 1270247268}
   viewPositionShaker: {fileID: 1850944945}
   viewRotationShaker: {fileID: 1504165456}
   combatInputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
@@ -9176,7 +9096,6 @@ SceneRoots:
   - {fileID: 28497149}
   - {fileID: 1621182267}
   - {fileID: 1137833633}
-  - {fileID: 1270247267}
   - {fileID: 1916256244}
   - {fileID: 1504165455}
   - {fileID: 883917911}

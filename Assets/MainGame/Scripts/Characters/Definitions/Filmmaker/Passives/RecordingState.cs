@@ -2,24 +2,35 @@ using System.Collections.Generic;
 
 namespace GARA.Characters.Filmmaker
 {
-    // Recording stacks on each opponent.
+    // Parry stacks per recorded skill, and the copies equipped.
     public sealed class RecordingState : PassiveRuntimeState
     {
-        private readonly Dictionary<ICombatTarget, int> _stacksByTarget = new Dictionary<ICombatTarget, int>();
+        // In the order each skill was first recorded.
+        public readonly List<SkillRecording> recordings = new List<SkillRecording>();
 
-        public int StacksOn(ICombatTarget target)
+        public readonly List<FormReplaySkillCard> equipped = new List<FormReplaySkillCard>();
+
+        public SkillRecording RecordingOf(SkillCardDefinition card)
         {
-            return _stacksByTarget.TryGetValue(target, out var stacks) ? stacks : 0;
+            return recordings.Find(recording => recording.card == card);
         }
 
-        public void SetStacks(ICombatTarget target, int stacks)
+        public SkillRecording StartRecording(SkillCardDefinition card)
         {
-            _stacksByTarget[target] = stacks;
+            var recording = new SkillRecording(card);
+            recordings.Add(recording);
+            return recording;
+        }
+
+        public bool IsEquipped(SkillCardDefinition card)
+        {
+            return equipped.Exists(copy => copy.SourceCard == card);
         }
 
         public override void Reset()
         {
-            _stacksByTarget.Clear();
+            recordings.Clear();
+            equipped.Clear();
         }
     }
 }

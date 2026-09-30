@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using GARA.Characters;
 using GARA.InputSets;
 using GARA.Rhythm;
-using GARA.ShakeBalance;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine;
@@ -69,6 +68,9 @@ namespace GARA.Combat
         [Tooltip("PlayerEffectDummy's OnNoirifiedEffect child.")]
         [SerializeField] private GameObject playerNoirifiedEffectTemplate;
 
+        [Tooltip("PlayerEffectDummy's OnExorcisedEffect child.")]
+        [SerializeField] private GameObject playerExorcisedEffectTemplate;
+
         [Header("Enemy Character Effects")]
         [Tooltip("EnemyEffectDummy's OnNotTargetedEffect child.")]
         [SerializeField] private GameObject enemyNotTargetedEffectTemplate;
@@ -97,6 +99,9 @@ namespace GARA.Combat
         [Tooltip("EnemyEffectDummy's OnNoirifiedEffect child.")]
         [SerializeField] private GameObject enemyNoirifiedEffectTemplate;
 
+        [Tooltip("EnemyEffectDummy's OnExorcisedEffect child.")]
+        [SerializeField] private GameObject enemyExorcisedEffectTemplate;
+
         [Header("Enemy HP")]
         [Tooltip("Spawned on each enemy's HP heart anchor at battle start; only shown while that enemy is targeted.")]
         [SerializeField] private HpHeartView enemyHpHeartPrefab;
@@ -115,9 +120,6 @@ namespace GARA.Combat
 
         [Tooltip("Scene instance of the InputSetVisualDriver prefab — shown whenever any input set collection starts.")]
         [SerializeField] private InputSetVisualDriver inputSetVisualDriver;
-
-        [Tooltip("Scene instance of the ShakeBalanceVisualDriver prefab — shown whenever any shake balance run starts.")]
-        [SerializeField] private ShakeBalanceVisualDriver shakeBalanceVisualDriver;
 
         // The ViewShake prefab's shakers, which move the whole rendered view.
         // They hold no shake settings of their own: whoever shakes the view
@@ -142,8 +144,6 @@ namespace GARA.Combat
             RhythmSequencePlayer.AnySequenceEnded += HideRhythmSequence;
             InputSetCollectionPlayer.AnySetCollectionStarted += ShowInputSetCollection;
             InputSetCollectionPlayer.AnySetCollectionEnded += HideInputSetCollection;
-            ShakeBalancePlayer.AnyBalanceStarted += ShowShakeBalance;
-            ShakeBalancePlayer.AnyBalanceEnded += HideShakeBalance;
             CombatParticipant.HpChanged += RefreshHpHeart;
             CombatParticipant.HpChanged += RefreshStatusBar;
             CombatParticipant.MpChanged += RefreshStatusBar;
@@ -155,8 +155,6 @@ namespace GARA.Combat
             RhythmSequencePlayer.AnySequenceEnded -= HideRhythmSequence;
             InputSetCollectionPlayer.AnySetCollectionStarted -= ShowInputSetCollection;
             InputSetCollectionPlayer.AnySetCollectionEnded -= HideInputSetCollection;
-            ShakeBalancePlayer.AnyBalanceStarted -= ShowShakeBalance;
-            ShakeBalancePlayer.AnyBalanceEnded -= HideShakeBalance;
             CombatParticipant.HpChanged -= RefreshHpHeart;
             CombatParticipant.HpChanged -= RefreshStatusBar;
             CombatParticipant.MpChanged -= RefreshStatusBar;
@@ -191,6 +189,7 @@ namespace GARA.Combat
                 CloneEffectOntoEveryCharacter(playerInvulnerableBlockEffectTemplate, enemyInvulnerableBlockEffectTemplate);
                 CloneEffectOntoEveryCharacter(playerActiveActorEffectTemplate, enemyActiveActorEffectTemplate);
                 CloneEffectOntoEveryCharacter(playerNoirifiedEffectTemplate, enemyNoirifiedEffectTemplate);
+                CloneEffectOntoEveryCharacter(playerExorcisedEffectTemplate, enemyExorcisedEffectTemplate);
                 SpawnEnemyHpHearts();
                 SpawnPlayerStatusBars();
                 _hasClonedCharacterEffects = true;
@@ -426,22 +425,6 @@ namespace GARA.Combat
             if (inputSetVisualDriver != null)
             {
                 inputSetVisualDriver.Hide();
-            }
-        }
-
-        private void ShowShakeBalance(ShakeBalanceRunner runner)
-        {
-            if (shakeBalanceVisualDriver != null)
-            {
-                shakeBalanceVisualDriver.Show(runner);
-            }
-        }
-
-        private void HideShakeBalance(ShakeBalanceRunner runner)
-        {
-            if (shakeBalanceVisualDriver != null)
-            {
-                shakeBalanceVisualDriver.Hide();
             }
         }
     }

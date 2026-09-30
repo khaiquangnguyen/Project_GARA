@@ -1,18 +1,18 @@
 using System;
-using GARA.Rhythm;
-using GARA.SkillCards.Rhythm;
+using GARA.InputSets;
+using GARA.SkillCards.InputSets;
 using UnityEngine;
 
 namespace GARA.Characters.Bard
 {
     // A Bard effect: plays joy or sadness, whichever the Bard is feeling
-    // when it lands. Gated on the fraction of its step's notes hit.
+    // when it lands. Gated on the fraction of its step's codes cleared.
     [Serializable]
-    public class DualEmotionEffect : RhythmStepEffect
+    public class DualEmotionEffect : InputSetStepEffect
     {
-        [Tooltip("Fraction of the bar's notes (the whole run, on the finale) that must be hit.")]
+        [Tooltip("Fraction of the step's codes (the whole run's, on the finale) that must be cleared.")]
         [Range(0f, 1f)]
-        public float requiredHitRate = 1f;
+        public float requiredClearRate = 1f;
 
         [SerializeReference]
         [SubclassPicker]
@@ -22,9 +22,9 @@ namespace GARA.Characters.Bard
         [SubclassPicker]
         public EmotionOutcome sadness;
 
-        public override bool IsTriggered(RhythmCompletionReport report)
+        public override bool IsTriggered(InputSetCompletionReport report)
         {
-            return report.TotalNotes > 0 && (float)report.HitNotes / report.TotalNotes >= requiredHitRate;
+            return report.TotalSets > 0 && (float)report.ClearedSets / report.TotalSets >= requiredClearRate;
         }
 
         public override void ApplyEffect(in SkillEffectContext context)

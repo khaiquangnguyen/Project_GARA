@@ -7,7 +7,7 @@ namespace GARA.Combat
 {
     // Combat-side implementation of ISkillInputHost — gives a skill card's
     // input session access to whatever driver component its concrete
-    // minigame needs (a rhythm conductor, a shake detector, etc.) plus a
+    // minigame needs (a rhythm conductor, a QTE player, etc.) plus a
     // MonoBehaviour to run coroutines on, without GARA.Characters needing to
     // know anything about GARA.Combat. Also raises the two UI-facing
     // announcements around an input phase (static events, invoked from an

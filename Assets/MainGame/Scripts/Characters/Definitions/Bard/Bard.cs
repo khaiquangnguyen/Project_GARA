@@ -1,5 +1,6 @@
 using GARA.Characters;
-using GARA.Rhythm;
+using GARA.InputSets;
+using GARA.SkillCards.InputSets;
 using UnityEngine;
 
 namespace GARA.Characters.Bard
@@ -11,12 +12,15 @@ namespace GARA.Characters.Bard
         [SerializeField]
         private SkillPerformanceTiering specialTiering = SkillPerformanceTiering.Default;
 
-        [Tooltip("Lead-in, tail-out and judging windows around every Bard card's bars.")]
         [SerializeField]
-        private RhythmSequenceTiming specialTiming = RhythmSequenceTiming.Default;
+        private InputSetScoreModel specialScoreModel = InputSetScoreModel.Default;
+
+        [SerializeField]
+        private InputSetRetryPolicy specialRetryPolicy = InputSetRetryPolicy.Default;
 
         public SkillPerformanceTiering SpecialTiering => specialTiering;
-        public RhythmSequenceTiming SpecialTiming => specialTiming;
+        public InputSetScoreModel SpecialScoreModel => specialScoreModel;
+        public InputSetRetryPolicy SpecialRetryPolicy => specialRetryPolicy;
 
         private void OnValidate()
         {

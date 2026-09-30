@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: GARA.Characters.Bard::GARA.Characters.Bard.MoodSwingPassive
   passiveId: mood_swing
   displayName: Mood Swing
-  description: The Bard is always feeling Joy or Sadness, which decides how each special plays. Every special it finishes swings it to the other emotion.
+  description: The Bard is always feeling Joy or Sadness, which decides how each special plays. Some specials change the mood as they finish.
   icon: {fileID: 0}
   startingEmotion: 0
-  swingOnAbort: 0
